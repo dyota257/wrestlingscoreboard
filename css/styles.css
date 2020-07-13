@@ -1,3 +1,5 @@
+/* Tags */
+
 body {
     background-color: black;
     font-family: Arial, Helvetica, sans-serif;
@@ -8,9 +10,6 @@ div {
     display: inline;
 }
 
-#playerInput{
-    display:block;
-}
 
 table {
     table-layout: fixed;
@@ -44,6 +43,8 @@ button.timer:disabled {
     color: grey;
 }
 
+/* Ids */
+
 #mainHeader {
     height: 5%;
     background-color: gold;
@@ -60,29 +61,34 @@ button.timer:disabled {
 
 }
 
-.firstName {
-    font-size: x-large;
+#playerInput {
+    display: block;
 }
 
-.lastName,
-#period {
-    font-size: xx-large;
-}
-
-.red.playerData {
-    text-align: right;
-}
-
-.blue.playerData {
-    text-align: left;
+/* Classes */
+.blue {
+    background-color: blue;
 }
 
 .blue button {
     background: darkblue;
 }
 
-.red button {
-    background: darkred;
+.blue.playerData {
+    text-align: left;
+}
+
+.buttonsRow {
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.centerPanel {
+    max-width: 43%;
+    display: inline-block;
+    position: relative;
+    padding: 10px 0;
+    vertical-align: top;
 }
 
 .container {
@@ -92,21 +98,12 @@ button.timer:disabled {
     padding-top: 0%;
 }
 
-.blue {
-    background-color: blue;
+.firstName {
+    font-size: x-large;
 }
 
-.red {
-    background-color: red;
-}
-
-.middle {
-    /* width:10%; */
-}
-
-.score {
-    font-size: 7.5rem;
-    justify-content: center;
+.lastName, #period {
+    font-size: xx-large;
 }
 
 .markerWarning {
@@ -122,12 +119,32 @@ button.timer:disabled {
     justify-content: left;
 }
 
-.centerPanel {
-    max-width: 43%;
-    display: inline-block;
-    position: relative;
-    padding: 10px 0;
-    vertical-align: top;
+.middle {
+    /* width:10%; */
+}
+
+.red.playerData {
+    text-align: right;
+}
+
+.red {
+    background-color: red;
+}
+
+.red button {
+    background: darkred;
+}
+
+.resetGame {
+    width: 10rem;
+    height: 2rem;
+    padding: 0;
+    margin: 0;
+}
+
+.score {
+    font-size: 7.5rem;
+    justify-content: center;
 }
 
 .team {
@@ -136,16 +153,4 @@ button.timer:disabled {
     color: #FFF;
     vertical-align: top;
     display: inline-block;
-}
-
-.buttonsRow {
-    overflow: hidden;
-    white-space: nowrap;
-}
-
-.resetGame {
-    width: 10rem;
-    height: 2rem;
-    padding: 0;
-    margin: 0;
 }
