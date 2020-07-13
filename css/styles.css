@@ -1,0 +1,151 @@
+body {
+    background-color: black;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+div {
+    color: white;
+    display: inline;
+}
+
+#playerInput{
+    display:block;
+}
+
+table {
+    table-layout: fixed;
+    width: 80%;
+}
+
+td {
+    border-color: white;
+    border-collapse: collapse;
+    border: 2px solid white;
+    color: white;
+    padding: 20px;
+    width: 25%;
+}
+
+button {
+    color: white;
+    font-size: large;
+    font-weight: bold;
+    padding: 5% 5%;
+}
+
+button.timer {
+    color: black;
+    font-size: small;
+    font-weight: normal;
+    padding: 2.5% 5%;
+}
+
+button.timer:disabled {
+    color: grey;
+}
+
+#mainHeader {
+    height: 5%;
+    background-color: gold;
+    display: flex;
+    color: black;
+    text-align: center;
+    justify-content: center;
+    font-size: xxx-large;
+    width: 100%;
+}
+
+#timer {
+    font-size: 7.5rem;
+
+}
+
+.firstName {
+    font-size: x-large;
+}
+
+.lastName,
+#period {
+    font-size: xx-large;
+}
+
+.red.playerData {
+    text-align: right;
+}
+
+.blue.playerData {
+    text-align: left;
+}
+
+.blue button {
+    background: darkblue;
+}
+
+.red button {
+    background: darkred;
+}
+
+.container {
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    padding-top: 0%;
+}
+
+.blue {
+    background-color: blue;
+}
+
+.red {
+    background-color: red;
+}
+
+.middle {
+    /* width:10%; */
+}
+
+.score {
+    font-size: 7.5rem;
+    justify-content: center;
+}
+
+.markerWarning {
+    display: flex;
+    height: 1rem;
+}
+
+.markerWarning.blue {
+    justify-content: right;
+}
+
+.markerWarning.red {
+    justify-content: left;
+}
+
+.centerPanel {
+    max-width: 43%;
+    display: inline-block;
+    position: relative;
+    padding: 10px 0;
+    vertical-align: top;
+}
+
+.team {
+    text-align: center;
+    font-size: 2.5em;
+    color: #FFF;
+    vertical-align: top;
+    display: inline-block;
+}
+
+.buttonsRow {
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.resetGame {
+    width: 10rem;
+    height: 2rem;
+    padding: 0;
+    margin: 0;
+}
