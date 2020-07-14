@@ -23,7 +23,7 @@
         <button class="resetGame" id = "resetGame"style="color:black;">Reset all</button>
     </div>
 
-    <div class = "container" id="playerInput">
+    <div class = "container" id="playerInput" style="display:none">
         <table class = "tablePlayerInput">
             <tr>
                 <td>
@@ -43,7 +43,19 @@
                     <input type = "text" name="playerData" id = "redLastName">
                 </td>
                 <td>
-                    <input type="button"  value="Confirm">
+                    <button type="button"  id="setConfirmGame">Confirm</button>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <input type="radio" name="gameType" id="seniorFreestyle">
+                    <label for="seniorFreestyle">Senior Freestyle</label>
+                    <br>
+                    <input type="radio" name="gameType" id="juniorFreestyle">
+                    <label for="juniorFreestyle ">Junior Freestyle</label>
+                    <br>
+                    <input type="radio" name="gameType" id="seniorGrecoRoman">
+                    <label for="seniorGrecoRoman">Senior Greco-Roman</label>
                 </td>
             </tr>
         </table>
@@ -143,7 +155,12 @@
             </tr>
         </table>
     </div>
-
+    <button id="popup">Pop up winner</button>
+    <div class="popup">
+        <div class="popup-content">
+            <img src="images/close.png" alt="" srcset="" class="close">
+        </div>
+    </div>
     
 </body>
 </html>

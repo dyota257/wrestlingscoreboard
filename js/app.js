@@ -66,6 +66,11 @@ for (var i=0; i<arButtons.length;i++){
         };
 
         if (this.id==="setGame") {
+            document.getElementById("playerInput").style.display = "block";
+        };
+
+        if (this.id==="setConfirmGame") {
+            document.getElementById("playerInput").style.display = "none";
             blueFirstName = document.getElementById("blueFirstName").value;
             document.querySelector(".blue.firstName").textContent = blueFirstName;
             blueLastName = document.getElementById("blueLastName").value;
@@ -104,6 +109,11 @@ for (var i=0; i<arButtons.length;i++){
             };
         };
 
+        if (this.id === "popup") {
+            document.getElementsByClassName("popup")[0].style.display = "flex";
+            document.getElementsByClassName("popup")[0].style.height = document.body.clientHeight;
+        }
+
         if (this.className === "timer" && this.id !== "startTimer"){
             switch(this.id){
                 case "resetTimerRest":
@@ -124,6 +134,14 @@ for (var i=0; i<arButtons.length;i++){
         };
     })
 }
+
+
+document.getElementsByClassName("close")[0].addEventListener("click", function() {
+        document.getElementsByClassName("popup")[0].style.display = "none";
+    }
+)
+    
+
 
 for (var i=0; i <= arPeriod.length; i++) {
     arPeriod[i].addEventListener("click", function() {
