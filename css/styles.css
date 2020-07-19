@@ -67,7 +67,7 @@ button.timer:disabled {
 
 /* Classes */
 .blue {
-    background-color: blue;
+    background: blue;
 }
 
 .blue button {
@@ -139,7 +139,7 @@ button.timer:disabled {
 .popup{
     background-color: rgba(0,0,0,0.6);
     width:100%;
-    height:100%;
+    height:150%;
     position:absolute;
     display: none;
     top:0;
@@ -148,6 +148,9 @@ button.timer:disabled {
 }
 
 .popup-content {
+    color: black;
+    text-align: center;
+    font-size: 4rem;
     height:250px;
     width:500px;
     background: #fff;

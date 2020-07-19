@@ -44,15 +44,11 @@ for (var i=0; i<arButtons.length;i++){
             case "red warning":
                 document.querySelector(".markerWarning.red").textContent = document.querySelector(".markerWarning.red").textContent + "⭕";
                 break;
-            case "blue reset":
-                scoreBlue = 0;
-                document.querySelector(".score.blue").textContent = scoreBlue;
-                document.querySelector(".markerWarning.blue").textContent = "";
+            case "blue pin":
+                victory("blue", "pin");
                 break;
-            case "red reset":
-                scoreRed = 0;
-                document.querySelector(".score.red").textContent = scoreRed;
-                document.querySelector(".markerWarning.red").textContent = "";
+            case "red pin":
+                victory("red", "pin");
                 break;
             case "middle reset":
                 document.querySelector(".score.blue").textContent = 0;
@@ -92,6 +88,7 @@ for (var i=0; i<arButtons.length;i++){
 
         if (this.id==="resetGame") {
             if (window.confirm("Are you sure? This will reset all scores and reset the timer.")) {
+                document.querySelector("#playerInput").style.display = none;
                 scoreBlue = 0;
                 document.querySelector(".score.blue").textContent = scoreBlue;
                 document.querySelector(".blue.firstName").textContent = "blueFirstName";
@@ -100,6 +97,7 @@ for (var i=0; i<arButtons.length;i++){
                 document.querySelector(".score.red").textContent = scoreRed;
                 document.querySelector(".red.firstName").textContent = "redFirstName";
                 document.querySelector(".red.lastName").textContent = "redLastName";
+                
                 document.querySelector("#timer").innerHTML = "0:00";
             }
         };
@@ -195,3 +193,20 @@ function timer(time) {
     },1000); // the smaller this number, the more accurate the timer will be
     
 };
+
+function victory(side, method) {
+    document.getElementsByClassName("popup")[0].style.display = "flex";
+    document.getElementsByClassName("popup")[0].style.height = document.body.clientHeight;
+    document.getElementsByClassName("popup-content")[0].style.background = side;
+    switch (side) {
+        case "blue":
+            var winnerName = blueFirstName +" "+blueLastName
+            break;
+        case "red":
+            var winnerName = redFirstName +" "+redLastName
+            break;
+        default:
+        break;
+    }
+    document.getElementsByClassName("popup-text")[0].textContent = winnerName +" wins by "+ method +"!";
+}
