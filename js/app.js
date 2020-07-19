@@ -125,6 +125,9 @@ for (var i=0; i<arButtons.length;i++){
                 case "resetTimerSenior":
                     timerInit = 180;
                     break;
+                case "resetTimerTest":
+                    timerInit = 3;
+                    break;
             };
 
             document.querySelector("#timer").innerHTML = Math.floor(timerInit/60).toString() + ":00";
