@@ -70,15 +70,24 @@ for (var i=0; i<arButtons.length;i++){
         };
 
         if (this.id==="setConfirmGame") {
-            document.getElementById("playerInput").style.display = "none";
-            blueFirstName = document.getElementById("blueFirstName").value;
-            document.querySelector(".blue.firstName").textContent = blueFirstName;
-            blueLastName = document.getElementById("blueLastName").value;
-            document.querySelector(".blue.lastName").textContent = blueLastName;
-            redFirstName = document.getElementById("redFirstName").value;
-            document.querySelector(".red.firstName").textContent = redFirstName;
-            redLastName = document.getElementById("redLastName").value;
-            document.querySelector(".red.lastName").textContent = redLastName;
+            if (
+                document.getElementById("blueFirstName").value === ""
+                || document.getElementById("blueLastName").value === ""
+                || document.getElementById("redFirstName").value === ""
+                || document.getElementById("redLastName").value === ""
+            ) {
+                    window.alert("Fill in all the names!");
+            } else {
+                document.getElementById("playerInput").style.display = "none";
+                blueFirstName = document.getElementById("blueFirstName").value;
+                document.querySelector(".blue.firstName").textContent = blueFirstName;
+                blueLastName = document.getElementById("blueLastName").value;
+                document.querySelector(".blue.lastName").textContent = blueLastName;
+                redFirstName = document.getElementById("redFirstName").value;
+                document.querySelector(".red.firstName").textContent = redFirstName;
+                redLastName = document.getElementById("redLastName").value;
+                document.querySelector(".red.lastName").textContent = redLastName;
+            }
         };
 
         if (this.id==="resetGame") {
