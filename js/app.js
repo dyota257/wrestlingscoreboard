@@ -71,10 +71,22 @@ for (var i=0; i<arButtons.length;i++){
                 || document.getElementById("blueLastName").value === ""
                 || document.getElementById("redFirstName").value === ""
                 || document.getElementById("redLastName").value === ""
+                || radioCheck() === 0
             ) {
-                    window.alert("Fill in all the names!");
+                    window.alert("Fill in all the names and game type!");
             } else {
                 document.getElementById("playerInput").style.display = "none";
+                switch (radioCheckWhich()){
+                    case 0:
+                        document.getElementById("gameType").textContent = "Senior Freestyle";
+                        break;
+                    case 1:
+                        document.getElementById("gameType").textContent = "Junior Freestyle";
+                        break;
+                    case 2:
+                        document.getElementById("gameType").textContent = "Senior Greco-Roman";
+                        break;
+                }
                 blueFirstName = document.getElementById("blueFirstName").value;
                 document.querySelector(".blue.firstName").textContent = blueFirstName;
                 blueLastName = document.getElementById("blueLastName").value;
@@ -150,7 +162,23 @@ document.getElementsByClassName("close")[0].addEventListener("click", function()
         document.getElementsByClassName("popup")[0].style.display = "none";
     }
 )
-    
+
+function radioCheck() {
+    var radioCheckSum = 0;
+    for (var i=0; i<document.getElementsByName("gameType").length; i++) {
+        radioCheckSum = radioCheckSum + document.getElementsByName("gameType")[i].checked
+    }
+    return radioCheckSum
+}
+
+function radioCheckWhich () {
+    var radioCheckArray = [];
+    for (var i=0; i<document.getElementsByName("gameType").length; i++) {
+        radioCheckArray.push( document.getElementsByName("gameType")[i].checked )
+    }
+    return radioCheckArray.indexOf(true)
+}
+
 
 
 for (var i=0; i <= arPeriod.length; i++) {
