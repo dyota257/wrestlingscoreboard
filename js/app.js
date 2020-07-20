@@ -12,6 +12,9 @@ var timerOn = false;
 
 var timerInit = 0;
 
+var phases = [ "1", "rest", "2"];
+var phasePos = 0;
+
 document.querySelector(".score.blue").textContent = scoreBlue;
 document.querySelector(".score.red").textContent = scoreRed;
 document.querySelector("#startTimer").disabled = true;
@@ -66,7 +69,7 @@ for (var i=0; i<arButtons.length;i++){
         };
 
         if (this.id==="setConfirmGame") {
-            if (
+            if ( // check for empty fields
                 document.getElementById("blueFirstName").value === ""
                 || document.getElementById("blueLastName").value === ""
                 || document.getElementById("redFirstName").value === ""
@@ -74,26 +77,48 @@ for (var i=0; i<arButtons.length;i++){
                 || radioCheck() === 0
             ) {
                     window.alert("Fill in all the names and game type!");
+
             } else {
+                // close input area
                 document.getElementById("playerInput").style.display = "none";
+
+                // restart phase at Period 1
+                phasePos = 0;
+                setPhase(phasePos);
+
+                // game type
                 switch (radioCheckWhich()){
                     case 0:
                         document.getElementById("gameType").textContent = "Senior Freestyle";
+                        // timerInit = 180;
+                        timerInit = 5;
                         break;
                     case 1:
                         document.getElementById("gameType").textContent = "Junior Freestyle";
+                        // timerInit = 120;
+                        timerInit = 3;
                         break;
                     case 2:
                         document.getElementById("gameType").textContent = "Senior Greco-Roman";
+                        // timerInit = 180;
+                        timerInit = 5;
                         break;
                 }
+
+                // timer setup
+                document.querySelector("#timer").innerHTML = Math.floor(timerInit/60).toString() + ":00";
+                document.getElementById("startTimer").innerHTML = "▶";
+                timerOn = false;
+                document.querySelector("#startTimer").disabled = false;
+                
+                // set player names
                 blueFirstName = document.getElementById("blueFirstName").value;
-                document.querySelector(".blue.firstName").textContent = blueFirstName;
                 blueLastName = document.getElementById("blueLastName").value;
-                document.querySelector(".blue.lastName").textContent = blueLastName;
                 redFirstName = document.getElementById("redFirstName").value;
-                document.querySelector(".red.firstName").textContent = redFirstName;
                 redLastName = document.getElementById("redLastName").value;
+                document.querySelector(".blue.firstName").textContent = blueFirstName;
+                document.querySelector(".blue.lastName").textContent = blueLastName;
+                document.querySelector(".red.firstName").textContent = redFirstName;
                 document.querySelector(".red.lastName").textContent = redLastName;
             }
         };
@@ -115,16 +140,15 @@ for (var i=0; i<arButtons.length;i++){
         };
 
         if (this.id === "startTimer"){
-            if (timerOn === false) {
+            if (timerOn === false) { // to pause the time
                 document.getElementById("startTimer").innerHTML = "⏸";
-                console.log("I'm here");
                 timerOn = true;
-                timer(timerInit, "start"); // 2 minutes is 120 seconds = 120 000 milliseconds
-            } else if (timerOn === true)  {
+                timer(timerInit); // 2 minutes is 120 seconds = 120 000 milliseconds
+
+            } else if (timerOn === true)  { // to restart the time
                 document.getElementById("startTimer").innerHTML = "▶";
                 timerOn = false;
-                timer(120, "stop");
-                console.log("Timer is already running!");
+                timer(0);
             };
         };
 
@@ -179,11 +203,12 @@ function radioCheckWhich () {
     return radioCheckArray.indexOf(true)
 }
 
-
+function setPhase(pos) {
+    document.querySelector("#period").innerHTML = "Period " + phases[pos];
+}
 
 for (var i=0; i <= arPeriod.length; i++) {
     arPeriod[i].addEventListener("click", function() {
-        console.log(this.value);
         document.querySelector("#period").innerHTML = "Period " + this.value;
     });
 }
@@ -194,13 +219,13 @@ function timer(time) {
     // fix up the variable scopes here
 
     var start = new Date().getTime();
-
+    var now = 0;
     console.log("start: "+start);
     
     var interval = setInterval( function() {
         
         if (timerOn === true) {
-            var now = Math.ceil((time*1000-(new Date().getTime()-start))/1000);
+            now = Math.ceil((time*1000-(new Date().getTime()-start))/1000);
             var colonZero = ":";
             timerInit = now;
             if ((now%60).toString().length === 1) { 
@@ -211,14 +236,21 @@ function timer(time) {
             document.querySelector("#timer").innerHTML = Math.floor(now/60).toString() + colonZero + (now%60).toString();
         };
 
+        if( now <= 0 && timerOn === true) {
+            phasePos++;
+            setPhase(phasePos);
+        };
+
         if( now <= 0 || timerOn === false) {
             console.log("Timer stopped at: "+now);
             clearInterval(interval);
         };
 
+        
+
         console.log("now: "+Math.ceil(now));
 
-    },1000); // the smaller this number, the more accurate the timer will be
+    },1000);
     
 };
 

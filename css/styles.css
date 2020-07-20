@@ -56,14 +56,29 @@ button.timer:disabled {
     width: 100%;
 }
 
+#playerInput {
+    display: block;
+}
+
+#startTimer {
+    width: 100px;
+    height: 70px;
+    font-size: xxx-large;
+    color: navy;
+}
+
+#startTimer:disabled {
+    width: 100px;
+    height: 70px;
+    font-size: xxx-large;
+    color: grey;
+}
+
 #timer {
     font-size: 7.5rem;
 
 }
 
-#playerInput {
-    display: block;
-}
 
 /* Classes */
 .blue {
