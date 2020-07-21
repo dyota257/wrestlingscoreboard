@@ -20,7 +20,7 @@ var timerInit = 0;
 var phases = [ "1", "rest", "2"];
 var phasePos = 0;
 var phasesTime = [0,0,0];
-var timeRest = 3 // should be 30 seconds
+var timeRest = 3; // should be 30 seconds
 
 document.querySelector(".score.blue").textContent = scoreBlue;
 document.querySelector(".score.red").textContent = scoreRed;
@@ -117,7 +117,7 @@ for (var i=0; i<arButtons.length;i++){
                 document.getElementById("startTimer").innerHTML = "▶";
                 document.querySelector("#startTimer").disabled = false;
                 timerOn = false;
-                phasesTime = [timerInit, timeRest, timeInit];
+                phasesTime = [timerInit, timeRest, timerInit];
                 
                 // set player names
                 blueFirstName = document.getElementById("blueFirstName").value;
@@ -128,12 +128,20 @@ for (var i=0; i<arButtons.length;i++){
                 document.querySelector(".blue.lastName").textContent = blueLastName;
                 document.querySelector(".red.firstName").textContent = redFirstName;
                 document.querySelector(".red.lastName").textContent = redLastName;
+
+                // set scores
+                scoreBlue = 0;
+                scoreRed = 0;
+                document.querySelector(".score.blue").textContent = scoreBlue;
+                document.querySelector(".score.red").textContent = scoreRed;
             }
         };
 
         if (this.id==="resetGame") {
-            if (window.confirm("Are you sure? This will reset all scores and reset the timer.")) {
-                document.querySelector("#playerInput").style.display = none;
+            var confirm = window.confirm("Are you sure? This will reset all scores and reset the timer.");
+            console.log(confirm);
+            if (confirm) {
+                document.querySelector("#playerInput").style.display = "none";
                 scoreBlue = 0;
                 document.querySelector(".score.blue").textContent = scoreBlue;
                 document.querySelector(".blue.firstName").textContent = "blueFirstName";
@@ -149,7 +157,7 @@ for (var i=0; i<arButtons.length;i++){
 
         if (this.id === "startTimer"){
             if (timerOn === false) { // to pause the time
-                document.getElementById("startTimer").innerHTML = "⏸";
+                document.getElementById("startTimer").innerHTML = "▐ ▌";
                 timerOn = true;
                 timer(timerInit); // 2 minutes is 120 seconds = 120 000 milliseconds
 
@@ -232,10 +240,11 @@ function timer(time) {
     
     var interval = setInterval( function() {
         
+        // timer on start
         if (timerOn === true) {
             now = Math.ceil((time*1000-(new Date().getTime()-start))/1000);
             var colonZero = ":";
-            timerInit = now;
+            // timerInit = now;
             if ((now%60).toString().length === 1) { 
                 colonZero = ":0";
             } else {
@@ -244,13 +253,16 @@ function timer(time) {
             document.querySelector("#timer").innerHTML = Math.floor(now/60).toString() + colonZero + (now%60).toString();
         };
 
+        // timer on end
         if( now <= 0 && timerOn === true) {
             phasePos++;
             if (phasePos<3) {
                 setPhase(phasePos);
                 timer(phasesTime[phasePos]);
+                console.log(timerInit);
             } else {
-                winBlue = (scoreBlue - scoreRed)/Math.abs(scoreBlue - scoreRed)
+                document.querySelector("#startTimer").disabled = true;
+                var winBlue = (scoreBlue - scoreRed)/Math.abs(scoreBlue - scoreRed)
                 switch ( winBlue ){
                     case 1:
                         victory("blue", "technical superiority");        
@@ -259,19 +271,18 @@ function timer(time) {
                         victory("red", "technical superiority");        
                         break;
                     case 0:
-                        victory("draw", "technical superiority");        
+                        victory("draw", "technical superiority");
+                        console.log("Outcome is draw")      
                         break;
                 }
-                victory();
             }
         };
 
+        // timer pause
         if( now <= 0 || timerOn === false) {
             console.log("Timer stopped at: "+now);
             clearInterval(interval);
         };
-
-        
 
         console.log("now: "+Math.ceil(now));
 
