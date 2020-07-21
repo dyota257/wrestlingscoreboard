@@ -1,3 +1,8 @@
+window.onbeforeunload = () => {
+    return "Are you sure?"
+}
+
+
 var scoreBlue = 0;
 var scoreRed = 0;
 var arButtons = document.querySelectorAll("button");
@@ -14,6 +19,8 @@ var timerInit = 0;
 
 var phases = [ "1", "rest", "2"];
 var phasePos = 0;
+var phasesTime = [0,0,0];
+var timeRest = 3 // should be 30 seconds
 
 document.querySelector(".score.blue").textContent = scoreBlue;
 document.querySelector(".score.red").textContent = scoreRed;
@@ -108,8 +115,9 @@ for (var i=0; i<arButtons.length;i++){
                 // timer setup
                 document.querySelector("#timer").innerHTML = Math.floor(timerInit/60).toString() + ":00";
                 document.getElementById("startTimer").innerHTML = "▶";
-                timerOn = false;
                 document.querySelector("#startTimer").disabled = false;
+                timerOn = false;
+                phasesTime = [timerInit, timeRest, timeInit];
                 
                 // set player names
                 blueFirstName = document.getElementById("blueFirstName").value;
@@ -238,7 +246,24 @@ function timer(time) {
 
         if( now <= 0 && timerOn === true) {
             phasePos++;
-            setPhase(phasePos);
+            if (phasePos<3) {
+                setPhase(phasePos);
+                timer(phasesTime[phasePos]);
+            } else {
+                winBlue = (scoreBlue - scoreRed)/Math.abs(scoreBlue - scoreRed)
+                switch ( winBlue ){
+                    case 1:
+                        victory("blue", "technical superiority");        
+                        break;
+                    case -1:
+                        victory("red", "technical superiority");        
+                        break;
+                    case 0:
+                        victory("draw", "technical superiority");        
+                        break;
+                }
+                victory();
+            }
         };
 
         if( now <= 0 || timerOn === false) {
@@ -257,16 +282,23 @@ function timer(time) {
 function victory(side, method) {
     document.getElementsByClassName("popup")[0].style.display = "flex";
     document.getElementsByClassName("popup")[0].style.height = document.body.clientHeight;
-    document.getElementsByClassName("popup-content")[0].style.background = side;
     switch (side) {
         case "blue":
-            var winnerName = blueFirstName +" "+blueLastName
+            var winnerName = blueFirstName +" "+blueLastName;
+            document.getElementsByClassName("popup-text")[0].textContent = winnerName +" wins by "+ method +"!";
+            document.getElementsByClassName("popup-content")[0].style.background = side;
             break;
         case "red":
-            var winnerName = redFirstName +" "+redLastName
+            var winnerName = redFirstName +" "+redLastName;
+            document.getElementsByClassName("popup-text")[0].textContent = winnerName +" wins by "+ method +"!";
+            document.getElementsByClassName("popup-content")[0].style.background = side;
+            break;
+        case "draw":
+            document.getElementsByClassName("popup-text")[0].textContent = "Draw!";
+            document.getElementsByClassName("popup-content")[0].style.background = "black";
             break;
         default:
         break;
     }
-    document.getElementsByClassName("popup-text")[0].textContent = winnerName +" wins by "+ method +"!";
+    
 }
