@@ -1,3 +1,9 @@
+// document.addEventListener("keydown", (e) => {
+//     switch(e) {
+//         case ""
+//     }
+// });
+
 window.onbeforeunload = () => {
     return "Are you sure?"
 }
@@ -26,6 +32,8 @@ document.querySelector(".score.blue").textContent = scoreBlue;
 document.querySelector(".score.red").textContent = scoreRed;
 document.querySelector("#startTimer").disabled = true;
 
+
+
 for (var i=0; i<arButtons.length;i++){
     arButtons[i].addEventListener("click", function() {
 
@@ -39,6 +47,9 @@ for (var i=0; i<arButtons.length;i++){
                     scoreBlue = scoreBlue - addScore;
                 }
                 document.querySelector(".score.blue").textContent = scoreBlue;
+                if(scoreBlue-scoreRed>=10){
+                    victory("blue", "technical superiority")   ;
+                }
                 break;
             case "red buttonsRow":
                 if (this.textContent.slice(0,1)==="+") {
@@ -47,6 +58,9 @@ for (var i=0; i<arButtons.length;i++){
                     scoreRed = scoreRed - addScore;
                 }
                 document.querySelector(".score.red").textContent = scoreRed;
+                if(scoreRed-scoreBlue>=10){
+                    victory("red", "technical superiority")   ;
+                }
                 break;
             case "blue warning":
                 document.querySelector(".markerWarning.blue").textContent = document.querySelector(".markerWarning.blue").textContent + "⭕";
@@ -72,7 +86,7 @@ for (var i=0; i<arButtons.length;i++){
         };
 
         if (this.id==="setGame") {
-            document.getElementById("playerInput").style.display = "block";
+            document.getElementById("playerInput").style.display = "flex";
         };
 
         if (this.id==="setConfirmGame") {
@@ -168,11 +182,6 @@ for (var i=0; i<arButtons.length;i++){
             };
         };
 
-        if (this.id === "popup") {
-            document.getElementsByClassName("popup")[0].style.display = "flex";
-            document.getElementsByClassName("popup")[0].style.height = document.body.clientHeight;
-        }
-
         if (this.className === "timer" && this.id !== "startTimer"){
             switch(this.id){
                 case "resetTimerRest":
@@ -202,6 +211,11 @@ document.getElementsByClassName("close")[0].addEventListener("click", function()
         document.getElementsByClassName("popup")[0].style.display = "none";
     }
 )
+
+document.getElementById("download").addEventListener("click", function(){
+    console.log("Click download.");
+    exportTableToCSV("numbers.csv");
+});
 
 function radioCheck() {
     var radioCheckSum = 0;
@@ -265,16 +279,17 @@ function timer(time) {
                 var winBlue = (scoreBlue - scoreRed)/Math.abs(scoreBlue - scoreRed)
                 switch ( winBlue ){
                     case 1:
-                        victory("blue", "technical superiority");        
+                        victory("blue", "points");        
                         break;
                     case -1:
-                        victory("red", "technical superiority");        
+                        victory("red", "points");        
                         break;
-                    case 0:
+                    default:
                         victory("draw", "technical superiority");
                         console.log("Outcome is draw")      
                         break;
                 }
+                clearInterval(interval);
             }
         };
 
@@ -293,14 +308,15 @@ function timer(time) {
 function victory(side, method) {
     document.getElementsByClassName("popup")[0].style.display = "flex";
     document.getElementsByClassName("popup")[0].style.height = document.body.clientHeight;
+    var winnerName = "";
     switch (side) {
         case "blue":
-            var winnerName = blueFirstName +" "+blueLastName;
+             winnerName = blueFirstName +" "+blueLastName;
             document.getElementsByClassName("popup-text")[0].textContent = winnerName +" wins by "+ method +"!";
             document.getElementsByClassName("popup-content")[0].style.background = side;
             break;
         case "red":
-            var winnerName = redFirstName +" "+redLastName;
+             winnerName = redFirstName +" "+redLastName;
             document.getElementsByClassName("popup-text")[0].textContent = winnerName +" wins by "+ method +"!";
             document.getElementsByClassName("popup-content")[0].style.background = side;
             break;
@@ -311,5 +327,66 @@ function victory(side, method) {
         default:
         break;
     }
+
+    // add the rows of table here. 
+
+    var matchResults = document.querySelector("table.results>tbody")
+    var newRow = 
+        "<td>"+blueFirstName+" "+blueLastName+"</td>"
+        +"<td>"+redFirstName+" "+redLastName+"</td>"
+        +"<td>"+scoreBlue+"</td>"
+        +"<td>"+scoreRed+"</td>"
+        +"<td>"+winnerName+"</td>"
+        +"<td>"+method+"</td>";
+
+    matchResults.innerHTML = matchResults.innerHTML + newRow;
+
     
-}
+};
+
+function downloadCSV(csv, filename) {
+    console.log("Start exportTableToCSV");
+    var csvFile;
+    var downloadLink;
+
+    // CSV file
+    csvFile = new Blob([csv], {type: "text/csv"});
+
+    // Download link
+    downloadLink = document.createElement("a");
+
+    // File name
+    downloadLink.download = filename;
+
+    // Create a link to the file
+    downloadLink.href = window.URL.createObjectURL(csvFile);
+
+    // Hide download link
+    downloadLink.style.display = "none";
+
+    // Add the link to DOM
+    document.body.appendChild(downloadLink);
+
+    // Click download link
+    downloadLink.click();
+    console.log("End exportTableToCSV");
+};
+
+function exportTableToCSV(filename) {
+    console.log("Start exportTableToCSV");
+    var csv = [];
+    var rows = document.querySelectorAll("table.results tr");
+    
+    for (var i = 0; i < rows.length; i++) {
+        var row = [], cols = rows[i].querySelectorAll("td, th");
+        
+        for (var j = 0; j < cols.length; j++) 
+            row.push(cols[j].innerText);
+        
+        csv.push(row.join(","));        
+    }
+
+    // Download CSV file
+    downloadCSV(csv.join("\n"), filename);
+    console.log("End exportTableToCSV");
+};

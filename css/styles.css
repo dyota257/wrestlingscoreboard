@@ -27,6 +27,7 @@ td {
 
 button {
     color: white;
+    background-color: rgb(255,215,0,1);
     font-size: large;
     font-weight: bold;
     padding: 5% 5%;
@@ -43,6 +44,10 @@ button.timer:disabled {
     color: grey;
 }
 
+button#download {
+    padding: 0;
+}
+
 /* Ids */
 
 #mainHeader {
@@ -57,7 +62,7 @@ button.timer:disabled {
 }
 
 #playerInput {
-    display: block;
+    display: flex;
 }
 
 #startTimer {

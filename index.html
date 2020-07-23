@@ -24,7 +24,7 @@
     </div>
 
     <div class = "container" id="playerInput" style="display:none">
-        <table class = "tablePlayerInput">
+        <table class="container">
             <tr>
                 <td>
                     <label>Blue first name</label>
@@ -43,11 +43,6 @@
                     <input type = "text" name="playerData" id = "redLastName">
                 </td>
                 <td>
-                    <button type="button"  id="setConfirmGame">Confirm</button>
-                </td>
-            </tr>
-            <tr>
-                <td>
                     <input type="radio" name="gameType" id="seniorFreestyle">
                     <label for="seniorFreestyle">Senior Freestyle</label>
                     <br>
@@ -56,6 +51,12 @@
                     <br>
                     <input type="radio" name="gameType" id="seniorGrecoRoman">
                     <label for="seniorGrecoRoman">Senior Greco-Roman</label>
+                </td>
+
+            </tr>
+            <tr>
+                <td colspan="5" >
+                    <button type="button"  id="setConfirmGame">Confirm</button>
                 </td>
             </tr>
         </table>
@@ -78,19 +79,20 @@
                     <span id="timer">0:00</span>
                     <br>
                     <button class = "timer" id="startTimer">▶</button>
+
                     <!-- <button class = "timer" id="pauseTimer">⏸</button> -->
-                    <br>
+                    <!-- <br>
                     <button class = "timer" id="resetTimerTest">🔁 (0:03)</button>
                     <button class = "timer" id="resetTimerRest">🔁 (1:00)</button>
                     <button class = "timer" id="resetTimerJunior">🔁 (2:00)</button>
-                    <button class = "timer" id="resetTimerSenior">🔁 (3:00)</button>
-                    <br>
+                    <button class = "timer" id="resetTimerSenior">🔁 (3:00)</button> -->
+                    <!-- <br>
                     <input type="radio" name="period" value="1">
                     <label for="1">1</label>
                     <input type="radio" name="period" value="rest">
                     <label for="rest">Rest</label>
                     <input type="radio" name="period" value="2">
-                    <label for="2">2</label>
+                    <label for="2">2</label> -->
                     
                 </td>
 <!-- Red side -->
@@ -157,7 +159,20 @@
             </tr>
         </table>
     </div>
-    <button id="popup">Pop up winner</button>
+    
+    <button id="download">Download</button>
+    
+
+    <table class="results">
+        <tr><td>Blue name</td><td>Red name</td><td>Blue score</td><td>Red score</td><td>Winner</td><td>Method</td></tr>
+        <tr><td>Two</td></tr>
+        <tr><td>Three</td></tr>
+        <tr><td>Four</td></tr>
+        <tr><td>Five</td></tr>
+    </table>
+
+    
+<!-- Popup  -->
     <div class="popup">
         <div class="popup-content">
             <img src="images/close.png" alt="" srcset="" class="close">
@@ -166,6 +181,8 @@
             </div>
         </div>
     </div>
+
+
     
 </body>
 </html>
