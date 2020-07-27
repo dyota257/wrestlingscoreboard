@@ -13,6 +13,7 @@ var scoreBlue = 0;
 var scoreRed = 0;
 var arButtons = document.querySelectorAll("button");
 var arPeriod = document.getElementsByName("period");
+var gameType = "";
 
 var blueFirstName = "";
 var blueLastName = "";
@@ -26,13 +27,11 @@ var timerInit = 0;
 var phases = [ "1", "rest", "2"];
 var phasePos = 0;
 var phasesTime = [0,0,0];
-var timeRest = 3; // should be 30 seconds
+var timeRest = 30; // should be 30 seconds
 
 document.querySelector(".score.blue").textContent = scoreBlue;
 document.querySelector(".score.red").textContent = scoreRed;
 document.querySelector("#startTimer").disabled = true;
-
-
 
 for (var i=0; i<arButtons.length;i++){
     arButtons[i].addEventListener("click", function() {
@@ -41,15 +40,23 @@ for (var i=0; i<arButtons.length;i++){
         var addScore = Number(this.textContent.slice(1));
         switch(sideColour){
             case "blue buttonsRow":
+                
                 if (this.textContent.slice(0,1)==="+") {
                     scoreBlue = scoreBlue + addScore;
                 } else if (this.textContent.slice(0,1)==="-" && scoreBlue > 0) {
                     scoreBlue = scoreBlue - addScore;
                 }
                 document.querySelector(".score.blue").textContent = scoreBlue;
-                if(scoreBlue-scoreRed>=10){
-                    victory("blue", "technical superiority")   ;
+
+                // Freestyle tech sup
+                if(scoreBlue-scoreRed>=10 && gameType.indexOf("Freestyle")>0 ){
+                    victory("blue", "technical superiority");
+                } else 
+                // Greo tech sup
+                if (scoreBlue-scoreRed>=8 && gameType.indexOf("Greco")>0) {
+                    victory("blue", "technical superiority");
                 }
+
                 break;
             case "red buttonsRow":
                 if (this.textContent.slice(0,1)==="+") {
@@ -58,9 +65,16 @@ for (var i=0; i<arButtons.length;i++){
                     scoreRed = scoreRed - addScore;
                 }
                 document.querySelector(".score.red").textContent = scoreRed;
-                if(scoreRed-scoreBlue>=10){
+
+                // Freestyle tech sup
+                if(scoreRed-scoreBlue>=10 && gameType.indexOf("Freestyle")>0){
                     victory("red", "technical superiority")   ;
+                } else 
+                // Greo tech sup
+                if (scoreRed-scoreBlue>=8 && gameType.indexOf("Greco")>0) {
+                    victory("red", "technical superiority");
                 }
+
                 break;
             case "blue warning":
                 document.querySelector(".markerWarning.blue").textContent = document.querySelector(".markerWarning.blue").textContent + "⭕";
@@ -110,21 +124,22 @@ for (var i=0; i<arButtons.length;i++){
                 // game type
                 switch (radioCheckWhich()){
                     case 0:
-                        document.getElementById("gameType").textContent = "Senior Freestyle";
+                        gameType = "Senior Freestyle";
                         // timerInit = 180;
-                        timerInit = 5;
+                        timerInit = 180;
                         break;
                     case 1:
-                        document.getElementById("gameType").textContent = "Junior Freestyle";
+                        gameType = "Junior Freestyle";
                         // timerInit = 120;
-                        timerInit = 3;
+                        timerInit = 120;
                         break;
                     case 2:
-                        document.getElementById("gameType").textContent = "Senior Greco-Roman";
+                        gameType = "Senior Greco-Roman";
                         // timerInit = 180;
-                        timerInit = 5;
+                        timerInit = 180;
                         break;
                 }
+                document.getElementById("gameType").textContent = gameType;
 
                 // timer setup
                 document.querySelector("#timer").innerHTML = Math.floor(timerInit/60).toString() + ":00";
@@ -185,7 +200,7 @@ for (var i=0; i<arButtons.length;i++){
         if (this.className === "timer" && this.id !== "startTimer"){
             switch(this.id){
                 case "resetTimerRest":
-                    timerInit = 60;
+                    timerInit = 30;
                     break;
                 case "resetTimerJunior":
                     timerInit = 120;
