@@ -8,7 +8,6 @@ window.onbeforeunload = () => {
     return "Are you sure?"
 }
 
-
 var scoreBlue = 0;
 var scoreRed = 0;
 var arButtons = document.querySelectorAll("button");
