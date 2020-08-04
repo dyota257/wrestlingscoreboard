@@ -15,7 +15,7 @@ var categories =
     },
     "16-17 yrs":{
         Female: [40, 43, 49, 56, 61, 65, 69, 73],
-        Male: 	[48, 55, 62, 69, 74, 86, 92,110]
+        Male: 	[48, 55, 62, 69, 74, 86, 92, 110]
     },
     // Age, sex, and male style block
     "18-20 yrs":{
@@ -34,6 +34,7 @@ var categories =
     }
 }
 
+// variables setup
 var ageDiv = "";
 var arWeight = [];
 var genderDiv="";
@@ -43,82 +44,77 @@ document.querySelector("select[name=weight]").style.visibility = "hidden";
 document.querySelector("select[name=gender]").style.visibility = "hidden";
 document.querySelector("select[name=style]").style.visibility = "hidden";
 
+// First dropdown block: age
 document.querySelector("select[name=age]").addEventListener("change", ()=>{
     document.querySelector("select[name=weight]").style.visibility = "hidden";
     document.querySelector("select[name=gender]").style.visibility = "hidden";
     document.querySelector("select[name=style]").style.visibility = "hidden";
     arWeight=[];
     ageDiv = document.querySelector("select[name=age]").value;
-    switch (ageDiv) {
-        case "6-7 yrs":
-            arWeight = categories[ageDiv];
-            break;
-        case "8-9 yrs":
-            arWeight = categories[ageDiv];
-            break;
-        case "10-11 yrs":
-            arWeight = categories[ageDiv];
-            break;
-        case "12-13 yrs":
-            document.querySelector("select[name=gender]").style.visibility = "visible";
-            switch (genderDiv){
-                case "Female":
-                    arWeight = categories[ageDiv][genderDiv];
-                    break;
-                case "Male":
-                    arWeight = categories[ageDiv][genderDiv];
-                    break;
-            }        
-            break;
-        case "14-15 yrs":
-    
-            break;
-        case "16-17 yrs":
-    
-            break;
-        case "18-20 yrs":
-    
-            break;
-        case "21yrs+":
-    
-            break;
-    }   
-    
-    optionsWeight(arWeight);
-    
+    if (
+        ageDiv == "6-7 yrs"
+        || ageDiv == "8-9 yrs"
+        || ageDiv == "10-11 yrs"
+    ) {
+        arWeight = categories[ageDiv];
+        optionsWeight(arWeight);
+    } else if (ageDiv != "") {
+        document.querySelector("select[name=gender]").style.visibility = "visible";
+    }
     console.log("arWeight: "+arWeight);
 })
 
+// Second dropdown block: gender
 document.querySelector("[name=gender]").addEventListener("change", ()=>{
     document.querySelector("select[name=weight]").style.visibility = "hidden";
-    document.querySelector("select[name=gender]").style.visibility = "hidden";
     document.querySelector("select[name=style]").style.visibility = "hidden";
     arWeight=[];
     genderDiv = document.querySelector("select[name=gender]").value;
+    if (
+        ageDiv == "12-13 yrs"
+        || ageDiv == "14-15 yrs"
+        || ageDiv == "16-17 yrs"
+    ) {
+        arWeight = categories[ageDiv][genderDiv];
+        optionsWeight(arWeight);
+    } else if (genderDiv != "") {
+        document.querySelector("select[name=style]").style.visibility = "visible";
+    }
+    console.log("arWeight: "+arWeight);
+})
 
-    switch (genderDiv){
-        case "Female":
-            arWeight = categories[ageDiv][genderDiv];
-            break;
-        case "Male":
-            arWeight = categories[ageDiv][genderDiv];
-            break;
-    }        
-    
+// Third dropdown block: style
+document.querySelector("[name=style]").addEventListener("change", ()=>{
+    document.querySelector("select[name=weight]").style.visibility = "hidden";
+    arWeight=[];
+    styleDiv = document.querySelector("select[name=style]").value;
+    if (
+        ageDiv == "18-20 yrs"
+        || ageDiv == "21yrs+"
+    ) {
+        arWeight = categories[ageDiv][genderDiv][styleDiv];
+        optionsWeight(arWeight);
+    } else if (styleDiv!="") {
+        document.querySelector("select[name=style]").style.visibility = "visible";
+    }
     console.log("arWeight: "+arWeight);
 })
 
 
+
 function optionsWeight (arWeight) {
+
     if (arWeight.length>0) {
         document.querySelector("select[name=weight]").style.visibility = "visible";
     }
+
     document.querySelector("select[name=weight]").innerHTML = "<option value=\"\"></option>";
+
     for (var i=0; i<arWeight.length; i++) {
         var optionWeight = arWeight[i];
-        console.log(optionWeight);
         document.querySelector("select[name=weight]").innerHTML = document.querySelector("select[name=weight]").innerHTML+"<option value=\""+optionWeight+"kg\">"+optionWeight+" kg</option>";
     }
+
 }
 
 
