@@ -44,6 +44,11 @@ document.querySelector("select[name=weight]").style.visibility = "hidden";
 document.querySelector("select[name=gender]").style.visibility = "hidden";
 document.querySelector("select[name=style]").style.visibility = "hidden";
 
+document.querySelector("select[name=age]").value = "";
+document.querySelector("select[name=weight]").value = "";
+document.querySelector("select[name=gender]").value = "";
+document.querySelector("select[name=style]").value = "";
+
 // First dropdown block: age
 document.querySelector("select[name=age]").addEventListener("change", ()=>{
     document.querySelector("select[name=weight]").style.visibility = "hidden";
@@ -116,6 +121,3 @@ function optionsWeight (arWeight) {
     }
 
 }
-
-
-// for (var i=0; i<arWeight)
