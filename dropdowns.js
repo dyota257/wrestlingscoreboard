@@ -40,10 +40,12 @@ var arWeight = [];
 var genderDiv="";
 var styleDiv = "";
 
+// set other dropdowns as hidden, showing only name-age
 document.querySelector("select[name=weight]").style.visibility = "hidden";
 document.querySelector("select[name=gender]").style.visibility = "hidden";
 document.querySelector("select[name=style]").style.visibility = "hidden";
 
+// set selected value to first value = ""
 document.querySelector("select[name=age]").value = "";
 document.querySelector("select[name=weight]").value = "";
 document.querySelector("select[name=gender]").value = "";
@@ -66,7 +68,6 @@ document.querySelector("select[name=age]").addEventListener("change", ()=>{
     } else if (ageDiv != "") {
         document.querySelector("select[name=gender]").style.visibility = "visible";
     }
-    console.log("arWeight: "+arWeight);
 })
 
 // Second dropdown block: gender
@@ -79,13 +80,15 @@ document.querySelector("[name=gender]").addEventListener("change", ()=>{
         ageDiv == "12-13 yrs"
         || ageDiv == "14-15 yrs"
         || ageDiv == "16-17 yrs"
+        || genderDiv == "Female" && (ageDiv == "18-20 yrs" || ageDiv == "21yrs+")
     ) {
         arWeight = categories[ageDiv][genderDiv];
         optionsWeight(arWeight);
-    } else if (genderDiv != "") {
+    } else if (        
+        genderDiv == "Male" && (ageDiv == "18-20 yrs" || ageDiv == "21yrs+")
+    ) {
         document.querySelector("select[name=style]").style.visibility = "visible";
     }
-    console.log("arWeight: "+arWeight);
 })
 
 // Third dropdown block: style
@@ -93,16 +96,8 @@ document.querySelector("[name=style]").addEventListener("change", ()=>{
     document.querySelector("select[name=weight]").style.visibility = "hidden";
     arWeight=[];
     styleDiv = document.querySelector("select[name=style]").value;
-    if (
-        ageDiv == "18-20 yrs"
-        || ageDiv == "21yrs+"
-    ) {
-        arWeight = categories[ageDiv][genderDiv][styleDiv];
-        optionsWeight(arWeight);
-    } else if (styleDiv!="") {
-        document.querySelector("select[name=style]").style.visibility = "visible";
-    }
-    console.log("arWeight: "+arWeight);
+    arWeight = categories[ageDiv][genderDiv][styleDiv];
+    optionsWeight(arWeight);
 })
 
 
