@@ -35,13 +35,53 @@ document.querySelector(".score.red").textContent = scoreRed;
 document.querySelector("#startTimer").disabled = true;
 
 document.addEventListener("keydown", (e) => {
-    console.log(e.keyCode);
+    
     if (e.keyCode == 32 && document.querySelector("#startTimer").disabled == false) {
         e.preventDefault();
         startTimer(now);
         console.log("timerInit: "+timerInit);
     }
+
+    if (timerOn == true) {
+        switch (e.keyCode) {
+            case 65:
+                scoreBlue = scoreBlue +5;
+                break;
+            case 83:
+                scoreBlue = scoreBlue +4;
+                break;
+            case 68:
+                scoreBlue = scoreBlue +2;
+                break;
+            case 70:
+                scoreBlue = scoreBlue +1;
+                break;
+            case 71:
+                if (scoreBlue!==0){scoreBlue = scoreBlue -1;}
+                break;
+            case 72:
+                if (scoreRed!==0){scoreRed = scoreRed -1;}
+                break;
+            case 74:
+                scoreRed = scoreRed +1;
+                break;
+            case 75:
+                scoreRed = scoreRed +2;
+                break;
+            case 76:
+                scoreRed = scoreRed +4;
+                break;
+            case 59:
+                scoreRed = scoreRed +5;
+                break;
+        }
+        document.querySelector(".score.blue").textContent = scoreBlue;
+        document.querySelector(".score.red").textContent = scoreRed;
+    }
+
+    console.log(e.keyCode);
 })
+
 
 for (var i=0; i<arButtons.length;i++){
     arButtons[i].addEventListener("click", function() {
@@ -146,19 +186,10 @@ for (var i=0; i<arButtons.length;i++){
                 setPhase(phasePos);
 
                 // game type
-                switch (dropdownsCheckWhich()[0]){
-                    case "Senior Freestyle":
-                        // timerInit = 180;
-                        timerInit = 180;
-                        break;
-                    case "Junior Freestyle":
-                        // timerInit = 120;
-                        timerInit = 120;
-                        break;
-                    case "Senior Greco-Roman":
-                        // timerInit = 180;
-                        timerInit = 180;
-                        break;
+                if (dropdownsCheckWhich()[0]=="Junior Freestyle") {
+                    timerInit = 120;
+                } else { // for Senior Freestyle and Senior Greco-Roman
+                    timerInit = 180;
                 }
                 
                 document.getElementById("gameType").textContent = gameType;

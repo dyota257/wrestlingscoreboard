@@ -23,7 +23,9 @@
 [ ] 3 warnings lead to a disqualification
 [ ] passive, 30 second shot clock
 [ ] add keyboard event listeners
-[ ] white background on pause
+    [ ] make scoring into functions so that it can be called in multiple places
+    [ ] there's no limiter on scoring by keyboard - need to copy from buttons.
+[x] white background on pause
 [x] age and weight division display
 [ ] remove draw conditions - replace with victory on the last biggest score
 
