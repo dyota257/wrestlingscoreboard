@@ -104,12 +104,20 @@ for (var i=0; i<arButtons.length;i++){
         };
 
         if (this.id==="setConfirmGame") {
+            document.getElementById("blueFirstName").value === "";
+            document.getElementById("blueLastName").value === "";
+            document.getElementById("redFirstName").value === "";
+            document.getElementById("redLastName").value === "";
+            gameType = "";
+            gameType = dropdownsCheckWhich() + ", " + document.querySelector("select[name=weight]").value;
+
             if ( // check for empty fields
                 document.getElementById("blueFirstName").value === ""
                 || document.getElementById("blueLastName").value === ""
                 || document.getElementById("redFirstName").value === ""
                 || document.getElementById("redLastName").value === ""
-                || radioCheck() === 0
+                || document.querySelector("select[name=weight]").value === ""
+                // || radioCheck() === 0
             ) {
                     window.alert("Fill in all the names and game type!");
 
@@ -122,23 +130,21 @@ for (var i=0; i<arButtons.length;i++){
                 setPhase(phasePos);
 
                 // game type
-                switch (radioCheckWhich()){
-                    case 0:
-                        gameType = "Senior Freestyle";
+                switch (dropdownsCheckWhich()){
+                    case "Senior Freestyle":
                         // timerInit = 180;
                         timerInit = 180;
                         break;
-                    case 1:
-                        gameType = "Junior Freestyle";
+                    case "Junior Freestyle":
                         // timerInit = 120;
                         timerInit = 120;
                         break;
-                    case 2:
-                        gameType = "Senior Greco-Roman";
+                    case "Senior Greco-Roman":
                         // timerInit = 180;
                         timerInit = 180;
                         break;
                 }
+                
                 document.getElementById("gameType").textContent = gameType;
 
                 // timer setup
@@ -181,6 +187,7 @@ for (var i=0; i<arButtons.length;i++){
                 document.querySelector(".red.lastName").textContent = "redLastName";
                 
                 document.querySelector("#timer").innerHTML = "0:00";
+                gameType = "";
             }
         };
 
@@ -232,20 +239,28 @@ document.getElementById("download").addEventListener("click", function(){
     exportTableToCSV("numbers.csv");
 });
 
-function radioCheck() {
-    var radioCheckSum = 0;
-    for (var i=0; i<document.getElementsByName("gameType").length; i++) {
-        radioCheckSum = radioCheckSum + document.getElementsByName("gameType")[i].checked
-    }
-    return radioCheckSum
-}
 
-function radioCheckWhich () {
-    var radioCheckArray = [];
-    for (var i=0; i<document.getElementsByName("gameType").length; i++) {
-        radioCheckArray.push( document.getElementsByName("gameType")[i].checked )
+
+function dropdownsCheckWhich() {
+    const ageDiv = document.querySelector("select[name=age]").value;
+    const styleDiv = document.querySelector("select[name=style]").value;
+    var gameType = "";
+    if (
+        ageDiv == "6-7 yrs" 
+        || ageDiv == "8-9 yrs" 
+        || ageDiv == "10-11 yrs" 
+        || ageDiv == "12-13 yrs" 
+        || ageDiv == "14-15 yrs" 
+        || ageDiv == "16-17 yrs" 
+    ) {
+        gameType = "Junior Freestyle";
+    } else if (styleDiv == "Freestyle") {
+        gameType = "Senior Freestyle";
+    }  else if (styleDiv == "Greco-Roman") {
+        gameType = "Senior Greco-Roman";
     }
-    return radioCheckArray.indexOf(true)
+    const styleAndAge = gameType+", "+ ageDiv;
+    return styleAndAge
 }
 
 function setPhase(pos) {
@@ -405,3 +420,20 @@ function exportTableToCSV(filename) {
     downloadCSV(csv.join("\n"), filename);
     console.log("End exportTableToCSV");
 };
+
+
+// function radioCheck() {
+//     var radioCheckSum = 0;
+//     for (var i=0; i<document.getElementsByName("gameType").length; i++) {
+//     radioCheckSum = radioCheckSum + document.getElementsByName("gameType")[i].checked
+//     }
+//     return radioCheckSum
+// }
+
+// function radioCheckWhich () {
+//     var radioCheckArray = [];
+//     for (var i=0; i<document.getElementsByName("gameType").length; i++) {
+//         radioCheckArray.push( document.getElementsByName("gameType")[i].checked )
+//     }
+//     return radioCheckArray.indexOf(true)
+// }

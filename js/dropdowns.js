@@ -41,15 +41,15 @@ var genderDiv="";
 var styleDiv = "";
 
 // set other dropdowns as hidden, showing only name-age
-document.querySelector("select[name=weight]").style.visibility = "hidden";
 document.querySelector("select[name=gender]").style.visibility = "hidden";
 document.querySelector("select[name=style]").style.visibility = "hidden";
+document.querySelector("select[name=weight]").style.visibility = "hidden";
 
 // set selected value to first value = ""
 document.querySelector("select[name=age]").value = "";
-document.querySelector("select[name=weight]").value = "";
 document.querySelector("select[name=gender]").value = "";
 document.querySelector("select[name=style]").value = "";
+document.querySelector("select[name=weight]").value = "";
 
 // First dropdown block: age
 document.querySelector("select[name=age]").addEventListener("change", ()=>{
