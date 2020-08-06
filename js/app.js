@@ -21,8 +21,9 @@ var redFirstName = "";
 var redLastName = "";
 
 var timerOn = false;
-
 var timerInit = 0;
+var timerPause = 0;
+var now = 0;
 
 var phases = [ "1", "rest", "2"];
 var phasePos = 0;
@@ -33,12 +34,23 @@ document.querySelector(".score.blue").textContent = scoreBlue;
 document.querySelector(".score.red").textContent = scoreRed;
 document.querySelector("#startTimer").disabled = true;
 
+document.addEventListener("keydown", (e) => {
+    console.log(e.keyCode);
+    if (e.keyCode == 32 && document.querySelector("#startTimer").disabled == false) {
+        e.preventDefault();
+        startTimer(now);
+        console.log("timerInit: "+timerInit);
+    }
+})
+
 for (var i=0; i<arButtons.length;i++){
     arButtons[i].addEventListener("click", function() {
 
         var sideColour = this.parentElement.className;
         var addScore = Number(this.textContent.slice(1));
+
         switch(sideColour){
+// Blue scoring buttons
             case "blue buttonsRow":
                 
                 if (this.textContent.slice(0,1)==="+") {
@@ -58,7 +70,8 @@ for (var i=0; i<arButtons.length;i++){
                 }
 
                 break;
-            case "red buttonsRow":
+// Red scoring buttons            
+                case "red buttonsRow":
                 if (this.textContent.slice(0,1)==="+") {
                     scoreRed = scoreRed + addScore;
                 } else if (this.textContent.slice(0,1)==="-" && scoreRed > 0) {
@@ -76,6 +89,7 @@ for (var i=0; i<arButtons.length;i++){
                 }
 
                 break;
+// Blue and red other buttons                
             case "blue warning":
                 document.querySelector(".markerWarning.blue").textContent = document.querySelector(".markerWarning.blue").textContent + "⭕";
                 break;
@@ -99,17 +113,19 @@ for (var i=0; i<arButtons.length;i++){
                 break;
         };
 
+// Set game
         if (this.id==="setGame") {
             document.getElementById("playerInput").style.display = "flex";
         };
 
+// Confirm game
         if (this.id==="setConfirmGame") {
             document.getElementById("blueFirstName").value === "";
             document.getElementById("blueLastName").value === "";
             document.getElementById("redFirstName").value === "";
             document.getElementById("redLastName").value === "";
             gameType = "";
-            gameType = dropdownsCheckWhich() + ", " + document.querySelector("select[name=weight]").value;
+            gameType = dropdownsCheckWhich()[0] + ", "+ dropdownsCheckWhich()[1] + ", " + document.querySelector("select[name=weight]").value;
 
             if ( // check for empty fields
                 document.getElementById("blueFirstName").value === ""
@@ -130,7 +146,7 @@ for (var i=0; i<arButtons.length;i++){
                 setPhase(phasePos);
 
                 // game type
-                switch (dropdownsCheckWhich()){
+                switch (dropdownsCheckWhich()[0]){
                     case "Senior Freestyle":
                         // timerInit = 180;
                         timerInit = 180;
@@ -152,6 +168,7 @@ for (var i=0; i<arButtons.length;i++){
                 document.getElementById("startTimer").innerHTML = "▶";
                 document.querySelector("#startTimer").disabled = false;
                 timerOn = false;
+                now = timerInit;
                 phasesTime = [timerInit, timeRest, timerInit];
                 
                 // set player names
@@ -172,6 +189,7 @@ for (var i=0; i<arButtons.length;i++){
             }
         };
 
+//Reset game
         if (this.id==="resetGame") {
             var confirm = window.confirm("Are you sure? This will reset all scores and reset the timer.");
             console.log(confirm);
@@ -191,43 +209,14 @@ for (var i=0; i<arButtons.length;i++){
             }
         };
 
+// Start timer
         if (this.id === "startTimer"){
-            if (timerOn === false) { // to pause the time
-                document.getElementById("startTimer").innerHTML = "▐ ▌";
-                timerOn = true;
-                timer(timerInit); // 2 minutes is 120 seconds = 120 000 milliseconds
-
-            } else if (timerOn === true)  { // to restart the time
-                document.getElementById("startTimer").innerHTML = "▶";
-                timerOn = false;
-                timer(0);
-            };
+            startTimer(now);
         };
 
-        if (this.className === "timer" && this.id !== "startTimer"){
-            switch(this.id){
-                case "resetTimerRest":
-                    timerInit = 30;
-                    break;
-                case "resetTimerJunior":
-                    timerInit = 120;
-                    break;
-                case "resetTimerSenior":
-                    timerInit = 180;
-                    break;
-                case "resetTimerTest":
-                    timerInit = 3;
-                    break;
-            };
-
-            document.querySelector("#timer").innerHTML = Math.floor(timerInit/60).toString() + ":00";
-            document.getElementById("startTimer").innerHTML = "▶";
-            timerOn = false;
-            document.querySelector("#startTimer").disabled = false;
-        };
+        // if (this.className === "timer" && this.id !== "startTimer"){switch(this.id){case "resetTimerRest":timerInit = 30;break;case "resetTimerJunior":timerInit = 120;break;case "resetTimerSenior":timerInit = 180;break;case "resetTimerTest":timerInit = 3;break;};document.querySelector("#timer").innerHTML = Math.floor(timerInit/60).toString() + ":00";document.getElementById("startTimer").innerHTML = "▶";timerOn = false;document.querySelector("#startTimer").disabled = false;};
     })
 }
-
 
 document.getElementsByClassName("close")[0].addEventListener("click", function() {
         document.getElementsByClassName("popup")[0].style.display = "none";
@@ -239,27 +228,18 @@ document.getElementById("download").addEventListener("click", function(){
     exportTableToCSV("numbers.csv");
 });
 
-
-
 function dropdownsCheckWhich() {
     const ageDiv = document.querySelector("select[name=age]").value;
     const styleDiv = document.querySelector("select[name=style]").value;
     var gameType = "";
-    if (
-        ageDiv == "6-7 yrs" 
-        || ageDiv == "8-9 yrs" 
-        || ageDiv == "10-11 yrs" 
-        || ageDiv == "12-13 yrs" 
-        || ageDiv == "14-15 yrs" 
-        || ageDiv == "16-17 yrs" 
-    ) {
-        gameType = "Junior Freestyle";
-    } else if (styleDiv == "Freestyle") {
-        gameType = "Senior Freestyle";
-    }  else if (styleDiv == "Greco-Roman") {
+    if (styleDiv == "Greco-Roman") {
         gameType = "Senior Greco-Roman";
+    } else if (ageDiv == "18-20 yrs" || ageDiv == "21yrs+") {
+        gameType = "Senior Freestyle";
+    }  else {
+        gameType = "Junior Freestyle";
     }
-    const styleAndAge = gameType+", "+ ageDiv;
+    const styleAndAge = [gameType, ageDiv];
     return styleAndAge
 }
 
@@ -274,19 +254,36 @@ for (var i=0; i <= arPeriod.length; i++) {
 }
 
 
+function startTimer(now) {
+    if (timerOn === false) { // to restart the time
+        document.getElementById("startTimer").innerHTML = "▐ ▌";
+        timerOn = true;
+        timer(now); // 2 minutes is 120 seconds = 120 000 milliseconds
+        document.getElementsByClassName("middle")[0].style.backgroundColor = "black";
+
+    } else if (timerOn === true)  { // to pause the time
+        document.getElementById("startTimer").innerHTML = "▶";
+        timerOn = false;
+        timer(now);
+        document.getElementsByClassName("middle")[0].style.backgroundColor = "grey";
+    };
+}
+
 function timer(time) {
     
     // fix up the variable scopes here
 
     var start = new Date().getTime();
-    var now = 0;
+    
     console.log("start: "+start);
     
     var interval = setInterval( function() {
         
         // timer on start
         if (timerOn === true) {
-            now = Math.ceil((time*1000-(new Date().getTime()-start))/1000);
+            now = Math.ceil(
+                ( time*1000 - (new Date().getTime()-start) )/1000
+            );
             var colonZero = ":";
             // timerInit = now;
             if ((now%60).toString().length === 1) { 
@@ -299,12 +296,15 @@ function timer(time) {
 
         // timer on end
         if( now <= 0 && timerOn === true) {
+            // move to the next phase
             phasePos++;
             if (phasePos<3) {
+                // if it's still in the game, start the clock again
                 setPhase(phasePos);
                 timer(phasesTime[phasePos]);
                 console.log(timerInit);
             } else {
+                // it must be the end of the game, close things down
                 document.querySelector("#startTimer").disabled = true;
                 var winBlue = (scoreBlue - scoreRed)/Math.abs(scoreBlue - scoreRed)
                 switch ( winBlue ){
@@ -315,6 +315,7 @@ function timer(time) {
                         victory("red", "points");        
                         break;
                     default:
+// Draw outcome
                         victory("draw", "technical superiority");
                         console.log("Outcome is draw")      
                         break;
@@ -327,6 +328,7 @@ function timer(time) {
         if( now <= 0 || timerOn === false) {
             console.log("Timer stopped at: "+now);
             clearInterval(interval);
+            now = time;
         };
 
         console.log("now: "+Math.ceil(now));
@@ -334,6 +336,7 @@ function timer(time) {
     },1000);
     
 };
+
 
 function victory(side, method) {
     document.getElementsByClassName("popup")[0].style.display = "flex";
@@ -370,7 +373,6 @@ function victory(side, method) {
         +"<td>"+method+"</td>";
 
     matchResults.innerHTML = matchResults.innerHTML + newRow;
-
     
 };
 

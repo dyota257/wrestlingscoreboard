@@ -24,7 +24,8 @@
 [ ] passive, 30 second shot clock
 [ ] add keyboard event listeners
 [ ] white background on pause
-[ ] age and weight division display
+[x] age and weight division display
+[ ] remove draw conditions - replace with victory on the last biggest score
 
 ## What if....
 

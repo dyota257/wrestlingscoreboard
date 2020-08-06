@@ -74,6 +74,7 @@ button#download {
 
 #startTimer:disabled {
     color: grey;
+    background-color: darkslategray;
 }
 
 #timer {
