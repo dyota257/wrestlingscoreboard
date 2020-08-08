@@ -188,10 +188,11 @@ button#download {
 }
 
 .resetGame {
-    width: 10rem;
+    color: black;
     height: 2rem;
-    padding: 0;
     margin: 0;
+    padding: 0;
+    width: 10rem;
 }
 
 .score {

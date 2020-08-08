@@ -20,8 +20,8 @@
     </div>
 
     <div>
-        <button class="resetGame" id = "setGame" style="color:black;">Set game</button>
-        <button class="resetGame" id = "resetGame"style="color:black;">Reset all</button>
+        <button class="resetGame" id = "setGame">Set game</button>
+        <button class="resetGame" id = "resetGame">Reset all</button>
     </div>
 <!-- Game setup - disappearable rows  -->
     <div class = "container" id="playerInput" style="display:none">
@@ -97,7 +97,7 @@
 <!-- Confirm game button -->
             <tr>
                 <td colspan="5" >
-                    <button type="button"  id="setConfirmGame">Confirm</button>
+                    <button class="resetGame" id="setConfirmGame">Confirm</button>
                 </td>
             </tr>
         </table>
@@ -163,20 +163,20 @@
             <tr>
                 <td class="blue">
                     <div class="blue buttonsRow">
-                        <button>+5</button>
-                        <button>+4</button>
-                        <button>+2</button>
-                        <button>+1</button>
-                        <button>-1</button>
+                        <button value=4>+5</button>
+                        <button value=3>+4</button>
+                        <button value=2>+2</button>
+                        <button value=1>+1</button>
+                        <button value=0>-1</button>
                     </div>
                 </td>
                 <td class="red">
                     <div class="red buttonsRow">
-                        <button>-1</button>
-                        <button>+1</button>
-                        <button>+2</button>
-                        <button>+4</button>
-                        <button>+5</button>
+                        <button value=0>-1</button>
+                        <button value=1>+1</button>
+                        <button value=2>+2</button>
+                        <button value=3>+4</button>
+                        <button value=4>+5</button>
                     </div>
                 </td>
             </tr>
@@ -184,8 +184,10 @@
             <tr>
                 <td class="blue warning">
                     <button>Warning</button>
+                    <button>Shot clock</button>
                 </td>
                 <td class="red warning">
+                    <button>Shot clock</button>
                     <button>Warning</button>
                 </td>
             </tr>

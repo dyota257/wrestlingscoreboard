@@ -14,19 +14,19 @@
     [x] Button pause
     [x] Button reset
 [x] Init player input div as display:none;
-[ ] When Set Game is pressed...
-    [ ] player input div display:block;
-    [ ] when confirm button pressed, populate player names 
-[ ] The play button gets confused / runs two timers if start button is pressed in rapid succession
+[x] When Set Game is pressed...
+    [x] player input div display:block;
+    [x] when confirm button pressed, populate player names 
 [x] FOCUS ON TIMER AND setPhase()
     [x] end the game on a pin
-[ ] 3 warnings lead to a disqualification
-[ ] passive, 30 second shot clock
-[ ] add keyboard event listeners
-    [ ] make scoring into functions so that it can be called in multiple places
-    [ ] there's no limiter on scoring by keyboard - need to copy from buttons.
+[x] add keyboard event listeners
+    [x] make scoring into functions so that it can be called in multiple places
+    [x] there's no limiter on scoring by keyboard - need to copy from buttons.
 [x] white background on pause
 [x] age and weight division display
+[ ] 3 warnings lead to a disqualification
+[ ] passive, 30 second shot clock
+[ ] The play button gets confused / runs two timers if start button is pressed in rapid succession
 [ ] remove draw conditions - replace with victory on the last biggest score
 
 ## What if....
@@ -35,8 +35,8 @@
 
 ## Collin says...
 [ ] Declare winner when match is over
-    [ ] By who has the most points
-    [ ] Depending on game type (10 points freestyle, 8 points greco)
+    [x] By who has the most points
+    [x] Depending on game type (10 points freestyle, 8 points greco)
 [ ] Declare winner by pin
     [ ] Have a button to stop the match, and set the winner
     [ ] Note that victory was by pin

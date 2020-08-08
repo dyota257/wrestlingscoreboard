@@ -30,56 +30,37 @@ var phasePos = 0;
 var phasesTime = [0,0,0];
 var timeRest = 30; // should be 30 seconds
 
+const  scoresMap = [ -1, 1, 2, 4, 5];
+
 document.querySelector(".score.blue").textContent = scoreBlue;
 document.querySelector(".score.red").textContent = scoreRed;
 document.querySelector("#startTimer").disabled = true;
 
 document.addEventListener("keydown", (e) => {
     
+    const blueKeysMap = [71, 70, 68, 83, 65]; // [G, F, D, S, A]
+    const redKeysMap = [72, 74, 75, 76, 59]; //[H, J, K, L, ;]
+
     if (e.keyCode == 32 && document.querySelector("#startTimer").disabled == false) {
         e.preventDefault();
         startTimer(now);
         console.log("timerInit: "+timerInit);
     }
+    
+    if (e.keyCode != 32) {
 
-    if (timerOn == true) {
-        switch (e.keyCode) {
-            case 65:
-                scoreBlue = scoreBlue +5;
-                break;
-            case 83:
-                scoreBlue = scoreBlue +4;
-                break;
-            case 68:
-                scoreBlue = scoreBlue +2;
-                break;
-            case 70:
-                scoreBlue = scoreBlue +1;
-                break;
-            case 71:
-                if (scoreBlue!==0){scoreBlue = scoreBlue -1;}
-                break;
-            case 72:
-                if (scoreRed!==0){scoreRed = scoreRed -1;}
-                break;
-            case 74:
-                scoreRed = scoreRed +1;
-                break;
-            case 75:
-                scoreRed = scoreRed +2;
-                break;
-            case 76:
-                scoreRed = scoreRed +4;
-                break;
-            case 59:
-                scoreRed = scoreRed +5;
-                break;
+        if (blueKeysMap.includes(e.keyCode)){
+            var addScore = scoresMap[blueKeysMap.indexOf(e.keyCode)];
+            blueScoreUpdate(addScore);
         }
-        document.querySelector(".score.blue").textContent = scoreBlue;
-        document.querySelector(".score.red").textContent = scoreRed;
+
+        if (redKeysMap.includes(e.keyCode)){
+            var addScore = scoresMap[redKeysMap.indexOf(e.keyCode)];
+            redScoreUpdate(addScore);
+        }
+        
     }
 
-    console.log(e.keyCode);
 })
 
 
@@ -87,47 +68,17 @@ for (var i=0; i<arButtons.length;i++){
     arButtons[i].addEventListener("click", function() {
 
         var sideColour = this.parentElement.className;
-        var addScore = Number(this.textContent.slice(1));
-
+        // var addScore = Number(this.textContent.slice(1));
+        var addScore = scoresMap[this.value];
+        console.log(Number(addScore)>0);
         switch(sideColour){
 // Blue scoring buttons
             case "blue buttonsRow":
-                
-                if (this.textContent.slice(0,1)==="+") {
-                    scoreBlue = scoreBlue + addScore;
-                } else if (this.textContent.slice(0,1)==="-" && scoreBlue > 0) {
-                    scoreBlue = scoreBlue - addScore;
-                }
-                document.querySelector(".score.blue").textContent = scoreBlue;
-
-                // Freestyle tech sup
-                if(scoreBlue-scoreRed>=10 && gameType.indexOf("Freestyle")>0 ){
-                    victory("blue", "technical superiority");
-                } else 
-                // Greo tech sup
-                if (scoreBlue-scoreRed>=8 && gameType.indexOf("Greco")>0) {
-                    victory("blue", "technical superiority");
-                }
-
+                blueScoreUpdate(addScore);
                 break;
 // Red scoring buttons            
-                case "red buttonsRow":
-                if (this.textContent.slice(0,1)==="+") {
-                    scoreRed = scoreRed + addScore;
-                } else if (this.textContent.slice(0,1)==="-" && scoreRed > 0) {
-                    scoreRed = scoreRed - addScore;
-                }
-                document.querySelector(".score.red").textContent = scoreRed;
-
-                // Freestyle tech sup
-                if(scoreRed-scoreBlue>=10 && gameType.indexOf("Freestyle")>0){
-                    victory("red", "technical superiority")   ;
-                } else 
-                // Greo tech sup
-                if (scoreRed-scoreBlue>=8 && gameType.indexOf("Greco")>0) {
-                    victory("red", "technical superiority");
-                }
-
+            case "red buttonsRow":
+                redScoreUpdate(addScore);
                 break;
 // Blue and red other buttons                
             case "blue warning":
@@ -259,6 +210,36 @@ document.getElementById("download").addEventListener("click", function(){
     exportTableToCSV("numbers.csv");
 });
 
+function blueScoreUpdate(addScore) {
+    if (addScore<0 && scoreBlue===0){}
+    else {scoreBlue = scoreBlue + addScore};
+    document.querySelector(".score.blue").textContent = scoreBlue;
+
+    // Freestyle tech sup
+    if(scoreBlue-scoreRed>=10 && gameType.indexOf("Freestyle")>0 ){
+        victory("blue", "technical superiority");
+    } else 
+    // Greo tech sup
+    if (scoreBlue-scoreRed>=8 && gameType.indexOf("Greco")>0) {
+        victory("blue", "technical superiority");
+    }
+}
+
+function redScoreUpdate(addScore) {
+    if (addScore<0 &&scoreRed===0){}
+    else {scoreRed = scoreRed + addScore;}
+    document.querySelector(".score.red").textContent = scoreRed;
+
+    // Freestyle tech sup
+    if(scoreRed-scoreBlue>=10 && gameType.indexOf("Freestyle")>0){
+        victory("red", "technical superiority")   ;
+    } else 
+    // Greo tech sup
+    if (scoreRed-scoreBlue>=8 && gameType.indexOf("Greco")>0) {
+        victory("red", "technical superiority");
+    }
+}
+
 function dropdownsCheckWhich() {
     const ageDiv = document.querySelector("select[name=age]").value;
     const styleDiv = document.querySelector("select[name=style]").value;
@@ -372,6 +353,11 @@ function timer(time) {
 function victory(side, method) {
     document.getElementsByClassName("popup")[0].style.display = "flex";
     document.getElementsByClassName("popup")[0].style.height = document.body.clientHeight;
+    
+    // pause time
+    startTimer(now);
+    
+    // declare winner
     var winnerName = "";
     switch (side) {
         case "blue":
