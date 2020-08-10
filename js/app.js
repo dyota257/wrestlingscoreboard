@@ -38,7 +38,7 @@ $(document).keydown( (e) => {
         console.log("timerInit: "+timerInit);
     }
     
-    if (e.keyCode != 32) {
+    if (e.keyCode != 32 && timerOn == true) {
 
         if (blueKeysMap.includes(e.keyCode)){
             var addScore = scoresMap[blueKeysMap.indexOf(e.keyCode)];
@@ -149,6 +149,7 @@ $("button").click( function() {
             scoreRed = 0;
             $(".score.blue").text(scoreBlue);
             $(".score.red").text(scoreRed);
+            $("div.markerWarning").text("");
         }
     };
 
@@ -169,6 +170,7 @@ $("button").click( function() {
             
             $("#timer").html("0:00");
             gameType = "";
+            $("div.markerWarning").text("");
         }
     };
 
@@ -189,12 +191,12 @@ function blueScoreUpdate(addScore) {
     else {scoreBlue = scoreBlue + addScore};
     $(".score.blue").text(scoreBlue);
 
-    // Freestyle tech sup
-    if(scoreBlue-scoreRed>=10 && gameType.indexOf("Freestyle")>0 ){
-        victory("blue", "technical superiority");
-    } else 
     // Greo tech sup
     if (scoreBlue-scoreRed>=8 && gameType.indexOf("Greco")>0) {
+        victory("blue", "technical superiority");
+    } else
+    // Freestyle tech sup
+    if(scoreBlue-scoreRed>=10 && gameType.indexOf("Freestyle")>0 ){
         victory("blue", "technical superiority");
     }
 }
@@ -204,14 +206,14 @@ function redScoreUpdate(addScore) {
     else {scoreRed = scoreRed + addScore;}
     $(".score.red").text(scoreRed);
 
-    // Freestyle tech sup
-    if(scoreRed-scoreBlue>=10 && gameType.indexOf("Freestyle")>0){
-        victory("red", "technical superiority")   ;
-    } else 
     // Greo tech sup
     if (scoreRed-scoreBlue>=8 && gameType.indexOf("Greco")>0) {
         victory("red", "technical superiority");
-    }
+    } else
+    // Freestyle tech sup
+    if(scoreRed-scoreBlue>=10 && gameType.indexOf("Freestyle")>0){
+        victory("red", "technical superiority")   ;
+    } 
 }
 
 function dropdownsCheckWhich() {
