@@ -3,6 +3,7 @@
 ## HTML
 [x] Display timer clock
 [x] Put confirm button on player input row
+[ ] put club name to be displayed
 
 ## CSS
 [ ] Style player input table

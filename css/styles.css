@@ -127,7 +127,7 @@ button#download {
     padding-top: 0%;
 }
 
-.firstName {
+.firstName, .clubName {
     font-size: x-large;
 }
 
