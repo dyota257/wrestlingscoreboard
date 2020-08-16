@@ -30,6 +30,7 @@
 [ ] passive, 30 second shot clock
 [ ] The play button gets confused / runs two timers if start button is pressed in rapid succession
 [ ] remove draw conditions - replace with victory on the last biggest score
+[ ] KEYBOARD BUTTONS ARE BACKWARDS
 
 ## Import function
 [x] Clash with individual input
