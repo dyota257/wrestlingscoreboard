@@ -87,6 +87,21 @@ $("button").click( function() {
             break;
     };
 
+    if (this.id === "import") {
+        $("#importArea").css("display", "flex");
+    }
+
+    if (this.id === "fixtures") {
+        switch( $("#fixturesTable").css("display") ) {
+            case "flex":
+                $("#fixturesTable").css("display", "none");
+                break;
+            case "none":
+                $("#fixturesTable").css("display", "flex");
+                break;
+        }
+    }
+
 // Set game
     if (this.id==="setGame") {
         $("#playerInput").css("display", "flex")

@@ -6,6 +6,7 @@
     <link rel="stylesheet" href="css/styles.css">
     <script defer src="js/jquery-3.5.1.slim.min.js"> </script>
     <script defer src="js/dropdowns.js"></script>
+    <script defer src="js/import.js"></script>
     <script defer src="js/download.js"></script>
     <script defer src="js/app.js"></script>
     <link rel="shortcut icon" href="http://wrestlingwa.org/wp-content/uploads/2017/05/wwa1-150x150.jpg" type="image/x-icon">
@@ -22,32 +23,32 @@
     <div>
         <button class="resetGame" id = "setGame">Set game</button>
         <button class="resetGame" id = "resetGame">Reset all</button>
+        <button class="resetGame" id = "import">Import</button>
+        <button class="resetGame" id = "fixtures">Fixtures</button>
+        <button class="resetGame" id = "prev"><<</button>
+        <button class="resetGame" id = "next">>></button>
     </div>
 <!-- Game setup - disappearable rows  -->
     <div class = "container" id="playerInput" style="display:none">
         <table class="container">
+            <tr>
+                <td>
 <!-- Players details -->
-            <tr>
-                <td>
-                    <label>Blue first name</label>
-                    <input type = "text" name="playerData" id = "blueFirstName">
-                </td>
-                <td>
-                    <label>Blue last name</label>
-                    <input type = "text" name="playerData" id = "blueLastName">
-                </td>
-                <td>
                     <label>Red first name</label>
-                    <input type = "text" name="playerData" id = "redFirstName">
-                </td>
-                <td>
+                    <input type = "text" name="playerData" id = "redFirstName"><br><br>
                     <label>Red last name</label>
-                    <input type = "text" name="playerData" id = "redLastName">
+                    <input type = "text" name="playerData" id = "redLastName"><br><br>
+                    <label>Red club name</label>
+                    <input type = "text" name="playerData" id = "redClubName"><br><br>
+                    <label>Blue first name</label>
+                    <input type = "text" name="playerData" id = "blueFirstName"><br><br>
+                    <label>Blue last name</label>
+                    <input type = "text" name="playerData" id = "blueLastName"><br><br>
+                    <label>Blue club name</label>
+                    <input type = "text" name="playerData" id = "blueClubName"><br><br>
                 </td>
-            </tr>
-<!-- Dropdown lists -->
-            <tr>
                 <td>
+<!-- Dropdown lists -->
                     <label>Age</label><br>
                     <select name="age" value="">
                         <option value="" selected></option>
@@ -59,29 +60,23 @@
                         <option value="16-17 yrs">16-17 yrs</option>
                         <option value="18-20 yrs">18-20 yrs</option>
                         <option value="21yrs+">21yrs+</option>
-                    </select> 
-                </td>
-                <td>
+                    </select><br> <br>
                     <label>Gender</label><br>
                     <select name="gender">
                         <option value="" selected></option>
                         <option value="Female">Female</option>
                         <option value="Male">Male</option>
-                    </select> 
-                </td>
-                <td>
+                    </select> <br> <br>
                     <label>Style</label><br>
                     <select name="style">
                         <option value=""></option>
                         <option value="Freestyle">Freestyle</option>
                         <option value="Greco-Roman">Greco-Roman</option>
-                    </select> 
-                </td>
-                <td>
+                    </select> <br> <br>
                     <label>Weight</label><br>
                     <select name="weight">
                         <option value=""></option>
-                    </select> 
+                    </select> <br> <br>
                 </td>
             </tr>
 <!-- Confirm game button -->
@@ -93,15 +88,36 @@
         </table>
     </div>
 
+    <div class = "container" id = "importArea" style = "display:none"> 
+        <table>
+            <tr>
+                <td>
+                    <textarea width=500 height=50 style="width: 659px; height: 577px;"></textarea>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <button class="resetGame" id = "importDone">Confirm</button>
+                    <button class="resetGame" id = "importCancel">Cancel</button>
+                </td>
+            </tr>
+        </table>
+    </div>
+
+    <div class = "container" id = "fixturesTable" style="display:none"> 
+        <table name = "list">
+
+        </table>
+    </div>
+
     <div class="container">
         <table>
             <tr>
-<!-- Blue side -->
-                <td class="blue playerData">
-                    <span class = "blue firstName">blueFirstName</span><br>
-                    <span class = "blue lastName">blueLastName</span>
-                    <span class = "blue clubName">blueClubName</span>
-                    <!-- club name -->
+<!-- Red side -->
+                <td class="red playerData">
+                    <span class = "red firstName">redFirstName</span><br>
+                    <span class = "red lastName">redLastName</span><br>
+                    <span class = "red clubName">redClubName</span>
                 </td>
 <!-- Timer central -->
                 <td class="middle">
@@ -113,12 +129,11 @@
                     <button class = "timer" id="startTimer" style="height: 100px; width: 150px;">▶</button>
 
                 </td>
-<!-- Red side -->
-                <td class="red playerData">
-                    <span class = "red firstName">redFirstName</span><br>
-                    <span class = "red lastName">redLastName</span><br>
-                    <span class = "red clubName">redClubName</span>
-                    <!-- club name -->
+<!-- Blue side -->
+                <td class="blue playerData">
+                    <span class = "blue firstName">blueFirstName</span><br>
+                    <span class = "blue lastName">blueLastName</span><br>
+                    <span class = "blue clubName">blueClubName</span>
                 </td>
             </tr>
         </table>
@@ -128,19 +143,19 @@
         <table>
 <!-- Player scores -->
             <tr>
-                <td class="blue" width = 50%>
-                    <div class="blue markerWarning"></div>
-                    <div class="blue score">0</div>
-                </td>
                 <td class="red">
                     <div class="red markerWarning"></div>
                     <div class="red score">0</div>
                 </td>
+                <td class="blue" width = 50%>
+                    <div class="blue markerWarning"></div>
+                    <div class="blue score">0</div>
+                </td>
             </tr>
 <!-- Control buttons row 1: scores -->
             <tr>
-                <td class="blue">
-                    <div class="blue buttonsRow">
+                <td class="red">
+                    <div class="red buttonsRow">
                         <button value=4>+5</button>
                         <button value=3>+4</button>
                         <button value=2>+2</button>
@@ -148,8 +163,8 @@
                         <button value=0>-1</button>
                     </div>
                 </td>
-                <td class="red">
-                    <div class="red buttonsRow">
+                <td class="blue">
+                    <div class="blue buttonsRow">
                         <button value=0>-1</button>
                         <button value=1>+1</button>
                         <button value=2>+2</button>
@@ -160,21 +175,21 @@
             </tr>
 <!-- Control buttons row 2: warning -->
             <tr>
-                <td class="blue warning">
-                    <button>Warning</button>
-                    <button>Shot clock</button>
-                </td>
                 <td class="red warning">
                     <button>Shot clock</button>
                     <button>Warning</button>
                 </td>
+                <td class="blue warning">
+                    <button>Warning</button>
+                    <button>Shot clock</button>
+                </td>
             </tr>
 <!-- Control buttons row 3: reset -->
             <tr>
-                <td class="blue pin">
+                <td class="red pin">
                     <button>Pin!</button>
                 </td>
-                <td class="red pin">
+                <td class="blue pin">
                     <button>Pin!</button>
                 </td>
             </tr>
@@ -198,8 +213,6 @@
             </div>
         </div>
     </div>
-
-
     
 </body>
 </html>

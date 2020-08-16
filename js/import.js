@@ -12,13 +12,14 @@ var raw = "";
 var rows = [];
 var tablePage = $("table[name=list]");
 
-$("button#import").click( function() {
+$("button#importDone").click( function() {
     
     tablePage.html("");
 
     raw  =  $("textarea").val();
-
-    rows = raw.trim().split("\n");
+    // to catch double spaces (otherwise club names are missed)
+    rawSingleSpace = raw.replace(/  /g, " "); 
+    rows = rawSingleSpace.trim().split("\n");
 
     for (var i=0; i<rows.length; i++) {
         var names  = [
@@ -49,10 +50,19 @@ $("button#import").click( function() {
     updateNames(matchOrder);
     $("textarea").val("");
     $("tr[matchOrder='0']").addClass("matchOrder");
+
+    // HTML controls
+
+    $("#importArea").css("display", "none");
     
+    // prepop names from first match
+    updateNames(0);
 
 })
 
+$("button#importCancel").click( function() {
+    $("#importArea").css("display", "none");
+})
 
 
 $("button#next").click( function() {
@@ -70,11 +80,23 @@ $("button#prev").click( function() {
 })
 
 function updateNames(matchOrder) {
+
     pairing = table[matchOrder];
+    // Fixtures table
     $(".firstName.red").text(pairing[0].split(" ")[0]);
     $(".lastName.red").text(pairing[0].split(" ")[1]);
     $(".clubName.red").text(pairing[0].split(" ")[2]);
     $(".firstName.blue").text(pairing[1].split(" ")[0]);
     $(".lastName.blue").text(pairing[1].split(" ")[1]);
     $(".clubName.blue").text(pairing[1].split(" ")[2]);
+
+    // Game setup form
+    $("#playerInput").css("display", "flex");
+    
+    $("input#redFirstName").val(pairing[0].split(" ")[0]);
+    $("input#redLastName").val(pairing[0].split(" ")[1]);
+    $("input#redClubName").val(pairing[0].split(" ")[2]);
+    $("input#blueFirstName").val(pairing[1].split(" ")[0]);
+    $("input#blueLastName").val(pairing[1].split(" ")[1]);
+    $("input#blueClubName").val(pairing[1].split(" ")[2]);
 }

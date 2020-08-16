@@ -31,6 +31,12 @@
 [ ] The play button gets confused / runs two timers if start button is pressed in rapid succession
 [ ] remove draw conditions - replace with victory on the last biggest score
 
+## Import function
+[x] Clash with individual input
+    [x] program thinks the weights haven't been entered yet! Need to prompt for weights input for each match
+[ ] Onchange dropdowns weight isn't coming up when gender isn't onchange
+[x] club names on indiv entry form
+
 ## What if....
 
 - What if Erica could upload/copy paste the fixtures into a text fields, and the app parses that into the fixtures?
