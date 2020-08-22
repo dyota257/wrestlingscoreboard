@@ -9,7 +9,7 @@
 [ ] Style player input table
 
 ## JS
-[ ] jQuery
+[x] jQuery
 [x] On reset, put up a warning "are you sure"?
 [x] Put a timer on
     [x] Button start

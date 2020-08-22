@@ -29,8 +29,8 @@ $("#startTimer").prop("disabled", true);
 
 $(document).keydown( (e) => {
     
-    const blueKeysMap = [71, 70, 68, 83, 65]; // [G, F, D, S, A]
-    const redKeysMap = [72, 74, 75, 76, 59]; //[H, J, K, L, ;]
+    const blueKeysMap = [72, 74, 75, 76, 59]; //[H, J, K, L, ;]
+    const redKeysMap = [71, 70, 68, 83, 65];  // [G, F, D, S, A]
 
     if (e.keyCode == 32 && $("#startTimer").prop("disabled") == false) {
         e.preventDefault();
