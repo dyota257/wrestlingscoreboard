@@ -1,7 +1,7 @@
 # To-do list
 
 ## HTML
-[x] Display timer clock
+[x] Display timer clock \n
 [x] Put confirm button on player input row
 [ ] put club name to be displayed
 
