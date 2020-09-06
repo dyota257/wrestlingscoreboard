@@ -3,7 +3,7 @@
 ## HTML
 [x] Display timer clock \n
 [x] Put confirm button on player input row
-[ ] put club name to be displayed
+[x] put club name to be displayed
 
 ## CSS
 [ ] Style player input table
@@ -54,9 +54,9 @@
 [ ] Declare winner when match is over
     [x] By who has the most points
     [x] Depending on game type (10 points freestyle, 8 points greco)
-[ ] Declare winner by pin
-    [ ] Have a button to stop the match, and set the winner
-    [ ] Note that victory was by pin
+[x] Declare winner by pin
+    [x] Have a button to stop the match, and set the winner
+    [x] Note that victory was by pin
 [x] Write results into an Excel file.
 
 
@@ -67,7 +67,7 @@
 
 ## Notes from the tournament
 [ ] Need a "live mode" or "tournament mode" where all of the control buttons are hidden while match is in progress
-[ ] Fix: the "reset all" button doesn't reset weights
+[x] Fix: the "reset all" button doesn't reset weights
  ?  Select match from fixture, by clicking on it?
 [ ] Space button is blocked from doing anything else except play/pause. Need to have active space button for editing import textarea.
 [ ] Change firstname lastname clubname separations to look for spaces; e.g. Jake Raymon Criddle has three names, the program picked up the wrong names
@@ -91,10 +91,11 @@ Next project..... programming a double-elim tournament
 
 [x] When setting game from the Set Game from, clubname is not transferred to the scoreboard
 [ ] Import textarea and fixtures are still visible when game is confirmed - hide this on confirm
-[ ] In some situations, game typ is wrong. If it's not overridden upon confirmgame, the variable is still storing the previous match. This happens e.g. a Greco match happens, and the next one is a 6-7yo where there is no Greco => there is no Greco selector. But, the program still remembers the style as "Greco" and keeps it as that
+[x] In some situations, game type is wrong. If it's not overridden upon confirmgame, the variable is still storing the previous match. This happens e.g. a Greco match happens, and the next one is a 6-7yo where there is no Greco => there is no Greco selector. But, the program still remembers the style as "Greco" and keeps it as that
 [ ] Put a ringing sound on timerend
 [ ] Repackage so that it's easily accessible for normal people (put all of the other files into folders, rename index.html to something stupidly obvious like launch.html)
  ?  Single button for scoring? Less complicated?
+    Can't have criteria detection for draws if this is the way
  ?  Separate timer clear and score clear?
  ?  Rest timer isn't timed in this tournament, the mat chairman just "feels it"
 [x] Turn warning markers to yellow squares

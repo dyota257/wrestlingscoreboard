@@ -14,6 +14,11 @@ var tablePage = $("table[name=list]");
 
 $("button#importDone").click( function() {
     
+    // clear previous table!
+    table = [];
+
+    $("#fixturesTable").css("display", "flex");
+
     tablePage.html("");
 
     raw  =  $("textarea").val();
@@ -22,15 +27,17 @@ $("button#importDone").click( function() {
     rows = rawSingleSpace.trim().split("\n");
 
     for (var i=0; i<rows.length; i++) {
+
         var names  = [
             rows[i].split("\t")[0], //red side
             rows[i].split("\t")[1] //blue side
         ]
         
         table[i] = names;
+        console.log(i);
         console.log(names);
-        console.log(names[1]);
         table.push(names);
+        
 
         redFirstName = names[0].split(" ")[0];
         redLastName = names[0].split(" ")[1];
@@ -43,9 +50,9 @@ $("button#importDone").click( function() {
             tablePage.html() + 
             "<tr matchOrder="+i+"><td>"+redFirstName+" "+redLastName+" "+redClubName+"</td><td>"+blueFirstName+" "+blueLastName+" "+blueClubName+"</td></tr>"
         )
-        
     }
 
+    table.pop(); // to remove duplicate last row
     matchOrder = 0;
     updateNames(matchOrder);
     $("textarea").val("");
@@ -66,17 +73,22 @@ $("button#importCancel").click( function() {
 
 
 $("button#next").click( function() {
-    $("tr").removeClass("matchOrder")
-    if (matchOrder!= table.length) {matchOrder++};
-    updateNames(matchOrder);
-    $("tr[matchorder='"+matchOrder+"']").addClass("matchOrder");
+    if (matchOrder+1 < table.length) {
+        $("tr").removeClass("matchOrder");
+        matchOrder++;
+        updateNames(matchOrder);
+        $("tr[matchorder='"+matchOrder+"']").addClass("matchOrder");
+    };
+    
 })
 
 $("button#prev").click( function() {
-    $("tr").removeClass("matchOrder")
-    if (matchOrder!=0) {matchOrder--;}
-    updateNames(matchOrder);
-    $("tr[matchorder='"+matchOrder+"']").addClass("matchOrder");
+    if (matchOrder!=0) {
+        $("tr").removeClass("matchOrder");
+        matchOrder--;
+        updateNames(matchOrder);
+        $("tr[matchorder='"+matchOrder+"']").addClass("matchOrder");
+    }
 })
 
 function updateNames(matchOrder) {

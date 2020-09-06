@@ -61,7 +61,6 @@ $("button").click( function() {
 
     var sideColour = this.parentElement.className;
     var addScore = scoresMap[this.value];
-    console.log(Number(addScore)>0);
     switch(sideColour){
 // Blue scoring buttons
         case "blue buttonsRow":
@@ -73,18 +72,20 @@ $("button").click( function() {
             break;
 // Blue and red other buttons                
         case "blue warning":
-            $(".markerWarning.blue").text($(".markerWarning.blue").text() + "■");
-            warningsBlue++;
-            if(warningsBlue === 3) {
+            if(warningsBlue < 2) {
+                $(".markerWarning.blue").text($(".markerWarning.blue").text() + "■");
+                warningsBlue++;
+            } else {
                 defeat("blue", "dq");
             }
             break;
         case "red warning":
-            $(".markerWarning.red").text($(".markerWarning.red").text() + "■");
-            warningsRed++;
-            if(warningsRed === 3) {
+            if(warningsRed < 2) {
+                $(".markerWarning.red").text($(".markerWarning.red").text() + "■");
+                warningsRed++;
+            } else [
                 defeat("red", "dq")
-            }
+            ]
             break;
         case "blue pin":
             victory("blue", "pin");
@@ -135,8 +136,9 @@ $("button").click( function() {
                 window.alert("Fill in all the names and game type!");
 
         } else {
-            // close input area
-            $("#playerInput").css("display", "none")
+            // close input area and fixtures
+            $("#playerInput").css("display", "none");
+            $("#fixturesTable").css("display", "none");
 
             // restart phase at Period 1
             phasePos = 0;
@@ -182,7 +184,7 @@ $("button").click( function() {
         }
     };
 
-//Reset game
+// Reset game
     if (this.id==="resetGame") {
         var confirm = window.confirm("Are you sure? This will reset all scores and reset the timer.");
         console.log(confirm);
@@ -199,6 +201,7 @@ $("button").click( function() {
             
             $("#timer").html("0:00");
             gameType = "";
+            $("#gameType").text(gameType);
             $("div.markerWarning").text("");
         }
     };
