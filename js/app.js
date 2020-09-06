@@ -4,6 +4,8 @@ window.onbeforeunload = () => {
 
 var scoreBlue = 0;
 var scoreRed = 0;
+var warningsBlue = 0;
+var warningsRed = 0;
 var gameType = "";
 
 var blueFirstName = "";
@@ -71,10 +73,18 @@ $("button").click( function() {
             break;
 // Blue and red other buttons                
         case "blue warning":
-            $(".markerWarning.blue").text($(".markerWarning.blue").text() + "⭕");
+            $(".markerWarning.blue").text($(".markerWarning.blue").text() + "■");
+            warningsBlue++;
+            if(warningsBlue === 3) {
+                defeat("blue", "dq");
+            }
             break;
         case "red warning":
-            $(".markerWarning.red").text($(".markerWarning.red").text() + "⭕");
+            $(".markerWarning.red").text($(".markerWarning.red").text() + "■");
+            warningsRed++;
+            if(warningsRed === 3) {
+                defeat("red", "dq")
+            }
             break;
         case "blue pin":
             victory("blue", "pin");
@@ -152,12 +162,16 @@ $("button").click( function() {
             // set player names
             blueFirstName = $("#blueFirstName").val();
             blueLastName = $("#blueLastName").val();
+            blueClubName = $("#blueClubName").val();
             redFirstName = $("#redFirstName").val();
             redLastName = $("#redLastName").val();
+            redClubName = $("#redClubName").val();
             $(".blue.firstName").text(blueFirstName);
             $(".blue.lastName").text(blueLastName);
+            $(".blue.clubName").text(blueClubName);
             $(".red.firstName").text(redFirstName);
             $(".red.lastName").text(redLastName);
+            $(".red.clubName").text(redClubName);
 
             // set scores
             scoreBlue = 0;
@@ -372,3 +386,40 @@ function victory(side, method) {
     
 };
 
+function defeat(side, method) {
+    $(".popup").css("display", "flex");
+    $(".popup").css("height", document.body.clientHeight);
+    
+    // pause time
+    startTimer(now);
+    
+    // declare winner
+    var winnerName = "";
+    var popupText = "";
+    var popupBg = "";
+    if (side == "draw") {
+        popupText = "Draw!";
+        popupBg = "black";
+    } else {
+        side == "blue" ? winnerName = blueFirstName+" "+blueLastName : winnerName = redFirstName+" "+redLastName;
+        popupText = winnerName +" wins by "+ method +"!";
+        popupBg = side;
+    }
+    $(".popup-text").text(popupText);
+    $(".popup-content").css("background", popupBg);
+    
+    // add the rows of table here. 
+
+    var matchResults = $("table.results>tbody")
+    console.log(matchResults)
+    var newRow = 
+        "<td>"+blueFirstName+" "+blueLastName+"</td>"
+        +"<td>"+redFirstName+" "+redLastName+"</td>"
+        +"<td>"+scoreBlue+"</td>"
+        +"<td>"+scoreRed+"</td>"
+        +"<td>"+winnerName+"</td>"
+        +"<td>"+method+"</td>";
+
+    matchResults.html(matchResults.html() + newRow);
+    
+};

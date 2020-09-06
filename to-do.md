@@ -26,11 +26,19 @@
     [x] there's no limiter on scoring by keyboard - need to copy from buttons.
 [x] white background on pause
 [x] age and weight division display
+[x] jquery dropdown.js
 [ ] 3 warnings lead to a disqualification
+    [ ] put in a counter for warnings
 [ ] passive, 30 second shot clock
 [ ] The play button gets confused / runs two timers if start button is pressed in rapid succession
-[ ] remove draw conditions - replace with victory on the last biggest score
-[ ] KEYBOARD BUTTONS ARE BACKWARDS
+[ ] remove draw conditions - replace with victory on the last biggest score (criteria!)
+    [ ] Underline criteria
+        if scoreBlue == scoreRed
+        check who has the largest score
+        else, check who has the most recent large score
+    [ ] start an array of score history
+[x] KEYBOARD BUTTONS ARE BACKWARDS
+[ ] fill out defeat() function
 
 ## Import function
 [x] Clash with individual input
@@ -81,7 +89,7 @@ Next project..... programming a double-elim tournament
     Internet connection (to access the app online, if the USB can't be accessed)
     Set Power Settings to never sleep
 
-[ ] When setting game from the Set Game from, clubname is not transferred to the scoreboard
+[x] When setting game from the Set Game from, clubname is not transferred to the scoreboard
 [ ] Import textarea and fixtures are still visible when game is confirmed - hide this on confirm
 [ ] In some situations, game typ is wrong. If it's not overridden upon confirmgame, the variable is still storing the previous match. This happens e.g. a Greco match happens, and the next one is a 6-7yo where there is no Greco => there is no Greco selector. But, the program still remembers the style as "Greco" and keeps it as that
 [ ] Put a ringing sound on timerend
@@ -89,7 +97,8 @@ Next project..... programming a double-elim tournament
  ?  Single button for scoring? Less complicated?
  ?  Separate timer clear and score clear?
  ?  Rest timer isn't timed in this tournament, the mat chairman just "feels it"
-[ ] Turn warning markers to yellow squares
+[x] Turn warning markers to yellow squares
+[ ] swap alignment for warning squares
 [ ] Put in a forfeit condition
 
 ### Timekeeping clock

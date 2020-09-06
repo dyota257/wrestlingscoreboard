@@ -136,16 +136,19 @@ button#download {
 }
 
 .markerWarning {
+    color: yellow;
     display: flex;
+    font-size: xxx-large;
     height: 1rem;
+    
 }
 
 .markerWarning.blue {
-    justify-content: right;
+    justify-content: left;
 }
 
 .markerWarning.red {
-    justify-content: left;
+    justify-content: right;
 }
 
 .matchOrder {

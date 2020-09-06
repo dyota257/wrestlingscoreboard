@@ -41,23 +41,28 @@ var genderDiv="";
 var styleDiv = "";
 
 // set other dropdowns as hidden, showing only name-age
-document.querySelector("select[name=gender]").style.visibility = "hidden";
-document.querySelector("select[name=style]").style.visibility = "hidden";
-document.querySelector("select[name=weight]").style.visibility = "hidden";
+$("[name=gender]").css("visibility", "hidden");
+$("[name=style]").css("visibility", "hidden");
+$("[name=weight]").css("visibility", "hidden");
 
 // set selected value to first value = ""
-document.querySelector("select[name=age]").value = "";
-document.querySelector("select[name=gender]").value = "";
-document.querySelector("select[name=style]").value = "";
-document.querySelector("select[name=weight]").value = "";
+$("select[name=age]").val("");
+$("select[name=gender]").val("");
+$("select[name=style]").val("");
+$("select[name=weight]").val("");
 
 // First dropdown block: age
-document.querySelector("select[name=age]").addEventListener("change", ()=>{
-    document.querySelector("select[name=gender]").style.visibility = "hidden";
-    document.querySelector("select[name=style]").style.visibility = "hidden";
-    document.querySelector("select[name=weight]").style.visibility = "hidden";
+$("select[name=age]").change(()=>{
+    $("[name=gender]").css("visibility", "hidden");
+    $("[name=style]").css("visibility", "hidden");
+    $("[name=weight]").css("visibility", "hidden");
+
+    $("select[name=gender]").val("");
+    $("select[name=style]").val("");
+    $("select[name=weight]").val("");
+
     arWeight=[];
-    ageDiv = document.querySelector("select[name=age]").value;
+    ageDiv = $("select[name=age]").val();
     if (
         ageDiv == "6-7 yrs"
         || ageDiv == "8-9 yrs"
@@ -66,16 +71,20 @@ document.querySelector("select[name=age]").addEventListener("change", ()=>{
         arWeight = categories[ageDiv];
         optionsWeight(arWeight);
     } else if (ageDiv != "") {
-        document.querySelector("select[name=gender]").style.visibility = "visible";
+        $("[name=gender]").css("visibility", "visible");
     }
 })
 
 // Second dropdown block: gender
-document.querySelector("[name=gender]").addEventListener("change", ()=>{
-    document.querySelector("select[name=weight]").style.visibility = "hidden";
-    document.querySelector("select[name=style]").style.visibility = "hidden";
+$("select[name=gender]").change(()=>{
+    $("[name=weight]").css("visibility", "hidden");
+    $("[name=style]").css("visibility", "hidden");
+
+    $("select[name=style]").val("");
+    $("select[name=weight]").val("");
+
     arWeight=[];
-    genderDiv = document.querySelector("select[name=gender]").value;
+    genderDiv = $("select[name=gender]").val();
     if (
         ageDiv == "12-13 yrs"
         || ageDiv == "14-15 yrs"
@@ -87,15 +96,16 @@ document.querySelector("[name=gender]").addEventListener("change", ()=>{
     } else if (        
         genderDiv == "Male" && (ageDiv == "18-20 yrs" || ageDiv == "21yrs+")
     ) {
-        document.querySelector("select[name=style]").style.visibility = "visible";
+       $("[name=style]").css("visibility", "visible");
     }
 })
 
 // Third dropdown block: style
-document.querySelector("[name=style]").addEventListener("change", ()=>{
-    document.querySelector("select[name=weight]").style.visibility = "hidden";
+$("select[name=style]").change(()=>{
+    $("select[name=weight]").css("visibility", "hidden");
+    $("select[name=weight]").val("");
     arWeight=[];
-    styleDiv = document.querySelector("select[name=style]").value;
+    styleDiv = $("select[name=style]").val();
     arWeight = categories[ageDiv][genderDiv][styleDiv];
     optionsWeight(arWeight);
 })
@@ -105,14 +115,16 @@ document.querySelector("[name=style]").addEventListener("change", ()=>{
 function optionsWeight (arWeight) {
 
     if (arWeight.length>0) {
-        document.querySelector("select[name=weight]").style.visibility = "visible";
+        $("[name=weight]").css("visibility", "visible");
     }
 
-    document.querySelector("select[name=weight]").innerHTML = "<option value=\"\"></option>";
+    $("select[name=weight]").html("<option value=\"\"></option>");
 
     for (var i=0; i<arWeight.length; i++) {
         var optionWeight = arWeight[i];
-        document.querySelector("select[name=weight]").innerHTML = document.querySelector("select[name=weight]").innerHTML+"<option value=\""+optionWeight+"kg\">"+optionWeight+" kg</option>";
+        $("select[name=weight]").html(
+            $("select[name=weight]").html()+"<option value=\""+optionWeight+"kg\">"+optionWeight+" kg</option>"
+        );
     }
 
 }
