@@ -102,6 +102,15 @@ Next project..... programming a double-elim tournament
 [ ] swap alignment for warning squares
 [ ] Put in a forfeit condition
 
+## Notes from Collin Kerr 2020-09-10
+[ ] On clock start, hide all the forms
+[ ] On clock start, have # anchor to "jump" to
+[ ] Scoring categoriees in final results table (depending on win condition achieved)
+[ ] Make red and blue recolour in CSS file (so that red and blue can match poster
+[ ] wrestlingwa.org/rbl-mgmt
+Dyota
+Dyota
+
 ### Timekeeping clock
 These clocks have 8 usable buttons:
 * +1 score red
