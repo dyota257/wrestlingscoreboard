@@ -208,6 +208,7 @@ $("button").click( function() {
 
 // Start timer
     if (this.id === "startTimer"){
+        window.location.href = "#main-display";
         startTimer(now);
     };
 
