@@ -98,8 +98,11 @@ button#download {
     font-size: 15vw;
 }
 
-#restGameRow{
-
+#resetGameRow{
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: center;
 }
 
 #main-display {
