@@ -15,12 +15,11 @@
 
 <body>
     <div id="mainHeader">
-        <img src="http://wrestlingwa.org/wp-content/uploads/wwa_logo.png">
-        Wrestling Western Australia<br>
-        Scoreboard
+        <span id="logo"><img src="http://wrestlingwa.org/wp-content/uploads/wwa_logo.png"></span>
+        <span id="fedName">Wrestling Western Australia <br> Scoreboard</span>
     </div>
 
-    <div>
+    <div id="restGameRow">
         <button class="resetGame" id = "setGame">Set game</button>
         <button class="resetGame" id = "resetGame">Reset all</button>
         <button class="resetGame" id = "import">Import</button>
@@ -28,6 +27,7 @@
         <button class="resetGame" id = "prev"><<</button>
         <button class="resetGame" id = "next">>></button>
     </div>
+
 <!-- Game setup - disappearable rows  -->
     <div class = "container" id="playerInput" style="display:none">
         <table class="container">
@@ -103,13 +103,12 @@
             </tr>
         </table>
     </div>
-
     <div class = "container" id = "fixturesTable" style="display:none"> 
         <table name = "list">
 
         </table>
     </div>
-
+<!-- Main Score Display -->
     <div class="container" id="main-display">
 <!-- Red side -->
         <div class="red playerData">
@@ -178,13 +177,14 @@
             <button>Pin!</button>
         </div>
     </div>
-    
-    <button id="download">Download</button>
-    
 
-    <table class="results container">
-        <tr style="font-weight:bolder"><td>Blue name</td><td>Red name</td><td>Blue score</td><td>Red score</td><td>Winner</td><td>Method</td></tr>
-    </table>
+    <div id="footer">
+        <button id="download">Download</button>
+        <table class="results container">
+            <tr style="font-weight:bolder"><td>Blue name</td><td>Red name</td><td>Blue score</td><td>Red score</td><td>Winner</td><td>Method</td></tr>
+        </table>
+
+    <div>
 
     
 <!-- Popup  -->
