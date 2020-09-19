@@ -6,6 +6,7 @@ body {
     display:flex;
     flex-direction: column;
     align-items: center;
+    --score-button-font-size: 15pt;
 }
 
 div {
@@ -82,8 +83,8 @@ button#download {
 }
 
 #startTimer {
-    width: 120px;
-    height: 70px;
+    width: 150px;
+    height: 100px;
     font-size: xxx-large;
     color: navy;
     border-radius: 10px;
@@ -230,7 +231,7 @@ button#download {
 }
 
 .pin button {
-    font-size: min(2vw,20pt);
+    font-size: min(2vw,var(--score-button-font-size));
     border-radius: 10px;
     font-weight: bold;
     padding: 10px;
@@ -267,7 +268,7 @@ button#download {
 }
 
 .points-control button {
-    font-size: min(2vw,20pt);
+    font-size: min(2vw,var(--score-button-font-size));
     border-radius: 10px;
     font-weight: bold;
     padding: 10px;
@@ -340,7 +341,7 @@ button#download {
 }
 
 .warning button {
-    font-size: min(2vw,20pt);
+    font-size: min(2vw,var(--score-button-font-size));
     border-radius: 10px;
     font-weight: bold;
     padding: 10px;
@@ -352,3 +353,36 @@ button#download {
     justify-content: center;
 }
 
+
+/*Iphone screen size */
+@media(max-width: 500px){
+    #startTimer {
+        width: 75px;
+        height: 50px;
+        font-size: x-large;
+        color: navy;
+        border-radius: 10px;
+    }
+
+    #main-display {
+        grid-template-rows: 40% 10% 1fr 1fr 1fr;
+    }
+
+    .buttonsRow {
+        display: flex;
+        flex-wrap: wrap;
+        overflow: initial;
+        white-space: initial;
+        justify-content: center;
+    }
+
+    .points-control button {
+        font-size: 15pt;
+    }
+    .pin button {
+        font-size: 20pt;
+    }
+    .warning button {
+        font-size: 10pt;
+    }
+}
