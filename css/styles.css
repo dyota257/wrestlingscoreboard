@@ -73,6 +73,7 @@ button#download {
     height: 70px;
     font-size: xxx-large;
     color: navy;
+    border-radius: 10px;
 }
 
 #startTimer:disabled {
@@ -81,8 +82,7 @@ button#download {
 }
 
 #timer {
-    font-size: 7.5rem;
-
+    font-size: 15vw;
 }
 
 #main-display {
@@ -91,8 +91,8 @@ button#download {
     background: black;
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
-    grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
-    grid-gap: 1px;
+    grid-template-rows: 60% 20% 1fr 1fr 1fr;
+    grid-gap: 2px;
     grid-template-areas:
       "left-player left-player time time right-player right-player"
       "left-score left-score left-score right-score right-score right-score"
@@ -118,6 +118,7 @@ button#download {
 
 .blue.scorebox {
     grid-area: right-player;
+    border-radius: 30px;
 }
 
 .blue.points-control {
@@ -164,11 +165,11 @@ button#download {
 }
 
 .firstName, .clubName {
-    font-size: x-large;
+    font-size: min(3vw,30pt);
 }
 
 .lastName, #period {
-    font-size: xx-large;
+    font-size: min(3.5vw,36pt);
 }
 
 .markerWarning {
@@ -176,7 +177,7 @@ button#download {
     display: flex;
     font-size: xxx-large;
     height: 1rem;
-    
+    background: initial;
 }
 
 .markerWarning.blue {
@@ -185,6 +186,7 @@ button#download {
 
 .markerWarning.red {
     justify-content: right;
+    background: initial;
 }
 
 .matchOrder {
@@ -196,6 +198,20 @@ button#download {
     /* width:10%; */
     grid-area: time;
 }
+
+.pin button {
+    font-size: min(2vw,20pt);
+    border-radius: 10px;
+    font-weight: bold;
+    padding: 10px;
+}
+
+.pin {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
 
 .popup{
     background-color: rgba(0,0,0,0.6);
@@ -220,6 +236,23 @@ button#download {
     top: 15%;
 }
 
+.points-control button {
+    font-size: min(2vw,20pt);
+    border-radius: 10px;
+    font-weight: bold;
+    padding: 10px;
+}
+
+.points-control {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.playerData {
+    padding: 10px;
+}
+
 .red.playerData {
     text-align: right;
     grid-area: left-score;
@@ -235,6 +268,7 @@ button#download {
 
 .red.scorebox {
     grid-area: left-player;
+    border-radius: 30px;
 }
 
 .red.points-control {
@@ -258,8 +292,10 @@ button#download {
 }
 
 .score {
-    font-size: 7.5rem;
-    justify-content: center;
+    /*font-size: 7.5rem;*/
+    font-size: 25vw;
+    background: initial;
+
 }
 
 .team {
@@ -268,5 +304,18 @@ button#download {
     color: #FFF;
     vertical-align: top;
     display: inline-block;
+}
+
+.warning button {
+    font-size: min(2vw,20pt);
+    border-radius: 10px;
+    font-weight: bold;
+    padding: 10px;
+}
+
+.warning {
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
