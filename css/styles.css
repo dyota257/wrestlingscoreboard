@@ -136,8 +136,16 @@ button#download {
     background: blue;
 }
 
+.red {
+    background-color: red;
+}
+
 .blue button {
     background: darkblue;
+}
+
+.red button {
+    background: darkred;
 }
 
 .blue.playerData {
@@ -148,7 +156,7 @@ button#download {
 
 .blue.scorebox {
     grid-area: right-player;
-    border-radius: 30px;
+    border-radius: 0px 30px 30px 0px;
 }
 
 .blue.points-control {
@@ -213,11 +221,13 @@ button#download {
 
 .markerWarning.blue {
     justify-content: left;
+    padding-left: 20px;
 }
 
 .markerWarning.red {
     justify-content: right;
     background: initial;
+    padding-right: 20px;
 }
 
 .matchOrder {
@@ -291,17 +301,13 @@ button#download {
     border-top-left-radius: 30px
 }
 
-.red {
-    background-color: red;
-}
+/* .red moved to top, next to .blue */
+/* .red button moved to top, next to .blue button */
 
-.red button {
-    background: darkred;
-}
 
 .red.scorebox {
     grid-area: left-player;
-    border-radius: 30px;
+    border-radius: 30px 0px 0px 30px;
 }
 
 .red.points-control {

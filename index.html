@@ -8,6 +8,7 @@
     <script defer src="js/dropdowns.js"></script>
     <script defer src="js/import.js"></script>
     <script defer src="js/download.js"></script>
+    <script defer src="js/victory.js"></script>
     <script defer src="js/app.js"></script>
     <script src="https://kit.fontawesome.com/0f58b31d22.js" crossorigin="anonymous"></script>
     <link rel="shortcut icon" href="http://wrestlingwa.org/wp-content/uploads/2017/05/wwa1-150x150.jpg" type="image/x-icon">
@@ -33,14 +34,16 @@
     <div class = "container" id="playerInput" style="display:none">
         <table class="container">
             <tr>
-                <td>
-<!-- Players details -->
+                <td class="red">
+<!-- Players details red -->
                     <label>Red first name</label>
                     <input type = "text" name="playerData" id = "redFirstName"><br><br>
                     <label>Red last name</label>
                     <input type = "text" name="playerData" id = "redLastName"><br><br>
                     <label>Red club name</label>
                     <input type = "text" name="playerData" id = "redClubName"><br><br>
+                </td>
+                <td class="blue">
                     <label>Blue first name</label>
                     <input type = "text" name="playerData" id = "blueFirstName"><br><br>
                     <label>Blue last name</label>
@@ -50,6 +53,12 @@
                 </td>
                 <td>
 <!-- Dropdown lists -->
+                    <label>Mat</label>
+                    <select name="mat" value="">
+                        <option value="" selected></option>
+                        <option value="Mat A">Mat A</option>
+                        <option value="Mat B">Mat B</option>
+                    </select><br> <br>    
                     <label>Age</label><br>
                     <select name="age" value="">
                         <option value="" selected></option>
@@ -182,7 +191,7 @@
     <div id="footer">
         <button id="download">Download</button>
         <table class="results container">
-            <tr style="font-weight:bolder"><td>Blue name</td><td>Red name</td><td>Blue score</td><td>Red score</td><td>Winner</td><td>Method</td></tr>
+            <tr style="font-weight:bolder"><td>Red name</td><td>Blue name</td><td>Red score</td><td>Blue score</td><td>Winner</td><td>Method</td><td>Classification</td></tr>
         </table>
 
     <div>

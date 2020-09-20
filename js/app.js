@@ -3,7 +3,9 @@ window.onbeforeunload = () => {
 }
 
 var scoreBlue = 0;
+var scoreBlueHist = [];
 var scoreRed = 0;
+var scoreRedHist = [];
 var warningsBlue = 0;
 var warningsRed = 0;
 var gameType = "";
@@ -76,7 +78,7 @@ $("button").click( function() {
                 $(".markerWarning.blue").text($(".markerWarning.blue").text() + "■");
                 warningsBlue++;
             } else {
-                defeat("blue", "dq");
+                victory("blue", "disqualification");
             }
             break;
         case "red warning":
@@ -84,14 +86,14 @@ $("button").click( function() {
                 $(".markerWarning.red").text($(".markerWarning.red").text() + "■");
                 warningsRed++;
             } else [
-                defeat("red", "dq")
+                victory("red", "disqualification")
             ]
             break;
         case "blue pin":
-            victory("blue", "pin");
+            victory("blue", "fall");
             break;
         case "red pin":
-            victory("red", "pin");
+            victory("red", "fall");
             break;
         default:
             null;
@@ -128,8 +130,10 @@ $("button").click( function() {
         if ( // check for empty fields
             $("#blueFirstName").val()==""
             || $("#blueLastName").val()==""
+            || $("#blueClubName").val()==""
             || $("#redFirstName").val()==""
             || $("#redLastName").val()==""
+            || $("#redClubName").val()==""
             || $("select[name=weight]").val()==""
             // || radioCheck() === 0
         ) {
@@ -194,10 +198,12 @@ $("button").click( function() {
             $(".score.blue").text(scoreBlue);
             $(".blue.firstName").text("blueFirstName");
             $(".blue.lastName").text("blueLastName");
+            $(".blue.clubName").text("blueClubName");
             scoreRed = 0;
             $(".score.red").text(scoreRed);
             $(".red.firstName").text("redFirstName");
             $(".red.lastName").text("redLastName");
+            $(".red.clubName").text("redClubName");
             
             $("#timer").html("0:00");
             gameType = "";
@@ -221,9 +227,13 @@ $(".close").click( function() {
 
 function blueScoreUpdate(addScore) {
     if (addScore<0 && scoreBlue===0 || timerOn == false){}
-    else {scoreBlue = scoreBlue + addScore};
-    $(".score.blue").text(scoreBlue);
-
+    else {
+        scoreBlue += addScore;
+        $(".score.blue").text(scoreBlue);
+        scoreBlueHist.push(addScore);
+        console.log(scoreBlueHist);
+        criteria();
+    };
     // Greo tech sup
     if (scoreBlue-scoreRed>=8 && gameType.indexOf("Greco")>0) {
         victory("blue", "technical superiority");
@@ -236,9 +246,13 @@ function blueScoreUpdate(addScore) {
 
 function redScoreUpdate(addScore) {
     if (addScore<0 &&scoreRed===0 || timerOn == false){}
-    else {scoreRed = scoreRed + addScore;}
-    $(".score.red").text(scoreRed);
-
+    else {
+        scoreRed += addScore;
+        $(".score.red").text(scoreRed);
+        scoreRedHist.push(addScore);
+        console.log(scoreRedHist);
+        criteria();
+    }
     // Greo tech sup
     if (scoreRed-scoreBlue>=8 && gameType.indexOf("Greco")>0) {
         victory("red", "technical superiority");
@@ -249,19 +263,26 @@ function redScoreUpdate(addScore) {
     } 
 }
 
-function dropdownsCheckWhich() {
-    const ageDiv = $("select[name=age]").val();
-    const styleDiv = $("select[name=style]").val();
-    var gameType = "";
-    if (styleDiv == "Greco-Roman") {
-        gameType = "Senior Greco-Roman";
-    } else if (ageDiv == "18-20 yrs" || ageDiv == "21yrs+") {
-        gameType = "Senior Freestyle";
-    }  else {
-        gameType = "Junior Freestyle";
+function criteria() {
+    scoreRedMax = Math.max(...scoreRedHist);
+    scoreRedLast = scoreRedHist[scoreRedHist.length-1];
+    scoreBlueMax = Math.max(...scoreBlueHist);
+    scoreBlueLast = scoreBlueHist[scoreBlueHist.length-1];
+    if(scoreRed == scoreBlue) {
+        if (scoreRedMax > scoreBlueMax) {
+            $(".red.score").css("text-decoration", "underline")
+        } else if (scoreRedMax < scoreBlueMax) {
+            $(".blue.score").css("text-decoration", "underline");    
+        } else if (scoreRedMax == scoreBlueMax)  {
+            // pick the more recent one and take 
+            // read page 25 of regulations
+
+
+        }
+    } else {
+        $(".red.score").css("text-decoration", "");
+        $(".blue.score").css("text-decoration", "");
     }
-    const styleAndAge = [gameType, ageDiv];
-    return styleAndAge
 }
 
 function setPhase(pos) {
@@ -274,12 +295,17 @@ function startTimer(now) {
         timerOn = true;
         timer(now); // 2 minutes is 120 seconds = 120 000 milliseconds
         $(".middle").css("backgroundColor", "black");
+        $('#resetGameRow').css("display", "none");
+        $('#importArea').css("display", "none");
+        $('#playerInput').css("display", "none");
+        $('#fixturesTable').css("display", "none");
 
     } else if (timerOn === true)  { // to pause the time
         $("#startTimer").html("▶");
         timerOn = false;
         timer(now);
         $(".middle").css("backgroundColor", "grey");
+        $('#resetGameRow').css("display", "flex");
     };
 }
 
@@ -351,79 +377,3 @@ function timer(time) {
     
 };
 
-
-function victory(side, method) {
-    $(".popup").css("display", "flex");
-    $(".popup").css("height", document.body.clientHeight);
-    
-    // pause time
-    startTimer(now);
-    
-    // declare winner
-    var winnerName = "";
-    var popupText = "";
-    var popupBg = "";
-    if (side == "draw") {
-        popupText = "Draw!";
-        popupBg = "black";
-    } else {
-        side == "blue" ? winnerName = blueFirstName+" "+blueLastName : winnerName = redFirstName+" "+redLastName;
-        popupText = winnerName +" wins by "+ method +"!";
-        popupBg = side;
-    }
-    $(".popup-text").text(popupText);
-    $(".popup-content").css("background", popupBg);
-    
-    // add the rows of table here. 
-
-    var matchResults = $("table.results>tbody")
-    console.log(matchResults)
-    var newRow = 
-        "<td>"+blueFirstName+" "+blueLastName+"</td>"
-        +"<td>"+redFirstName+" "+redLastName+"</td>"
-        +"<td>"+scoreBlue+"</td>"
-        +"<td>"+scoreRed+"</td>"
-        +"<td>"+winnerName+"</td>"
-        +"<td>"+method+"</td>";
-
-    matchResults.html(matchResults.html() + newRow);
-    
-};
-
-function defeat(side, method) {
-    $(".popup").css("display", "flex");
-    $(".popup").css("height", document.body.clientHeight);
-    
-    // pause time
-    startTimer(now);
-    
-    // declare winner
-    var winnerName = "";
-    var popupText = "";
-    var popupBg = "";
-    if (side == "draw") {
-        popupText = "Draw!";
-        popupBg = "black";
-    } else {
-        side == "blue" ? winnerName = blueFirstName+" "+blueLastName : winnerName = redFirstName+" "+redLastName;
-        popupText = winnerName +" wins by "+ method +"!";
-        popupBg = side;
-    }
-    $(".popup-text").text(popupText);
-    $(".popup-content").css("background", popupBg);
-    
-    // add the rows of table here. 
-
-    var matchResults = $("table.results>tbody")
-    console.log(matchResults)
-    var newRow = 
-        "<td>"+blueFirstName+" "+blueLastName+"</td>"
-        +"<td>"+redFirstName+" "+redLastName+"</td>"
-        +"<td>"+scoreBlue+"</td>"
-        +"<td>"+scoreRed+"</td>"
-        +"<td>"+winnerName+"</td>"
-        +"<td>"+method+"</td>";
-
-    matchResults.html(matchResults.html() + newRow);
-    
-};
