@@ -250,7 +250,8 @@ button#download {
     height:150%;
     position:absolute;
     display: none;
-    top:0;
+    top: 0px;
+    left: 0px;
     justify-content: center;
 }
 
