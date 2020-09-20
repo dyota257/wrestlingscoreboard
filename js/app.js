@@ -270,7 +270,7 @@ function setPhase(pos) {
 
 function startTimer(now) {
     if (timerOn === false) { // to restart the time
-        $("#startTimer").html("▐ ▌");
+        $("#startTimer").html('<i class="fas fa-pause"></i>');
         timerOn = true;
         timer(now); // 2 minutes is 120 seconds = 120 000 milliseconds
         $(".middle").css("backgroundColor", "black");
