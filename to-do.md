@@ -90,7 +90,7 @@ Next project..... programming a double-elim tournament
     Set Power Settings to never sleep
 
 [x] When setting game from the Set Game from, clubname is not transferred to the scoreboard
-[ ] Import textarea and fixtures are still visible when game is confirmed - hide this on confirm
+[x] Import textarea and fixtures are still visible when game is confirmed - hide this on confirm
 [x] In some situations, game type is wrong. If it's not overridden upon confirmgame, the variable is still storing the previous match. This happens e.g. a Greco match happens, and the next one is a 6-7yo where there is no Greco => there is no Greco selector. But, the program still remembers the style as "Greco" and keeps it as that
 [ ] Put a ringing sound on timerend
 [ ] Repackage so that it's easily accessible for normal people (put all of the other files into folders, rename index.html to something stupidly obvious like launch.html)
@@ -99,17 +99,15 @@ Next project..... programming a double-elim tournament
  ?  Separate timer clear and score clear?
  ?  Rest timer isn't timed in this tournament, the mat chairman just "feels it"
 [x] Turn warning markers to yellow squares
-[ ] swap alignment for warning squares
+[x] swap alignment for warning squares
 [ ] Put in a forfeit condition
 
 ## Notes from Collin Kerr 2020-09-10
-[ ] On clock start, hide all the forms
-[ ] On clock start, have # anchor to "jump" to
-[ ] Scoring categoriees in final results table (depending on win condition achieved)
+[x] On clock start, hide all the forms
+[x] On clock start, have # anchor to "jump" to
+[ ] Scoring categories in final results table (depending on win condition achieved)
 [ ] Make red and blue recolour in CSS file (so that red and blue can match poster
 [ ] wrestlingwa.org/rbl-mgmt
-Dyota
-Dyota
 
 ### Timekeeping clock
 These clocks have 8 usable buttons:

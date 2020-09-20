@@ -277,6 +277,9 @@ function startTimer(now) {
         timer(now); // 2 minutes is 120 seconds = 120 000 milliseconds
         $(".middle").css("backgroundColor", "black");
         $('#resetGameRow').css("display", "none");
+        $('#importArea').css("display", "none");
+        $('#playerInput').css("display", "none");
+        $('#fixturesTable').css("display", "none");
 
     } else if (timerOn === true)  { // to pause the time
         $("#startTimer").html("▶");

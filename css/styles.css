@@ -133,11 +133,19 @@ button#download {
 
 /* Classes */
 .blue {
-    background: blue;
+    background: navy;
+}
+
+.red {
+    background-color: pink;
 }
 
 .blue button {
     background: darkblue;
+}
+
+.red button {
+    background: darkred;
 }
 
 .blue.playerData {
@@ -293,13 +301,9 @@ button#download {
     border-top-left-radius: 30px
 }
 
-.red {
-    background-color: red;
-}
+/* .red moved to top, next to .blue */
+/* .red button moved to top, next to .blue button */
 
-.red button {
-    background: darkred;
-}
 
 .red.scorebox {
     grid-area: left-player;
