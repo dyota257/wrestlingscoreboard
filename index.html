@@ -15,12 +15,11 @@
 
 <body>
     <div id="mainHeader">
-        <img src="http://wrestlingwa.org/wp-content/uploads/wwa_logo.png">
-        Wrestling Western Australia<br>
-        Scoreboard
+        <span id="logo"><img src="http://wrestlingwa.org/wp-content/uploads/wwa_logo.png"></span>
+        <span id="fedName">Wrestling Western Australia <br> Scoreboard</span>
     </div>
 
-    <div>
+    <div id="resetGameRow">
         <button class="resetGame" id = "setGame">Set game</button>
         <button class="resetGame" id = "resetGame">Reset all</button>
         <button class="resetGame" id = "import">Import</button>
@@ -28,6 +27,7 @@
         <button class="resetGame" id = "prev"><<</button>
         <button class="resetGame" id = "next">>></button>
     </div>
+
 <!-- Game setup - disappearable rows  -->
     <div class = "container" id="playerInput" style="display:none">
         <table class="container">
@@ -103,105 +103,88 @@
             </tr>
         </table>
     </div>
-
     <div class = "container" id = "fixturesTable" style="display:none"> 
         <table name = "list">
 
         </table>
     </div>
-
-    <div class="container">
-        <table>
-            <tr>
+<!-- Main Score Display -->
+    <div class="container" id="main-display">
 <!-- Red side -->
-                <td class="red playerData">
-                    <span class = "red firstName">redFirstName</span><br>
-                    <span class = "red lastName">redLastName</span><br>
-                    <span class = "red clubName">redClubName</span>
-                </td>
+        <div class="red playerData">
+            <span class = "red firstName">redFirstName</span><br>
+            <span class = "red lastName">redLastName</span><br>
+            <span class = "red clubName">redClubName</span>
+        </div>
 <!-- Timer central -->
-                <td class="middle">
-                    <span id="period">Period 1</span><br>
-                    <span id="gameType"></span>
-                    <br>
-                    <span id="timer">0:00</span>
-                    <br>
-                    <button class = "timer" id="startTimer" style="height: 100px; width: 150px;">▶</button>
+        <div class="middle">
+            <span id="period">Period 1</span><br>
+            <span id="gameType"></span>
+            <br>
+            <span id="timer">0:00</span>
+            <br>
+            <button class ="timer" id="startTimer" >▶</button>
 
-                </td>
+        </div>
 <!-- Blue side -->
-                <td class="blue playerData">
-                    <span class = "blue firstName">blueFirstName</span><br>
-                    <span class = "blue lastName">blueLastName</span><br>
-                    <span class = "blue clubName">blueClubName</span>
-                </td>
-            </tr>
-        </table>
-    </div>
-    
-    <div class="container">
-        <table>
+        <div class="blue playerData">
+            <span class = "blue firstName">blueFirstName</span><br>
+            <span class = "blue lastName">blueLastName</span><br>
+            <span class = "blue clubName">blueClubName</span>
+        </div>
 <!-- Player scores -->
-            <tr>
-                <td class="red">
-                    <div class="red markerWarning"></div>
-                    <div class="red score">0</div>
-                </td>
-                <td class="blue" width = 50%>
-                    <div class="blue markerWarning"></div>
-                    <div class="blue score">0</div>
-                </td>
-            </tr>
+        <div class="red scorebox">
+            <div class="red markerWarning"></div>
+            <div class="red score">0</div>
+        </div>
+        <div class="blue scorebox">
+            <div class="blue markerWarning"></div>
+            <div class="blue score">0</div>
+        </div>
 <!-- Control buttons row 1: scores -->
-            <tr>
-                <td class="red">
-                    <div class="red buttonsRow">
-                        <button value=4>+5</button>
-                        <button value=3>+4</button>
-                        <button value=2>+2</button>
-                        <button value=1>+1</button>
-                        <button value=0>-1</button>
-                    </div>
-                </td>
-                <td class="blue">
-                    <div class="blue buttonsRow">
-                        <button value=0>-1</button>
-                        <button value=1>+1</button>
-                        <button value=2>+2</button>
-                        <button value=3>+4</button>
-                        <button value=4>+5</button>
-                    </div>
-                </td>
-            </tr>
+        <div class="red points-control">
+            <div class="red buttonsRow">
+                <button value=4>+5</button>
+                <button value=3>+4</button>
+                <button value=2>+2</button>
+                <button value=1>+1</button>
+                <button value=0>-1</button>
+            </div>
+        </div>
+        <div class="blue points-control">
+            <div class="blue buttonsRow">
+                <button value=0>-1</button>
+                <button value=1>+1</button>
+                <button value=2>+2</button>
+                <button value=3>+4</button>
+                <button value=4>+5</button>
+            </div>
+        </div>
 <!-- Control buttons row 2: warning -->
-            <tr>
-                <td class="red warning">
-                    <button>Shot clock</button>
-                    <button>Warning</button>
-                </td>
-                <td class="blue warning">
-                    <button>Warning</button>
-                    <button>Shot clock</button>
-                </td>
-            </tr>
+        <div class="red warning">
+            <button>Shot clock</button>
+            <button>Warning</button>
+        </div>
+        <div class="blue warning">
+            <button>Warning</button>
+            <button>Shot clock</button>
+        </div>
 <!-- Control buttons row 3: reset -->
-            <tr>
-                <td class="red pin">
-                    <button>Pin!</button>
-                </td>
-                <td class="blue pin">
-                    <button>Pin!</button>
-                </td>
-            </tr>
-        </table>
+        <div class="red pin">
+            <button>Pin!</button>
+        </div>
+        <div class="blue pin">
+            <button>Pin!</button>
+        </div>
     </div>
-    
-    <button id="download">Download</button>
-    
 
-    <table class="results container">
-        <tr style="font-weight:bolder"><td>Blue name</td><td>Red name</td><td>Blue score</td><td>Red score</td><td>Winner</td><td>Method</td></tr>
-    </table>
+    <div id="footer">
+        <button id="download">Download</button>
+        <table class="results container">
+            <tr style="font-weight:bolder"><td>Blue name</td><td>Red name</td><td>Blue score</td><td>Red score</td><td>Winner</td><td>Method</td></tr>
+        </table>
+
+    <div>
 
     
 <!-- Popup  -->

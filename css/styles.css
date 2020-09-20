@@ -3,11 +3,15 @@
 body {
     background-color: black;
     font-family: Arial, Helvetica, sans-serif;
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    --score-button-font-size: 15pt;
 }
 
 div {
     color: white;
-    display: inline;
+    /*display: inline;*/
 }
 
 
@@ -45,7 +49,8 @@ button.timer:disabled {
 }
 
 button#download {
-    padding: 0;
+    padding: 5px;
+    border-radius: 5px;
 }
 
 /* Ids */
@@ -59,17 +64,30 @@ button#download {
     justify-content: center;
     font-size: xxx-large;
     width: 100%;
+    margin-bottom: 10px;
 }
+
+@media(max-width: 1400px){
+    #fedName{
+        display: none;
+    }
+
+    #logo img{
+        max-width:100%;
+    }
+}
+
 
 #playerInput {
     display: flex;
 }
 
 #startTimer {
-    width: 120px;
-    height: 70px;
+    width: 150px;
+    height: 100px;
     font-size: xxx-large;
     color: navy;
+    border-radius: 10px;
 }
 
 #startTimer:disabled {
@@ -78,8 +96,38 @@ button#download {
 }
 
 #timer {
-    font-size: 7.5rem;
+    font-size: 15vw;
+}
 
+#resetGameRow{
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+#main-display {
+    width: 95%;
+    height: 100vh;
+    background: black;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+    grid-template-rows: 60% 20% 1fr 1fr 1fr;
+    grid-gap: 2px;
+    grid-template-areas:
+      "left-player left-player time time right-player right-player"
+      "left-score left-score left-score right-score right-score right-score"
+      "left-points-control left-points-control left-points-control right-points-control right-points-control right-points-control"
+      "left-penalty-control left-penalty-control left-penalty-control right-penalty-control right-penalty-control right-penalty-control"
+      "left-pin left-pin left-pin right-pin right-pin right-pin";
+    margin-top: 10px;
+    margin-bottom: 40px;
+}
+
+#footer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 
@@ -94,6 +142,26 @@ button#download {
 
 .blue.playerData {
     text-align: left;
+    grid-area: right-score;
+    border-top-right-radius: 30px
+}
+
+.blue.scorebox {
+    grid-area: right-player;
+    border-radius: 30px;
+}
+
+.blue.points-control {
+    grid-area: right-points-control;
+}
+
+.blue.warning {
+    grid-area: right-penalty-control;
+}
+
+.blue.pin {
+    grid-area: right-pin;
+    border-bottom-right-radius: 30px
 }
 
 .buttonsRow {
@@ -128,11 +196,11 @@ button#download {
 }
 
 .firstName, .clubName {
-    font-size: x-large;
+    font-size: min(3vw,30pt);
 }
 
 .lastName, #period {
-    font-size: xx-large;
+    font-size: min(3.5vw,36pt);
 }
 
 .markerWarning {
@@ -140,7 +208,7 @@ button#download {
     display: flex;
     font-size: xxx-large;
     height: 1rem;
-    
+    background: initial;
 }
 
 .markerWarning.blue {
@@ -149,6 +217,7 @@ button#download {
 
 .markerWarning.red {
     justify-content: right;
+    background: initial;
 }
 
 .matchOrder {
@@ -158,7 +227,22 @@ button#download {
 
 .middle {
     /* width:10%; */
+    grid-area: time;
 }
+
+.pin button {
+    font-size: min(2vw,var(--score-button-font-size));
+    border-radius: 10px;
+    font-weight: bold;
+    padding: 10px;
+}
+
+.pin {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
 
 .popup{
     background-color: rgba(0,0,0,0.6);
@@ -183,8 +267,27 @@ button#download {
     top: 15%;
 }
 
+.points-control button {
+    font-size: min(2vw,var(--score-button-font-size));
+    border-radius: 10px;
+    font-weight: bold;
+    padding: 10px;
+}
+
+.points-control {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.playerData {
+    padding: 10px;
+}
+
 .red.playerData {
     text-align: right;
+    grid-area: left-score;
+    border-top-left-radius: 30px
 }
 
 .red {
@@ -195,17 +298,38 @@ button#download {
     background: darkred;
 }
 
+.red.scorebox {
+    grid-area: left-player;
+    border-radius: 30px;
+}
+
+.red.points-control {
+    grid-area: left-points-control;
+}
+
+.red.warning {
+    grid-area: left-penalty-control;
+}
+
+.red.pin {
+    grid-area: left-pin;
+    border-bottom-left-radius: 30px
+}
+
 .resetGame {
     color: black;
     height: 2rem;
     margin: 0;
     padding: 0;
     width: 10rem;
+    border-radius: 5px;
 }
 
 .score {
-    font-size: 7.5rem;
-    justify-content: center;
+    /*font-size: 7.5rem;*/
+    font-size: 25vw;
+    background: initial;
+
 }
 
 .team {
@@ -214,4 +338,51 @@ button#download {
     color: #FFF;
     vertical-align: top;
     display: inline-block;
+}
+
+.warning button {
+    font-size: min(2vw,var(--score-button-font-size));
+    border-radius: 10px;
+    font-weight: bold;
+    padding: 10px;
+}
+
+.warning {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+/*Iphone screen size */
+@media(max-width: 500px){
+    #startTimer {
+        width: 75px;
+        height: 50px;
+        font-size: x-large;
+        color: navy;
+        border-radius: 10px;
+    }
+
+    #main-display {
+        grid-template-rows: 40% 10% 1fr 1fr 1fr;
+    }
+
+    .buttonsRow {
+        display: flex;
+        flex-wrap: wrap;
+        overflow: initial;
+        white-space: initial;
+        justify-content: center;
+    }
+
+    .points-control button {
+        font-size: 15pt;
+    }
+    .pin button {
+        font-size: 20pt;
+    }
+    .warning button {
+        font-size: 10pt;
+    }
 }
