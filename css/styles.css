@@ -133,11 +133,11 @@ button#download {
 
 /* Classes */
 .blue {
-    background: navy;
+    background: blue;
 }
 
 .red {
-    background-color: pink;
+    background-color: red;
 }
 
 .blue button {
