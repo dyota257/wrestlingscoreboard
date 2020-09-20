@@ -110,8 +110,6 @@ $("select[name=style]").change(()=>{
     optionsWeight(arWeight);
 })
 
-
-
 function optionsWeight (arWeight) {
 
     if (arWeight.length>0) {
@@ -127,4 +125,19 @@ function optionsWeight (arWeight) {
         );
     }
 
+}
+
+function dropdownsCheckWhich() {
+    const ageDiv = $("select[name=age]").val();
+    const styleDiv = $("select[name=style]").val();
+    var gameType = "";
+    if (styleDiv == "Greco-Roman") {
+        gameType = "Senior Greco-Roman";
+    } else if (ageDiv == "18-20 yrs" || ageDiv == "21yrs+") {
+        gameType = "Senior Freestyle";
+    }  else {
+        gameType = "Junior Freestyle";
+    }
+    const styleAndAge = [gameType, ageDiv];
+    return styleAndAge
 }

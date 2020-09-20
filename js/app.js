@@ -232,6 +232,7 @@ function blueScoreUpdate(addScore) {
         $(".score.blue").text(scoreBlue);
         scoreBlueHist.push(addScore);
         console.log(scoreBlueHist);
+        criteria();
     };
     // Greo tech sup
     if (scoreBlue-scoreRed>=8 && gameType.indexOf("Greco")>0) {
@@ -250,6 +251,7 @@ function redScoreUpdate(addScore) {
         $(".score.red").text(scoreRed);
         scoreRedHist.push(addScore);
         console.log(scoreRedHist);
+        criteria();
     }
     // Greo tech sup
     if (scoreRed-scoreBlue>=8 && gameType.indexOf("Greco")>0) {
@@ -272,12 +274,14 @@ function criteria() {
         } else if (scoreRedMax < scoreBlueMax) {
             $(".blue.score").css("text-decoration", "underline");    
         } else if (scoreRedMax == scoreBlueMax)  {
-            // pick the more recent one
-            
+            // pick the more recent one and take 
+            // read page 25 of regulations
+
+
         }
     } else {
-        $(".red.score").css("text-decoration", "underline");
-        $(".blue.score").css("text-decoration", "underline");
+        $(".red.score").css("text-decoration", "");
+        $(".blue.score").css("text-decoration", "");
     }
 }
 
@@ -372,3 +376,4 @@ function timer(time) {
     },1000);
     
 };
+
