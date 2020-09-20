@@ -194,10 +194,12 @@ $("button").click( function() {
             $(".score.blue").text(scoreBlue);
             $(".blue.firstName").text("blueFirstName");
             $(".blue.lastName").text("blueLastName");
+            $(".blue.clubName").text("blueClubName");
             scoreRed = 0;
             $(".score.red").text(scoreRed);
             $(".red.firstName").text("redFirstName");
             $(".red.lastName").text("redLastName");
+            $(".red.clubName").text("redClubName");
             
             $("#timer").html("0:00");
             gameType = "";
@@ -274,12 +276,14 @@ function startTimer(now) {
         timerOn = true;
         timer(now); // 2 minutes is 120 seconds = 120 000 milliseconds
         $(".middle").css("backgroundColor", "black");
+        $('#resetGameRow').css("display", "none");
 
     } else if (timerOn === true)  { // to pause the time
         $("#startTimer").html("▶");
         timerOn = false;
         timer(now);
         $(".middle").css("backgroundColor", "grey");
+        $('#resetGameRow').css("display", "flex");
     };
 }
 
