@@ -105,7 +105,7 @@ Next project..... programming a double-elim tournament
 ## Notes from Collin Kerr 2020-09-10
 [x] On clock start, hide all the forms
 [x] On clock start, have # anchor to "jump" to
-[ ] Scoring categories in final results table (depending on win condition achieved)
+[x] Scoring categories in final results table (depending on win condition achieved)
 [ ] Make red and blue recolour in CSS file (so that red and blue can match poster
 [ ] wrestlingwa.org/rbl-mgmt
 

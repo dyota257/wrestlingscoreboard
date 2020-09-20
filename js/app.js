@@ -76,7 +76,7 @@ $("button").click( function() {
                 $(".markerWarning.blue").text($(".markerWarning.blue").text() + "■");
                 warningsBlue++;
             } else {
-                victory("blue", "dq");
+                victory("blue", "disqualification");
             }
             break;
         case "red warning":
@@ -84,14 +84,14 @@ $("button").click( function() {
                 $(".markerWarning.red").text($(".markerWarning.red").text() + "■");
                 warningsRed++;
             } else [
-                victory("red", "dq")
+                victory("red", "disqualification")
             ]
             break;
         case "blue pin":
-            victory("blue", "pin");
+            victory("blue", "fall");
             break;
         case "red pin":
-            victory("red", "pin");
+            victory("red", "fall");
             break;
         default:
             null;
@@ -359,4 +359,3 @@ function timer(time) {
     },1000);
     
 };
-
