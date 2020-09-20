@@ -27,8 +27,8 @@
 [x] white background on pause
 [x] age and weight division display
 [x] jquery dropdown.js
-[ ] 3 warnings lead to a disqualification
-    [ ] put in a counter for warnings
+[x] 3 warnings lead to a disqualification
+    [x] put in a counter for warnings
 [ ] passive, 30 second shot clock
 [ ] The play button gets confused / runs two timers if start button is pressed in rapid succession
 [ ] remove draw conditions - replace with victory on the last biggest score (criteria!)
@@ -38,7 +38,7 @@
         else, check who has the most recent large score
     [ ] start an array of score history
 [x] KEYBOARD BUTTONS ARE BACKWARDS
-[ ] fill out defeat() function
+[x] fill out defeat() function
 
 ## Import function
 [x] Clash with individual input
@@ -106,7 +106,7 @@ Next project..... programming a double-elim tournament
 [x] On clock start, hide all the forms
 [x] On clock start, have # anchor to "jump" to
 [x] Scoring categories in final results table (depending on win condition achieved)
-[ ] Make red and blue recolour in CSS file (so that red and blue can match poster
+[x] Make red and blue recolour in CSS file (so that red and blue can match poster
 [ ] wrestlingwa.org/rbl-mgmt
 
 ### Timekeeping clock

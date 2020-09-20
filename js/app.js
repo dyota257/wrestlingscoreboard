@@ -3,7 +3,9 @@ window.onbeforeunload = () => {
 }
 
 var scoreBlue = 0;
+var scoreBlueHist = [];
 var scoreRed = 0;
+var scoreRedHist = [];
 var warningsBlue = 0;
 var warningsRed = 0;
 var gameType = "";
@@ -225,9 +227,12 @@ $(".close").click( function() {
 
 function blueScoreUpdate(addScore) {
     if (addScore<0 && scoreBlue===0 || timerOn == false){}
-    else {scoreBlue = scoreBlue + addScore};
-    $(".score.blue").text(scoreBlue);
-
+    else {
+        scoreBlue += addScore;
+        $(".score.blue").text(scoreBlue);
+        scoreBlueHist.push(addScore);
+        console.log(scoreBlueHist);
+    };
     // Greo tech sup
     if (scoreBlue-scoreRed>=8 && gameType.indexOf("Greco")>0) {
         victory("blue", "technical superiority");
@@ -240,9 +245,12 @@ function blueScoreUpdate(addScore) {
 
 function redScoreUpdate(addScore) {
     if (addScore<0 &&scoreRed===0 || timerOn == false){}
-    else {scoreRed = scoreRed + addScore;}
-    $(".score.red").text(scoreRed);
-
+    else {
+        scoreRed += addScore;
+        $(".score.red").text(scoreRed);
+        scoreRedHist.push(addScore);
+        console.log(scoreRedHist);
+    }
     // Greo tech sup
     if (scoreRed-scoreBlue>=8 && gameType.indexOf("Greco")>0) {
         victory("red", "technical superiority");
@@ -253,19 +261,24 @@ function redScoreUpdate(addScore) {
     } 
 }
 
-function dropdownsCheckWhich() {
-    const ageDiv = $("select[name=age]").val();
-    const styleDiv = $("select[name=style]").val();
-    var gameType = "";
-    if (styleDiv == "Greco-Roman") {
-        gameType = "Senior Greco-Roman";
-    } else if (ageDiv == "18-20 yrs" || ageDiv == "21yrs+") {
-        gameType = "Senior Freestyle";
-    }  else {
-        gameType = "Junior Freestyle";
+function criteria() {
+    scoreRedMax = Math.max(...scoreRedHist);
+    scoreRedLast = scoreRedHist[scoreRedHist.length-1];
+    scoreBlueMax = Math.max(...scoreBlueHist);
+    scoreBlueLast = scoreBlueHist[scoreBlueHist.length-1];
+    if(scoreRed == scoreBlue) {
+        if (scoreRedMax > scoreBlueMax) {
+            $(".red.score").css("text-decoration", "underline")
+        } else if (scoreRedMax < scoreBlueMax) {
+            $(".blue.score").css("text-decoration", "underline");    
+        } else if (scoreRedMax == scoreBlueMax)  {
+            // pick the more recent one
+            
+        }
+    } else {
+        $(".red.score").css("text-decoration", "underline");
+        $(".blue.score").css("text-decoration", "underline");
     }
-    const styleAndAge = [gameType, ageDiv];
-    return styleAndAge
 }
 
 function setPhase(pos) {
