@@ -26,7 +26,11 @@ var phasePos = 0;
 var phasesTime = [0,0,0];
 const shotclocktime = 30;
 let shotClocktimerOn = false;
-
+const player = {
+    RED: "red",
+    BLUE: "blue"
+}
+let shotClockPlayer = null;
 const scoresMap = [ -1, 1, 2, 4, 5];
 
 $(".score.blue").text(scoreBlue);
@@ -79,6 +83,7 @@ $("button").click( function() {
         case "blue warning":
             if(buttonid === "shotclockbuttonblue" && shotClocktimerOn === false){
                 $(".blue.shotclock").css("visibility","visible");
+                shotClockPlayer = player.BLUE;
                 shotclocktimer(shotclocktime);
             } else if(buttonid === "shotclockbuttonblue" && shotClocktimerOn === true){
                 break; // can't give them a shot clock warning if the shotclock is already on
@@ -93,6 +98,7 @@ $("button").click( function() {
         case "red warning":
             if(buttonid === "shotclockbuttonred" && shotClocktimerOn === false){
                 $(".red.shotclock").css("visibility","visible");
+                shotClockPlayer = player.RED;
                 shotclocktimer(shotclocktime);
             } else if(buttonid === "shotclockbuttonred" && shotClocktimerOn === true){
                 break; // can't give them a shot clock warning if the shotclock is already on
@@ -241,6 +247,7 @@ $(".close").click( function() {
     }
 )
 
+//should really refactor and combine blueScoreUpdate and redScoreUpdate, also should make a class called players and make each player an object, would simply a lot of code
 function blueScoreUpdate(addScore) {
     if (addScore<0 && scoreBlue===0 || timerOn == false){}
     else {
@@ -405,9 +412,18 @@ function shotclocktimer(time) {
 
         // timer on end
         if( now <= 0 && shotClocktimerOn === true) {
-            $(".shotclock").css("visibility","hidden"); //hide shot clock on timer end
             clearInterval(interval);
+            $(".shotclock").css("visibility","hidden"); //hide shot clock on timer end
+            switch(shotClockPlayer){
+                case player.BLUE:
+                    redScoreUpdate(1); //other player gets the point
+                    break;
+                case player.RED:
+                    blueScoreUpdate(1);
+                    break;
+            }
             shotClocktimerOn = false;
+            shotClockPlayer = null;
         };
 
         // timer pause
@@ -424,6 +440,7 @@ function shotclocktimer(time) {
 };
 
 function secondsToClock(seconds){
+    //used to format the clock displays
     let date = new Date(0);
     date.setSeconds(seconds);
     return date.toISOString().substr(15, 4);
