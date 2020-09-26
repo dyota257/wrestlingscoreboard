@@ -27,6 +27,7 @@ var phasePos = 0;
 var phasesTime = [0,0,0];
 const shotClockTime = 30;
 let shotClocktimerOn = false;
+let shotClockPaused = false;
 const player = {
     RED: "red",
     BLUE: "blue"
@@ -65,7 +66,7 @@ $(document).keydown( (e) => {
 
 })
 
-$("button").click( function() {
+$("button").click(function() {
     var sideColour = this.parentElement.className;
     let buttonid = this.id;
     console.log(buttonid);
@@ -326,10 +327,14 @@ function setPhase(pos) {
 }
 
 function startTimer(now) {
-    if (timerOn === false) { // to restart the time
+    if(timerOn === false) { // to restart the time
         $("#startTimer").html('<i class="fas fa-pause"></i>');
         timerOn = true;
         timer(now); // 2 minutes is 120 seconds = 120 000 milliseconds
+        if(shotClocktimerOn === true){ //continue shotclock if it was on during the pause
+            shotclocktimer(nowShotClock);
+            shotClockPaused = false;
+        }
         $(".middle").css("backgroundColor", "black");
         $('#resetGameRow').css("display", "none");
         $('#importArea').css("display", "none");
@@ -417,9 +422,7 @@ function shotclocktimer(time) {
         
         // timer on start
         if (shotClocktimerOn === true) {
-            nowShotClock = Math.ceil(
-                ( time*1000 - (new Date().getTime()-start) )/1000
-            );
+            nowShotClock = Math.ceil((time*1000 - (new Date().getTime()-start) )/1000);
             $(".shotclock").html(secondsToClock(nowShotClock));
         };
 
@@ -445,6 +448,12 @@ function shotclocktimer(time) {
             }
             shotClocktimerOn = false;
             shotClockPlayer = null;
+        };
+
+        if((now <= 0 || timerOn === false) && shotClocktimerOn === true) { //pause shot clock when round time paused. 
+            console.log("Timer stopped at: "+timerOn);
+            clearInterval(interval);
+            shotClockPaused = true;
         };
 
         console.log("nowShotClock: "+Math.ceil(nowShotClock));
