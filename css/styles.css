@@ -360,7 +360,7 @@ button#download {
     background: initial;
     margin: 20px;
     color: yellow;
-    visibility: hidden
+    visibility: hidden;
 }
 
 .team {

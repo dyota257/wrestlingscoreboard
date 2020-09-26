@@ -24,6 +24,8 @@ const phases = [ "1", "rest", "2"];
 const timeRest = 30; // should be 30 seconds
 var phasePos = 0;
 var phasesTime = [0,0,0];
+const shotclocktime = 30;
+let shotClocktimerOn = false;
 
 const scoresMap = [ -1, 1, 2, 4, 5];
 
@@ -60,8 +62,9 @@ $(document).keydown( (e) => {
 
 
 $("button").click( function() {
-
     var sideColour = this.parentElement.className;
+    let buttonid = this.id;
+    console.log(buttonid);
     var addScore = scoresMap[this.value];
     switch(sideColour){
 // Blue scoring buttons
@@ -74,6 +77,12 @@ $("button").click( function() {
             break;
 // Blue and red other buttons                
         case "blue warning":
+            if(buttonid === "shotclockbuttonblue" && shotClocktimerOn === false){
+                $(".blue.shotclock").css("visibility","visible");
+                shotclocktimer(shotclocktime);
+            } else if(buttonid === "shotclockbuttonblue" && shotClocktimerOn === true){
+                break; // can't give them a shot clock warning if the shotclock is already on
+            }
             if(warningsBlue < 2) {
                 $(".markerWarning.blue").text($(".markerWarning.blue").text() + "■");
                 warningsBlue++;
@@ -82,6 +91,12 @@ $("button").click( function() {
             }
             break;
         case "red warning":
+            if(buttonid === "shotclockbuttonred" && shotClocktimerOn === false){
+                $(".red.shotclock").css("visibility","visible");
+                shotclocktimer(shotclocktime);
+            } else if(buttonid === "shotclockbuttonred" && shotClocktimerOn === true){
+                break; // can't give them a shot clock warning if the shotclock is already on
+            }
             if(warningsRed < 2) {
                 $(".markerWarning.red").text($(".markerWarning.red").text() + "■");
                 warningsRed++;
@@ -162,6 +177,7 @@ $("button").click( function() {
             $("#startTimer").html("▶");
             $("#startTimer").prop("disabled", false);
             timerOn = false;
+            shotClocktimerOn = false;
             now = timerInit;
             phasesTime = [timerInit, timeRest, timerInit];
             
@@ -324,14 +340,7 @@ function timer(time) {
             now = Math.ceil(
                 ( time*1000 - (new Date().getTime()-start) )/1000
             );
-            var colonZero = ":";
-            // timerInit = now;
-            if ((now%60).toString().length === 1) { 
-                colonZero = ":0";
-            } else {
-                colonZero = ":";
-            }
-            $("#timer").html(Math.floor(now/60).toString() + colonZero + (now%60).toString());
+            $("#timer").html(secondsToClock(now));
         };
 
         // timer on end
@@ -377,3 +386,45 @@ function timer(time) {
     
 };
 
+function shotclocktimer(time) {
+    //time in seconds, returns nothing 
+    let start = new Date().getTime();
+    shotClocktimerOn = true;
+    console.log("shotclocktimerstart: "+start);
+    $(".shotclock").html(secondsToClock(time));
+    
+    let interval = setInterval( function() {
+        
+        // timer on start
+        if (shotClocktimerOn === true) {
+            now = Math.ceil(
+                ( time*1000 - (new Date().getTime()-start) )/1000
+            );
+            $(".shotclock").html(secondsToClock(now));
+        };
+
+        // timer on end
+        if( now <= 0 && shotClocktimerOn === true) {
+            $(".shotclock").css("visibility","hidden"); //hide shot clock on timer end
+            clearInterval(interval);
+            shotClocktimerOn = false;
+        };
+
+        // timer pause
+        if( now <= 0 || shotClocktimerOn === false) {
+            console.log("Timer stopped at: "+now);
+            clearInterval(interval);
+            now = time;
+        };
+
+        console.log("now: "+Math.ceil(now));
+
+    },1000);
+    
+};
+
+function secondsToClock(seconds){
+    let date = new Date(0);
+    date.setSeconds(seconds);
+    return date.toISOString().substr(15, 4);
+}
