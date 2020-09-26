@@ -249,12 +249,16 @@ $(".close").click( function() {
 
 //should really refactor and combine blueScoreUpdate and redScoreUpdate, also should make a class called players and make each player an object, would simply a lot of code
 function blueScoreUpdate(addScore) {
-    if (addScore<0 && scoreBlue===0 || timerOn == false){}
-    else {
+    if (addScore<0 && scoreBlue===0 || timerOn == false){
+        //do nothing
+    } else {
         scoreBlue += addScore;
         $(".score.blue").text(scoreBlue);
         scoreBlueHist.push(addScore);
         console.log(scoreBlueHist);
+        if(shotClocktimerOn === true){
+            shotClocktimerOn = false; 
+        }
         criteria();
     };
     // Greo tech sup
@@ -268,12 +272,16 @@ function blueScoreUpdate(addScore) {
 }
 
 function redScoreUpdate(addScore) {
-    if (addScore<0 &&scoreRed===0 || timerOn == false){}
-    else {
+    if (addScore<0 &&scoreRed===0 || timerOn == false){
+        //do nothing
+    } else {
         scoreRed += addScore;
         $(".score.red").text(scoreRed);
         scoreRedHist.push(addScore);
         console.log(scoreRedHist);
+        if(shotClocktimerOn === true){
+            shotClocktimerOn = false; 
+        }
         criteria();
     }
     // Greo tech sup
@@ -410,6 +418,14 @@ function shotclocktimer(time) {
             $(".shotclock").html(secondsToClock(now));
         };
 
+        // score occured during shotclock
+        if(shotClocktimerOn === false && now > 0){
+            clearInterval(interval);
+            $(".shotclock").css("visibility","hidden"); //hide shot clock on timer end
+            shotClocktimerOn = false;
+            shotClockPlayer = null;
+        }
+
         // timer on end
         if( now <= 0 && shotClocktimerOn === true) {
             clearInterval(interval);
@@ -424,13 +440,6 @@ function shotclocktimer(time) {
             }
             shotClocktimerOn = false;
             shotClockPlayer = null;
-        };
-
-        // timer pause
-        if( now <= 0 || shotClocktimerOn === false) {
-            console.log("Timer stopped at: "+now);
-            clearInterval(interval);
-            now = time;
         };
 
         console.log("now: "+Math.ceil(now));
