@@ -25,7 +25,7 @@ const phases = [ "1", "rest", "2"];
 const timeRest = 30; // should be 30 seconds
 var phasePos = 0;
 var phasesTime = [0,0,0];
-const shotclocktime = 30;
+const shotClockTime = 30;
 let shotClocktimerOn = false;
 const player = {
     RED: "red",
@@ -65,7 +65,6 @@ $(document).keydown( (e) => {
 
 })
 
-
 $("button").click( function() {
     var sideColour = this.parentElement.className;
     let buttonid = this.id;
@@ -84,10 +83,12 @@ $("button").click( function() {
         case "blue warning":
             if(buttonid === "shotclockbuttonblue" && (shotClocktimerOn === true||timerOn === false)){
                 break; // can't give them a shot clock warning if the shotclock is already on or the time hasn't started yet
+            } else if(now < shotClockTime){
+                break; // can't give them a shot clock if less than shotclock time
             } else if(buttonid === "shotclockbuttonblue" && shotClocktimerOn === false){
                 $(".blue.shotclock").css("visibility","visible");
                 shotClockPlayer = player.BLUE;
-                shotclocktimer(shotclocktime);
+                shotclocktimer(shotClockTime);
             }
             if(warningsBlue < 2) {
                 $(".markerWarning.blue").text($(".markerWarning.blue").text() + "■");
@@ -99,10 +100,12 @@ $("button").click( function() {
         case "red warning":
             if(buttonid === "shotclockbuttonred" && (shotClocktimerOn === true||timerOn === false)){
                 break; // can't give them a shot clock warning if the shotclock is already on or the time hasn't started yet
+            } else if(now < shotClockTime){
+                break; // can't give them a shot clock if less than shotclock time
             } else if(buttonid === "shotclockbuttonred" && shotClocktimerOn === false){
                 $(".red.shotclock").css("visibility","visible");
                 shotClockPlayer = player.RED;
-                shotclocktimer(shotclocktime);
+                shotclocktimer(shotClockTime);
             }
 
             if(warningsRed < 2) {
