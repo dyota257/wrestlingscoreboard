@@ -19,6 +19,7 @@ var timerOn = false;
 var timerInit = 0;
 var timerPause = 0;
 var now = 0;
+let nowShotClock = 0;
 
 const phases = [ "1", "rest", "2"];
 const timeRest = 30; // should be 30 seconds
@@ -81,12 +82,12 @@ $("button").click( function() {
             break;
 // Blue and red other buttons                
         case "blue warning":
-            if(buttonid === "shotclockbuttonblue" && shotClocktimerOn === false){
+            if(buttonid === "shotclockbuttonblue" && (shotClocktimerOn === true||timerOn === false)){
+                break; // can't give them a shot clock warning if the shotclock is already on or the time hasn't started yet
+            } else if(buttonid === "shotclockbuttonblue" && shotClocktimerOn === false){
                 $(".blue.shotclock").css("visibility","visible");
                 shotClockPlayer = player.BLUE;
                 shotclocktimer(shotclocktime);
-            } else if(buttonid === "shotclockbuttonblue" && shotClocktimerOn === true){
-                break; // can't give them a shot clock warning if the shotclock is already on
             }
             if(warningsBlue < 2) {
                 $(".markerWarning.blue").text($(".markerWarning.blue").text() + "■");
@@ -96,13 +97,14 @@ $("button").click( function() {
             }
             break;
         case "red warning":
-            if(buttonid === "shotclockbuttonred" && shotClocktimerOn === false){
+            if(buttonid === "shotclockbuttonred" && (shotClocktimerOn === true||timerOn === false)){
+                break; // can't give them a shot clock warning if the shotclock is already on or the time hasn't started yet
+            } else if(buttonid === "shotclockbuttonred" && shotClocktimerOn === false){
                 $(".red.shotclock").css("visibility","visible");
                 shotClockPlayer = player.RED;
                 shotclocktimer(shotclocktime);
-            } else if(buttonid === "shotclockbuttonred" && shotClocktimerOn === true){
-                break; // can't give them a shot clock warning if the shotclock is already on
             }
+
             if(warningsRed < 2) {
                 $(".markerWarning.red").text($(".markerWarning.red").text() + "■");
                 warningsRed++;
@@ -412,14 +414,14 @@ function shotclocktimer(time) {
         
         // timer on start
         if (shotClocktimerOn === true) {
-            now = Math.ceil(
+            nowShotClock = Math.ceil(
                 ( time*1000 - (new Date().getTime()-start) )/1000
             );
-            $(".shotclock").html(secondsToClock(now));
+            $(".shotclock").html(secondsToClock(nowShotClock));
         };
 
         // score occured during shotclock
-        if(shotClocktimerOn === false && now > 0){
+        if(shotClocktimerOn === false && nowShotClock > 0){
             clearInterval(interval);
             $(".shotclock").css("visibility","hidden"); //hide shot clock on timer end
             shotClocktimerOn = false;
@@ -427,7 +429,7 @@ function shotclocktimer(time) {
         }
 
         // timer on end
-        if( now <= 0 && shotClocktimerOn === true) {
+        if( nowShotClock <= 0 && shotClocktimerOn === true) {
             clearInterval(interval);
             $(".shotclock").css("visibility","hidden"); //hide shot clock on timer end
             switch(shotClockPlayer){
@@ -442,7 +444,7 @@ function shotclocktimer(time) {
             shotClockPlayer = null;
         };
 
-        console.log("now: "+Math.ceil(now));
+        console.log("nowShotClock: "+Math.ceil(nowShotClock));
 
     },1000);
     
