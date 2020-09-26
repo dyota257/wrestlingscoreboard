@@ -19,12 +19,20 @@ var timerOn = false;
 var timerInit = 0;
 var timerPause = 0;
 var now = 0;
+let nowShotClock = 0;
 
-const  phases = [ "1", "rest", "2"];
+const phases = [ "1", "rest", "2"];
 const timeRest = 30; // should be 30 seconds
 var phasePos = 0;
 var phasesTime = [0,0,0];
-
+const shotClockTime = 30;
+let shotClockTimerOn = false;
+let shotClockPaused = false;
+const player = {
+    RED: "red",
+    BLUE: "blue"
+}
+let shotClockPlayer = null;
 const scoresMap = [ -1, 1, 2, 4, 5];
 
 $(".score.blue").text(scoreBlue);
@@ -58,10 +66,10 @@ $(document).keydown( (e) => {
 
 })
 
-
-$("button").click( function() {
-
+$("button").click(function() {
     var sideColour = this.parentElement.className;
+    let buttonId = this.id;
+    console.log(buttonId);
     var addScore = scoresMap[this.value];
     switch(sideColour){
 // Blue scoring buttons
@@ -74,6 +82,15 @@ $("button").click( function() {
             break;
 // Blue and red other buttons                
         case "blue warning":
+            if(buttonId === "shotclockbuttonblue" && (shotClockTimerOn === true||timerOn === false)){
+                break; // can't give them a shot clock warning if the shotclock is already on or the time hasn't started yet
+            } else if(now < shotClockTime){
+                break; // can't give them a shot clock if less than shotclock time
+            } else if(buttonId === "shotclockbuttonblue" && shotClockTimerOn === false){
+                $(".blue.shotclock").css("visibility","visible");
+                shotClockPlayer = player.BLUE;
+                shotClockTimer(shotClockTime);
+            }
             if(warningsBlue < 2) {
                 $(".markerWarning.blue").text($(".markerWarning.blue").text() + "■");
                 warningsBlue++;
@@ -82,6 +99,15 @@ $("button").click( function() {
             }
             break;
         case "red warning":
+            if(buttonId === "shotclockbuttonred" && (shotClockTimerOn === true||timerOn === false)){
+                break; // can't give them a shot clock warning if the shotclock is already on or the time hasn't started yet
+            } else if(now < shotClockTime){
+                break; // can't give them a shot clock if less than shotclock time
+            } else if(buttonId === "shotclockbuttonred" && shotClockTimerOn === false){
+                $(".red.shotclock").css("visibility","visible");
+                shotClockPlayer = player.RED;
+                shotClockTimer(shotClockTime);
+            }
             if(warningsRed < 2) {
                 $(".markerWarning.red").text($(".markerWarning.red").text() + "■");
                 warningsRed++;
@@ -162,6 +188,7 @@ $("button").click( function() {
             $("#startTimer").html("▶");
             $("#startTimer").prop("disabled", false);
             timerOn = false;
+            shotClockTimerOn = false;
             now = timerInit;
             phasesTime = [timerInit, timeRest, timerInit];
             
@@ -225,13 +252,18 @@ $(".close").click( function() {
     }
 )
 
+//should really refactor and combine blueScoreUpdate and redScoreUpdate, also should make a class called players and make each player an object, would simply a lot of code
 function blueScoreUpdate(addScore) {
-    if (addScore<0 && scoreBlue===0 || timerOn == false){}
-    else {
+    if (addScore<0 && scoreBlue===0 || timerOn == false){
+        //do nothing
+    } else {
         scoreBlue += addScore;
         $(".score.blue").text(scoreBlue);
         scoreBlueHist.push(addScore);
         console.log(scoreBlueHist);
+        if(shotClockTimerOn === true){
+            shotClockTimerOn = false; 
+        }
         criteria();
     };
     // Greo tech sup
@@ -245,12 +277,16 @@ function blueScoreUpdate(addScore) {
 }
 
 function redScoreUpdate(addScore) {
-    if (addScore<0 &&scoreRed===0 || timerOn == false){}
-    else {
+    if (addScore<0 &&scoreRed===0 || timerOn == false){
+        //do nothing
+    } else {
         scoreRed += addScore;
         $(".score.red").text(scoreRed);
         scoreRedHist.push(addScore);
         console.log(scoreRedHist);
+        if(shotClockTimerOn === true){
+            shotClockTimerOn = false; 
+        }
         criteria();
     }
     // Greo tech sup
@@ -290,10 +326,14 @@ function setPhase(pos) {
 }
 
 function startTimer(now) {
-    if (timerOn === false) { // to restart the time
+    if(timerOn === false) { // to restart the time
         $("#startTimer").html('<i class="fas fa-pause"></i>');
         timerOn = true;
         timer(now); // 2 minutes is 120 seconds = 120 000 milliseconds
+        if(shotClockTimerOn === true){ //continue shotclock if it was on during the pause
+            shotClockTimer(nowShotClock);
+            shotClockPaused = false;
+        }
         $(".middle").css("backgroundColor", "black");
         $('#resetGameRow').css("display", "none");
         $('#importArea').css("display", "none");
@@ -324,14 +364,7 @@ function timer(time) {
             now = Math.ceil(
                 ( time*1000 - (new Date().getTime()-start) )/1000
             );
-            var colonZero = ":";
-            // timerInit = now;
-            if ((now%60).toString().length === 1) { 
-                colonZero = ":0";
-            } else {
-                colonZero = ":";
-            }
-            $("#timer").html(Math.floor(now/60).toString() + colonZero + (now%60).toString());
+            $("#timer").html(secondsToClock(now));
         };
 
         // timer on end
@@ -375,5 +408,62 @@ function timer(time) {
 
     },1000);
     
-};
+}
 
+function shotClockTimer(time) {
+    //time in seconds, returns nothing 
+    let start = new Date().getTime();
+    shotClockTimerOn = true;
+    console.log("shotClockTimerstart: "+start);
+    $(".shotclock").html(secondsToClock(time));
+    
+    let interval = setInterval( function() {
+        
+        // timer on start
+        if (shotClockTimerOn === true) {
+            nowShotClock = Math.ceil((time*1000 - (new Date().getTime()-start) )/1000);
+            $(".shotclock").html(secondsToClock(nowShotClock));
+        };
+
+        // score occured during shotclock
+        if(shotClockTimerOn === false && nowShotClock > 0){
+            clearInterval(interval);
+            $(".shotclock").css("visibility","hidden"); //hide shot clock on timer end
+            shotClockTimerOn = false;
+            shotClockPlayer = null;
+        }
+
+        // timer on end
+        if( nowShotClock <= 0 && shotClockTimerOn === true) {
+            clearInterval(interval);
+            $(".shotclock").css("visibility","hidden"); //hide shot clock on timer end
+            switch(shotClockPlayer){
+                case player.BLUE:
+                    redScoreUpdate(1); //other player gets the point
+                    break;
+                case player.RED:
+                    blueScoreUpdate(1);
+                    break;
+            }
+            shotClockTimerOn = false;
+            shotClockPlayer = null;
+        };
+
+        if((now <= 0 || timerOn === false) && shotClockTimerOn === true) { //pause shot clock when round time paused. 
+            console.log("Timer stopped at: "+nowShotClock);
+            clearInterval(interval);
+            shotClockPaused = true;
+        };
+
+        console.log("nowShotClock: "+Math.ceil(nowShotClock));
+
+    },1000);
+    
+}
+
+function secondsToClock(seconds){
+    //used to format the clock displays
+    let date = new Date(0);
+    date.setSeconds(seconds);
+    return date.toISOString().substr(15, 4);
+}

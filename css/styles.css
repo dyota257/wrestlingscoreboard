@@ -214,9 +214,11 @@ button#download {
 .markerWarning {
     color: yellow;
     display: flex;
-    font-size: xxx-large;
-    height: 1rem;
+    font-size:  8vh;/* xxx-large; */
+    height: 8vh;/* 1rem; */
     background: initial;
+    padding: 0px;
+    margin: 0px;
 }
 
 .markerWarning.blue {
@@ -238,6 +240,10 @@ button#download {
 .middle {
     /* width:10%; */
     grid-area: time;
+    display: flex;
+    flex-direction: column; 
+    justify-content: center;
+    align-items: center;
 }
 
 .pin button {
@@ -334,9 +340,27 @@ button#download {
 
 .score {
     /*font-size: 7.5rem;*/
-    font-size: 25vw;
+    font-size: 35vh;
     background: initial;
+    padding: 0px;
+    margin: 0px;
+}
 
+.scorebox {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: stretch;
+    padding: 0px;
+    margin: 0px;
+}
+
+.shotclock {
+    font-size: 6vh;
+    background: initial;
+    margin: 20px;
+    color: yellow;
+    visibility: hidden;
 }
 
 .team {
@@ -386,10 +410,26 @@ button#download {
     .points-control button {
         font-size: 15pt;
     }
+
     .pin button {
         font-size: 20pt;
     }
+
     .warning button {
         font-size: 10pt;
+    }
+
+    .score {
+        /*font-size: 7.5rem;*/
+        font-size: 18vh;
+    }
+
+    .shotclock {
+        font-size: 4vh;
+
+    }
+
+    #timer {
+        font-size: 13vw;
     }
 }
