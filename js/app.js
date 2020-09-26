@@ -20,7 +20,7 @@ var timerInit = 0;
 var timerPause = 0;
 var now = 0;
 
-const  phases = [ "1", "rest", "2"];
+const phases = [ "1", "rest", "2"];
 const timeRest = 30; // should be 30 seconds
 var phasePos = 0;
 var phasesTime = [0,0,0];
