@@ -25,6 +25,9 @@ const phases = [ "1", "rest", "2"];
 const timeRest = 30; // should be 30 seconds
 var phasePos = 0;
 var phasesTime = [0,0,0];
+
+let nowOffset = 0;
+let nowShotClock = 0;
 const shotClockTime = 30;
 let shotClockTimerOn = false;
 let shotClockPaused = false;
@@ -94,6 +97,7 @@ $("button").click(function() {
                             victory("red", "disqualification");
                         }
                         break;
+                    // shotclock
                     case "shotclockbtn":
                         if(buttonId === "shotclockbuttonblue" && (shotClockTimerOn === true||timerOn === false)){
                             break; // can't give them a shot clock warning if the shotclock is already on or the time hasn't started yet
@@ -343,6 +347,3 @@ function criteria() {
         $(".blue.score").css("text-decoration", "");
     }
 }
-
-
-

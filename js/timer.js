@@ -35,9 +35,9 @@ function startTimer(now) {
 
 function timer(time) {
     
-    var start = new Date().getTime();
+    let start = new Date().getTime();
     
-    console.log("start: "+start);
+    console.log(`start: ${start}`);
     
     var interval = setInterval( function() {
         
@@ -47,6 +47,11 @@ function timer(time) {
                 ( time*1000 - (new Date().getTime()-start) )/1000
             );
             $("#timer").html(secondsToClock(now));
+
+            if(shotClockTimerOn){
+                nowShotClock = now - nowOffset;
+                $(".shotclock").html(secondsToClock(nowShotClock));
+            }
         };
 
         // timer on end
@@ -98,7 +103,12 @@ function timer(time) {
 
 function shotClockTimer(time) {
     //time in seconds, returns nothing 
+
+    nowOffset = now - 30;
+    nowShotClock = now - nowOffset;
+    console.log(nowOffset);
     let start = new Date().getTime();
+
     shotClockTimerOn = true;
     console.log(`shotClockTimerstart: ${start}`);
     $(".shotclock").html(secondsToClock(time));
@@ -143,6 +153,7 @@ function shotClockTimer(time) {
 
         console.log("nowShotClock: "+Math.ceil(nowShotClock));
 
+    // other end of setInterval
     },1000);
     
 }
