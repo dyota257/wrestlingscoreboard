@@ -81,50 +81,56 @@ $("button").click(function() {
 // Red scoring buttons            
             case "red buttonsRow":
                 redScoreUpdate(addScore);
-                break;
-// Blue and red other buttons                
-// Warnings
-            case "blue warning":
-                if(warningsBlue < 2) {
-                    $(".markerWarning.blue").text($(".markerWarning.blue").text() + "■");
-                    warningsBlue++;
-                } else {
-                    victory("blue", "disqualification");
-                }
-
-                break;
-
-            case "red warning":
-                if(warningsRed < 2) {
-                    $(".markerWarning.red").text($(".markerWarning.red").text() + "■");
-                    warningsRed++;
-                } else [
-                    victory("red", "disqualification")
-                ]
-                break;
-
-// Shot clocks
-            case "blue shotclock":
-                if(buttonId === "shotclockbuttonblue" && (shotClockTimerOn === true||timerOn === false)){
-                    break; // can't give them a shot clock warning if the shotclock is already on or the time hasn't started yet
-                } else if(now < shotClockTime){
-                    break; // can't give them a shot clock if less than shotclock time
-                } else if(buttonId === "shotclockbuttonblue" && shotClockTimerOn === false){
-                    $(".blue.shotclock").css("visibility","visible");
-                    shotClockPlayer = player.BLUE;
-                    shotClockTimer(shotClockTime);
+                break;                
+// Warnings and shotclock row
+            case "blue penalty":
+                switch(this.className){
+                    // warning
+                    case "warning":
+                        if(warningsBlue < 2) {
+                            $(".markerWarning.blue").text($(".markerWarning.blue").text() + "■");
+                            warningsBlue++;
+                        } else {
+                            victory("red", "disqualification");
+                        }
+                        break;
+                    case "blue shotclockbtn":
+                        if(buttonId === "shotclockbuttonblue" && (shotClockTimerOn === true||timerOn === false)){
+                            break; // can't give them a shot clock warning if the shotclock is already on or the time hasn't started yet
+                        } else if(now < shotClockTime){
+                            break; // can't give them a shot clock if less than shotclock time
+                        } else if(buttonId === "shotclockbuttonblue" && shotClockTimerOn === false){
+                            $(".blue.shotclock").css("visibility","visible");
+                            shotClockPlayer = player.BLUE;
+                            shotClockTimer(shotClockTime);
+                        }
+                        break;
                 }
                 break;
 
-            case "red shotclock":
-                if(buttonId === "shotclockbuttonred" && (shotClockTimerOn === true||timerOn === false)){
-                    break; // can't give them a shot clock warning if the shotclock is already on or the time hasn't started yet
-                } else if(now < shotClockTime){
-                    break; // can't give them a shot clock if less than shotclock time
-                } else if(buttonId === "shotclockbuttonred" && shotClockTimerOn === false){
-                    $(".red.shotclock").css("visibility","visible");
-                    shotClockPlayer = player.RED;
-                    shotClockTimer(shotClockTime);
+            case "red penalty":
+                switch(this.className){
+                    // warning
+                    case "warning":
+                        if(warningsRed < 2) {
+                            $(".markerWarning.red").text($(".markerWarning.red").text() + "■");
+                            warningsRed++;
+                        } else {
+                            victory("blue", "disqualification")
+                        }
+                        break;
+                    // shotclock
+                    case "red shotclockbtn":
+                        if(buttonId === "shotclockbuttonred" && (shotClockTimerOn === true||timerOn === false)){
+                            break; // can't give them a shot clock warning if the shotclock is already on or the time hasn't started yet
+                        } else if(now < shotClockTime){
+                            break; // can't give them a shot clock if less than shotclock time
+                        } else if(buttonId === "shotclockbuttonred" && shotClockTimerOn === false){
+                            $(".red.shotclock").css("visibility","visible");
+                            shotClockPlayer = player.RED;
+                            shotClockTimer(shotClockTime);
+                        }
+                        break;
                 }
                 break;
             
@@ -191,7 +197,7 @@ $("button").click(function() {
 
             // game type
             if (dropdownsCheckWhich()[0]=="Junior Freestyle") {
-                timerInit = 12;
+                timerInit = 120;
             } else { // for Senior Freestyle and Senior Greco-Roman
                 timerInit = 180;
             }
@@ -237,11 +243,13 @@ $("button").click(function() {
         if (confirm) {
             $("#playerInput").css("display","none");
             scoreBlue = 0;
+            warningsBlue = 0;
             $(".score.blue").text(scoreBlue);
             $(".blue.firstName").text("blueFirstName");
             $(".blue.lastName").text("blueLastName");
             $(".blue.clubName").text("blueClubName");
             scoreRed = 0;
+            warningsRed = 0;
             $(".score.red").text(scoreRed);
             $(".red.firstName").text("redFirstName");
             $(".red.lastName").text("redLastName");
