@@ -83,8 +83,28 @@ $("button").click(function() {
                 redScoreUpdate(addScore);
                 break;
 // Blue and red other buttons                
-
+// Warnings
             case "blue warning":
+                if(warningsBlue < 2) {
+                    $(".markerWarning.blue").text($(".markerWarning.blue").text() + "■");
+                    warningsBlue++;
+                } else {
+                    victory("blue", "disqualification");
+                }
+
+                break;
+
+            case "red warning":
+                if(warningsRed < 2) {
+                    $(".markerWarning.red").text($(".markerWarning.red").text() + "■");
+                    warningsRed++;
+                } else [
+                    victory("red", "disqualification")
+                ]
+                break;
+
+// Shot clocks
+            case "blue shotclock":
                 if(buttonId === "shotclockbuttonblue" && (shotClockTimerOn === true||timerOn === false)){
                     break; // can't give them a shot clock warning if the shotclock is already on or the time hasn't started yet
                 } else if(now < shotClockTime){
@@ -94,14 +114,9 @@ $("button").click(function() {
                     shotClockPlayer = player.BLUE;
                     shotClockTimer(shotClockTime);
                 }
-                if(warningsBlue < 2) {
-                    $(".markerWarning.blue").text($(".markerWarning.blue").text() + "■");
-                    warningsBlue++;
-                } else {
-                    victory("blue", "disqualification");
-                }
                 break;
-            case "red warning":
+
+            case "red shotclock":
                 if(buttonId === "shotclockbuttonred" && (shotClockTimerOn === true||timerOn === false)){
                     break; // can't give them a shot clock warning if the shotclock is already on or the time hasn't started yet
                 } else if(now < shotClockTime){
@@ -111,13 +126,9 @@ $("button").click(function() {
                     shotClockPlayer = player.RED;
                     shotClockTimer(shotClockTime);
                 }
-                if(warningsRed < 2) {
-                    $(".markerWarning.red").text($(".markerWarning.red").text() + "■");
-                    warningsRed++;
-                } else [
-                    victory("red", "disqualification")
-                ]
                 break;
+            
+// Pins
             case "blue pin":
                 victory("blue", "fall");
                 break;
@@ -256,7 +267,7 @@ $(".close").click( function() {
     }
 )
 
-//should really refactor and combine blueScoreUpdate and redScoreUpdate, also should make a class called players and make each player an object, would simply a lot of code
+// should really refactor and combine blueScoreUpdate and redScoreUpdate, also should make a class called players and make each player an object, would simply a lot of code
 function blueScoreUpdate(addScore) {
     if (addScore<0 && scoreBlue===0 || timerOn == false){
         //do nothing

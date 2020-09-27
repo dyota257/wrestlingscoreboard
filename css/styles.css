@@ -167,7 +167,7 @@ label {
     grid-area: right-points-control;
 }
 
-.blue.warning {
+.blue.penalty {
     grid-area: right-penalty-control;
 }
 
@@ -323,7 +323,7 @@ label {
     grid-area: left-points-control;
 }
 
-.red.warning {
+.red.penalty {
     grid-area: left-penalty-control;
 }
 
@@ -374,14 +374,14 @@ label {
     display: inline-block;
 }
 
-.warning button {
+.penalty button {
     font-size: min(2vw,var(--score-button-font-size));
     border-radius: 10px;
     font-weight: bold;
     padding: 10px;
 }
 
-.warning {
+.penalty {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -418,7 +418,7 @@ label {
         font-size: 20pt;
     }
 
-    .warning button {
+    .penalty button {
         font-size: 10pt;
     }
 

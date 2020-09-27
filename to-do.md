@@ -25,6 +25,8 @@
  ?  Insert new rows into the imported 
     [ ] Keep textarea text, don't clear it
     [ ] upon re-import, "ClearCollect()" the HTML table. This is how the organisers can "insert" rows in between, for special matches or for bracket outcomes
+[ ] sound on timerend
+[ ] pause clock on timerend
 
 
 ## HTML
@@ -96,11 +98,8 @@
 [x] Need a "live mode" or "tournament mode" where all of the control buttons are hidden while match is in progress
 [x] Fix: the "reset all" button doesn't reset weights
  ?  Select match from fixture, by clicking on it?
-
  ?  autocomplete on names, based on what's been imported?
  ?  Block computer from going to sleep?
-
-
 
 Next project..... programming a double-elim tournament
 
