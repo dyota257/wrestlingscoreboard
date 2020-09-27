@@ -20,7 +20,7 @@ var timerInit = 0;
 var timerPause = 0;
 var now = 0;
 
-const  phases = [ "1", "rest", "2"];
+const phases = [ "1", "rest", "2"];
 const timeRest = 30; // should be 30 seconds
 var phasePos = 0;
 var phasesTime = [0,0,0];
@@ -63,42 +63,45 @@ $("button").click( function() {
 
     var sideColour = this.parentElement.className;
     var addScore = scoresMap[this.value];
-    switch(sideColour){
+
+    if (timerOn == true) {
+        switch(sideColour){
 // Blue scoring buttons
-        case "blue buttonsRow":
-            blueScoreUpdate(addScore);
-            break;
+            case "blue buttonsRow":
+                blueScoreUpdate(addScore);
+                break;
 // Red scoring buttons            
-        case "red buttonsRow":
-            redScoreUpdate(addScore);
-            break;
+            case "red buttonsRow":
+                redScoreUpdate(addScore);
+                break;
 // Blue and red other buttons                
-        case "blue warning":
-            if(warningsBlue < 2) {
-                $(".markerWarning.blue").text($(".markerWarning.blue").text() + "■");
-                warningsBlue++;
-            } else {
-                victory("blue", "disqualification");
-            }
-            break;
-        case "red warning":
-            if(warningsRed < 2) {
-                $(".markerWarning.red").text($(".markerWarning.red").text() + "■");
-                warningsRed++;
-            } else [
-                victory("red", "disqualification")
-            ]
-            break;
-        case "blue pin":
-            victory("blue", "fall");
-            break;
-        case "red pin":
-            victory("red", "fall");
-            break;
-        default:
-            null;
-            break;
-    };
+            case "blue warning":
+                if(warningsBlue < 2) {
+                    $(".markerWarning.blue").text($(".markerWarning.blue").text() + "■");
+                    warningsBlue++;
+                } else {
+                    victory("blue", "disqualification");
+                }
+                break;
+            case "red warning":
+                if(warningsRed < 2) {
+                    $(".markerWarning.red").text($(".markerWarning.red").text() + "■");
+                    warningsRed++;
+                } else [
+                    victory("red", "disqualification")
+                ]
+                break;
+            case "blue pin":
+                victory("blue", "fall");
+                break;
+            case "red pin":
+                victory("red", "fall");
+                break;
+            default:
+                null;
+                break;
+        };
+    } 
 
     if (this.id === "import") {
         $("#importArea").css("display", "flex");
@@ -150,7 +153,7 @@ $("button").click( function() {
 
             // game type
             if (dropdownsCheckWhich()[0]=="Junior Freestyle") {
-                timerInit = 120;
+                timerInit = 12;
             } else { // for Senior Freestyle and Senior Greco-Roman
                 timerInit = 180;
             }
@@ -285,95 +288,5 @@ function criteria() {
     }
 }
 
-function setPhase(pos) {
-    $("#period").html("Period " + phases[pos]);
-}
 
-function startTimer(now) {
-    if (timerOn === false) { // to restart the time
-        $("#startTimer").html('<i class="fas fa-pause"></i>');
-        timerOn = true;
-        timer(now); // 2 minutes is 120 seconds = 120 000 milliseconds
-        $(".middle").css("backgroundColor", "black");
-        $('#resetGameRow').css("display", "none");
-        $('#importArea').css("display", "none");
-        $('#playerInput').css("display", "none");
-        $('#fixturesTable').css("display", "none");
-
-    } else if (timerOn === true)  { // to pause the time
-        $("#startTimer").html("▶");
-        timerOn = false;
-        timer(now);
-        $(".middle").css("backgroundColor", "grey");
-        $('#resetGameRow').css("display", "flex");
-    };
-}
-
-function timer(time) {
-    
-    // fix up the variable scopes here
-
-    var start = new Date().getTime();
-    
-    console.log("start: "+start);
-    
-    var interval = setInterval( function() {
-        
-        // timer on start
-        if (timerOn === true) {
-            now = Math.ceil(
-                ( time*1000 - (new Date().getTime()-start) )/1000
-            );
-            var colonZero = ":";
-            // timerInit = now;
-            if ((now%60).toString().length === 1) { 
-                colonZero = ":0";
-            } else {
-                colonZero = ":";
-            }
-            $("#timer").html(Math.floor(now/60).toString() + colonZero + (now%60).toString());
-        };
-
-        // timer on end
-        if( now <= 0 && timerOn === true) {
-            // move to the next phase
-            phasePos++;
-            if (phasePos<3) {
-                // if it's still in the game, start the clock again
-                setPhase(phasePos);
-                timer(phasesTime[phasePos]);
-                console.log(timerInit);
-            } else {
-                // it must be the end of the game, close things down
-                $("#startTimer").prop("disabled", true);
-                var winBlue = (scoreBlue - scoreRed)/Math.abs(scoreBlue - scoreRed)
-                switch ( winBlue ){
-                    case 1:
-                        victory("blue", "points");        
-                        break;
-                    case -1:
-                        victory("red", "points");        
-                        break;
-                    default:
-// Draw outcome
-                        victory("draw", "technical superiority");
-                        console.log("Outcome is draw")      
-                        break;
-                }
-                clearInterval(interval);
-            }
-        };
-
-        // timer pause
-        if( now <= 0 || timerOn === false) {
-            console.log("Timer stopped at: "+now);
-            clearInterval(interval);
-            now = time;
-        };
-
-        console.log("now: "+Math.ceil(now));
-
-    },1000);
-    
-};
 
