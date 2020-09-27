@@ -84,52 +84,16 @@ $("button").click(function() {
                 break;
 // Blue and red other buttons                
 
-        case "blue warning":
-            if(buttonId === "shotclockbuttonblue" && (shotClockTimerOn === true||timerOn === false)){
-                break; // can't give them a shot clock warning if the shotclock is already on or the time hasn't started yet
-            } else if(now < shotClockTime){
-                break; // can't give them a shot clock if less than shotclock time
-            } else if(buttonId === "shotclockbuttonblue" && shotClockTimerOn === false){
-                $(".blue.shotclock").css("visibility","visible");
-                shotClockPlayer = player.BLUE;
-                shotClockTimer(shotClockTime);
-            }
-            if(warningsBlue < 2) {
-                $(".markerWarning.blue").text($(".markerWarning.blue").text() + "■");
-                warningsBlue++;
-            } else {
-                victory("blue", "disqualification");
-            }
-            break;
-        case "red warning":
-            if(buttonId === "shotclockbuttonred" && (shotClockTimerOn === true||timerOn === false)){
-                break; // can't give them a shot clock warning if the shotclock is already on or the time hasn't started yet
-            } else if(now < shotClockTime){
-                break; // can't give them a shot clock if less than shotclock time
-            } else if(buttonId === "shotclockbuttonred" && shotClockTimerOn === false){
-                $(".red.shotclock").css("visibility","visible");
-                shotClockPlayer = player.RED;
-                shotClockTimer(shotClockTime);
-            }
-            if(warningsRed < 2) {
-                $(".markerWarning.red").text($(".markerWarning.red").text() + "■");
-                warningsRed++;
-            } else [
-                victory("red", "disqualification")
-            ]
-            break;
-        case "blue pin":
-            victory("blue", "fall");
-            break;
-        case "red pin":
-            victory("red", "fall");
-            break;
-        default:
-            null;
-            break;
-    };
-=======
             case "blue warning":
+                if(buttonId === "shotclockbuttonblue" && (shotClockTimerOn === true||timerOn === false)){
+                    break; // can't give them a shot clock warning if the shotclock is already on or the time hasn't started yet
+                } else if(now < shotClockTime){
+                    break; // can't give them a shot clock if less than shotclock time
+                } else if(buttonId === "shotclockbuttonblue" && shotClockTimerOn === false){
+                    $(".blue.shotclock").css("visibility","visible");
+                    shotClockPlayer = player.BLUE;
+                    shotClockTimer(shotClockTime);
+                }
                 if(warningsBlue < 2) {
                     $(".markerWarning.blue").text($(".markerWarning.blue").text() + "■");
                     warningsBlue++;
@@ -138,6 +102,15 @@ $("button").click(function() {
                 }
                 break;
             case "red warning":
+                if(buttonId === "shotclockbuttonred" && (shotClockTimerOn === true||timerOn === false)){
+                    break; // can't give them a shot clock warning if the shotclock is already on or the time hasn't started yet
+                } else if(now < shotClockTime){
+                    break; // can't give them a shot clock if less than shotclock time
+                } else if(buttonId === "shotclockbuttonred" && shotClockTimerOn === false){
+                    $(".red.shotclock").css("visibility","visible");
+                    shotClockPlayer = player.RED;
+                    shotClockTimer(shotClockTime);
+                }
                 if(warningsRed < 2) {
                     $(".markerWarning.red").text($(".markerWarning.red").text() + "■");
                     warningsRed++;
@@ -154,9 +127,8 @@ $("button").click(function() {
             default:
                 null;
                 break;
-        };
-    } 
-
+        }; 
+    };
 
     if (this.id === "import") {
         $("#importArea").css("display", "flex");
