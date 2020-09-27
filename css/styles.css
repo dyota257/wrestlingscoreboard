@@ -360,9 +360,9 @@ label {
 
 .shotclock {
     font-size: 6vh;
-    background: initial;
+    background: grey;
     margin: 20px;
-    color: yellow;
+    color: white;
     visibility: hidden;
 }
 

@@ -1,13 +1,8 @@
 # To-do list
 
 ## Shotclock
-[ ] making a shot clock puts a warning marker on - do not want this
-    this is because the button.onclick callback pcks up the class .warning - change this to pick up on an id #arning (or something)
+[ ] Make shot clock in sync with current time
 
-[ ] warning dq logic is gone? 
-	3 warnings and you're out
-
-[ ] warningsBlue and warningsRed are not being reset on Reset Game
 
 [ ] make the shot clock background grey - the same grey as the paused timer bg colour
 
@@ -38,6 +33,14 @@
 [x] Style player input table
 
 ## JS
+[x] warningsBlue and warningsRed are not being reset on Reset Game
+
+[x] making a shot clock puts a warning marker on - do not want this
+    this is because the button.onclick callback pcks up the class .warning - change this to pick up on an id #arning (or something)
+
+[x] warning dq logic is gone? 
+	3 warnings and you're out
+
 [x] remove draw conditions - replace with victory on the last biggest score (criteria!)
     [x] Underline criteria
         if scoreBlue == scoreRed
