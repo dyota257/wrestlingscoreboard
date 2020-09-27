@@ -4,7 +4,7 @@
 [ ] Make shot clock in sync with current time
 
 
-[ ] make the shot clock background grey - the same grey as the paused timer bg colour
+
 
 ## misc
 [ ] Put in a forfeit condition
@@ -33,6 +33,7 @@
 [x] Style player input table
 
 ## JS
+[x] make the shot clock background grey - the same grey as the paused timer bg colour
 [x] warningsBlue and warningsRed are not being reset on Reset Game
 
 [x] making a shot clock puts a warning marker on - do not want this

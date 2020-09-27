@@ -438,7 +438,7 @@ function shotClockTimer(time) {
     //time in seconds, returns nothing 
     let start = new Date().getTime();
     shotClockTimerOn = true;
-    console.log("shotClockTimerstart: "+start);
+    console.log(`shotClockTimerstart: ${start}`);
     $(".shotclock").html(secondsToClock(time));
     
     let interval = setInterval( function() {
