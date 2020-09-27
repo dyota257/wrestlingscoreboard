@@ -94,7 +94,7 @@ $("button").click(function() {
                             victory("red", "disqualification");
                         }
                         break;
-                    case "blue shotclockbtn":
+                    case "shotclockbtn":
                         if(buttonId === "shotclockbuttonblue" && (shotClockTimerOn === true||timerOn === false)){
                             break; // can't give them a shot clock warning if the shotclock is already on or the time hasn't started yet
                         } else if(now < shotClockTime){
@@ -120,7 +120,7 @@ $("button").click(function() {
                         }
                         break;
                     // shotclock
-                    case "red shotclockbtn":
+                    case "shotclockbtn":
                         if(buttonId === "shotclockbuttonred" && (shotClockTimerOn === true||timerOn === false)){
                             break; // can't give them a shot clock warning if the shotclock is already on or the time hasn't started yet
                         } else if(now < shotClockTime){
