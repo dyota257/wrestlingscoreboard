@@ -2,11 +2,22 @@ function setPhase(pos) {
     $("#period").html("Period " + phases[pos]);
 }
 
+function secondsToClock(seconds){
+    //used to format the clock displays
+    let date = new Date(0);
+    date.setSeconds(seconds);
+    return date.toISOString().substr(15, 4);
+}
+
 function startTimer(now) {
-    if (timerOn === false) { // to restart the time
+    if(timerOn === false) { // to restart the time
         $("#startTimer").html('<i class="fas fa-pause"></i>');
         timerOn = true;
         timer(now); // 2 minutes is 120 seconds = 120 000 milliseconds
+        if(shotClockTimerOn === true){ //continue shotclock if it was on during the pause
+            shotClockTimer(nowShotClock);
+            shotClockPaused = false;
+        }
         $(".middle").css("backgroundColor", "black");
         $('#resetGameRow').css("display", "none");
         $('#importArea').css("display", "none");
@@ -19,7 +30,6 @@ function startTimer(now) {
         timer(now);
         $(".middle").css("backgroundColor", "grey");
         $('#resetGameRow').css("display", "flex");
-        
     };
 }
 
@@ -36,14 +46,7 @@ function timer(time) {
             now = Math.ceil(
                 ( time*1000 - (new Date().getTime()-start) )/1000
             );
-            var colonZero = ":";
-            // timerInit = now;
-            if ((now%60).toString().length === 1) { 
-                colonZero = ":0";
-            } else {
-                colonZero = ":";
-            }
-            $("#timer").html(Math.floor(now/60).toString() + colonZero + (now%60).toString());
+            $("#timer").html(secondsToClock(now));
         };
 
         // timer on end
@@ -56,6 +59,7 @@ function timer(time) {
             if (phasePos<3) {
                 // if it's still in the game, set the next phase
                 setPhase(phasePos);
+                // pause the clock
                 startTimer(phasesTime[phasePos]);
                 // timer(phasesTime[phasePos]);
             } else {
@@ -91,3 +95,54 @@ function timer(time) {
     },1000);
     
 };
+
+function shotClockTimer(time) {
+    //time in seconds, returns nothing 
+    let start = new Date().getTime();
+    shotClockTimerOn = true;
+    console.log(`shotClockTimerstart: ${start}`);
+    $(".shotclock").html(secondsToClock(time));
+    
+    let interval = setInterval( function() {
+        
+        // timer on start
+        if (shotClockTimerOn === true) {
+            nowShotClock = Math.ceil((time*1000 - (new Date().getTime()-start) )/1000);
+            $(".shotclock").html(secondsToClock(nowShotClock));
+        };
+
+        // score occured during shotclock
+        if(shotClockTimerOn === false && nowShotClock > 0){
+            clearInterval(interval);
+            $(".shotclock").css("visibility","hidden"); //hide shot clock on timer end
+            shotClockTimerOn = false;
+            shotClockPlayer = null;
+        }
+
+        // timer on end
+        if( nowShotClock <= 0 && shotClockTimerOn === true) {
+            clearInterval(interval);
+            $(".shotclock").css("visibility","hidden"); //hide shot clock on timer end
+            switch(shotClockPlayer){
+                case player.BLUE:
+                    redScoreUpdate(1); //other player gets the point
+                    break;
+                case player.RED:
+                    blueScoreUpdate(1);
+                    break;
+            }
+            shotClockTimerOn = false;
+            shotClockPlayer = null;
+        };
+
+        if((now <= 0 || timerOn === false) && shotClockTimerOn === true) { //pause shot clock when round time paused. 
+            console.log("Timer stopped at: "+nowShotClock);
+            clearInterval(interval);
+            shotClockPaused = true;
+        };
+
+        console.log("nowShotClock: "+Math.ceil(nowShotClock));
+
+    },1000);
+    
+}
