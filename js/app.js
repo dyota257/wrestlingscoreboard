@@ -71,16 +71,19 @@ $("button").click(function() {
     let buttonId = this.id;
     console.log(buttonId);
     var addScore = scoresMap[this.value];
-    switch(sideColour){
+
+    if (timerOn == true) {
+        switch(sideColour){
 // Blue scoring buttons
-        case "blue buttonsRow":
-            blueScoreUpdate(addScore);
-            break;
+            case "blue buttonsRow":
+                blueScoreUpdate(addScore);
+                break;
 // Red scoring buttons            
-        case "red buttonsRow":
-            redScoreUpdate(addScore);
-            break;
+            case "red buttonsRow":
+                redScoreUpdate(addScore);
+                break;
 // Blue and red other buttons                
+
         case "blue warning":
             if(buttonId === "shotclockbuttonblue" && (shotClockTimerOn === true||timerOn === false)){
                 break; // can't give them a shot clock warning if the shotclock is already on or the time hasn't started yet
@@ -125,6 +128,35 @@ $("button").click(function() {
             null;
             break;
     };
+=======
+            case "blue warning":
+                if(warningsBlue < 2) {
+                    $(".markerWarning.blue").text($(".markerWarning.blue").text() + "■");
+                    warningsBlue++;
+                } else {
+                    victory("blue", "disqualification");
+                }
+                break;
+            case "red warning":
+                if(warningsRed < 2) {
+                    $(".markerWarning.red").text($(".markerWarning.red").text() + "■");
+                    warningsRed++;
+                } else [
+                    victory("red", "disqualification")
+                ]
+                break;
+            case "blue pin":
+                victory("blue", "fall");
+                break;
+            case "red pin":
+                victory("red", "fall");
+                break;
+            default:
+                null;
+                break;
+        };
+    } 
+
 
     if (this.id === "import") {
         $("#importArea").css("display", "flex");
@@ -176,7 +208,7 @@ $("button").click(function() {
 
             // game type
             if (dropdownsCheckWhich()[0]=="Junior Freestyle") {
-                timerInit = 120;
+                timerInit = 12;
             } else { // for Senior Freestyle and Senior Greco-Roman
                 timerInit = 180;
             }
@@ -321,6 +353,7 @@ function criteria() {
     }
 }
 
+
 function setPhase(pos) {
     $("#period").html("Period " + phases[pos]);
 }
@@ -460,6 +493,9 @@ function shotClockTimer(time) {
     },1000);
     
 }
+
+
+
 
 function secondsToClock(seconds){
     //used to format the clock displays

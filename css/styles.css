@@ -53,6 +53,10 @@ button#download {
     border-radius: 5px;
 }
 
+label {
+    font-weight: bold;
+}
+
 /* Ids */
 
 #mainHeader {
@@ -309,7 +313,6 @@ button#download {
 
 /* .red moved to top, next to .blue */
 /* .red button moved to top, next to .blue button */
-
 
 .red.scorebox {
     grid-area: left-player;
