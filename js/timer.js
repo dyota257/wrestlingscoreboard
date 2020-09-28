@@ -48,10 +48,7 @@ function timer(time) {
             );
             $("#timer").html(secondsToClock(now));
 
-            if(shotClockTimerOn){
-                nowShotClock = now - nowOffset;
-                $(".shotclock").html(secondsToClock(nowShotClock));
-            }
+            shotClockTimer()
         };
 
         // timer on end
@@ -102,36 +99,32 @@ function timer(time) {
 };
 
 function shotClockTimer(time) {
-    //time in seconds, returns nothing 
+    // time in seconds, returns nothing 
 
-    nowOffset = now - 30;
-    nowShotClock = now - nowOffset;
-    console.log(nowOffset);
     let start = new Date().getTime();
-
-    shotClockTimerOn = true;
-    console.log(`shotClockTimerstart: ${start}`);
-    $(".shotclock").html(secondsToClock(time));
     
-    let interval = setInterval( function() {
+    console.log(`shotClockTimerstart: ${start}`);
+    // $(".shotclock").html(secondsToClock(time));
+    
+    // let interval = setInterval( function() {
         
         // timer on start
-        if (shotClockTimerOn === true) {
-            nowShotClock = Math.ceil((time*1000 - (new Date().getTime()-start) )/1000);
+        if (shotClockTimerOn) {
+            nowShotClock = now - nowOffset;
             $(".shotclock").html(secondsToClock(nowShotClock));
         };
 
         // score occured during shotclock
-        if(shotClockTimerOn === false && nowShotClock > 0){
-            clearInterval(interval);
+        if(!shotClockTimerOn && nowShotClock > 0){
+            // clearInterval(interval);
             $(".shotclock").css("visibility","hidden"); //hide shot clock on timer end
             shotClockTimerOn = false;
             shotClockPlayer = null;
         }
 
         // timer on end
-        if( nowShotClock <= 0 && shotClockTimerOn === true) {
-            clearInterval(interval);
+        if( nowShotClock <= 0 && shotClockTimerOn) {
+            // clearInterval(interval);
             $(".shotclock").css("visibility","hidden"); //hide shot clock on timer end
             switch(shotClockPlayer){
                 case player.BLUE:
@@ -145,8 +138,8 @@ function shotClockTimer(time) {
             shotClockPlayer = null;
         };
 
-        if((now <= 0 || timerOn === false) && shotClockTimerOn === true) { //pause shot clock when round time paused. 
-            console.log("Timer stopped at: "+nowShotClock);
+        if((now <= 0 || !timerOn) && shotClockTimerOn) { //pause shot clock when round time paused. 
+            console.log(`Timer stopped at: ${nowShotClock}`);
             clearInterval(interval);
             shotClockPaused = true;
         };
@@ -154,6 +147,6 @@ function shotClockTimer(time) {
         console.log("nowShotClock: "+Math.ceil(nowShotClock));
 
     // other end of setInterval
-    },1000);
+    // },1000);
     
 }

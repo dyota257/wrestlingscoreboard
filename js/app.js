@@ -27,7 +27,6 @@ var phasePos = 0;
 var phasesTime = [0,0,0];
 
 let nowOffset = 0;
-let nowShotClock = 0;
 const shotClockTime = 30;
 let shotClockTimerOn = false;
 let shotClockPaused = false;
@@ -99,14 +98,18 @@ $("button").click(function() {
                         break;
                     // shotclock
                     case "shotclockbtn":
-                        if(buttonId === "shotclockbuttonblue" && (shotClockTimerOn === true||timerOn === false)){
+                        if(shotClockTimerOn) {
                             break; // can't give them a shot clock warning if the shotclock is already on or the time hasn't started yet
-                        } else if(now < shotClockTime){
+                        } else if(now < shotClockTime) {
                             break; // can't give them a shot clock if less than shotclock time
-                        } else if(buttonId === "shotclockbuttonblue" && shotClockTimerOn === false){
+                        } else if (!timerOn) {
+                            $(".blue.shotclock").css("visibility","visible");
+                        } else if(!shotClockTimerOn) {
                             $(".blue.shotclock").css("visibility","visible");
                             shotClockPlayer = player.BLUE;
-                            shotClockTimer(shotClockTime);
+                            shotClockTimerOn = true;
+                            nowOffset = now - 30;
+                            console.log(nowOffset);
                         }
                         break;
                 }
@@ -125,14 +128,18 @@ $("button").click(function() {
                         break;
                     // shotclock
                     case "shotclockbtn":
-                        if(buttonId === "shotclockbuttonred" && (shotClockTimerOn === true||timerOn === false)){
+                        if(shotClockTimerOn) {
                             break; // can't give them a shot clock warning if the shotclock is already on or the time hasn't started yet
-                        } else if(now < shotClockTime){
+                        } else if(now < shotClockTime) {
                             break; // can't give them a shot clock if less than shotclock time
-                        } else if(buttonId === "shotclockbuttonred" && shotClockTimerOn === false){
+                        } else if (!timerOn) {
+                            $(".red.shotclock").css("visibility","visible");
+                        } else if(!shotClockTimerOn) {
                             $(".red.shotclock").css("visibility","visible");
                             shotClockPlayer = player.RED;
-                            shotClockTimer(shotClockTime);
+                            shotClockTimerOn = true;
+                            nowOffset = now - 30;
+                            console.log(nowOffset);
                         }
                         break;
                 }
@@ -150,6 +157,46 @@ $("button").click(function() {
                 break;
         }; 
     };
+
+// Shot clock
+    switch(sideColour){
+        case "blue penalty":
+            if (this.className == "shotclockbtn"){
+                if(shotClockTimerOn) {
+                    break; // can't give them a shot clock warning if the shotclock is already on or the time hasn't started yet
+                } else if(now < shotClockTime) {
+                    break; // can't give them a shot clock if less than shotclock time
+
+                } else if(!shotClockTimerOn || !timerOn) {
+                    shotClockPlayer = player.BLUE;
+                    shotClockTimerOn = true;
+                    nowOffset = now - 30;
+                    nowShotClock = now - nowOffset;
+                    $(".shotclock").html(secondsToClock(nowShotClock));
+                    $(".blue.shotclock").css("visibility","visible");
+                    console.log(nowOffset);
+                }
+            }
+            break;
+
+        case "red penalty":
+            if (this.className == "shotclockbtn"){
+                if(shotClockTimerOn) {
+                    break; // can't give them a shot clock warning if the shotclock is already on or the time hasn't started yet
+                } else if(now < shotClockTime) {
+                    break; // can't give them a shot clock if less than shotclock time
+                } else if(!shotClockTimerOn) {
+                    shotClockPlayer = player.RED;
+                    shotClockTimerOn = true;
+                    nowOffset = now - 30;
+                    nowShotClock = now - nowOffset;
+                    $(".shotclock").html(secondsToClock(nowShotClock));
+                    $(".red.shotclock").css("visibility","visible");
+                    console.log(nowOffset);
+                }
+            }
+            break;
+    }
 
     if (this.id === "import") {
         $("#importArea").css("display", "flex");
@@ -288,7 +335,7 @@ function blueScoreUpdate(addScore) {
         $(".score.blue").text(scoreBlue);
         scoreBlueHist.push(addScore);
         console.log(scoreBlueHist);
-        if(shotClockTimerOn === true){
+        if(shotClockTimerOn){
             shotClockTimerOn = false; 
         }
         criteria();
@@ -311,7 +358,7 @@ function redScoreUpdate(addScore) {
         $(".score.red").text(scoreRed);
         scoreRedHist.push(addScore);
         console.log(scoreRedHist);
-        if(shotClockTimerOn === true){
+        if(shotClockTimerOn){
             shotClockTimerOn = false; 
         }
         criteria();
