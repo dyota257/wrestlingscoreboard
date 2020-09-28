@@ -16,9 +16,14 @@ class Player {
         this.warnings  = warnings;
         this.shotClock = shotClock;
     }
+
+    scoreUpdate() {
+        // update the score
+    }
 }
 
-const playerBlue = new Player();
-const playerRed = new Player();
-
-"https://stackoverflow.com/questions/1005857/how-to-call-a-function-from-a-string-stored-in-a-variable"
+const playerBlue = new Player("blue", "Dyota", "Tan");
+const playerRed = new Player("red", "Carol", "But");
+const players = [playerBlue, playerRed];
+let side = "red";
+players.find(x => x.side === side).firstName; // "Carol"
