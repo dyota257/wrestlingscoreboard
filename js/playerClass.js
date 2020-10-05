@@ -5,6 +5,7 @@ class Player {
         lastName,
         clubName,
         score,
+        scoreHist,
         warnings,
         shotClock
     ) {
@@ -13,6 +14,7 @@ class Player {
         this.lastName  = lastName;
         this.clubName  = clubName;
         this.score     = score;
+        this.scoreHist = scoreHist;
         this.warnings  = warnings;
         this.shotClock = shotClock;
     }

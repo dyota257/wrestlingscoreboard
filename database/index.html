@@ -1,0 +1,25 @@
+Hello there! Pick a database now.<br> 
+<a href="/tournaments">Tournaments</a> <br>
+<a href="/matchesRaw">Matches</a>
+<br>
+<form action="/" method="post">
+    <input type="text" name="queryFROM" id="">
+    <input type="text" name="queryWHERE" id="">
+    <input type="submit" value="search">
+</form>
+
+<form action="/add" method="post">
+    <label for="category">category</label><br>
+    <input type="text" name="category" id="" value="category"><br>
+    <label for="round">round</label><br>
+    <input type="text" name="round" id="" value="round"><br>
+    <label for="mat">mat</label><br>
+    <input type="text" name="mat" id="" value="mat"><br>
+    <label for="id">id</label><br>
+    <input type="text" name="id" id="" value="id"><br>
+    <label for="red">red</label><br>
+    <input type="text" name="red" id="" value="red"><br>
+    <label for="blue">blue</label><br>
+    <input type="text" name="blue" id="" value="blue"><br>
+    <input type="submit" value="add">
+</form>

@@ -1,5 +1,6 @@
 Other reference/
 WWA reference/
+node_modules/
 WWA_scoreboard_single.html
 WWA_scoreboard_single.min.html
 Timer_example.html
@@ -10,3 +11,4 @@ wwa_logo.png
 George-Samios-Cup-2019-Pairing.xlsx
 UFW 2020 Pairing.xlsx
 textbox.html
+package-lock.json
