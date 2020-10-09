@@ -141,3 +141,42 @@ function dropdownsCheckWhich() {
     const styleAndAge = [gameType, ageDiv];
     return styleAndAge
 }
+
+// Age 	Gender 	Freestyle Weight Categories (kg) 	Greco Roman Weight Categories (kg)
+// 6-7 yrs 	Male/Female 	19, 23, 27, 35, 42, 53, 66, 73 and 73+ 	 
+// 8-9 yrs 	Male/Female 	23, 27, 35, 42, 53, 66, 73 and 73+ 	 
+// 10-11 yrs 	Male/Female 	23, 27, 35, 42, 53, 66, 73, 85 and 85+ 	 
+// 12-13 yrs 	Female 	33, 37, 44, 50, 55, 62, 73, 85 and 85+ 	 
+// 12-13 yrs 	Male 	35, 41, 48, 55, 62, 69, 75, 89 and 89+ 	 
+// 14-15 yrs 	Female 	35, 40, 45, 50, 55, 60, 65, 70 and 70+ 	 
+// 14-15 yrs 	Male 	35, 42, 49, 56, 63, 70, 78, 89 and 89+ 	 
+
+// 16- 17 yrs
+
+// (Cadets)
+// 	Female 	40, 43, 49, 56, 61, 65, 69, 73 and 73+ 	 
+
+// 16- 17 yrs
+
+// (Cadets)
+// 	Male 	48, 55, 62, 69, 74, 86, 92, 110 and 110+ 	 
+
+// 18-20 yrs
+
+// (Juniors)
+// 	Female 	50, 53, 57, 62, 68, 76, 85 and 85+ 	 
+
+// 18-20 yrs
+
+// (Juniors)
+// 	Male 	57, 65, 74, 79, 86, 92, 97, 125 and 125+ 	60, 67, 77, 87, 97, 130 and 130+
+
+// 21yrs +
+
+// (Seniors)
+// 	Female 	50, 53, 57, 62, 68, 76, 85 and 85+ 	 
+
+// 21yrs +
+
+// (Seniors)
+// 	Male 	57, 65, 74, 79, 86, 92, 97, 125 and 125+ 	60, 67, 77, 87, 97, 130 and 130+

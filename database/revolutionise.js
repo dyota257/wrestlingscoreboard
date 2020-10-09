@@ -1,4 +1,6 @@
-Name	Payment status	Gender	Date of Birth	Club	Age Category (age you will be at the end of this year)	What is your actual weight (kg) now?	Which weight category do you wish to enter?	Which style to you wish to compete in?
+var x = 
+
+`Name	Payment status	Gender	Date of Birth	Club	Age Category (age you will be at the end of this year)	What is your actual weight (kg) now?	Which weight category do you wish to enter?	Which style to you wish to compete in?
 Asmaa Gharir	Paid	female	19/08/2014	Wolves	05-7 y/o	19.3 kg	23	Freestyle
 								
 Max Thayer	Paid	male	30/01/2013	Gladiators	05-7 y/o	27.1	35	Freestyle
@@ -111,3 +113,8 @@ Joshua Katene	Paid	male	18/03/1982	Wolves	Senior (>21 y/o)	128	130	Greco Roman
 								
 Milla Graham-Arho		female	18/05/2013	Warriors	05-7 y/o	19	23	Freestyle
 Jesse Armstrong		male	27/10/1987	Evolution MMA	Senior (>21 y/o)	85	86	Freestyle
+`
+
+document.querySelector('textarea').value = x;
+
+alert('hello');
