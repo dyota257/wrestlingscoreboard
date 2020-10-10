@@ -200,5 +200,3 @@ app.post('/importMatches', async (req, res) => {
 
 app.listen(process.env.PORT || port, () => console.log(`Listening on port ${port}`));
 
-console.log('hello %y', 'you')
-
