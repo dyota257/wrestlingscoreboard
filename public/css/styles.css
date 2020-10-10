@@ -1,5 +1,9 @@
 /* Tags */
 
+a {
+    color:yellow;
+}
+
 body {
     background-color: black;
     font-family: Arial, Helvetica, sans-serif;
@@ -14,6 +18,18 @@ div {
     /*display: inline;*/
 }
 
+h1 {
+    color: white;
+}
+
+label {
+    color: white;
+    font-weight: bold;
+}
+
+p {
+    color: white;
+}
 
 table {
     table-layout: fixed;
@@ -30,7 +46,7 @@ td {
 }
 
 button {
-    color: white;
+    color: black;
     background-color: rgb(255,215,0,1);
     font-size: large;
     font-weight: bold;
@@ -59,6 +75,30 @@ label {
 
 /* Ids */
 
+#footer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#main-display {
+    width: 95%;
+    height: 100vh;
+    background: black;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+    grid-template-rows: 60% 20% 1fr 1fr 1fr;
+    grid-gap: 2px;
+    grid-template-areas:
+      "left-player left-player time time right-player right-player"
+      "left-score left-score left-score right-score right-score right-score"
+      "left-points-control left-points-control left-points-control right-points-control right-points-control right-points-control"
+      "left-penalty-control left-penalty-control left-penalty-control right-penalty-control right-penalty-control right-penalty-control"
+      "left-pin left-pin left-pin right-pin right-pin right-pin";
+    margin-top: 10px;
+    margin-bottom: 40px;
+}
+
 #mainHeader {
     height: 5%;
     background-color: gold;
@@ -81,9 +121,15 @@ label {
     }
 }
 
-
 #playerInput {
     display: flex;
+}
+
+#resetGameRow{
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: center;
 }
 
 #startTimer {
@@ -103,38 +149,6 @@ label {
     font-size: 15vw;
 }
 
-#resetGameRow{
-    display: flex;
-    align-items: center;
-    flex-wrap: wrap;
-    justify-content: center;
-}
-
-#main-display {
-    width: 95%;
-    height: 100vh;
-    background: black;
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
-    grid-template-rows: 60% 20% 1fr 1fr 1fr;
-    grid-gap: 2px;
-    grid-template-areas:
-      "left-player left-player time time right-player right-player"
-      "left-score left-score left-score right-score right-score right-score"
-      "left-points-control left-points-control left-points-control right-points-control right-points-control right-points-control"
-      "left-penalty-control left-penalty-control left-penalty-control right-penalty-control right-penalty-control right-penalty-control"
-      "left-pin left-pin left-pin right-pin right-pin right-pin";
-    margin-top: 10px;
-    margin-bottom: 40px;
-}
-
-#footer {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-
 /* Classes */
 .blue {
     background: blue;
@@ -146,10 +160,12 @@ label {
 
 .blue button {
     background: darkblue;
+    color:white;
 }
 
 .red button {
     background: darkred;
+    color:white;
 }
 
 .blue.playerData {
@@ -213,6 +229,11 @@ label {
 
 .lastName, #period {
     font-size: min(3.5vw,36pt);
+}
+
+.mainPage {
+    width:200px;
+    height: 100px;
 }
 
 .markerWarning {

@@ -1,21 +1,27 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-const pool = require('./db');
+const pool = require('./database/db');
 const app = express();
 const port = 8080;
 
-const importWrestlers = require('./importWrestlers');
-const importMatches = require('./importMatches');
-const matchesToHtml = require('./matchesToHtml');
-const wrestlersToHtml = require('./wrestlersToHtml');
-
-
+const importWrestlers = require('./database/importWrestlers');
+const importMatches = require('./database/importMatches');
+const matchesToHtml = require('./database/matchesToHtml');
+const wrestlersToHtml = require('./database/wrestlersToHtml');
+const tournamentsToHtml = require('./database/tournamentsToHtml');
 
 app.use(bodyParser.urlencoded({extended: true}));
+
+app.use(express.static('public'));
+
+app.set('view engine', 'ejs');
 
 // expose an endpoint "tournaments"
 app.get('/', (req, res) => {
     res.sendFile(`${__dirname}/index.html`);
+});
+app.get('/scoreboard', (req, res) => {
+    res.sendFile(`${__dirname}/scoreboard.html`);
 });
 
 app.get('/tournaments', async (req, res) => {
@@ -24,7 +30,11 @@ app.get('/tournaments', async (req, res) => {
         conn = await pool.getConnection();
         var query = "select * from tournaments";
         var rows = await conn.query(query);
-        res.send(rows);
+        var table = tournamentsToHtml(rows);
+        res.render('table', {
+            title: 'Tournaments',
+            table: table
+        })
 
     } catch (err) {
         throw err;
@@ -33,14 +43,36 @@ app.get('/tournaments', async (req, res) => {
     }
 });
 
-app.get('/matchesRaw', async (req, res) =>{
+app.get('/matchesA', async (req, res) =>{
     let conn;
     try {
         conn = await pool.getConnection();
-        var query = "select * from matchesRaw";
+        var query = 'SELECT * FROM matchesRaw WHERE mat = "A"';
         var rows = await conn.query(query);
         var table = matchesToHtml(rows);
-        res.send(table);
+        res.render('table', { 
+            title: 'Matches',
+            table: table
+        })
+
+    } catch (err) {
+        throw err;
+    } finally {
+        if (conn) return conn.end();
+    }
+});
+
+app.get('/matchesB', async (req, res) =>{
+    let conn;
+    try {
+        conn = await pool.getConnection();
+        var query = 'SELECT * FROM matchesRaw WHERE mat = "B"';
+        var rows = await conn.query(query);
+        var table = matchesToHtml(rows);
+        res.render('table', { 
+            title: 'Matches',
+            table: table
+        })
 
     } catch (err) {
         throw err;
@@ -56,7 +88,10 @@ app.get('/wrestlers', async (req, res) =>{
         var query = "select * from wrestlers";
         var rows = await conn.query(query);
         var table = wrestlersToHtml(rows);
-        res.send(table);
+        res.render('table', {
+            title: 'Wrestlers',
+            table: table
+        });
 
     } catch (err) {
         throw err;
@@ -140,6 +175,7 @@ app.post('/importMatches', async (req, res) => {
         conn = await pool.getConnection();
         var sqlQuery  = importMatches(req.body.x);
         console.log("Connected...");
+        console.log(sqlQuery);
         query = `INSERT IGNORE INTO matchesRaw (
             category,
             round,

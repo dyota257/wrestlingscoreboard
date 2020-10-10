@@ -46,7 +46,7 @@ function importMatches(x) {
         blue_club = row[5].split(/\(/)[1];
 
         if (blue_club !== undefined) {
-            blue_club = blue_club.slice(0, blue_club.length-1);
+            blue_club = blue_club.slice(0, blue_club.length-2);
             console.log(blue_club);
         }
 

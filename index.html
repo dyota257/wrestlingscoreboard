@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="shortcut icon" href="http://wrestlingwa.org/wp-content/uploads/2017/05/wwa1-150x150.jpg" type="image/x-icon">
+    
+    <title>Document</title>
+    <style>
+
+    </style>
+</head>
+
+<body>
+    <div id="mainHeader">
+        <span id="logo"><img src="http://wrestlingwa.org/wp-content/uploads/wwa_logo.png"></span>
+        <span id="fedName">Wrestling Western Australia <br> Tournament Centre</span>
+    </div>
+
+    <h1>Tournament Centre</h1>
+    
+    <table style="align-items: center;">
+        <tr>
+            <td>
+                <form action="/tournaments" method="get">
+                    <button class="mainPage" type="submit">Tournaments</button>
+                </form>
+            </td>
+            <td>
+                <form action="/matchesA" method="get">
+                    <button id="matA" class="mainPage" type="submit">Matches Mat A</button>
+                </form>
+                <form action="/matchesB" method="get">
+                    <button id="matB" class="mainPage" type="submit">Matches Mat B</button>
+                </form>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <form action="/wrestlers" method="get">
+                    <button class="mainPage" type="submit">Wrestlers</button>
+                </form>
+            </td>
+            <td>
+                <form action="/scoreboard" method="get">
+                    <button class="mainPage" type="submit">Scoreboard</button>
+                </form>
+            </td>
+        
+        </tr>
+        <tr>
+            <td>
+                <h1>Bulk import wrestlers to <span style="font-family: 'Consolas', 'Courier New', Courier, monospace;">wrestlers</span></h1>
+                <form action="/importWrestlers" method="post">
+                    <textarea name="x" id="" cols="30" rows="10"></textarea><br>
+                    <button>import wrestlers</button>
+                </form>
+            </td>
+            <td>
+                <h1>Bulk import matches into <span style="font-family: 'Consolas', 'Courier New', Courier, monospace;">matchesRaw</span></h1>
+                <form action="/importMatches" method="post">
+                    <textarea name="x" id="" cols="30" rows="10"></textarea><br>
+                    <button>import matches</button>
+                </form>
+            </td>
+        </tr>
+    </table>
+
+    <!-- <h1>Add to database table <span style="font-family: 'Consolas', 'Courier New', Courier, monospace;">"matchesRaw"</span></h1>
+    <form action="/add" method="post">
+        <label for="category">category</label><br>
+        <input type="text" name="category" id="" value="category"><br>
+        <label for="round">round</label><br>
+        <input type="text" name="round" id="" value="round"><br>
+        <label for="mat">mat</label><br>
+        <input type="text" name="mat" id="" value="mat"><br>
+        <label for="id">id</label><br>
+        <input type="text" name="id" id="" value="id"><br>
+        <label for="red">red</label><br>
+        <input type="text" name="red" id="" value="red"><br>
+        <label for="blue">blue</label><br>
+        <input type="text" name="blue" id="" value="blue"><br>
+        <input type="submit" value="add">
+    </form> -->
+
+</body>
+</html>
