@@ -1,14 +1,21 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-// const pool = require('./database/db');
 const app = express();
 const port = 8080;
+
+if (process.env.JAWSDB_URL) {
+    var pool = mariadb.createPool(process.env.JAWSDB_URL)
+} else {
+    var pool = require('./database/db');
+}
 
 const importWrestlers = require('./database/importWrestlers');
 const importMatches = require('./database/importMatches');
 const matchesToHtml = require('./database/matchesToHtml');
 const wrestlersToHtml = require('./database/wrestlersToHtml');
 const tournamentsToHtml = require('./database/tournamentsToHtml');
+
+
 
 app.use(bodyParser.urlencoded({extended: true}));
 
