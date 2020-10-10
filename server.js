@@ -1,6 +1,6 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-const pool = require('./database/db');
+// const pool = require('./database/db');
 const app = express();
 const port = 8080;
 
@@ -198,5 +198,7 @@ app.post('/importMatches', async (req, res) => {
 });
 
 
-app.listen(port, () => console.log(`Listening on port ${port}`));
+app.listen(process.env.PORT || port, () => console.log(`Listening on port ${port}`));
+
+console.log('hello %y', 'you')
 
