@@ -33,7 +33,7 @@ const maria = {
     database: "wrestling"
 };
 
-const db = maria;
+const db = jaws;
 
 // expose an endpoint "tournaments"
 app.get('/', (req, res) => {
@@ -116,7 +116,7 @@ app.get('/wrestlers', async (req, res) => {
     let conn = mysql.createConnection(db);
     conn.connect();
 
-    let query = "select * from wrestlers";
+    let query = "SELECT * from wrestlers";
     
     conn.query(query, (err, rows, fields) => {
         
