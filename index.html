@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="css/styles.css">
     <link rel="shortcut icon" href="http://wrestlingwa.org/wp-content/uploads/2017/05/wwa1-150x150.jpg" type="image/x-icon">
     
-    <title>Document</title>
+    <title>Wrestling WA Tournament Centre</title>
     <style>
 
     </style>
@@ -23,6 +23,9 @@
     <table style="align-items: center;">
         <tr>
             <td>
+                <form action="/tournamentSetup" method="get">
+                    <button class="mainPage" type="submit">Setup tournament</button>
+                </form>
                 <form action="/tournaments" method="get">
                     <button class="mainPage" type="submit">Tournaments</button>
                 </form>
@@ -66,6 +69,10 @@
             </td>
         </tr>
     </table>
+
+    <form action="/query" method="GET">
+        <button>Query</button>
+    </form>
 
     <!-- <h1>Add to database table <span style="font-family: 'Consolas', 'Courier New', Courier, monospace;">"matchesRaw"</span></h1>
     <form action="/add" method="post">

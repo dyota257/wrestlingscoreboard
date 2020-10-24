@@ -1,9 +1,9 @@
 # To-do list
 
 ## Shotclock
-[ ] Make shot clock in sync with current time
+[x] Make shot clock in sync with current time
 
-[ ] Make shotclock visible when timerOn = false (timer is paused).
+[x] Make shotclock visible when timerOn = false (timer is paused).
     This is because the ref will blow the whistle, set the shot clock, and play will resume. 
 
 

@@ -13,6 +13,8 @@ const importMatches = require('./database/importMatches');
 const matchesToHtml = require('./database/matchesToHtml');
 const wrestlersToHtml = require('./database/wrestlersToHtml');
 const tournamentsToHtml = require('./database/tournamentsToHtml');
+const tournamentsToOptions = require('./database/tournamentsToOptions');
+
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static('public'));
@@ -43,45 +45,53 @@ app.get('/scoreboard', (req, res) => {
     res.sendFile(`${__dirname}/scoreboard.html`);
 });
 
+app.get('/tournamentSetup', async (req,res) => {
+    
+    const today = new Date();
+    const todayString = `${today.getFullYear()}-${today.getMonth()}-${today.getDate()}`
+
+    let conn = mysql.createConnection(db);
+    conn.connect();
+    let query = 'SELECT title FROM tournaments';
+    conn.query(query, (err, rows, fields) => {
+        if (err) throw err;
+        let options = tournamentsToOptions(rows);
+        res.render('tournamentSetup', {
+            options: options,
+            today: todayString
+        })
+        console.log(rows);
+    });
+    conn.end();
+})
+
 app.get('/tournaments', async (req, res) => {
     let conn = mysql.createConnection(db);
     conn.connect();
-
     let query = 'SELECT * FROM tournaments';
-    
     conn.query(query, (err, rows, fields) => {
-        
         if (err) throw err;
-        
         let table = tournamentsToHtml(rows);
         res.render('table', {
             title: 'Tournaments',
             table: table
         })
-        
         console.log(rows);
     });
-    
     conn.end();
-
 });
 
 app.get('/matchesA', async (req, res) => {
     let conn = mysql.createConnection(db);
     conn.connect();
-
     let query = 'SELECT * FROM matchesRaw WHERE mat = "A"';
-    
     conn.query(query, (err, rows, fields) => {
-        
         if (err) throw err;
-        
         let table = matchesToHtml(rows);
         res.render('table', {
             title: 'Matches',
             table: table
         })
-        
         console.log(rows);
     });
     
@@ -91,43 +101,30 @@ app.get('/matchesA', async (req, res) => {
 app.get('/matchesB', async (req, res) => {
     let conn = mysql.createConnection(db);
     conn.connect();
-
     let query = 'SELECT * FROM matchesRaw WHERE mat = "B"';
-    
     conn.query(query, (err, rows, fields) => {
-        
         if (err) throw err;
-
         let table = matchesToHtml(rows);
         res.render('table', {
             title: 'Matches',
             table: table
         })
-        
         console.log(rows);
     });
-    
     conn.end();
-
 });
 
 app.get('/wrestlers', async (req, res) => {
-
     let conn = mysql.createConnection(db);
     conn.connect();
-
     let query = "SELECT * from wrestlers";
-    
     conn.query(query, (err, rows, fields) => {
-        
         if (err) throw err;
-
         let table = wrestlersToHtml(rows);
         res.render('table', {
             title: 'Wrestlers',
             table: table
         });
-        
         console.log(rows);
     });
     
@@ -138,7 +135,6 @@ app.get('/wrestlers', async (req, res) => {
 app.post('/importWrestlers', async (req, res) => {
     let conn = mysql.createConnection(db);
     conn.connect();
-
     let values = importWrestlers(req.body.x);
     let query = `INSERT IGNORE INTO wrestlers (
         first_name, 
@@ -147,19 +143,12 @@ app.post('/importWrestlers', async (req, res) => {
         club_name,
         full_name
     ) VALUES ${values}`;
-    
     conn.query(query, (err, rows, fields) => {
-        
         if (err) throw err;
-
         res.redirect('/');
-        
         console.log(rows);
     });
-    
     conn.end();
-
-
 });
 
 app.post('/importMatches', async (req, res) => {
@@ -184,9 +173,27 @@ app.post('/importMatches', async (req, res) => {
     conn.query(query);
     console.log("Query successful. Table 'matchesRaw' populated.");
     res.redirect('/');
-
+    conn.end();
 });
 
+app.get('/query', (req,res) =>{
+    res.render('query', );
+})
+
+app.post('/query', async (req, res) => {
+    console.log(req.body.query);
+    const query = req.body.query;
+    let conn = mysql.createConnection(db);
+    conn.connect();
+    console.log("Connected...");
+    conn.query(query, (err, rows, fields) => {
+        if (err) res.send('Error! Try again.')
+        // throw err; // don't want to throw an error and break the app
+        res.send(rows);
+        console.log(rows);
+    });
+    conn.end();
+})
 
 app.listen(process.env.PORT || port, () => console.log(`Listening on port ${port}`));
 
