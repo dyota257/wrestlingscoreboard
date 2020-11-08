@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="shortcut icon" href="http://wrestlingwa.org/wp-content/uploads/2017/05/wwa1-150x150.jpg" type="image/x-icon">
+    <title>
+        Tournament setup
+    </title>
+</head>
+<body>
+    <%- include('header'); %> 
+    <!-- Name of the tournament -->
+    <!-- Date of the tournaments -->
+    <!-- Location of the tournament -->
+    
+    <form action="/query" method="post">
+        <table>
+            <tr>
+                <td>
+                    <strong>Tournament title</strong>
+                </td>
+                <td>
+                    Choose from existing tournament name:<br>
+                    <select name="title" value="">
+                        <%- options %>
+                    </select><br><br>
+                    Or enter a new one: <br>
+                    <input type="text" placeholder="Enter new tournament name"></input>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <strong>Date</strong>
+                </td>
+                <td>
+                    Today is <%- today%>. <br>
+                    <input type="date" name="date" id="" value="2020-12-31" >
+                    
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <strong>Location</strong>
+                </td>
+                <td>
+                    <text name="query" style="width: 660px; height:320px"></text>
+                </td>
+            </tr>
+        </table>
+        <input type="submit" value="Write query">
+    </form>
+
+    
+    
+
+</body>
+</html>
