@@ -13,7 +13,8 @@ const importMatches = require('./database/importMatches');
 const matchesToHtml = require('./database/matchesToHtml');
 const wrestlersToHtml = require('./database/wrestlersToHtml');
 const tournamentsToHtml = require('./database/tournamentsToHtml');
-const tournamentsToOptions = require('./database/tournamentsToOptions');
+const tournamentsToOptionsTitles = require('./database/tournamentsToOptionsTitles');
+const tournamentsToOptionsLocations = require('./database/tournamentsToOptionsLocations');
 
 
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -52,16 +53,24 @@ app.get('/tournamentSetup', async (req,res) => {
 
     let conn = mysql.createConnection(db);
     conn.connect();
-    let query = 'SELECT title FROM tournaments';
+    let query = 'SELECT title, location FROM tournaments';
+
     conn.query(query, (err, rows, fields) => {
         if (err) throw err;
-        let options = tournamentsToOptions(rows);
+        let optionsTitle = tournamentsToOptionsTitles(rows); 
+        let optionsLocations = tournamentsToOptionsLocations(rows);
         res.render('tournamentSetup', {
-            options: options,
+            optionsTitles: optionsTitle,
+            optionsLocations: optionsLocations,
             today: todayString
         })
+
         console.log(rows);
     });
+
+    
+
+
     conn.end();
 })
 
@@ -135,6 +144,7 @@ app.get('/wrestlers', async (req, res) => {
 app.post('/importWrestlers', async (req, res) => {
     let conn = mysql.createConnection(db);
     conn.connect();
+
     let values = importWrestlers(req.body.x);
     let query = `INSERT IGNORE INTO wrestlers (
         first_name, 
@@ -143,11 +153,13 @@ app.post('/importWrestlers', async (req, res) => {
         club_name,
         full_name
     ) VALUES ${values}`;
+    
     conn.query(query, (err, rows, fields) => {
         if (err) throw err;
         res.redirect('/');
         console.log(rows);
     });
+    
     conn.end();
 });
 

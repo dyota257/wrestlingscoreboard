@@ -22,9 +22,9 @@
                     <strong>Tournament title</strong>
                 </td>
                 <td>
-                    Choose from existing tournament name:<br>
+                    Choose from a previous tournament name:<br>
                     <select name="title" value="">
-                        <%- options %>
+                        <%- optionsTitles %>
                     </select><br><br>
                     Or enter a new one: <br>
                     <input type="text" placeholder="Enter new tournament name"></input>
@@ -45,15 +45,17 @@
                     <strong>Location</strong>
                 </td>
                 <td>
-                    <text name="query" style="width: 660px; height:320px"></text>
+                    Choose from a previous location:<br>
+                    <select name="location" value="">
+                        <%- optionsLocations %>
+                    </select><br><br>
+                    Or enter a new one: <br>
+                    <input type="text" placeholder="Enter new location"></input>
                 </td>
             </tr>
         </table>
         <input type="submit" value="Write query">
     </form>
-
-    
-    
 
 </body>
 </html>
