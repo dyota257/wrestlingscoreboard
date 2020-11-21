@@ -263,6 +263,10 @@ $("button").click(function() {
             shotClockTimerOn = false;
             now = timerInit;
             phasesTime = [timerInit, timeRest, timerInit];
+
+            // hide shot clocks
+            $(".blue.shotclock").css("visibility","hidden");
+            $(".red.shotclock").css("visibility","hidden");
             
             // set player names
             blueFirstName = $("#blueFirstName").val();
@@ -310,6 +314,10 @@ $("button").click(function() {
             gameType = "";
             $("#gameType").text(gameType);
             $("div.markerWarning").text("");
+
+            // hide shot clocks
+            $(".blue.shotclock").css("visibility","hidden");
+            $(".red.shotclock").css("visibility","hidden");
         }
     };
 
