@@ -2,13 +2,14 @@ window.onbeforeunload = () => {
     return "Are you sure?"
 }
 
-var scoreBlue = 0;
-var scoreBlueHist = [];
-var scoreRed = 0;
-var scoreRedHist = [];
-var warningsBlue = 0;
-var warningsRed = 0;
+// var scoreBlue = 0;
+// var scoreBlueHist = [];
+// var scoreRed = 0;
+// var scoreRedHist = [];
+// var warningsBlue = 0;
+// var warningsRed = 0;
 var gameType = "";
+var gameTypeWinScore = 0;
 
 var blueFirstName = "";
 var blueLastName = "";
@@ -37,38 +38,42 @@ const player = {
 let shotClockPlayer = null;
 const scoresMap = [ -1, 1, 2, 4, 5];
 
-$(".score.blue").text(scoreBlue);
-$(".score.red").text(scoreRed);
+$(".score.blue").text(playerBlue.score);
+$(".score.red").text(playerRed.score);
 $("#startTimer").prop("disabled", true);
 
 $(document).keydown( (e) => {
     
-    const blueKeysMap = [72, 74, 75, 76, 59]; //[H, J, K, L, ;]
+    const blueKeysMap = [72, 74, 75, 76, 59]; // [H, J, K, L, ;]
     const redKeysMap = [71, 70, 68, 83, 65];  // [G, F, D, S, A]
 
+    // spacebar
     if (e.keyCode == 32 && $("#startTimer").prop("disabled") == false) {
+        // don't enter a "space" character
         e.preventDefault();
+
         startTimer(now);
         console.log("timerInit: "+timerInit);
     }
     
+    // any other key (not spacebar)
     if (e.keyCode != 32 && timerOn == true) {
 
         if (blueKeysMap.includes(e.keyCode)){
             var addScore = scoresMap[blueKeysMap.indexOf(e.keyCode)];
-            blueScoreUpdate(addScore);
+            updateScore("blue", addScore);
         }
 
         if (redKeysMap.includes(e.keyCode)){
             var addScore = scoresMap[redKeysMap.indexOf(e.keyCode)];
-            redScoreUpdate(addScore);
+            updateScore("red", addScore);
         }
         
     }
 
 })
 
-$("button").click(function() {
+$("button").click( function() {
     var sideColour = this.parentElement.className;
     let buttonId = this.id;
     console.log(buttonId);
@@ -78,11 +83,11 @@ $("button").click(function() {
         switch(sideColour){
 // Blue scoring buttons
             case "blue buttonsRow":
-                blueScoreUpdate(addScore);
+                updateScore("blue", addScore);
                 break;
 // Red scoring buttons            
             case "red buttonsRow":
-                redScoreUpdate(addScore);
+                updateScore("red", addScore);
                 break;                
 // Warnings and shotclock row
             case "blue penalty":
@@ -283,11 +288,19 @@ $("button").click(function() {
             $(".red.clubName").text(redClubName);
 
             // set scores
-            scoreBlue = 0;
-            scoreRed = 0;
-            $(".score.blue").text(scoreBlue);
-            $(".score.red").text(scoreRed);
+            playerBlue.score = 0;
+            playerRed.score = 0;
+            $(".score.blue").text(playerBlue.score);
+            $(".score.red").text(playerRed.score);
             $("div.markerWarning").text("");
+
+            // 
+            if (gameType.indexOf("Greco")>0) {
+                gameTypeWinScore = 8;
+            } else if (gameType.indexOf("Freestyle")>0) {
+                gameTypeWinScore = 10;
+            }
+            
         }
     };
 
@@ -297,15 +310,17 @@ $("button").click(function() {
         console.log(confirm);
         if (confirm) {
             $("#playerInput").css("display","none");
-            scoreBlue = 0;
+            
+            playerBlue.score = 0;
             warningsBlue = 0;
-            $(".score.blue").text(scoreBlue);
+            $(".score.blue").text(playerBlue.score);
             $(".blue.firstName").text("blueFirstName");
             $(".blue.lastName").text("blueLastName");
             $(".blue.clubName").text("blueClubName");
-            scoreRed = 0;
+            
+            playerRed.score = 0;
             warningsRed = 0;
-            $(".score.red").text(scoreRed);
+            $(".score.red").text(playerRed.score);
             $(".red.firstName").text("redFirstName");
             $(".red.lastName").text("redLastName");
             $(".red.clubName").text("redClubName");
@@ -335,67 +350,48 @@ $(".close").click( function() {
 )
 
 // should really refactor and combine blueScoreUpdate and redScoreUpdate, also should make a class called players and make each player an object, would simply a lot of code
-function blueScoreUpdate(addScore) {
-    if (addScore<0 && scoreBlue===0 || timerOn == false){
-        //do nothing
+function updateScore(side, addScore) {
+    // get the player of the correct side
+    let player = players.find(x => x.side === side);
+    
+    // add score
+    if (addScore<0 && player.score ===0 || timerOn == false){
+        // do nothing
     } else {
-        scoreBlue += addScore;
-        $(".score.blue").text(scoreBlue);
-        scoreBlueHist.push(addScore);
-        console.log(scoreBlueHist);
+        player.score += addScore;
+        $(`.score.${side}`).text(player.score);
+        player.scoreHist.push(addScore);
+        console.log(player.scoreHist);
         if(shotClockTimerOn){
             shotClockTimerOn = false; 
         }
         criteria();
     };
-    // Greo tech sup
-    if (scoreBlue-scoreRed>=8 && gameType.indexOf("Greco")>0) {
-        victory("blue", "technical superiority");
-    } else
-    // Freestyle tech sup
-    if(scoreBlue-scoreRed>=10 && gameType.indexOf("Freestyle")>0 ){
-        victory("blue", "technical superiority");
-    }
-}
 
-function redScoreUpdate(addScore) {
-    if (addScore<0 &&scoreRed===0 || timerOn == false){
-        //do nothing
-    } else {
-        scoreRed += addScore;
-        $(".score.red").text(scoreRed);
-        scoreRedHist.push(addScore);
-        console.log(scoreRedHist);
-        if(shotClockTimerOn){
-            shotClockTimerOn = false; 
-        }
-        criteria();
+    if ( Math.abs(playerBlue.score-playerRed.score)>=gameTypeWinScore) {
+        // get the winning score
+        let scoreWinner = Math.max(playerBlue.score, playerRed.score);
+        // get the side of the player with the winning score
+        let side = players.find(x => x.score === scoreWinner).side;
+        // declare victory
+        victory(side, "technical superiority");
     }
-    // Greo tech sup
-    if (scoreRed-scoreBlue>=8 && gameType.indexOf("Greco")>0) {
-        victory("red", "technical superiority");
-    } else
-    // Freestyle tech sup
-    if(scoreRed-scoreBlue>=10 && gameType.indexOf("Freestyle")>0){
-        victory("red", "technical superiority")   ;
-    } 
+
 }
 
 function criteria() {
-    scoreRedMax = Math.max(...scoreRedHist);
-    scoreRedLast = scoreRedHist[scoreRedHist.length-1];
-    scoreBlueMax = Math.max(...scoreBlueHist);
-    scoreBlueLast = scoreBlueHist[scoreBlueHist.length-1];
-    if(scoreRed == scoreBlue) {
+    scoreRedMax = Math.max(...playerRed.scoreHist);
+    scoreRedLast = playerRed.scoreHist[playerRed.scoreHist.length-1];
+    scoreBlueMax = Math.max(...playerBlue.scoreHist);
+    scoreBlueLast = playerBlue.scoreHist[playerBlue.scoreHist.length-1];
+    if(playerRed.score == playerBlue.score) {
         if (scoreRedMax > scoreBlueMax) {
             $(".red.score").css("text-decoration", "underline")
         } else if (scoreRedMax < scoreBlueMax) {
             $(".blue.score").css("text-decoration", "underline");    
         } else if (scoreRedMax == scoreBlueMax)  {
             // pick the more recent one and take 
-            // read page 25 of regulations
-
-
+            // read page 25 of regulation
         }
     } else {
         $(".red.score").css("text-decoration", "");

@@ -26,6 +26,10 @@
 [ ] pause clock on timerend
 
 
+## Scoring
+[ ] Rewrite win condition on updateScore()
+[ ] Rewrite victory.js to include players objects
+
 ## HTML
 [x] Display timer clock \n
 [x] Put confirm button on player input row

@@ -10,6 +10,9 @@ fall
 var classification = "";
 
 function victory(side, method) {
+    let scoreRed = playerRed.score;
+    let scoreBlue = playerBlue.score;
+    
     $(".popup").css("display", "flex");
     $(".popup").css("height", document.body.clientHeight);
     

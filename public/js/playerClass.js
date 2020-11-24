@@ -24,8 +24,27 @@ class Player {
     }
 }
 
-const playerBlue = new Player("blue", "Dyota", "Tan");
-const playerRed = new Player("red", "Carol", "But");
+const playerBlue = new Player(
+    "blue", 
+    "blueFirstName",
+    "blueLastName",
+    "blueClubName",
+    10,
+    [], 
+    0,
+    false
+);
+const playerRed = new Player(
+    "red", 
+    "redFirstName",
+    "redLastName",
+    "redClubName",
+    10,
+    [], 
+    0,
+    false
+);
+
 const players = [playerBlue, playerRed];
 let side = "red";
 players.find(x => x.side === side).firstName; // "Carol"
