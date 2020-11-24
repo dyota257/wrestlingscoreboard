@@ -1,12 +1,7 @@
 # To-do list
 
-## Shotclock
-[x] Make shot clock in sync with current time
-
-[x] Make shotclock visible when timerOn = false (timer is paused).
-    This is because the ref will blow the whistle, set the shot clock, and play will resume. 
-
-[ ] make reset function
+## Refactoring
+[ ] Refactor resets into a function
 
 
 ## misc
@@ -26,10 +21,18 @@
 [ ] sound on timerend
 [ ] pause clock on timerend
 
+## Shotclock
+[x] Make shot clock in sync with current time
+
+[x] Make shotclock visible when timerOn = false (timer is paused).
+    This is because the ref will blow the whistle, set the shot clock, and play will resume. 
+
+[/] make reset function
+
 
 ## Scoring
 [x] Rewrite win condition on updateScore()
-[ ] Rewrite victory.js to include players objects
+[x] Rewrite victory.js to include players objects
 
 ## HTML
 [x] Display timer clock \n

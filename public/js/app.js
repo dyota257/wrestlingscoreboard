@@ -11,10 +11,10 @@ window.onbeforeunload = () => {
 var gameType = "";
 var gameTypeWinScore = 0;
 
-var blueFirstName = "";
-var blueLastName = "";
-var redFirstName = "";
-var redLastName = "";
+// var blueFirstName = "";
+// var blueLastName = "";
+// var redFirstName = "";
+// var redLastName = "";
 
 var timerOn = false;
 var timerInit = 0;
@@ -94,9 +94,9 @@ $("button").click( function() {
                 switch(this.className){
                     // warning
                     case "warning":
-                        if(warningsBlue < 2) {
+                        if(playerBlue.warnings < 2) {
                             $(".markerWarning.blue").text($(".markerWarning.blue").text() + "■");
-                            warningsBlue++;
+                            playerBlue.warnings++;
                         } else {
                             victory("red", "disqualification");
                         }
@@ -124,9 +124,9 @@ $("button").click( function() {
                 switch(this.className){
                     // warning
                     case "warning":
-                        if(warningsRed < 2) {
+                        if(playerRed.warnings < 2) {
                             $(".markerWarning.red").text($(".markerWarning.red").text() + "■");
-                            warningsRed++;
+                            playerRed.warnings++;
                         } else {
                             victory("blue", "disqualification")
                         }
@@ -268,32 +268,30 @@ $("button").click( function() {
             shotClockTimerOn = false;
             now = timerInit;
             phasesTime = [timerInit, timeRest, timerInit];
-
-            // hide shot clocks
-            $(".blue.shotclock").css("visibility","hidden");
-            $(".red.shotclock").css("visibility","hidden");
             
             // set player names
-            blueFirstName = $("#blueFirstName").val();
-            blueLastName = $("#blueLastName").val();
-            blueClubName = $("#blueClubName").val();
-            redFirstName = $("#redFirstName").val();
-            redLastName = $("#redLastName").val();
-            redClubName = $("#redClubName").val();
-            
-            $(".blue.firstName").text(blueFirstName);
-            $(".blue.lastName").text(blueLastName);
-            $(".blue.clubName").text(blueClubName);
-            $(".red.firstName").text(redFirstName);
-            $(".red.lastName").text(redLastName);
-            $(".red.clubName").text(redClubName);
+            playerBlue.firstName = $("#blueFirstName").val();
+            playerBlue.lastName = $("#blueLastName").val();
+            playerBlue.clubName = $("#blueClubName").val();
+            playerRed.firstName = $("#redFirstName").val();
+            playerRed.lastName = $("#redLastName").val();
+            playerRed.clubName = $("#redClubName").val();
 
-            // set scores
-            playerBlue.score = 0;
-            playerRed.score = 0;
-            $(".score.blue").text(playerBlue.score);
-            $(".score.red").text(playerRed.score);
-            $("div.markerWarning").text("");
+            $(".blue.firstName").text(playerBlue.firstName);
+            $(".blue.lastName").text(playerBlue.lastName);
+            $(".blue.clubName").text(playerBlue.clubName);
+            $(".red.firstName").text(playerRed.firstName);
+            $(".red.lastName").text(playerRed.lastName);
+            $(".red.clubName").text(playerRed.clubName);
+
+            reset(
+                // scores
+                true,
+                // warnings
+                true,
+                // shotclocks
+                true
+            );
 
             // 
             if (gameType.indexOf("Greco")>0) {
@@ -312,28 +310,26 @@ $("button").click( function() {
         if (confirm) {
             $("#playerInput").css("display","none");
             
-            playerBlue.score = 0;
-            warningsBlue = 0;
-            $(".score.blue").text(playerBlue.score);
+            reset(
+                // scores
+                true,
+                // warnings
+                true,
+                // shotclocks
+                true
+            );
+            
             $(".blue.firstName").text("blueFirstName");
             $(".blue.lastName").text("blueLastName");
             $(".blue.clubName").text("blueClubName");
-            
-            playerRed.score = 0;
-            warningsRed = 0;
-            $(".score.red").text(playerRed.score);
             $(".red.firstName").text("redFirstName");
             $(".red.lastName").text("redLastName");
             $(".red.clubName").text("redClubName");
             
             $("#timer").html("0:00");
-            gameType = "";
+            
+            sgameType = "";
             $("#gameType").text(gameType);
-            $("div.markerWarning").text("");
-
-            // hide shot clocks
-            $(".blue.shotclock").css("visibility","hidden");
-            $(".red.shotclock").css("visibility","hidden");
         }
     };
 
@@ -349,6 +345,27 @@ $(".close").click( function() {
         $(".popup").css("display", "none");
     }
 )
+
+function reset(scores, warnings, shotclocks) {
+    if (scores) {
+        playerBlue.score = 0;
+        playerRed.score = 0;
+        $(".score").text(0);
+        $(".score").css("text-decoration", "none");
+
+    };
+
+    if (warnings) {
+        playerBlue.warnings = 0;
+        playerRed.warnings = 0;
+        $("div.markerWarning").text("");
+    };
+
+    if (shotclocks) {
+        $(".shotclock").css("visibility","hidden");
+    };
+
+}
 
 function updateScore(side, addScore) {
     // get the player of the correct side
@@ -378,7 +395,7 @@ function updateScore(side, addScore) {
     }
 }
 
-function criteria() {}
+function criteria() {
 
     scoreRedMax = Math.max(...playerRed.scoreHist);
     scoreRedLast = playerRed.scoreHist[playerRed.scoreHist.length-1];
@@ -388,7 +405,7 @@ function criteria() {}
         if (scoreRedMax > scoreBlueMax) {
             $(".red.score").css("text-decoration", "underline")
         } else if (scoreRedMax < scoreBlueMax) {
-            $(".blue.score").css("text-decoration", "underline");    
+            $(".blue.score").css("text-decoration", "underline");
         } else if (scoreRedMax == scoreBlueMax)  {
             // pick the more recent one and take 
             // read page 25 of regulation
