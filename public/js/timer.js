@@ -37,7 +37,7 @@ function timer(time) {
     
     let start = new Date().getTime();
     
-    console.log(`start: ${start}`);
+    // console.log(`start: ${start}`);
     
     var interval = setInterval( function() {
         
@@ -87,12 +87,12 @@ function timer(time) {
 
         // timer pause
         if( now <= 0 || timerOn === false) {
-            console.log("Timer stopped at: "+now);
+            // console.log("Timer stopped at: "+now);
             clearInterval(interval);
             now = time;
         };
 
-        console.log("now: "+Math.ceil(now));
+        // console.log("now: "+Math.ceil(now));
 
     },1000);
     
@@ -103,7 +103,7 @@ function shotClockTimer(time) {
 
     let start = new Date().getTime();
     
-    console.log(`shotClockTimerstart: ${start}`);
+    // console.log(`shotClockTimerstart: ${start}`);
     // $(".shotclock").html(secondsToClock(time));
     
     // let interval = setInterval( function() {
@@ -144,7 +144,7 @@ function shotClockTimer(time) {
             shotClockPaused = true;
         };
 
-        console.log("nowShotClock: "+Math.ceil(nowShotClock));
+        // console.log("nowShotClock: "+Math.ceil(nowShotClock));
 
     // other end of setInterval
     // },1000);

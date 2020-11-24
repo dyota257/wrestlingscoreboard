@@ -1,7 +1,9 @@
 # To-do list
 
 ## Refactoring
-[ ] Refactor resets into a function
+[x] Refactor resets into a function
+[ ] Refactor colour buttons class names
+[ ] comment out/delete console.logs on timers
 
 
 ## misc

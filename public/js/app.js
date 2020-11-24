@@ -2,19 +2,8 @@ window.onbeforeunload = () => {
     return "Are you sure?"
 }
 
-// var scoreBlue = 0;
-// var scoreBlueHist = [];
-// var scoreRed = 0;
-// var scoreRedHist = [];
-// var warningsBlue = 0;
-// var warningsRed = 0;
 var gameType = "";
 var gameTypeWinScore = 0;
-
-// var blueFirstName = "";
-// var blueLastName = "";
-// var redFirstName = "";
-// var redLastName = "";
 
 var timerOn = false;
 var timerInit = 0;
@@ -74,21 +63,21 @@ $(document).keydown( (e) => {
 })
 
 $("button").click( function() {
-    var sideColour = this.parentElement.className;
+    // the first class of parentElement.className is the colour blue/red
+    var side = this.parentElement.className.split(" ")[0];
     let buttonId = this.id;
-    console.log(buttonId);
+    console.log("buttonId: " + buttonId);
     var addScore = scoresMap[this.value];
 
+    console.log("side: " + side);
+    console.log("parentElement.className: " + this.parentElement.className);
+
     if (timerOn == true) {
-        switch(sideColour){
-// Blue scoring buttons
-            case "blue buttonsRow":
-                updateScore("blue", addScore);
+        switch(this.parentElement.className){
+// scoring buttons
+            case `${side} buttonsRow`:
+                updateScore(side, addScore);             
                 break;
-// Red scoring buttons            
-            case "red buttonsRow":
-                updateScore("red", addScore);
-                break;                
 // Warnings and shotclock row
             case "blue penalty":
                 switch(this.className){
@@ -114,7 +103,7 @@ $("button").click( function() {
                             shotClockPlayer = player.BLUE;
                             shotClockTimerOn = true;
                             nowOffset = now - 30;
-                            console.log(nowOffset);
+                            // console.log(nowOffset);
                         }
                         break;
                 }
@@ -144,7 +133,7 @@ $("button").click( function() {
                             shotClockPlayer = player.RED;
                             shotClockTimerOn = true;
                             nowOffset = now - 30;
-                            console.log(nowOffset);
+                            // console.log(nowOffset);
                         }
                         break;
                 }
@@ -164,7 +153,7 @@ $("button").click( function() {
     };
 
 // Shot clock
-    switch(sideColour){
+    switch(this.parentElement.className){
         case "blue penalty":
             if (this.className == "shotclockbtn"){
                 if(shotClockTimerOn) {
@@ -179,7 +168,7 @@ $("button").click( function() {
                     nowShotClock = now - nowOffset;
                     $(".shotclock").html(secondsToClock(nowShotClock));
                     $(".blue.shotclock").css("visibility","visible");
-                    console.log(nowOffset);
+                    
                 }
             }
             break;
@@ -197,7 +186,7 @@ $("button").click( function() {
                     nowShotClock = now - nowOffset;
                     $(".shotclock").html(secondsToClock(nowShotClock));
                     $(".red.shotclock").css("visibility","visible");
-                    console.log(nowOffset);
+                    
                 }
             }
             break;
@@ -284,14 +273,8 @@ $("button").click( function() {
             $(".red.lastName").text(playerRed.lastName);
             $(".red.clubName").text(playerRed.clubName);
 
-            reset(
-                // scores
-                true,
-                // warnings
-                true,
-                // shotclocks
-                true
-            );
+            // reset scores, warnings, shotclocks
+            reset(true,true,true);
 
             // 
             if (gameType.indexOf("Greco")>0) {
@@ -306,18 +289,12 @@ $("button").click( function() {
 // Reset game
     if (this.id==="resetGame") {
         var confirm = window.confirm("Are you sure? This will reset all scores and reset the timer.");
-        console.log(confirm);
+        
         if (confirm) {
             $("#playerInput").css("display","none");
             
-            reset(
-                // scores
-                true,
-                // warnings
-                true,
-                // shotclocks
-                true
-            );
+            // reset scores, warnings, shotclocks
+            reset(true,true,true);
             
             $(".blue.firstName").text("blueFirstName");
             $(".blue.lastName").text("blueLastName");
