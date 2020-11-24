@@ -19,9 +19,6 @@ class Player {
         this.shotClock = shotClock;
     }
 
-    scoreUpdate() {
-        // update the score
-    }
 }
 
 let playerBlue = new Player(
@@ -29,7 +26,7 @@ let playerBlue = new Player(
     "blueFirstName",
     "blueLastName",
     "blueClubName",
-    10,
+    0,
     [], 
     0,
     false
@@ -39,7 +36,7 @@ let playerRed = new Player(
     "redFirstName",
     "redLastName",
     "redClubName",
-    10,
+    0,
     [], 
     0,
     false
