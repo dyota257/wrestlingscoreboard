@@ -280,6 +280,7 @@ $("button").click( function() {
             redFirstName = $("#redFirstName").val();
             redLastName = $("#redLastName").val();
             redClubName = $("#redClubName").val();
+            
             $(".blue.firstName").text(blueFirstName);
             $(".blue.lastName").text(blueLastName);
             $(".blue.clubName").text(blueClubName);
@@ -349,7 +350,6 @@ $(".close").click( function() {
     }
 )
 
-// should really refactor and combine blueScoreUpdate and redScoreUpdate, also should make a class called players and make each player an object, would simply a lot of code
 function updateScore(side, addScore) {
     // get the player of the correct side
     let player = players.find(x => x.side === side);
@@ -376,10 +376,10 @@ function updateScore(side, addScore) {
         // declare victory
         victory(side, "technical superiority");
     }
-
 }
 
-function criteria() {
+function criteria() {}
+
     scoreRedMax = Math.max(...playerRed.scoreHist);
     scoreRedLast = playerRed.scoreHist[playerRed.scoreHist.length-1];
     scoreBlueMax = Math.max(...playerBlue.scoreHist);

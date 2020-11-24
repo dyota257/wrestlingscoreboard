@@ -6,6 +6,7 @@
 [x] Make shotclock visible when timerOn = false (timer is paused).
     This is because the ref will blow the whistle, set the shot clock, and play will resume. 
 
+[ ] make reset function
 
 
 ## misc
@@ -27,7 +28,7 @@
 
 
 ## Scoring
-[ ] Rewrite win condition on updateScore()
+[x] Rewrite win condition on updateScore()
 [ ] Rewrite victory.js to include players objects
 
 ## HTML

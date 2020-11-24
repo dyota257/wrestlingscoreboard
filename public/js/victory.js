@@ -10,8 +10,6 @@ fall
 var classification = "";
 
 function victory(side, method) {
-    let scoreRed = playerRed.score;
-    let scoreBlue = playerBlue.score;
     
     $(".popup").css("display", "flex");
     $(".popup").css("height", document.body.clientHeight);
@@ -25,14 +23,14 @@ function victory(side, method) {
             classification = "VFA 5:0";
             break;
         case "technical superiority":
-            if (scoreRed == 0 || scoreBlue == 0) {
+            if (playerRed.score == 0 || playerBlue.score == 0) {
                 classification = "VSU 4:0";
             } else {
                 classification = "VSU1 4:1";
             }
             break;
         case "points":
-            if (scoreRed == 0 || scoreBlue == 0) {
+            if (playerRed.score == 0 || playerBlue.score == 0) {
                 classification = "VPO 3:0";
             } else {
                 classification = "VPO1 3:1";
@@ -46,18 +44,15 @@ function victory(side, method) {
     var winnerName = "";
     var popupText = "";
     var popupBg = "";
+
     if (side == "draw") {
         popupText = "Draw!";
         popupBg = "black";
     } else {
-        switch (side) {
-            case "blue":
-                winnerName = `${blueFirstName} ${blueLastName}`;
-                break;
-            case "red":
-                winnerName = `${redFirstName} ${redLastName}`;
-                break;
-        }
+        let winnerFirstName = players.find(x => x.side === side).firstName;
+        let winnerLastName = players.find(x => x.side === side).lastName;
+        winnerName = `${winnerFirstName} ${winnerLastName}`;
+
         popupText = `${winnerName} wins by ${method}!`;
         popupBg = side;
     }
@@ -68,7 +63,14 @@ function victory(side, method) {
 
     var matchResults = $("table.results>tbody")
     console.log(matchResults)
-    var newRow = `<td>${blueFirstName} ${blueLastName}</td><td>${redFirstName} ${redLastName}</td><td>${scoreBlue}</td><td>${scoreRed}</td><td>${winnerName}</td><td>${method}</td><td>${classification}</td>`;
+    var newRow = `
+        <td>${playerBlue.firstName} ${playerBlue.lastName}</td>
+        <td>${playerRed.firstName} ${playerRed.lastName}</td>
+        <td>${playerBlue.score}</td>
+        <td>${playerRed.score}</td>
+        <td>${winnerName}</td>
+        <td>${method}</td>
+        <td>${classification}</td>`;
     matchResults.html(matchResults.html() + newRow);
     
 };
