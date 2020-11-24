@@ -72,94 +72,50 @@ $("button").click( function() {
     console.log("side: " + side);
     console.log("parentElement.className: " + this.parentElement.className);
 
-
-
-    if (timerOn == true) {
-        switch(this.parentElement.className){
-// scoring buttons
-            case `${side} buttonsRow`:
-                updateScore(side, addScore);             
-                break;
-// Warnings and shotclock row
-            case `${side} penalty`:
-                switch(this.className){
-                    // warning
-                    case "warning":
-                        if(players[playerNumber].warnings < 2) {
-                            $(`.markerWarning.${side}`).text($(`.markerWarning.${side}`).text() + "■");
-                            players[playerNumber].warnings++;
-                        } else {
-                            // the other side wins
-                            victory(players[Math.abs(playerNumber-1)].side, "disqualification");
-                        }
-                        break;
-                    // shotclock
-                    case "shotclockbtn":
-                        if(shotClockTimerOn) {
-                            break; // can't give them a shot clock warning if the shotclock is already on or the time hasn't started yet
-                        } else if(now < shotClockTime) {
-                            break; // can't give them a shot clock if less than shotclock time
-                        } else if (!timerOn) {
-                            $(`.${side}.shotclock`).css("visibility","visible");
-                        } else if(!shotClockTimerOn) {
-                            $(`.${side}.shotclock`).css("visibility","visible");
-                            shotClockPlayer = players.find(x => x.side === side).side;
-                            shotClockTimerOn = true;
-                            nowOffset = now - 30;
-                            // console.log(nowOffset);
-                        }
-                        break;
-                }
-                break;
-// Pins
-            case `${side} pin`:
-                victory(side, "fall");
-                break;
-            default:
-                null;
-                break;
-        }; 
-    };
-
-// Shot clock
     switch(this.parentElement.className){
-        case "blue penalty":
-            if (this.className == "shotclockbtn"){
-                if(shotClockTimerOn) {
-                    break; // can't give them a shot clock warning if the shotclock is already on or the time hasn't started yet
-                } else if(now < shotClockTime) {
-                    break; // can't give them a shot clock if less than shotclock time
-
-                } else if(!shotClockTimerOn || !timerOn) {
-                    shotClockPlayer = player.BLUE;
-                    shotClockTimerOn = true;
-                    nowOffset = now - 30;
-                    nowShotClock = now - nowOffset;
-                    $(".shotclock").html(secondsToClock(nowShotClock));
-                    $(`.${side}.shotclock`).css("visibility","visible");
-                    
-                }
+// scoring buttons
+        case `${side} buttonsRow`:
+            updateScore(side, addScore);             
+            break;
+// Warnings and shotclock row
+        case `${side} penalty`:
+            switch(this.className){
+                // warning
+                case "warning":
+                    if(players[playerNumber].warnings < 2) {
+                        $(`.markerWarning.${side}`).text($(`.markerWarning.${side}`).text() + "■");
+                        players[playerNumber].warnings++;
+                    } else {
+                        // the other side wins
+                        victory(players[Math.abs(playerNumber-1)].side, "disqualification");
+                    }
+                    break;
+                // shotclock
+                case "shotclockbtn":
+                    if(shotClockTimerOn) {
+                        break; // can't give them a shot clock warning if the shotclock is already on or the time hasn't started yet
+                    } else if(now < shotClockTime) {
+                        break; // can't give them a shot clock if less than shotclock time
+                    } else if (!timerOn) {
+                        $(`.${side}.shotclock`).css("visibility","visible");
+                    } else if(!shotClockTimerOn) {
+                        $(`.${side}.shotclock`).css("visibility","visible");
+                        shotClockPlayer = players.find(x => x.side === side).side;
+                        shotClockTimerOn = true;
+                        nowOffset = now - 30;
+                        // console.log(nowOffset);
+                    }
+                    break;
             }
             break;
-
-        case "red penalty":
-            if (this.className == "shotclockbtn"){
-                if(shotClockTimerOn) {
-                    break; // can't give them a shot clock warning if the shotclock is already on or the time hasn't started yet
-                } else if(now < shotClockTime) {
-                    break; // can't give them a shot clock if less than shotclock time
-                } else if(!shotClockTimerOn) {
-                    shotClockPlayer = player.RED;
-                    shotClockTimerOn = true;
-                    nowOffset = now - 30;
-                    nowShotClock = now - nowOffset;
-                    $(".shotclock").html(secondsToClock(nowShotClock));
-                    $(".red.shotclock").css("visibility","visible");
-                    
-                }
-            }
+// Pins
+        case `${side} pin`:
+            victory(side, "fall");
             break;
-    }
+        default:
+            null;
+            break;
+    }; 
 
     if (this.id === "import") {
         $("#importArea").css("display", "flex");
@@ -262,8 +218,8 @@ $("button").click( function() {
         if (confirm) {
             $("#playerInput").css("display","none");
             
-            // reset scores, warnings, shotclocks
-            reset(true,true,true);
+            // reset scores, warnings, shotclocks, gameType
+            reset(true,true,true, true);
             
             $(".blue.firstName").text("blueFirstName");
             $(".blue.lastName").text("blueLastName");
@@ -273,9 +229,6 @@ $("button").click( function() {
             $(".red.clubName").text("redClubName");
             
             $("#timer").html("0:00");
-            
-            sgameType = "";
-            $("#gameType").text(gameType);
         }
     };
 
@@ -292,7 +245,7 @@ $(".close").click( function() {
     }
 )
 
-function reset(scores, warnings, shotclocks) {
+function reset(scores, warnings, shotclocks, gameType) {
     if (scores) {
         playerBlue.score = 0;
         playerRed.score = 0;
@@ -311,6 +264,12 @@ function reset(scores, warnings, shotclocks) {
         $(".shotclock").css("visibility","hidden");
     };
 
+    if (gameType) {
+        gameType = "";
+        $("#gameType").text(gameType);
+        gameTypeWinScore = 0;
+    }
+
 }
 
 function updateScore(side, addScore) {
@@ -318,9 +277,10 @@ function updateScore(side, addScore) {
     let player = players.find(x => x.side === side);
     
     // add score
-    if (addScore<0 && player.score ===0 || timerOn == false){
+    if (addScore<0 && player.score === 0 ||  gameType === ""){
         // do nothing
     } else {
+        console.log(player.score);
         player.score += addScore;
         $(`.score.${side}`).text(player.score);
         player.scoreHist.push(addScore);
@@ -331,7 +291,7 @@ function updateScore(side, addScore) {
         criteria();
     };
 
-    if ( Math.abs(playerBlue.score-playerRed.score)>=gameTypeWinScore) {
+    if ( Math.abs(playerBlue.score-playerRed.score)>=gameTypeWinScore && gameType != "") {
         // get the winning score
         let scoreWinner = Math.max(playerBlue.score, playerRed.score);
         // get the side of the player with the winning score
