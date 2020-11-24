@@ -2,8 +2,8 @@
 
 ## Refactoring
 [x] Refactor resets into a function
-[ ] Refactor colour buttons class names
-[ ] comment out/delete console.logs on timers
+[x] Refactor colour buttons class names
+[x] comment out/delete console.logs on timers
 
 
 ## misc

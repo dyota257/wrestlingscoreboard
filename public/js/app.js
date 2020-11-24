@@ -75,7 +75,7 @@ $("button").click( function() {
     switch(this.parentElement.className){
 // scoring buttons
         case `${side} buttonsRow`:
-            updateScore(side, addScore);             
+            updateScore(side, addScore);          
             break;
 // Warnings and shotclock row
         case `${side} penalty`:
@@ -206,7 +206,7 @@ $("button").click( function() {
 
             // reset scores, warnings, shotclocks
             reset(true,true,true);
-            
+
             if (gameType.indexOf("Greco")>0) {
                 gameTypeWinScore = 8;
             } else if (gameType.indexOf("Freestyle")>0) {

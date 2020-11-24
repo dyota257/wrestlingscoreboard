@@ -1,4 +1,3 @@
-
 var matchOrder = 0;
 var pairing = [];
 var table = [];
