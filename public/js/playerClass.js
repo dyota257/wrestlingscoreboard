@@ -24,7 +24,7 @@ class Player {
     }
 }
 
-const playerBlue = new Player(
+let playerBlue = new Player(
     "blue", 
     "blueFirstName",
     "blueLastName",
@@ -34,7 +34,7 @@ const playerBlue = new Player(
     0,
     false
 );
-const playerRed = new Player(
+let playerRed = new Player(
     "red", 
     "redFirstName",
     "redLastName",

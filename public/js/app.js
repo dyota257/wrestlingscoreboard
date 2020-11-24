@@ -145,6 +145,7 @@ $("button").click( function() {
         $(".middle").css("backgroundColor", "black");
 
         if ( // check for empty fields
+            
             $("#blueFirstName").val()==""
             || $("#blueLastName").val()==""
             || $("#blueClubName").val()==""
@@ -152,9 +153,8 @@ $("button").click( function() {
             || $("#redLastName").val()==""
             || $("#redClubName").val()==""
             || $("select[name=weight]").val()==""
-            // || radioCheck() === 0
         ) {
-                window.alert("Fill in all the names and game type!");
+            window.alert("Fill in all the names and game type!");
 
         } else {
             // close input area and fixtures
@@ -184,12 +184,18 @@ $("button").click( function() {
             phasesTime = [timerInit, timeRest, timerInit];
             
             // set player names
-            playerBlue.firstName = $("#blueFirstName").val();
-            playerBlue.lastName = $("#blueLastName").val();
-            playerBlue.clubName = $("#blueClubName").val();
-            playerRed.firstName = $("#redFirstName").val();
-            playerRed.lastName = $("#redLastName").val();
-            playerRed.clubName = $("#redClubName").val();
+            playerBlue = {...playerBlue,...{
+                    firstName: $("#blueFirstName").val(),
+                    lastName: $("#blueLastName").val(),
+                    clubName: $("#blueClubName").val()
+                }
+            };
+            playerRed = {...playerRed,...{
+                    firstName: $("#redFirstName").val(),
+                    lastName: $("#redLastName").val(),
+                    clubName: $("#redClubName").val()
+                }
+            };
 
             $(".blue.firstName").text(playerBlue.firstName);
             $(".blue.lastName").text(playerBlue.lastName);
@@ -200,8 +206,7 @@ $("button").click( function() {
 
             // reset scores, warnings, shotclocks
             reset(true,true,true);
-
-            // 
+            
             if (gameType.indexOf("Greco")>0) {
                 gameTypeWinScore = 8;
             } else if (gameType.indexOf("Freestyle")>0) {
