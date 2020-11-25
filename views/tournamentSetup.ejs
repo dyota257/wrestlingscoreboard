@@ -9,14 +9,20 @@
         Tournament setup
     </title>
 
+    <style>
+        div {
+            display:flex;
+            align-items:center;
+            align-self: center;
+        }
+    </style>
+
 </head>
 <body>
     <%- include('header'); %> 
-    <!-- Name of the tournament -->
-    <!-- Date of the tournaments -->
-    <!-- Location of the tournament -->
     
-    <form action="/tournamentSetup" method="post">
+    <div>
+    <form style="align-items:center;" action="/tournamentSetup" method="post">
         <table>
             <tr>
                 <td>
@@ -54,35 +60,70 @@
                 </td>
             </tr>
         </table>
-        <input type="submit" value="Write query">
+
+        <input style="visibility: hidden;" type="submit" value="Create tournament">
+
     </form>
+    </div>
 
     <script>
         
         // "Other" title for tournament
-        let selectTitle = document.getElementsByTagName("select")[0];
-        selectTitle.addEventListener("click", () => {
-            if (document.getElementsByTagName("select")[0].value === "Other") {
-                document.getElementsByName("otherTitle")[0].style.visibility = "visible";
-                document.getElementsByName("otherTitleLabel")[0].style.visibility = "visible";
+        let selectTitle = document.getElementsByTagName('select')[0];
+        selectTitle.addEventListener('click', () => {
+            val();
+
+            if (document.getElementsByTagName('select')[0].value === 'Other') {
+                document.getElementsByName('otherTitle')[0].style.visibility = 'visible';
+                document.getElementsByName('otherTitleLabel')[0].style.visibility = 'visible';
             } else {
-                document.getElementsByName("otherTitle")[0].style.visibility = "hidden";
-                document.getElementsByName("otherTitleLabel")[0].style.visibility = "hidden";
+                document.getElementsByName('otherTitle')[0].style.visibility = 'hidden';
+                document.getElementsByName('otherTitleLabel')[0].style.visibility = 'hidden';
             }
         })
 
-        // "Other" location
-        let selectLocation = document.getElementsByTagName("select")[1];
-        selectLocation.addEventListener("click", () => {
-            if (document.getElementsByTagName("select")[1].value === "Other") {
-                document.getElementsByName("otherLocation")[0].style.visibility = "visible";
-                document.getElementsByName("otherLocationLabel")[0].style.visibility = "visible";
+        // 'Other' location
+        let selectLocation = document.getElementsByTagName('select')[1];
+        selectLocation.addEventListener('click', () => {
+            val()
+
+            if (document.getElementsByTagName('select')[1].value === 'Other') {
+                document.getElementsByName('otherLocation')[0].style.visibility = 'visible';
+                document.getElementsByName('otherLocationLabel')[0].style.visibility = 'visible';
             } else {
-                document.getElementsByName("otherLocation")[0].style.visibility = "hidden";
-                document.getElementsByName("otherLocationLabel")[0].style.visibility = "hidden";
+                document.getElementsByName('otherLocation')[0].style.visibility = 'hidden';
+                document.getElementsByName('otherLocationLabel')[0].style.visibility = 'hidden';
             }
         })
+
+        let textBoxes = document.querySelectorAll('input[type=text]')
+        for (var i=0; i<= textBoxes.length; i++) {
+            textBoxes[i].addEventListener('keydown', () => {
+                val()
+            })
+        }
+
         
+        function val() {
+
+            let check = 
+                (
+                    document.getElementsByTagName('select')[0].value === ''
+                    || document.getElementsByTagName('select')[0].value === 'Other' && document.getElementsByName('otherLocation')[0].value === ''
+                ) || (
+                    document.getElementsByTagName('select')[1].value === ''
+                    || document.getElementsByTagName('select')[1].value === 'Other' && document.getElementsByName('otherLocation')[0] === ''
+                );
+            
+                console.log(check);
+            
+            if (check) {
+                document.querySelectorAll('input[type=submit]')[0].style.visibility = 'hidden'
+            } else {
+                document.querySelectorAll('input[type=submit]')[0].style.visibility = 'visible'
+            }
+        }
+
     </script>
 </body>
 </html>

@@ -45,7 +45,7 @@ td {
     width: 25%;
 }
 
-button {
+button, input[type=submit] {
     color: black;
     background-color: rgb(255,215,0,1);
     font-size: large;

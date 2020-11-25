@@ -4,7 +4,7 @@
 ### Create tournament
 [ ] Create error screen for missing information
 [ ] Once finished doing the tournament setup, make a screen for "this tournament" 
-[ ] Date format in tournament display
+[x] Date format in tournament displa
 
 
 ## misc

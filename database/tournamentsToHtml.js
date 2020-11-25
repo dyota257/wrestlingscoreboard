@@ -29,7 +29,7 @@ function tournamentsToHtml(x) {
             <td>Title</td>
             <td>Location</td>
         </tr>
-    ${tableRows}</table>`
+        ${tableRows}</table>`
 
     return tableRows
 }
