@@ -49,7 +49,7 @@ app.get('/scoreboard', (req, res) => {
 app.get('/tournamentSetup', async (req,res) => {
     
     const today = new Date();
-    const todayString = `${today.getFullYear()}-${today.getMonth()}-${today.getDate()}`
+    const todayString = `${today.getFullYear()}-${today.getMonth()+1}-${today.getDate()}`
 
     let conn = mysql.createConnection(db);
     conn.connect();
@@ -72,14 +72,51 @@ app.get('/tournamentSetup', async (req,res) => {
 });
 
 app.post('/tournamentSetup', async (req,res) => {
-    
-    console.log(req.body);
-    let title = req.body.title;
     let date = req.body.date;
-    let location = req.body.location;
-    console.log(title)
-    console.log(date)
-    console.log(location)
+    let title = '';
+    let location = '';
+
+    if (req.body.title === "Other") {
+        title = req.body.otherTitle;
+    } else {
+        title = req.body.title;
+    }
+
+    if (req.body.location === "Other") {
+        location = req.body.otherLocation;
+    } else {
+        location = req.body.location;
+    }
+
+    let query = `INSERT INTO tournaments (date,title,location) VALUES 
+    ('${date}','${title}','${location}')`
+
+    console.log(query);
+
+    let check = 
+        (
+            req.body.title === ''
+            || req.body.title === 'Other' && req.body.otherTitle === ''
+        ) || (
+            req.body.location === ''
+            || req.body.location === 'Other' && req.body.otherLocation === ''
+        )
+
+    if (check) {
+        res.send('Some information is missing. Go back and make sure that everything has been filled in correctly.');
+    } else {
+        
+        // send to database
+        let conn = mysql.createConnection(db);
+        conn.connect();
+        conn.query(query, (err, rows, fields) => {
+            if (err) throw err;
+            console.log(rows);
+        });
+        conn.end();
+
+        res.redirect('/');
+    }
 
 })
 
