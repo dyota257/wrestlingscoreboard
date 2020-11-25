@@ -8,6 +8,7 @@
     <title>
         Tournament setup
     </title>
+
 </head>
 <body>
     <%- include('header'); %> 
@@ -15,7 +16,7 @@
     <!-- Date of the tournaments -->
     <!-- Location of the tournament -->
     
-    <form action="/query" method="post">
+    <form action="/tournamentSetup" method="post">
         <table>
             <tr>
                 <td>
@@ -25,9 +26,10 @@
                     Choose from a previous tournament name:<br>
                     <select name="title" value="">
                         <%- optionsTitles %>
-                    </select><br><br>
-                    Or enter a new one: <br>
-                    <input type="text" placeholder="Enter new tournament name"></input>
+                    </select>
+                    <br><br>
+                    <span style="visibility: hidden;" name="otherTitleLabel">Or enter a new one: <br></span>
+                    <input style="visibility: hidden;" name="otherTitle" type="text" placeholder="Enter new tournament name"></input>
                 </td>
             </tr>
             <tr>
@@ -35,9 +37,7 @@
                     <strong>Date</strong>
                 </td>
                 <td>
-                    Today is <%- today%>. <br>
-                    <input type="date" name="date" id="" value="2020-12-31" >
-                    
+                    <input type="date" name="date" id="" value=<%- today%> >
                 </td>
             </tr>
             <tr>
@@ -49,13 +49,42 @@
                     <select name="location" value="">
                         <%- optionsLocations %>
                     </select><br><br>
-                    Or enter a new one: <br>
-                    <input type="text" placeholder="Enter new location"></input>
+                    <span style="visibility: hidden;" name="otherLocationLabel">Or enter a new one: <br></span>
+                    <input style="visibility: hidden;" name="otherLocation" type="text" placeholder="Enter new location"></input>
                 </td>
             </tr>
         </table>
         <input type="submit" value="Write query">
     </form>
 
+    <script>
+        
+        let today = 
+
+        // "Other" title for tournament
+        let selectTitle = document.getElementsByTagName("select")[0];
+        selectTitle.addEventListener("click", () => {
+            if (document.getElementsByTagName("select")[0].value === "Other") {
+                document.getElementsByName("otherTitle")[0].style.visibility = "visible";
+                document.getElementsByName("otherTitleLabel")[0].style.visibility = "visible";
+            } else {
+                document.getElementsByName("otherTitle")[0].style.visibility = "hidden";
+                document.getElementsByName("otherTitleLabel")[0].style.visibility = "hidden";
+            }
+        })
+
+        // "Other" location
+        let selectLocation = document.getElementsByTagName("select")[1];
+        selectLocation.addEventListener("click", () => {
+            if (document.getElementsByTagName("select")[1].value === "Other") {
+                document.getElementsByName("otherLocation")[0].style.visibility = "visible";
+                document.getElementsByName("otherLocationLabel")[0].style.visibility = "visible";
+            } else {
+                document.getElementsByName("otherLocation")[0].style.visibility = "hidden";
+                document.getElementsByName("otherLocationLabel")[0].style.visibility = "hidden";
+            }
+        })
+        
+    </script>
 </body>
 </html>

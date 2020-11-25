@@ -68,10 +68,19 @@ app.get('/tournamentSetup', async (req,res) => {
         console.log(rows);
     });
 
-    
-
-
     conn.end();
+});
+
+app.post('/tournamentSetup', async (req,res) => {
+    
+    console.log(req.body);
+    let title = req.body.title;
+    let date = req.body.date;
+    let location = req.body.location;
+    console.log(title)
+    console.log(date)
+    console.log(location)
+
 })
 
 app.get('/tournaments', async (req, res) => {

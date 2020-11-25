@@ -1,9 +1,8 @@
 # To-do list
 
-## Refactoring
-[x] Refactor resets into a function
-[x] Refactor colour buttons class names
-[x] comment out/delete console.logs on timers
+## Tournament manager
+### Create tournament
+[ ] 
 
 
 ## misc
@@ -22,6 +21,11 @@
     [ ] upon re-import, "ClearCollect()" the HTML table. This is how the organisers can "insert" rows in between, for special matches or for bracket outcomes
 [ ] sound on timerend
 [ ] pause clock on timerend
+
+## Refactoring scoreboard
+[x] Refactor resets into a function
+[x] Refactor colour buttons class names
+[x] comment out/delete console.logs on timers
 
 ## Shotclock
 [x] Make shot clock in sync with current time
