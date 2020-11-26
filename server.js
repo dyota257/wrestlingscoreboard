@@ -25,21 +25,18 @@ app.route('/scoreboard')
     });
 
 // TOURNAMENTS
-
-let tournamentOpen = {
-    id: '',
-    date: '',
-    title: '',
-    location: ''
-}
+// use app variable app.use('tournamentId'), retrieve with app.get('tournamentId')
 
 const history = require('./routes/tournaments/history.js');
 const setup = require('./routes/tournaments/setup.js')();
 const open = require('./routes/tournaments/open.js');
 
+app.set('tournamentId', -1);
+
 app.route('/tournaments/history')
     .get(async (req, res) => {
-        history(req, res, mysql, db);
+        history(req, res, mysql, db, req.app.get('tournamentId'));
+        console.log('history/ tournamentId: ' + req.app.get('tournamentId'));
     })
 
 app.route('/tournaments/setup')
@@ -52,8 +49,9 @@ app.route('/tournaments/setup')
 
 app.route('/tournaments/open')
     .get(async (req,res) => {
-        
         open(req, res, mysql,db);
+        app.set('tournamentId',  req.query.id);
+        console.log('/open tournamentId: ' + app.get('tournamentId'));
     })
 
 // MATCHES

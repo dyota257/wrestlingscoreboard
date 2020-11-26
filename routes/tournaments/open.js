@@ -2,7 +2,6 @@ module.exports = open;
 
 const dateFormat = require(process.cwd()+'/database/dateFormat');
 
-
 function open(req, res, mysql, db) {
 
     let id = req.query.id;

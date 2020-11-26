@@ -78,6 +78,10 @@ function post(req, res, mysql, db) {
         conn.query(queryGetLast, (err, rows, fields) => {
             if (err) throw err;
             console.log(rows)
+            
+            tournamentOpen = rows[0];
+
+            console.log(tournamentOpen);
 
             res.redirect(`/tournaments/open?id=${rows[0].id}`)
         })
