@@ -1,6 +1,6 @@
-window.onbeforeunload = () => {
-    return "Are you sure?"
-}
+// window.onbeforeunload = () => {
+//     return "Are you sure?"
+// }
 
 var gameType = "";
 var gameTypeWinScore = 0;

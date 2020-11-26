@@ -213,12 +213,13 @@
     <div id="footer">
         <!-- <button id="download">Download</button> -->
         <table class="results container">
-            <tr style="font-weight:bolder"><td>Red name</td><td>Blue name</td><td>Red score</td><td>Blue score</td><td>Winner</td><td>Method</td><td>Classification</td></tr>
+            <tr style="font-weight:bolder">
+                <td>Red name</td><td>Blue name</td><td>Red score</td><td>Blue score</td><td>Winner</td><td>Method</td><td>Classification</td>
+            </tr>
         </table>
 
     <div>
 
-    
 <!-- Popup  -->
     <div class="popup">
         <div class="popup-content">
@@ -226,8 +227,28 @@
             <div class="popup-text">
 
             </div>
+            <form method="POST" action="/matches/records">
+                <div style="display: none;">
+                    <input type="text" name="id">
+                    <input type="text" name="tournament">
+                    <input type="text" name="red">
+                    <input type="text" name="blue">
+                    <input type="text" name="winner">
+                    <input type="text" name="class_points">
+                    <input type="text" name="age">
+                    <input type="text" name="gender">
+                    <input type="text" name="style">
+                    <input type="text" name="weight">
+                </div>
+                <button type="submit">Save result</button>
+            </form>
+            
         </div>
     </div>
+
+
+
+
 <!-- Footer -->
     <br>
     <br>

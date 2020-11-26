@@ -6,14 +6,6 @@ const app        = express();
 
 const port = 8080;
 
-const history                       = require('./routes/tournaments/history.js')
-const setup                         = require('./routes/tournaments/setup.js')()
-const mat                           = require('./routes/matches/mat.js')
-const matches_import                = require('./routes/matches/matches_import.js')
-const all                           = require('./routes/wrestlers/all.js')
-const wrestlers_import              = require('./routes/wrestlers/wrestlers_import.js')
-const open                          = require('./routes/tournaments/open.js')
-
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static('public'));
 app.set('view engine', 'ejs');
@@ -33,25 +25,42 @@ app.route('/scoreboard')
     });
 
 // TOURNAMENTS
+
+let tournamentOpen = {
+    id: '',
+    date: '',
+    title: '',
+    location: ''
+}
+
+const history = require('./routes/tournaments/history.js');
+const setup = require('./routes/tournaments/setup.js')();
+const open = require('./routes/tournaments/open.js');
+
 app.route('/tournaments/history')
     .get(async (req, res) => {
         history(req, res, mysql, db);
     })
-    
-app.route('/tournament/setup')
+
+app.route('/tournaments/setup')
     .get(async (req,res) => {
         setup[0](req, res, mysql,db);
     })
     .post(async (req,res) => {
         setup[1](req, res, mysql,db);
     });
-    
+
 app.route('/tournaments/open')
     .get(async (req,res) => {
+        
         open(req, res, mysql,db);
     })
 
 // MATCHES
+const mat = require('./routes/matches/mat.js');
+const matches_import = require('./routes/matches/matches_import.js');
+const records = require('./routes/matches/records.js');
+
 app.route('/matches/matA')
     .get(async (req, res) => {
         mat(req,res,mysql,db,"A")
@@ -62,7 +71,16 @@ app.route('/matches/matB')
         mat(req,res,mysql,db,"B")
     });
 
+app.route('/matches/records')
+    .post(async (req,res) => {
+        records(req, res, mysql, db)
+        console.log(req.body);
+    })
+
 // WRESTLERS
+const all = require('./routes/wrestlers/all.js')
+const wrestlers_import = require('./routes/wrestlers/wrestlers_import.js')
+
 app.route('/wrestlers/all')
     .get(async (req, res) => {
         all(req,res,mysql,db)

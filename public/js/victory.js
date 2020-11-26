@@ -72,7 +72,8 @@ function victory(side, method) {
         <td>${method}</td>
         <td>${classification}</td>`;
     matchResults.html(matchResults.html() + newRow);
-    
+
+
 };
 
 

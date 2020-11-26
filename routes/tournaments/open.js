@@ -31,7 +31,6 @@ function open(req, res, mysql, db) {
             location: location
         })
 
-        // res.send(id + ' ' + date + ' ' + title + ' ' + location);
     });
     conn.end();
 }

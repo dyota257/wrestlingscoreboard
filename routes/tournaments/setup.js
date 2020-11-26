@@ -71,11 +71,20 @@ function post(req, res, mysql, db) {
         conn.connect();
         conn.query(query, (err, rows, fields) => {
             if (err) throw err;
-            console.log(rows);
+            console.log("Submission successful");
         });
+
+        let queryGetLast = 'SELECT * FROM tournaments WHERE id = (SELECT MAX(id) from tournaments)'
+        conn.query(queryGetLast, (err, rows, fields) => {
+            if (err) throw err;
+            console.log(rows)
+
+            res.redirect(`/tournaments/open?id=${rows[0].id}`)
+        })
+
         conn.end();
 
-        res.redirect('/');
+        
     }
 
 }

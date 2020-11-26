@@ -26,7 +26,7 @@ let playerBlue = new Player(
     "blueFirstName",
     "blueLastName",
     "blueClubName",
-    0,
+    10,
     [], 
     0,
     false
