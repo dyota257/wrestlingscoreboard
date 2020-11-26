@@ -1,5 +1,7 @@
 module.exports =tournamentsToHtml;
 
+const dateFormat = require('../database/dateFormat.js');
+
 function tournamentsToHtml(x) {
     
     var tableRows='';
@@ -13,7 +15,7 @@ function tournamentsToHtml(x) {
                 ${dateFormat(x[i].date)}
             </td>
             <td>
-                ${x[i].title}
+                <a href="/tournaments/open?id=${x[i].id}">${x[i].title}</a>
             </td>
             <td>
                 ${x[i].location}
@@ -34,15 +36,3 @@ function tournamentsToHtml(x) {
     return tableRows
 }
 
-function dateFormat(x) {
-    const days = ["Sun", "Mon", "Tues", "Wed", "Thu", "Fri", "Sat"];
-    const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
-
-    let day = days[x.getDay()];
-    let date = x.getDate();
-    let month = months[x.getMonth()]
-    let year = x.getFullYear();
-
-    return `${day}, ${date} ${month}, ${year}`
-
-}

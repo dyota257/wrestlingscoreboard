@@ -1,7 +1,5 @@
 module.exports = setup;
 
-// function history() { console.log(process.cwd())};
-
 const tournamentsToOptionsTitles = require(process.cwd()+'/database/tournamentsToOptionsTitles');
 const tournamentsToOptionsLocations = require(process.cwd()+'/database/tournamentsToOptionsLocations');
 

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="shortcut icon" href="http://wrestlingwa.org/wp-content/uploads/2017/05/wwa1-150x150.jpg" type="image/x-icon">
+    <title>
+        <%- title %>
+    </title>
+</head>
+<body>
+    <%- include('header'); %> 
+    <h1><%- title %></h1>
+    <h3><%- location %>,  <%- date %></h3>
+    
+    <table>
+        <tr>
+            <td>
+                <form action="/matches/matA" method="get">
+                    <button id="matA" class="mainPage" type="submit">Matches Mat A</button>
+                </form>
+            </td>
+            <td>
+                <form action="/matches/matB" method="get">
+                    <button id="matB" class="mainPage" type="submit">Matches Mat B</button>
+                </form>
+            </td>
+        </tr>
+    </table>
+
+</body>
+</html>

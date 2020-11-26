@@ -3,12 +3,13 @@
 ## Tournament manager
 ### ROUTING
 This server.js file is getting really big and disorganised. Organise it.
-[ ] Create routes folder
+[x] Create routes folder
 
 ### Create tournament
-[ ] Create error screen for missing information
-[ ] Once finished doing the tournament setup, make a screen for "this tournament" 
-[x] Date format in tournament displa
+[x] Once finished doing the tournament setup, make a screen for "this tournament" 
+    [ ] Flesh out "this tournament"
+[ ] Clear up main screen
+[x] Date format in tournament display
 
 
 ## misc

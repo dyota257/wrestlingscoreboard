@@ -12,6 +12,7 @@ const mat                           = require('./routes/matches/mat.js')
 const matches_import                = require('./routes/matches/matches_import.js')
 const all                           = require('./routes/wrestlers/all.js')
 const wrestlers_import              = require('./routes/wrestlers/wrestlers_import.js')
+const open                          = require('./routes/tournaments/open.js')
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static('public'));
@@ -44,6 +45,11 @@ app.route('/tournament/setup')
     .post(async (req,res) => {
         setup[1](req, res, mysql,db);
     });
+    
+app.route('/tournaments/open')
+    .get(async (req,res) => {
+        open(req, res, mysql,db);
+    })
 
 // MATCHES
 app.route('/matches/matA')
