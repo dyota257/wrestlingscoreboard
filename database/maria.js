@@ -6,4 +6,4 @@ const maria = () => {
     database: "wrestling"})
 };
 
-module.exports =maria;
+module.exports = maria;

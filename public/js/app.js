@@ -307,7 +307,6 @@ function updateScore(side, addScore) {
 }
 
 function criteria() {
-
     scoreRedMax = Math.max(...playerRed.scoreHist);
     scoreRedLast = playerRed.scoreHist[playerRed.scoreHist.length-1];
     scoreBlueMax = Math.max(...playerBlue.scoreHist);
@@ -322,7 +321,6 @@ function criteria() {
             // read page 25 of regulation
         }
     } else {
-        $(".red.score").css("text-decoration", "");
-        $(".blue.score").css("text-decoration", "");
+        $(".score").css("text-decoration", "");
     }
 }

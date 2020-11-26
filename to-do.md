@@ -1,6 +1,10 @@
 # To-do list
 
 ## Tournament manager
+### ROUTING
+This server.js file is getting really big and disorganised. Organise it.
+[ ] Create routes folder
+
 ### Create tournament
 [ ] Create error screen for missing information
 [ ] Once finished doing the tournament setup, make a screen for "this tournament" 
