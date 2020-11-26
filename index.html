@@ -23,25 +23,25 @@
     <table style="align-items: center;">
         <tr>
             <td>
-                <form action="/tournamentSetup" method="get">
+                <form action="/tournament/setup" method="get">
                     <button class="mainPage" type="submit">Setup tournament</button>
                 </form>
-                <form action="/tournaments" method="get">
+                <form action="/tournaments/history" method="get">
                     <button class="mainPage" type="submit">Tournaments</button>
                 </form>
             </td>
             <td>
-                <form action="/matchesA" method="get">
+                <form action="/matches/matA" method="get">
                     <button id="matA" class="mainPage" type="submit">Matches Mat A</button>
                 </form>
-                <form action="/matchesB" method="get">
+                <form action="/matches/matB" method="get">
                     <button id="matB" class="mainPage" type="submit">Matches Mat B</button>
                 </form>
             </td>
         </tr>
         <tr>
             <td>
-                <form action="/wrestlers" method="get">
+                <form action="/wrestlers/all" method="get">
                     <button class="mainPage" type="submit">Wrestlers</button>
                 </form>
             </td>
@@ -55,7 +55,7 @@
         <tr>
             <td>
                 <h1>Bulk import wrestlers to <span style="font-family: 'Consolas', 'Courier New', Courier, monospace;">wrestlers</span></h1>
-                <form action="/importWrestlers" method="post">
+                <form action="/wrestlers/import" method="post">
                     <textarea name="x" id="" cols="30" rows="10"></textarea><br>
                     <button>import wrestlers</button>
                 </form>

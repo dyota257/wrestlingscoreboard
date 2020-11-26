@@ -1,5 +1,4 @@
 
-
 const express    = require('express');
 const bodyParser = require('body-parser');
 const mysql      = require('mysql');
@@ -10,11 +9,12 @@ const port = 8080;
 
 const importWrestlers               = require('./database/importWrestlers');
 const importMatches                 = require('./database/importMatches');
-const matchesToHtml                 = require('./database/matchesToHtml');
-const wrestlersToHtml               = require('./database/wrestlersToHtml');
-
-const tournamentsToOptionsTitles    = require('./database/tournamentsToOptionsTitles');
-const tournamentsToOptionsLocations = require('./database/tournamentsToOptionsLocations');
+const history                       = require('./routes/tournaments/history.js')
+const setup                         = require('./routes/tournaments/setup.js')()
+const mat                           = require('./routes/matches/mat.js')
+const matches_import                = require('./routes/matches/matches_import.js')
+const all                           = require('./routes/wrestlers/all.js')
+const wrestlers_import              = require('./routes/wrestlers/wrestlers_import.js')
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static('public'));
@@ -22,210 +22,60 @@ app.set('view engine', 'ejs');
 
 const db = require('./database/db.js')();
 
-app.get('/', (req, res) => {
-    res.sendFile(`${__dirname}/index.html`);
-});
+// HOME
+app.route('/')
+    .get((req, res) => {
+        res.sendFile(`${__dirname}/index.html`);
+    });
 
-app.get('/scoreboard', (req, res) => {
-    res.sendFile(`${__dirname}/scoreboard.html`);
-});
+// SCOREBOARD
+app.route('/scoreboard')
+    .get((req, res) => {
+        res.sendFile(`${__dirname}/scoreboard.html`);
+    });
 
-const history = require('./routes/tournaments/history.js')
+// TOURNAMENTS
 app.route('/tournaments/history')
     .get(async (req, res) => {
         history(req, res, mysql, db);
     })
-
-app.get('/tournaments', async (req, res) => {
-    let conn = mysql.createConnection(db);
-    conn.connect();
-    let query = 'SELECT * FROM tournaments';
-    conn.query(query, (err, rows, fields) => {
-        if (err) throw err;
-        let table = tournamentsToHtml(rows);
-        res.render('table', {
-            title: 'Tournaments',
-            table: table
-        })
-        console.log(rows);
-    });
-    conn.end();
-});
-
-app.route('/tournamentSetup')
+    
+app.route('/tournament/setup')
     .get(async (req,res) => {
-        
-        const today = new Date();
-        const todayString = `${today.getFullYear()}-${today.getMonth()+1}-${today.getDate()}`
-
-        let conn = mysql.createConnection(db);
-        conn.connect();
-        let query = 'SELECT title, location FROM tournaments';
-
-        conn.query(query, (err, rows, fields) => {
-            if (err) throw err;
-            let optionsTitle = tournamentsToOptionsTitles(rows); 
-            let optionsLocations = tournamentsToOptionsLocations(rows);
-            res.render('tournamentSetup', {
-                optionsTitles: optionsTitle,
-                optionsLocations: optionsLocations,
-                today: todayString
-            })
-
-            console.log(rows);
-        });
-
-        conn.end();
+        setup[0](req, res, mysql,db);
     })
     .post(async (req,res) => {
-        let date = req.body.date;
-        let title = '';
-        let location = '';
-
-        if (req.body.title === "Other") {
-            title = req.body.otherTitle;
-        } else {
-            title = req.body.title;
-        }
-
-        if (req.body.location === "Other") {
-            location = req.body.otherLocation;
-        } else {
-            location = req.body.location;
-        }
-
-        let query = `INSERT INTO tournaments (date,title,location) VALUES 
-        ('${date}','${title}','${location}')`
-
-        console.log(query);
-
-        let check = 
-            (
-                req.body.title === ''
-                || req.body.title === 'Other' && req.body.otherTitle === ''
-            ) || (
-                req.body.location === ''
-                || req.body.location === 'Other' && req.body.otherLocation === ''
-            )
-
-        if (check) {
-            res.send('Some information is missing. Go back and make sure that everything has been filled in correctly.');
-        } else {
-            
-            // send to database
-            let conn = mysql.createConnection(db);
-            conn.connect();
-            conn.query(query, (err, rows, fields) => {
-                if (err) throw err;
-                console.log(rows);
-            });
-            conn.end();
-
-            res.redirect('/');
-        }
-
+        setup[1](req, res, mysql,db);
     });
 
-
-
-app.get('/matchesA', async (req, res) => {
-    let conn = mysql.createConnection(db);
-    conn.connect();
-    let query = 'SELECT * FROM matchesRaw WHERE mat = "A"';
-    conn.query(query, (err, rows, fields) => {
-        if (err) throw err;
-        let table = matchesToHtml(rows);
-        res.render('table', {
-            title: 'Matches',
-            table: table
-        })
-        console.log(rows);
+// MATCHES
+app.route('/matches/matA')
+    .get(async (req, res) => {
+        mat(req,res,mysql,db,"A")
     });
-    
-    conn.end();
-});
 
-app.get('/matchesB', async (req, res) => {
-    let conn = mysql.createConnection(db);
-    conn.connect();
-    let query = 'SELECT * FROM matchesRaw WHERE mat = "B"';
-    conn.query(query, (err, rows, fields) => {
-        if (err) throw err;
-        let table = matchesToHtml(rows);
-        res.render('table', {
-            title: 'Matches',
-            table: table
-        })
-        console.log(rows);
+app.route('/matches/matB')
+    .get(async (req, res) => {
+        mat(req,res,mysql,db,"B")
     });
-    conn.end();
-});
 
-app.get('/wrestlers', async (req, res) => {
-    let conn = mysql.createConnection(db);
-    conn.connect();
-    let query = "SELECT * from wrestlers";
-    conn.query(query, (err, rows, fields) => {
-        if (err) throw err;
-        let table = wrestlersToHtml(rows);
-        res.render('table', {
-            title: 'Wrestlers',
-            table: table
-        });
-        console.log(rows);
+// WRESTLERS
+app.route('/wrestlers/all')
+    .get(async (req, res) => {
+        all(req,res,mysql,db)
     });
-    
-    conn.end();
 
-});
-
-app.post('/importWrestlers', async (req, res) => {
-    let conn = mysql.createConnection(db);
-    conn.connect();
-
-    let values = importWrestlers(req.body.x);
-    let query = `INSERT IGNORE INTO wrestlers (
-        first_name, 
-        last_name,
-        gender,
-        club_name,
-        full_name
-    ) VALUES ${values}`;
-    
-    conn.query(query, (err, rows, fields) => {
-        if (err) throw err;
-        res.redirect('/');
-        console.log(rows);
+app.route('/wrestlers/import')
+    .post(async (req, res) => {
+        wrestlers_import(req,res,mysql,db);
     });
-    
-    conn.end();
-});
 
-app.post('/importMatches', async (req, res) => {
-    let conn = mysql.createConnection(db);
-    conn.connect();
-    console.log("Connected...");
-    var values = importMatches(req.body.x);
-    console.log(values);
-    query = `INSERT IGNORE INTO matchesRaw (
-        category,
-        round,
-        mat,
-        id,
-        red_name,
-        red_fullname,
-        red_club,
-        blue_name,
-        blue_fullname,
-        blue_club
-        ) VALUES ${values}`;
-    console.log(query);
-    conn.query(query);
-    console.log("Query successful. Table 'matchesRaw' populated.");
-    res.redirect('/');
-    conn.end();
-});
+app.route('/matches/import')
+    .post(async (req, res) => {
+        matches_import(req,res,mysql,db);
+    });
 
+// SQL INTERFACE
 app.route('/query')
     .get((req,res) =>{
         res.render('query', );
