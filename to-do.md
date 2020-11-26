@@ -1,6 +1,11 @@
 # To-do list
 
 ## Tournament manager
+### Passing data
+
+[ ] Store match results in matches_records
+
+
 ### ROUTING
 This server.js file is getting really big and disorganised. Organise it.
 [x] Create routes folder

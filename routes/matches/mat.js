@@ -8,10 +8,14 @@ function mat(req, res, mysql, db, mat) {
     let whichMat = mat;
     let query = `SELECT * FROM matchesRaw WHERE mat = "${whichMat}"`;
     conn.query(query, (err, rows, fields) => {
-        if (err) throw err;
+        if (err) {
+            res.send("Can't find this table")
+        }
+        
+        // throw err; don't throw
         let table = matchesToHtml(rows);
         res.render('table', {
-            title: 'Matches',
+            title: `Matches - Mat ${whichMat}`,
             table: table
         })
         console.log(rows);

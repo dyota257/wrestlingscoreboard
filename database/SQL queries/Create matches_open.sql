@@ -2,7 +2,7 @@
 -- This is the table that will be displayed as fixtures "on the wall"
 -- Results from the scoreboard will not go here. They will go to matches_records
 
-CREATE TABLE matches_temp(
+CREATE TABLE matches_open(
     id INT NOT NULL AUTO_INCREMENT,
     tournament INT,
     red INT,
@@ -18,7 +18,7 @@ CREATE TABLE matches_temp(
     FOREIGN KEY (blue) REFERENCES wrestlers(id),
 );
 
-INSERT INTO matches
+INSERT INTO matches_open
 VALUES (
     1,
     "Phoenix Evans-Brown",
