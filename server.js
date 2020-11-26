@@ -2,13 +2,10 @@
 const express    = require('express');
 const bodyParser = require('body-parser');
 const mysql      = require('mysql');
-const mariadb    = require('mariadb'); //not called upon
 const app        = express();
 
 const port = 8080;
 
-const importWrestlers               = require('./database/importWrestlers');
-const importMatches                 = require('./database/importMatches');
 const history                       = require('./routes/tournaments/history.js')
 const setup                         = require('./routes/tournaments/setup.js')()
 const mat                           = require('./routes/matches/mat.js')
