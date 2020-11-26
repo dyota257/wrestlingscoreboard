@@ -22,10 +22,10 @@ app.set('view engine', 'ejs');
 
 const db = require('./database/db.js')();
 
-
 app.get('/', (req, res) => {
     res.sendFile(`${__dirname}/index.html`);
 });
+
 app.get('/scoreboard', (req, res) => {
     res.sendFile(`${__dirname}/scoreboard.html`);
 });
