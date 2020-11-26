@@ -280,6 +280,10 @@ label {
     align-self: start;
 }
 
+.nav>a {
+    margin: 0 5px 0 5px;
+}
+
 .pin button {
     font-size: min(2vw,var(--score-button-font-size));
     border-radius: 10px;

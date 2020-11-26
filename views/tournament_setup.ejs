@@ -21,9 +21,11 @@
 <body>
     <%- include('header'); %> 
     
+    <h1>Set up new tournament</h1>
+
     <div>
-    <form style="align-items:center;" action="/tournament/setup" method="post">
-        <table>
+    <form action="/tournament/setup" method="post">
+        <table style="display:flex; align-self: center; align-items:center;">
             <tr>
                 <td>
                     <strong>Tournament title</strong>
