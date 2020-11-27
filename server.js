@@ -16,6 +16,7 @@ const db = require('./database/db.js')();
 app.route('/')
     .get((req, res) => {
         res.sendFile(`${__dirname}/index.html`);
+        console.log('/home: ' + app.get('tournamentId'));
     });
 
 // SCOREBOARD
@@ -49,9 +50,16 @@ app.route('/tournaments/setup')
 
 app.route('/tournaments/open')
     .get(async (req,res) => {
+        
         open(req, res, mysql,db);
+        
         app.set('tournamentId',  req.query.id);
         console.log('/open tournamentId: ' + app.get('tournamentId'));
+    })
+
+app.route('/tournaments/openHome')
+    .get(async (req,res) => {
+        res.redirect('/tournaments/open?id='+app.get('tournamentId'))
     })
 
 // MATCHES
