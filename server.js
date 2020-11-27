@@ -49,7 +49,7 @@ app.route('/tournaments/setup')
     });
 
 app.route('/tournaments/open')
-    .get(async (req,res) => {
+    .get((req,res) => {
         open(req, res, mysql,db);
         app.set('tournamentId',  req.query.id);
         console.log('/open tournamentId: ' + app.get('tournamentId'));
@@ -69,22 +69,17 @@ app.route('/tournaments/openHome')
     })
 
 // MATCHES
-const mat = require('./routes/matches/mat.js');
+const fixtures = require('./routes/matches/fixtures.js');
 const matches_import = require('./routes/matches/matches_import.js');
 const records = require('./routes/matches/records.js');
 
-app.route('/matches/matA')
-    .get(async (req, res) => {
-        mat(req,res,mysql,db,"A")
-    });
-
-app.route('/matches/matB')
-    .get(async (req, res) => {
-        mat(req,res,mysql,db,"B")
+app.route('/matches/fixtures')
+    .get((req, res) => {
+        fixtures(req,res,mysql,db,req.query.mat)
     });
 
 app.route('/matches/records')
-    .post(async (req,res) => {
+    .post((req,res) => {
         records(req, res, mysql, db)
         console.log(req.body);
     })

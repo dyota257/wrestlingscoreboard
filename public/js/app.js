@@ -20,16 +20,18 @@ let nowOffset = 0;
 const shotClockTime = 30;
 let shotClockTimerOn = false;
 let shotClockPaused = false;
-const player = {
-    RED: "red",
-    BLUE: "blue"
-}
 let shotClockPlayer = null;
 const scoresMap = [ -1, 1, 2, 4, 5];
 
 $(".score.blue").text(playerBlue.score);
 $(".score.red").text(playerRed.score);
 $("#startTimer").prop("disabled", true);
+
+$(document).keyup((e)=>{
+    if (e.keycode===32) {
+        e.preventDefault();
+    }
+})
 
 $(document).keydown( (e) => {
     
@@ -67,6 +69,8 @@ $(document).keydown( (e) => {
 })
 
 $("button").click( function() {
+    this.blur();
+
     // the first class of parentElement.className is the colour blue/red
     var side = this.parentElement.className.split(" ")[0];
     let buttonId = this.id;
@@ -286,25 +290,29 @@ function reset(scores, warnings, shotclocks, gameType) {
 }
 
 function updateScore(side, addScore) {
-    // get the player of the correct side
-    let player = players.find(x => x.side === side);
-    
+    // get the clone player of the correct side
+    let i; if (side === 'blue') { i = 0} 
+    else if (side === 'red') {i = 1}
+    let player = players[i]
+
     // add score
     if (addScore<0 && player.score === 0 ||  gameType === ""){
         // do nothing
     } else {
-        console.log(player.score);
         player.score += addScore;
         $(`.score.${side}`).text(player.score);
         player.scoreHist.push(addScore);
-        console.log(player.scoreHist);
         if(shotClockTimerOn){
             shotClockTimerOn = false; 
         }
+        // return the clone to the real player
+        if (side === 'blue') { playerBlue = player}
+        else if (side === 'red') {playerRed = player}
+        
         criteria();
     };
 
-    if ( Math.abs(playerBlue.score-playerRed.score)>=gameTypeWinScore && gameType != "") {
+    if ( Math.abs(playerBlue.score-playerRed.score)>=gameTypeWinScore && gameType != "" ) {
         // get the winning score
         let scoreWinner = Math.max(playerBlue.score, playerRed.score);
         // get the side of the player with the winning score
@@ -326,6 +334,12 @@ function criteria() {
             $(".blue.score").css("text-decoration", "underline");
         } else if (scoreRedMax == scoreBlueMax)  {
             // pick the more recent one and take 
+            if (scoreRedLast > scoreBlueLast) {
+                $(".red.score").css("text-decoration", "underline")
+            } else if (scoreRedLast < scoreBlueLast) {
+                $(".blue.score").css("text-decoration", "underline");
+            }
+            
             // read page 25 of regulation
         }
     } else {

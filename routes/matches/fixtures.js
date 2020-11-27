@@ -1,8 +1,8 @@
-module.exports = mat;
+module.exports = fixtures;
 
 const matchesToHtml = require(process.cwd()+'/database/matchesToHtml');
 
-function mat(req, res, mysql, db, mat) {
+function fixtures(req, res, mysql, db, mat) {
     let conn = mysql.createConnection(db);
     conn.connect();
     let whichMat = mat;
@@ -10,15 +10,16 @@ function mat(req, res, mysql, db, mat) {
     conn.query(query, (err, rows, fields) => {
         if (err) {
             res.send("Can't find this table")
+        } else {
+            let table = matchesToHtml(rows);
+            res.render('table', {
+                title: `Matches - Mat ${whichMat}`,
+                table: table
+            })
+            console.log(rows);
         }
         
-        // throw err; don't throw
-        let table = matchesToHtml(rows);
-        res.render('table', {
-            title: `Matches - Mat ${whichMat}`,
-            table: table
-        })
-        console.log(rows);
+        
     });
     
     conn.end();

@@ -22,12 +22,9 @@ function records(req, res, mysql, db) {
     conn.query(query, (err, rows, fields) => {
         if (err) {
             res.send("Something is wrong with this record - go back")
+        } else {
+            res.send(query);
         }
-        
-        // throw err; don't throw
-        
-        res.send(query);
-        // res.redirect('/scoreboard');
     });
     
     conn.end();

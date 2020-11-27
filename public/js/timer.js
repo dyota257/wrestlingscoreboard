@@ -127,10 +127,10 @@ function shotClockTimer(time) {
             // clearInterval(interval);
             $(".shotclock").css("visibility","hidden"); //hide shot clock on timer end
             switch(shotClockPlayer){
-                case player.BLUE:
+                case 'blue':
                     redScoreUpdate(1); //other player gets the point
                     break;
-                case player.RED:
+                case 'red':
                     blueScoreUpdate(1);
                     break;
             }
