@@ -4,6 +4,9 @@
 ### Passing data
 
 [ ] Store match results in matches_records
+[ ] Store the time the match ended (Chris Samios)
+    match begin
+    clock duration at stop
 
 
 ### ROUTING

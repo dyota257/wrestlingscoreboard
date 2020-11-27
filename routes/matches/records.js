@@ -17,6 +17,9 @@ function records(req, res, mysql, db) {
         "gender"
         "style"
         "weight"
+        "time_start TIME"
+        "time_end TIME"
+        "time_clock VARCHAR(30)"
     )`;
     
     conn.query(query, (err, rows, fields) => {
@@ -28,4 +31,5 @@ function records(req, res, mysql, db) {
     });
     
     conn.end();
+    console.log(req.body);
 }

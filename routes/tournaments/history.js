@@ -16,4 +16,5 @@ function history(req, res, mysql, db, id) {
         console.log('history.js: ' + id);
     });
     conn.end();
+    console.log('history/ tournamentId: ' + req.app.get('tournamentId'));
 }

@@ -35,18 +35,11 @@ const open = require('./routes/tournaments/open.js');
 app.set('tournamentId', -1);
 
 app.route('/tournaments/history')
-    .get((req, res) => {
-        history(req, res, mysql, db, req.app.get('tournamentId'));
-        console.log('history/ tournamentId: ' + req.app.get('tournamentId'));
-    })
+    .get((req, res) => {history(req, res, mysql, db, req.app.get('tournamentId'));})
 
 app.route('/tournaments/setup')
-    .get((req,res) => {
-        setupGet(req, res, mysql,db);
-    })
-    .post((req,res) => {
-        setupPost(req, res, mysql,db);
-    });
+    .get((req,res) => {setupGet(req, res, mysql,db);})
+    .post((req,res) => {setupPost(req, res, mysql,db);});
 
 app.route('/tournaments/open')
     .get((req,res) => {
@@ -74,34 +67,34 @@ const matches_import = require('./routes/matches/matches_import.js');
 const records = require('./routes/matches/records.js');
 
 app.route('/matches/fixtures')
-    .get((req, res) => {
-        fixtures(req,res,mysql,db,req.query.mat)
-    });
+    .get((req, res) => {fixtures(req,res,mysql,db,req.query.mat)});
 
 app.route('/matches/records')
-    .post((req,res) => {
-        records(req, res, mysql, db)
-        console.log(req.body);
+    .post((req,res) => {records(req, res, mysql, db)});
+
+app.route('/matches/import')
+    .get((req,res)=>{ 
+        res.render('import', {
+            mat: req.query.mat
+        })
     })
+    .post((req, res) => {
+        // res.send('POST for mat ' + req.query.mat)
+        matches_import(req,res,mysql,db);
+    });
 
 // WRESTLERS
 const all = require('./routes/wrestlers/all.js')
 const wrestlers_import = require('./routes/wrestlers/wrestlers_import.js')
 
 app.route('/wrestlers/all')
-    .get(async (req, res) => {
-        all(req,res,mysql,db)
-    });
+    .get((req, res) => {all(req,res,mysql,db)});
 
 app.route('/wrestlers/import')
     .post(async (req, res) => {
         wrestlers_import(req,res,mysql,db);
     });
 
-app.route('/matches/import')
-    .post(async (req, res) => {
-        matches_import(req,res,mysql,db);
-    });
 
 // SQL INTERFACE
 app.route('/query')
@@ -115,7 +108,7 @@ app.route('/query')
         conn.connect();
         console.log("Connected...");
         conn.query(query, (err, rows, fields) => {
-            if (err) {res.send('Error! Try again.')} else {
+            if (err) {res.send('Error! Try again. <br><br>' + err)} else {
                 res.send(rows);
                 console.log(rows);
             }

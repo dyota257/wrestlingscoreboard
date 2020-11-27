@@ -15,7 +15,7 @@ CREATE TABLE matches_open(
     PRIMARY KEY (id),
     FOREIGN KEY (tournament) REFERENCES tournaments(id),
     FOREIGN KEY (red) REFERENCES wrestlers(id),
-    FOREIGN KEY (blue) REFERENCES wrestlers(id),
+    FOREIGN KEY (blue) REFERENCES wrestlers(id)
 );
 
 INSERT INTO matches_open

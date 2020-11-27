@@ -56,3 +56,9 @@ VALUES (
     "Greco-Roman",
     "90kg"
 );
+
+ALTER TABLE matches_records 
+ADD 
+time_start TIME,
+time_end TIME,
+time_clock VARCHAR(30);
