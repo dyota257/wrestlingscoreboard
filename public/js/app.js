@@ -37,10 +37,14 @@ $(document).keydown( (e) => {
     const redKeysMap = [71, 70, 68, 83, 65];  // [G, F, D, S, A]
 
     // spacebar
-    if (e.keyCode == 32 && $("#startTimer").prop("disabled") == false) {
-        // don't enter a "space" character
+    if (
+        e.keyCode == 32 
+        && $("#startTimer").prop("disabled") == false 
+        && $('#playerInput').css('display') === 'none'
+        && $('#importArea').css('display') === 'none'
+    ) {
+        // don't enter a "space" character if it's not in text input mode
         e.preventDefault();
-
         startTimer(now);
         console.log("timerInit: "+timerInit);
     }
@@ -132,10 +136,14 @@ $("button").click( function() {
         }
     }
 
-// Set game
+// Set game - cancel set game
     if (this.id==="setGame") {
         $("#playerInput").css("display", "flex")
     };
+    
+    if (this.id==="cancelConfirmGame") {
+        $("#playerInput").css("display", "none")
+    }
 
 // Confirm game
     if (this.id==="setConfirmGame") {

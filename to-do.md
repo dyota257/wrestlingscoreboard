@@ -22,7 +22,7 @@ This server.js file is getting really big and disorganised. Organise it.
 
 [ ] The play button gets confused / runs two timers if start button is pressed in rapid succession
 
-[ ] Space button is blocked from doing anything else except play/pause. Need to have active space button for editing import textarea.
+[x] Space button is blocked from doing anything else except play/pause. Need to have active space button for editing import textarea.
 [ ] Change firstname lastname clubname separations to look for spaces; e.g. Jake Raymon Criddle has three names, the program picked up the wrong names
     * new rules
         1. anything within brackets is the club name
@@ -31,8 +31,8 @@ This server.js file is getting really big and disorganised. Organise it.
  ?  Insert new rows into the imported 
     [ ] Keep textarea text, don't clear it
     [ ] upon re-import, "ClearCollect()" the HTML table. This is how the organisers can "insert" rows in between, for special matches or for bracket outcomes
-[ ] sound on timerend
-[ ] pause clock on timerend
+[x] sound on timerend
+[x] pause clock on timerend
 
 ## Refactoring scoreboard
 [x] Refactor resets into a function
