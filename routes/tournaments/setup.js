@@ -1,4 +1,5 @@
-module.exports = setup;
+module.exports.setupGet = get;
+module.exports.setupPost = post;
 
 const tournamentsToOptionsTitles = require(process.cwd()+'/database/tournamentsToOptionsTitles');
 const tournamentsToOptionsLocations = require(process.cwd()+'/database/tournamentsToOptionsLocations');

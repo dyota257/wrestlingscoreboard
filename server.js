@@ -29,37 +29,43 @@ app.route('/scoreboard')
 // use app variable app.use('tournamentId'), retrieve with app.get('tournamentId')
 
 const history = require('./routes/tournaments/history.js');
-const setup = require('./routes/tournaments/setup.js')();
+const {setupGet, setupPost} = require('./routes/tournaments/setup.js');
 const open = require('./routes/tournaments/open.js');
 
 app.set('tournamentId', -1);
 
 app.route('/tournaments/history')
-    .get(async (req, res) => {
+    .get((req, res) => {
         history(req, res, mysql, db, req.app.get('tournamentId'));
         console.log('history/ tournamentId: ' + req.app.get('tournamentId'));
     })
 
 app.route('/tournaments/setup')
-    .get(async (req,res) => {
-        setup[0](req, res, mysql,db);
+    .get((req,res) => {
+        setupGet(req, res, mysql,db);
     })
-    .post(async (req,res) => {
-        setup[1](req, res, mysql,db);
+    .post((req,res) => {
+        setupPost(req, res, mysql,db);
     });
 
 app.route('/tournaments/open')
     .get(async (req,res) => {
-        
         open(req, res, mysql,db);
-        
         app.set('tournamentId',  req.query.id);
         console.log('/open tournamentId: ' + app.get('tournamentId'));
     })
 
 app.route('/tournaments/openHome')
-    .get(async (req,res) => {
-        res.redirect('/tournaments/open?id='+app.get('tournamentId'))
+    .get((req,res) => {
+        if (app.get('tournamentId')>0) {
+            res.redirect('/tournaments/open?id='+app.get('tournamentId'))
+        } else {
+            res.render('error', {
+                title: 'Error!',
+                errorMessage: `Can't find what you're looking for! There is no tournament open at the moment. Set a new one up <a href="/tournaments/setup">here</a>, or go to an existing one <a href="/tournaments/history">here</a>. 
+                `
+            })
+        }
     })
 
 // MATCHES
@@ -114,10 +120,10 @@ app.route('/query')
         conn.connect();
         console.log("Connected...");
         conn.query(query, (err, rows, fields) => {
-            if (err) res.send('Error! Try again.')
-            // throw err; // don't want to throw an error and break the app
-            res.send(rows);
-            console.log(rows);
+            if (err) {res.send('Error! Try again.')} else {
+                res.send(rows);
+                console.log(rows);
+            }
         });
         conn.end();
     })
