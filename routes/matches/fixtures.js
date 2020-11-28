@@ -9,7 +9,7 @@ function fixtures(req, res, mysql, db, mat) {
     let query = `SELECT * FROM matchesRaw WHERE mat = "${whichMat}"`;
     conn.query(query, (err, rows, fields) => {
         if (err) {
-            res.send("Can't find this table")
+            res.send(`Can't find the table for mat ${whichMat}`)
         } else {
             let table = matchesToHtml(rows);
             res.render('table', {
