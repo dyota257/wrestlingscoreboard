@@ -96,20 +96,20 @@ function updateNames(matchOrder) {
 
     pairing = table[matchOrder];
     // Fixtures table
-    $(".firstName.red").text(pairing.children[5].textContent.trim());
-    $(".lastName.red").text(pairing.children[6].textContent.trim());
-    $(".clubName.red").text(pairing.children[7].textContent.trim());
-    $(".firstName.blue").text(pairing.children[9].textContent.trim());
-    $(".lastName.blue").text(pairing.children[10].textContent.trim());
-    $(".clubName.blue").text(pairing.children[11].textContent.trim());
+    $(".firstName.red").text(pairing.children[3].textContent.trim());
+    $(".lastName.red").text(pairing.children[4].textContent.trim());
+    $(".clubName.red").text(pairing.children[5].textContent.trim());
+    $(".firstName.blue").text(pairing.children[7].textContent.trim());
+    $(".lastName.blue").text(pairing.children[8].textContent.trim());
+    $(".clubName.blue").text(pairing.children[9].textContent.trim());
 
     // Game setup form
     $("#playerInput").css("display", "flex");
     
-    $("input#redFirstName").val(pairing.children[5].textContent.trim());
-    $("input#redLastName").val(pairing.children[6].textContent.trim());
-    $("input#redClubName").val(pairing.children[7].textContent.trim());
-    $("input#blueFirstName").val(pairing.children[9].textContent.trim());
-    $("input#blueLastName").val(pairing.children[10].textContent.trim());
-    $("input#blueClubName").val(pairing.children[11].textContent.trim());
+    $("input#redFirstName").val(pairing.children[3].textContent.trim());
+    $("input#redLastName").val(pairing.children[4].textContent.trim());
+    $("input#redClubName").val(pairing.children[5].textContent.trim());
+    $("input#blueFirstName").val(pairing.children[7].textContent.trim());
+    $("input#blueLastName").val(pairing.children[8].textContent.trim());
+    $("input#blueClubName").val(pairing.children[9].textContent.trim());
 }

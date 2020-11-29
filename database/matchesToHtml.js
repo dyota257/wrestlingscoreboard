@@ -15,12 +15,6 @@ function matchesToHtml(x) {
             <td>
                 ${x[i].round}
             </td>
-            <td>
-                ${x[i].mat}
-            </td>
-            <td>
-                ${x[i].id}
-            </td>
             <td style='color:red;'>
                 ${x[i].red_name}
             </td>
@@ -54,8 +48,6 @@ function matchesToHtml(x) {
         <tr style='font-weight:bold; text-align:center;'>
             <td>Category</td>
             <td>Round</td>
-            <td>Mat</td>
-            <td>Id</td>
             <td>Red</td>
             <td>Red Club</td>
             <td>Blue</td>
