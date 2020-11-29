@@ -1,5 +1,19 @@
 # To-do list
 
+[ ] key map under keys
+[ ] password at /import to prevent other people from entering stuff during the match
+[ ] highlight the currently ongoing match
+    [ ] Need a param on scoreboard for matchID
+[ ] search box to highlight when your matches are
+
+[ ] organise JS files
+    [ ] client-side
+        [ ] scoreboard
+        [ ] others
+    [ ] server-side
+
+[ ] break up scoreboard into different partials
+
 ## Tournament manager
 ### Passing data
 
@@ -26,14 +40,14 @@ This server.js file is getting really big and disorganised. Organise it.
 [ ] The play button gets confused / runs two timers if start button is pressed in rapid succession
 
 [x] Space button is blocked from doing anything else except play/pause. Need to have active space button for editing import textarea.
-[ ] Change firstname lastname clubname separations to look for spaces; e.g. Jake Raymon Criddle has three names, the program picked up the wrong names
+[x] Change firstname lastname clubname separations to look for spaces; e.g. Jake Raymon Criddle has three names, the program picked up the wrong names
     * new rules
         1. anything within brackets is the club name
         2. anything before the first space is the first name
         3. the rest is the lastname
  ?  Insert new rows into the imported 
-    [ ] Keep textarea text, don't clear it
-    [ ] upon re-import, "ClearCollect()" the HTML table. This is how the organisers can "insert" rows in between, for special matches or for bracket outcomes
+    [x] Keep textarea text, don't clear it
+    [x] upon re-import, "ClearCollect()" the HTML table. This is how the organisers can "insert" rows in between, for special matches or for bracket outcomes
 [x] sound on timerend
 [x] pause clock on timerend
 
@@ -147,7 +161,7 @@ Next project..... programming a double-elim tournament
 [x] Import textarea and fixtures are still visible when game is confirmed - hide this on confirm
 [x] In some situations, game type is wrong. If it's not overridden upon confirmgame, the variable is still storing the previous match. This happens e.g. a Greco match happens, and the next one is a 6-7yo where there is no Greco => there is no Greco selector. But, the program still remembers the style as "Greco" and keeps it as that
 [x] Put a ringing sound on timerend
-[ ] Repackage so that it's easily accessible for normal people (put all of the other files into folders, rename index.html to something stupidly obvious like launch.html)
+[x] Repackage so that it's easily accessible for normal people (put all of the other files into folders, rename index.html to something stupidly obvious like launch.html)
  ?  Single button for scoring? Less complicated?
     Can't have criteria detection for draws if this is the way
  ?  Separate timer clear and score clear?

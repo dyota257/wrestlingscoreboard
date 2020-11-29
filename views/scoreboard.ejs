@@ -93,22 +93,6 @@
             </tr>
         </table>
     </div>
-
-    <!-- <div class = "container" id = "importArea" style = "display:none"> 
-        <table>
-            <tr>
-                <td>
-                    <textarea width=500 height=50 style="width: 659px; height: 577px;"></textarea>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <button class="resetGame" id = "importDone">Confirm</button>
-                    <button class="resetGame" id = "importCancel">Cancel</button>
-                </td>
-            </tr>
-        </table>
-    </div> -->
     <div class = "container" id = "fixturesTable" style="display:none"> 
         <%- table %>
     </div>
@@ -151,20 +135,29 @@
 <!-- Control buttons row 1: scores -->
         <div class="red points-control">
             <div class="red buttonsRow">
-                <button value=4>+5</button>
-                <button value=3>+4</button>
-                <button value=2>+2</button>
-                <button value=1>+1</button>
-                <button value=0>-1</button>
+                <table style="border:none; margin-right:0; margin-left:auto;">
+                    <tr>
+                        <td style="border:none"><button value=4>+5</button><br>A</td>
+                        <td style="border:none"><button value=3>+4</button><br>S</td>
+                        <td style="border:none"><button value=2>+2</button><br>D</td>
+                        <td style="border:none"><button value=1>+1</button><br>F</td>
+                        <td style="border:none"><button value=0>-1</button><br>G</td>
+                    </tr>
+                </table>
             </div>
         </div>
         <div class="blue points-control">
             <div class="blue buttonsRow">
-                <button value=0>-1</button>
-                <button value=1>+1</button>
-                <button value=2>+2</button>
-                <button value=3>+4</button>
-                <button value=4>+5</button>
+                <table style="border:none;margin-right:auto; margin-left:0;">
+                    <tr>
+                        <td style="border:none"><button value=0>-1</button><br>H</td>
+                        <td style="border:none"><button value=1>+1</button><br>J</td>
+                        <td style="border:none"><button value=2>+2</button><br>K</td>
+                        <td style="border:none"><button value=3>+4</button><br>L</td>
+                        <td style="border:none"><button value=4>+5</button><br>;</td>
+                    </tr>
+                </table>
+
             </div>
         </div>
 <!-- Control buttons row 2: warning -->
