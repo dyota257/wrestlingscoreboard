@@ -46,7 +46,7 @@ function importMatches(x) {
         }
         // blue
         blue_name = row[5].split(/\(/)[0].trim();
-        blue_club = row[5].split(/\(/)[1];
+        blue_club = row[5].split(/\(/)[1].trim();
         arr_blue_name = blue_name.split(' ');
         blue_lastname = arr_blue_name.pop();
         blue_firstname = arr_blue_name.join(' ');

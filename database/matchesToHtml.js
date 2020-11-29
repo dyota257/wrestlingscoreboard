@@ -2,7 +2,9 @@ module.exports = matchesToHtml;
 
 function matchesToHtml(x) {
     
-    var tableRows='';
+    let tableRows='';
+    let colorRed = "color:#f99";
+    let colorBlue = "color:#99f";
 
     for(i=0; i<x.length;i++) {
         
@@ -15,28 +17,28 @@ function matchesToHtml(x) {
             <td>
                 ${x[i].round}
             </td>
-            <td style='color:red;'>
+            <td style='${colorRed};'>
                 ${x[i].red_name}
             </td>
-            <td style='color:red;display:none'>
+            <td style='${colorRed};display:none'>
                 ${x[i].red_firstname}
             </td>
-            <td style='color:red;display:none'>
+            <td style='${colorRed};display:none'>
                 ${x[i].red_lastname}
             </td>
-            <td style='color:red;'>
+            <td style='${colorRed};'>
                 ${x[i].red_club}
             </td>
-            <td style='color:blue;'>
+            <td style='${colorBlue};'>
                 ${x[i].blue_name}
             </td>
-            <td style='color:blue;display:none'>
+            <td style='${colorBlue};display:none'>
                 ${x[i].blue_firstname}
             </td>
-            <td style='color:blue;display:none'>
+            <td style='${colorBlue};display:none'>
                 ${x[i].blue_lastname}
             </td>
-            <td style='color:blue;'>
+            <td style='${colorBlue};'>
                 ${x[i].blue_club}
             </td>
         </tr>
