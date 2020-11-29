@@ -72,14 +72,13 @@ app.route('/matches/fixtures/:mat')
 app.route('/matches/records')
     .post((req,res) => {records(req, res, mysql, db)});
 
-app.route('/matches/import')
+app.route('/matches/import/:mat')
     .get((req,res)=>{ 
         res.render('import', {
-            mat: req.query.mat
+            mat: req.params.mat
         })
     })
     .post((req, res) => {
-        // res.send('POST for mat ' + req.query.mat)
         matches_import(req,res,mysql,db);
     });
 

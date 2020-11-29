@@ -2,16 +2,18 @@ module.exports = matches_import;
 
 const importMatches = require(process.cwd()+'/database/importMatches');
 
-function matches_import(req, res, mysql, db) {
+async function matches_import(req, res, mysql, db) {
     
     var values = importMatches(req.body.x);
-    res.send(values);
     
     let conn = mysql.createConnection(db);
     conn.connect();
     console.log("Connected...");
 
-    // DELETE FROM matches_temp
+    let clearTable = `DELETE FROM  matches_temp`
+
+    await conn.query(clearTable);
+
     query = `INSERT IGNORE INTO matches_temp (
         category,
         round,
@@ -29,8 +31,10 @@ function matches_import(req, res, mysql, db) {
         blue_club
         ) VALUES ${values}`;
     console.log(query);
-    conn.query(query);
+    
+    await conn.query(query);
+    
     console.log("Query successful. Table 'matches_temp' populated.");
-    res.redirect('/');
+    res.send("Query successful. Table 'matches_temp' populated.");
     conn.end();
 }
