@@ -2,11 +2,11 @@ module.exports = fixtures;
 
 const matchesToHtml = require(process.cwd()+'/database/matchesToHtml');
 
-function fixtures(req, res, mysql, db, mat) {
+function fixtures(req, res, mysql, db) {
     let conn = mysql.createConnection(db);
     conn.connect();
-    let whichMat = mat;
-    let query = `SELECT * FROM matchesRaw WHERE mat = "${whichMat}"`;
+    let whichMat = req.params.mat;
+    let query = `SELECT * FROM matches_temp WHERE mat = "${whichMat}"`;
     conn.query(query, (err, rows, fields) => {
         if (err) {
             res.send(`Can't find the table for mat ${whichMat}`)

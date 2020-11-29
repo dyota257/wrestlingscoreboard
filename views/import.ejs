@@ -6,7 +6,7 @@
 <body>
     <%- include('header'); %> 
     <h1>Import Matches for Mat <%- mat %></h1>
-    <form  action="/matches/import?mat=<%- mat %>" method="POST">
+    <form  action="/matches/import/<%- mat %>" method="POST">
         <textarea name="x" style="width: 660px; height:320px" placeholder="Paste directly from Excel into here"></textarea>
         <br><br>
         <input type="submit" value="Import matches">

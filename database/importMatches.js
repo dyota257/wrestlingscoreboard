@@ -2,7 +2,7 @@ module.exports = importMatches;
 
 function importMatches(x) {
     
-    var arr = x.split('\n');
+    var arr = x.split('\n')
 
     var newArr = [];
 
@@ -26,8 +26,6 @@ function importMatches(x) {
 
     for (i=0; i<newArr.length;i++) {
         var rowtext = newArr[i];
-        
-        // TAB SEPARATED VALUES
         var row = rowtext.split('\t');
 
         category = row[0];
@@ -37,6 +35,11 @@ function importMatches(x) {
 
         // red
         red_name = row[4].split(/\(/)[0].trim();
+        arr_red_name = red_name.split(' ');
+        red_lastname = arr_red_name.pop();
+        red_firstname = arr_red_name.join(' ');
+
+
         red_club = row[4].split(/\(/)[1];
         if (red_club !== undefined) {
             red_club = red_club.slice(0, red_club.length-1);
@@ -45,6 +48,9 @@ function importMatches(x) {
         // blue
         blue_name = row[5].split(/\(/)[0].trim();
         blue_club = row[5].split(/\(/)[1];
+        arr_blue_name = blue_name.split(' ');
+        blue_lastname = arr_blue_name.pop();
+        blue_firstname = arr_blue_name.join(' ');
 
         if (blue_club !== undefined) {
             blue_club = blue_club.slice(0, blue_club.length-1);
@@ -57,9 +63,13 @@ function importMatches(x) {
             mat: mat,
             id: id,
             red_name: red_name,
+            red_firstname: red_firstname,
+            red_lastname: red_lastname,
             red_fullname: red_name.replace(' ', '').toLowerCase(),
             red_club: red_club,
             blue_name: blue_name,
+            blue_firstname: blue_firstname,
+            blue_lastname: blue_lastname,
             blue_fullname: blue_name.replace(' ', '').toLowerCase(),
             blue_club: blue_club
         };
@@ -77,9 +87,13 @@ function importMatches(x) {
             "${matches[i].mat}",
             "${matches[i].id}",
             "${matches[i].red_name}",
+            "${matches[i].red_firstname}",
+            "${matches[i].red_lastname}",
             "${matches[i].red_fullname}",
             "${matches[i].red_club}",
             "${matches[i].blue_name}",
+            "${matches[i].blue_firstname}",
+            "${matches[i].blue_lastname}",
             "${matches[i].blue_fullname}",
             "${matches[i].blue_club}"
         ),`
@@ -89,9 +103,6 @@ function importMatches(x) {
     sqlQuery = sqlQuery.slice(0,sqlQuery.length-1);
 
     console.log(sqlQuery);
-
+    
     return sqlQuery;
 }
-
-
-
