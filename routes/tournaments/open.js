@@ -13,14 +13,10 @@ function open(req, res, mysql, db) {
     
     conn.query(query, (err, rows, fields) => {
         if (err) {
-            res.render('error', {
+            res.render('notif', {
                 title: 'Error!',
-                errorMessage: `Can't find what you're looking for! There is no tournament open at the moment. Set a new one up <a href="/tournaments/setup">here</a>, or go to an existing one <a href="/tournaments/history">here</a>. 
-                    <br><br>
-                    <p style="font-family:monospace;">
-                    Error message: ${err}
-                    </p>
-                `
+                message: `Can't find what you're looking for! There is no tournament open at the moment. Set a new one up <a href="/tournaments/setup">here</a>, or go to an existing one <a href="/tournaments/history">here</a>.`,
+                error: `<p style="font-family:monospace;">Error message: ${err}</p>`
             })
             
         } else {

@@ -35,6 +35,13 @@ async function matches_import(req, res, mysql, db) {
     await conn.query(query);
     
     console.log("Query successful. Table 'matches_temp' populated.");
-    res.send("Query successful. Table 'matches_temp' populated.");
+    
     conn.end();
+
+    res.render('notif', {
+        title: 'Success!',
+        message: `Fixtures have been updated. <br> Click <a href="/matches/fixtures/${req.params.mat}">here</a> to view fixtures.`,
+        error: ''
+    })
+
 }

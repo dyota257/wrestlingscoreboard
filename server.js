@@ -20,10 +20,9 @@ app.route('/')
     });
 
 // SCOREBOARD
-app.route('/scoreboard')
-    .get((req, res) => {
-        res.sendFile(`${__dirname}/scoreboard.html`);
-    });
+const scoreboard= require('./routes/scoreboard/scoreboard.js');
+app.route('/scoreboard/:mat')
+    .get((req, res) => {scoreboard(req, res, mysql, db);});
 
 // TOURNAMENTS
 // use app variable app.use('tournamentId'), retrieve with app.get('tournamentId')
@@ -53,10 +52,11 @@ app.route('/tournaments/openHome')
         if (app.get('tournamentId')>0) {
             res.redirect('/tournaments/open?id='+app.get('tournamentId'))
         } else {
-            res.render('error', {
+            res.render('notif', {
                 title: 'Error!',
-                errorMessage: `Can't find what you're looking for! There is no tournament open at the moment. Set a new one up <a href="/tournaments/setup">here</a>, or go to an existing one <a href="/tournaments/history">here</a>. 
-                `
+                message: `Can't find what you're looking for! There is no tournament open at the moment. Set a new one up <a href="/tournaments/setup">here</a>, or go to an existing one <a href="/tournaments/history">here</a>. 
+                `,
+                error: ''
             })
         }
     })
@@ -73,14 +73,11 @@ app.route('/matches/records')
     .post((req,res) => {records(req, res, mysql, db)});
 
 app.route('/matches/import/:mat')
-    .get((req,res)=>{ 
-        res.render('import', {
-            mat: req.params.mat
-        })
-    })
-    .post((req, res) => {
-        matches_import(req,res,mysql,db);
-    });
+    .get((req,res)=>{ res.render('import', {mat: req.params.mat})})
+    .post((req, res) => {matches_import(req,res,mysql,db);});
+
+app.route('/matches/sampleA').get((req,res)=>{res.sendFile(__dirname+'/database/CSV files/matches A.tsv')});
+app.route('/matches/sampleB').get((req,res)=>{res.sendFile(__dirname+'/database/CSV files/matches B.tsv')});
 
 // WRESTLERS
 const all = require('./routes/wrestlers/all.js')

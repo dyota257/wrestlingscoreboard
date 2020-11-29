@@ -72,6 +72,8 @@ $("button#importCancel").click( function() {
 
 
 $("button#next").click( function() {
+    table = $('[matchOrder]')
+
     if (matchOrder+1 < table.length) {
         $("tr").removeClass("matchOrder");
         matchOrder++;
@@ -94,20 +96,20 @@ function updateNames(matchOrder) {
 
     pairing = table[matchOrder];
     // Fixtures table
-    $(".firstName.red").text(pairing[0].split(" ")[0]);
-    $(".lastName.red").text(pairing[0].split(" ")[1]);
-    $(".clubName.red").text(pairing[0].split(" ")[2]);
-    $(".firstName.blue").text(pairing[1].split(" ")[0]);
-    $(".lastName.blue").text(pairing[1].split(" ")[1]);
-    $(".clubName.blue").text(pairing[1].split(" ")[2]);
+    $(".firstName.red").text(pairing.children[5].textContent.trim());
+    $(".lastName.red").text(pairing.children[6].textContent.trim());
+    $(".clubName.red").text(pairing.children[7].textContent.trim());
+    $(".firstName.blue").text(pairing.children[9].textContent.trim());
+    $(".lastName.blue").text(pairing.children[10].textContent.trim());
+    $(".clubName.blue").text(pairing.children[11].textContent.trim());
 
     // Game setup form
     $("#playerInput").css("display", "flex");
     
-    $("input#redFirstName").val(pairing[0].split(" ")[0]);
-    $("input#redLastName").val(pairing[0].split(" ")[1]);
-    $("input#redClubName").val(pairing[0].split(" ")[2]);
-    $("input#blueFirstName").val(pairing[1].split(" ")[0]);
-    $("input#blueLastName").val(pairing[1].split(" ")[1]);
-    $("input#blueClubName").val(pairing[1].split(" ")[2]);
+    $("input#redFirstName").val(pairing.children[5].textContent.trim());
+    $("input#redLastName").val(pairing.children[6].textContent.trim());
+    $("input#redClubName").val(pairing.children[7].textContent.trim());
+    $("input#blueFirstName").val(pairing.children[9].textContent.trim());
+    $("input#blueLastName").val(pairing.children[10].textContent.trim());
+    $("input#blueClubName").val(pairing.children[11].textContent.trim());
 }

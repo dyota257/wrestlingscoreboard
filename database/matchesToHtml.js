@@ -8,7 +8,7 @@ function matchesToHtml(x) {
         
         tableRows = tableRows+
         `
-        <tr>
+        <tr matchOrder="${i}">
             <td>
                 ${x[i].category}
             </td>
@@ -24,11 +24,23 @@ function matchesToHtml(x) {
             <td style='color:red;'>
                 ${x[i].red_name}
             </td>
+            <td style='color:red;display:none'>
+                ${x[i].red_firstname}
+            </td>
+            <td style='color:red;display:none'>
+                ${x[i].red_lastname}
+            </td>
             <td style='color:red;'>
                 ${x[i].red_club}
             </td>
             <td style='color:blue;'>
                 ${x[i].blue_name}
+            </td>
+            <td style='color:blue;display:none'>
+                ${x[i].blue_firstname}
+            </td>
+            <td style='color:blue;display:none'>
+                ${x[i].blue_lastname}
             </td>
             <td style='color:blue;'>
                 ${x[i].blue_club}
@@ -38,7 +50,7 @@ function matchesToHtml(x) {
         `
     }
 
-    tableRows = `<table>
+    tableRows = `<table name='list'>
         <tr style='font-weight:bold; text-align:center;'>
             <td>Category</td>
             <td>Round</td>
