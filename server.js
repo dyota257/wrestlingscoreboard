@@ -15,7 +15,8 @@ const db = require('./database/db.js')();
 // HOME
 app.route('/')
     .get((req, res) => {
-        res.sendFile(`${__dirname}/index.html`);
+        res.render('index');
+        // res.sendFile(`${__dirname}/index.html`);
         console.log('/home: ' + app.get('tournamentId'));
     });
 

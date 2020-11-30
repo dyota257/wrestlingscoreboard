@@ -47,13 +47,13 @@ function matchesToHtml(x) {
     }
 
     tableRows = `<table class="mobile" name='list'>
-        <tr class="mobile"style='font-weight:bold; text-align:center;'>
-            <td class="mobile">Category</td>
-            <td class="mobile">Round</td>
-            <td class="mobile">Red</td>
-            <td class="mobile">Red Club</td>
-            <td class="mobile">Blue</td>
-            <td class="mobile">Blue Club</td>
+        <tr class="header mobile" style='font-weight:bold; text-align:center;'>
+            <td>Category</td>
+            <td>Round</td>
+            <td>Red</td>
+            <td>Red Club</td>
+            <td>Blue</td>
+            <td>Blue Club</td>
         </tr>
     ${tableRows}</table>`
 

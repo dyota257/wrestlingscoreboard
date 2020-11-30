@@ -1,3 +1,30 @@
 @media(max-width:500px){
+    tr.header.mobile, 
+    td.mobile[data-label="round"],
+    td.mobile[data-label="red_club"],
+    td.mobile[data-label="blue_club"],
+    span.mobile
+    {
+        display:none;
+    }
     
+    span.mobile[data-label="fixtures"] {
+        display:contents;
+        font-size:1.25em;
+    }
+
+    tr.mobile {
+        border: solid white;
+    }
+
+    td.mobile {
+        border:none;
+        padding-bottom:5%;
+        text-align:left;
+        width: 95%;
+        font-size:1.5em;
+        vertical-align: top;
+
+    }
+
 }
