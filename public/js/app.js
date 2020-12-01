@@ -27,12 +27,6 @@ $(".score.blue").text(playerBlue.score);
 $(".score.red").text(playerRed.score);
 $("#startTimer").prop("disabled", true);
 
-$(document).keyup((e)=>{
-    if (e.keycode===32) {
-        e.preventDefault();
-    }
-})
-
 $(document).keydown( (e) => {
     
     const blueKeysMap = [72, 74, 75, 76, 59]; // [H, J, K, L, ;]
@@ -43,7 +37,6 @@ $(document).keydown( (e) => {
         e.keyCode == 32 
         && $("#startTimer").prop("disabled") == false 
         && $('#playerInput').css('display') === 'none'
-        && $('#importArea').css('display') === 'none'
     ) {
         // don't enter a "space" character if it's not in text input mode
         e.preventDefault();
@@ -227,6 +220,9 @@ $("button").click( function() {
             
             // confirm and set up for records
             let inputMatchID = $('td[data-label="id"]')[matchOrder].textContent.trim();
+            $("input[name='matchID']").val(inputMatchID);
+            let path = window.location.pathname.split('/');
+            $("input[name='mat']").val(path[2]);
         }
     };
 

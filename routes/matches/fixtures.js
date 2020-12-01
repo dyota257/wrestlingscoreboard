@@ -17,7 +17,7 @@ async function fixtures(req, res, mysql, db) {
                 title: `Matches - Mat ${whichMat}`,
                 table: table
             })
-            console.log(rows);
+            // console.log(rows);
         }
         
         

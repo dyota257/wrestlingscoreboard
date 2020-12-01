@@ -1,16 +1,14 @@
 module.exports = records;
 
-// const matchesToHtml = require(process.cwd()+'/database/matchesToHtml');
-
 async function records(req, res, mysql, db) {
     let conn = mysql.createConnection(db);
     conn.connect();
 
-    let query = `DELETE FROM matches_temp WHERE mat = ${req.body.mat}, id = ${req.body.matchID}`;
+    let query = `DELETE FROM matches_temp WHERE (mat = "${req.body.mat}" AND id = ${req.body.matchID})`;
 
     await conn.query(query, (err, rows, fields) => {
         if (err) {
-            res.send("Something is wrong with this record - go back")
+            res.send(err)
         } else {
             res.redirect(`/scoreboard/${req.body.mat}`);
         }
@@ -41,5 +39,5 @@ async function records(req, res, mysql, db) {
     // });
     
     conn.end();
-    res.send(req.body);
+    // res.send(req.body);
 }
