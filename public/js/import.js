@@ -11,65 +11,7 @@ var raw = "";
 var rows = [];
 var tablePage = $("table[name=list]");
 
-$("button#importDone").click( function() {
-    
-    // clear previous table!
-    table = [];
-
-    $("#fixturesTable").css("display", "flex");
-
-    tablePage.html("");
-
-    raw  =  $("textarea").val();
-    // to catch double spaces (otherwise club names are missed)
-    rawSingleSpace = raw.replace(/  /g, " "); 
-    rows = rawSingleSpace.trim().split("\n");
-
-    for (var i=0; i<rows.length; i++) {
-
-        var names  = [
-            rows[i].split("\t")[0], //red side
-            rows[i].split("\t")[1] //blue side
-        ]
-        
-        table[i] = names;
-        console.log(i);
-        console.log(names);
-        table.push(names);
-        
-
-        redFirstName = names[0].split(" ")[0];
-        redLastName = names[0].split(" ")[1];
-        redClubName = names[0].split(" ")[2];
-        blueFirstName = names[1].split(" ")[0];
-        blueLastName = names[1].split(" ")[1];
-        blueClubName = names[1].split(" ")[2];
-
-        tablePage.html(
-            tablePage.html() + 
-            "<tr matchOrder="+i+"><td>"+redFirstName+" "+redLastName+" "+redClubName+"</td><td>"+blueFirstName+" "+blueLastName+" "+blueClubName+"</td></tr>"
-        )
-    }
-
-    table.pop(); // to remove duplicate last row
-    matchOrder = 0;
-    updateNames(matchOrder);
-    $("textarea").val("");
-    $("tr[matchOrder='0']").addClass("matchOrder");
-
-    // HTML controls
-
-    $("#importArea").css("display", "none");
-    
-    // prepop names from first match
-    updateNames(0);
-
-})
-
-$("button#importCancel").click( function() {
-    $("#importArea").css("display", "none");
-})
-
+$(`tr[matchOrder='0']`).addClass("matchOrder");
 
 $("button#next").click( function() {
     table = $('[matchOrder]')
@@ -92,24 +34,25 @@ $("button#prev").click( function() {
     }
 })
 
-function updateNames(matchOrder) {
 
-    pairing = table[matchOrder];
+
+function updateNames(matchOrder) {
+    
     // Fixtures table
-    $(".firstName.red").text(pairing.children[3].textContent.trim());
-    $(".lastName.red").text(pairing.children[4].textContent.trim());
-    $(".clubName.red").text(pairing.children[5].textContent.trim());
-    $(".firstName.blue").text(pairing.children[7].textContent.trim());
-    $(".lastName.blue").text(pairing.children[8].textContent.trim());
-    $(".clubName.blue").text(pairing.children[9].textContent.trim());
+    $(".firstName.red").text(   $(`tr[matchOrder='${matchOrder}']>[data-label='red_firstname']`)[0].textContent.trim());
+    $(".lastName.red").text(    $(`tr[matchOrder='${matchOrder}']>[data-label='red_lastname']`)[0].textContent.trim());
+    $(".clubName.red").text(    $(`tr[matchOrder='${matchOrder}']>[data-label='red_club']`)[0].textContent.trim());
+    $(".firstName.blue").text(  $(`tr[matchOrder='${matchOrder}']>[data-label='blue_firstname']`)[0].textContent.trim());
+    $(".lastName.blue").text(   $(`tr[matchOrder='${matchOrder}']>[data-label='blue_lastname']`)[0].textContent.trim());
+    $(".clubName.blue").text(   $(`tr[matchOrder='${matchOrder}']>[data-label='blue_club']`)[0].textContent.trim());
 
     // Game setup form
     $("#playerInput").css("display", "flex");
     
-    $("input#redFirstName").val(pairing.children[3].textContent.trim());
-    $("input#redLastName").val(pairing.children[4].textContent.trim());
-    $("input#redClubName").val(pairing.children[5].textContent.trim());
-    $("input#blueFirstName").val(pairing.children[7].textContent.trim());
-    $("input#blueLastName").val(pairing.children[8].textContent.trim());
-    $("input#blueClubName").val(pairing.children[9].textContent.trim());
+    $("input#redFirstName").val($(`tr[matchOrder='${matchOrder}']>[data-label='red_firstname']`)[0].textContent.trim());
+    $("input#redLastName").val($(`tr[matchOrder='${matchOrder}']>[data-label='red_lastname']`)[0].textContent.trim());
+    $("input#redClubName").val($(`tr[matchOrder='${matchOrder}']>[data-label='red_club']`)[0].textContent.trim());
+    $("input#blueFirstName").val($(`tr[matchOrder='${matchOrder}']>[data-label='blue_firstname']`)[0].textContent.trim());
+    $("input#blueLastName").val($(`tr[matchOrder='${matchOrder}']>[data-label='blue_lastname']`)[0].textContent.trim());
+    $("input#blueClubName").val($(`tr[matchOrder='${matchOrder}']>[data-label='blue_club']`)[0].textContent.trim());
 }

@@ -17,6 +17,7 @@ function matchesToHtml(x) {
             <td class="mobile" data-label="mat" style="display:none" >
                 ${x[i].mat}
             </td>
+            
             <td class="mobile" data-label="category">
                 ${x[i].category}
             </td>

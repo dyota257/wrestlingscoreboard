@@ -226,7 +226,7 @@ $("button").click( function() {
             }
             
             // confirm and set up for records
-            $("input[name=matchID]")=
+            let inputMatchID = $('td[data-label="id"]')[matchOrder].textContent.trim();
         }
     };
 
