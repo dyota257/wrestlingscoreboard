@@ -12,10 +12,14 @@ app.set('view engine', 'ejs');
 
 const db = require('./database/db.js')();
 
+app.set('tournamentId', -1);
+
 // HOME
 app.route('/')
     .get((req, res) => {
-        res.render('index');
+        res.render('index', {
+            tournamentId: app.get('tournamentId')
+        });
         // res.sendFile(`${__dirname}/index.html`);
         console.log('/home: ' + app.get('tournamentId'));
     });
@@ -31,8 +35,6 @@ app.route('/scoreboard/:mat')
 const history = require('./routes/tournaments/history.js');
 const {setupGet, setupPost} = require('./routes/tournaments/setup.js');
 const open = require('./routes/tournaments/open.js');
-
-app.set('tournamentId', -1);
 
 app.route('/tournaments/history')
     .get((req, res) => {history(req, res, mysql, db, req.app.get('tournamentId'));})

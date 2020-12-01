@@ -2,7 +2,9 @@
     
     <title>Wrestling WA Tournament Centre</title>
     <style>
-
+        form {
+            display: inline;
+        }
     </style>
 </head>
 
@@ -14,18 +16,21 @@
     <table style="align-items: center;">
         <tr>
             <td>
+                <% if (tournamentId != -1) { %>
+                    <form action="/tournaments/openHome" method="get">
+                        <button class="mainPage" type="submit">Go to current tournament</button>
+                    </form>
+                <% } %>
+            </td>
+            <td>
                 <form action="/tournaments/setup" method="get">
                     <button class="mainPage" type="submit">Set up new tournament</button>
                 </form>
 
-                <form action="/tournaments/openHome" method="get">
-                    <button class="mainPage" type="submit">Go to current tournament</button>
-                </form>
-            </td>
-            <td>
                 <form action="/tournaments/history" method="get">
-                    <button class="mainPage" type="submit">Tournaments</button>
+                    <button class="mainPage" type="submit">Past tournaments</button>
                 </form>
+
             </td>
         </tr>
         <tr>
@@ -41,48 +46,8 @@
             </td>
         
         </tr>
-        <tr>
-            <td>
-                <h1>Bulk import wrestlers to <span style="font-family: 'Consolas', 'Courier New', Courier, monospace;">wrestlers</span></h1>
-                <form action="/wrestlers/import" method="post">
-                    <textarea name="x" id="" cols="30" rows="10"></textarea><br>
-                    <button>import wrestlers</button>
-                </form>
-            </td>
-            <td>
-                <h1>Bulk import matches into <span style="font-family: 'Consolas', 'Courier New', Courier, monospace;">matchesRaw</span></h1>
-                <form action="/importMatches" method="post">
-                    <textarea name="x" id="" cols="30" rows="10"></textarea><br>
-                    <button>import matches</button>
-                </form>
-            </td>
-        </tr>
+
     </table>
-
-    <form action="/query" method="GET">
-        <button>Query</button>
-    </form>
-
-    <form action="/tournaments/history" method="GET">
-        <button>/tournaments/history</button>
-    </form>
-
-    <!-- <h1>Add to database table <span style="font-family: 'Consolas', 'Courier New', Courier, monospace;">"matchesRaw"</span></h1>
-    <form action="/add" method="post">
-        <label for="category">category</label><br>
-        <input type="text" name="category" id="" value="category"><br>
-        <label for="round">round</label><br>
-        <input type="text" name="round" id="" value="round"><br>
-        <label for="mat">mat</label><br>
-        <input type="text" name="mat" id="" value="mat"><br>
-        <label for="id">id</label><br>
-        <input type="text" name="id" id="" value="id"><br>
-        <label for="red">red</label><br>
-        <input type="text" name="red" id="" value="red"><br>
-        <label for="blue">blue</label><br>
-        <input type="text" name="blue" id="" value="blue"><br>
-        <input type="submit" value="add">
-    </form> -->
 
 </body>
 </html>
