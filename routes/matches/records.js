@@ -2,11 +2,21 @@ module.exports = records;
 
 // const matchesToHtml = require(process.cwd()+'/database/matchesToHtml');
 
-function records(req, res, mysql, db) {
+async function records(req, res, mysql, db) {
     let conn = mysql.createConnection(db);
     conn.connect();
 
-    let query = `INSERT INTO matches_records VALUES (
+    let query = `DELETE FROM matches_temp WHERE mat = ${req.body.mat}, id = ${req.body.matchID}`;
+
+    await conn.query(query, (err, rows, fields) => {
+        if (err) {
+            res.send("Something is wrong with this record - go back")
+        } else {
+            res.redirect(`/scoreboard/${req.body.mat}`);
+        }
+    });
+
+    query = `INSERT INTO matches_records VALUES (
         "id"
         "tournament"
         "red"
@@ -17,19 +27,19 @@ function records(req, res, mysql, db) {
         "gender"
         "style"
         "weight"
-        "time_start TIME"
-        "time_end TIME"
-        "time_clock VARCHAR(30)"
+        "time_start"
+        "time_end"
+        "time_clock"
     )`;
-    
-    conn.query(query, (err, rows, fields) => {
-        if (err) {
-            res.send("Something is wrong with this record - go back")
-        } else {
-            res.send(query);
-        }
-    });
+
+    // await conn.query(query, (err, rows, fields) => {
+    //     if (err) {
+    //         res.send("Something is wrong with this record - go back")
+    //     } else {
+    //         res.send(query);
+    //     }
+    // });
     
     conn.end();
-    console.log(req.body);
+    res.send(req.body);
 }

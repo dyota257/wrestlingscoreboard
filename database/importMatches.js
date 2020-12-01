@@ -43,16 +43,21 @@ function importMatches(x) {
         red_club = row[4].split(/\(/)[1];
         if (red_club !== undefined) {
             red_club = red_club.slice(0, red_club.length-1);
+        } else {
+            red_club = " - "
         }
+
         // blue
         blue_name = row[5].split(/\(/)[0].trim();
-        blue_club = row[5].split(/\(/)[1].trim();
         arr_blue_name = blue_name.split(' ');
         blue_lastname = arr_blue_name.pop();
         blue_firstname = arr_blue_name.join(' ');
-
+        
+        blue_club = row[5].split(/\(/)[1];
         if (blue_club !== undefined) {
-            blue_club = blue_club.slice(0, blue_club.length-1);
+            blue_club = blue_club.trim().slice(0, blue_club.length-1);
+        } else {
+            blue_club = " - "
         }
 
         newMatch = {

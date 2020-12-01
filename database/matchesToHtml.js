@@ -11,6 +11,12 @@ function matchesToHtml(x) {
         tableRows = tableRows+
         `
         <tr class="mobile" matchOrder="${i}">
+            <td class="mobile" data-label="id" style="display:none" >
+                ${x[i].id}
+            </td>
+            <td class="mobile" data-label="mat" style="display:none" >
+                ${x[i].mat}
+            </td>
             <td class="mobile" data-label="category">
                 ${x[i].category}
             </td>
@@ -39,7 +45,7 @@ function matchesToHtml(x) {
                 ${x[i].blue_lastname}
             </td>
             <td class="mobile" data-label="blue_club" style='${colorBlue};'>
-                ${x[i].blue_club}
+                ${x[i].blue_club.slice(0,-1)}
             </td>
         </tr>
         

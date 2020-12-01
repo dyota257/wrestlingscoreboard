@@ -225,6 +225,8 @@ $("button").click( function() {
                 gameTypeWinScore = 10;
             }
             
+            // confirm and set up for records
+            $("input[name=matchID]")=
         }
     };
 

@@ -1,7 +1,8 @@
 # To-do list
 
-[ ] key map under keys
-[ ] password at /import to prevent other people from entering stuff during the match
+[x] key map under keys
+[/] password at /import to prevent other people from entering stuff during the match
+    hid the other nav bar items in mobile mode
 [ ] highlight the currently ongoing match
     [ ] Need a param on scoreboard for matchID
 [ ] search box to highlight when your matches are
