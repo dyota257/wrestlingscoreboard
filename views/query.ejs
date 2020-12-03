@@ -5,11 +5,15 @@
 </head>
 <body>
     <%- include('header'); %> 
-    <form  action="/query" method="post">
-        <textarea name="query" style="width: 660px; height:320px">SELECT * FROM tournaments </textarea>
-        <br><br>
-        <input type="submit" value="Write query">
-    </form>
+
+    <section class="container">
+        <form  action="/query" method="post">
+            <textarea class="textarea" name="query" style="width: 660px; height:320px; font-family:monospace">SELECT * FROM tournaments </textarea>
+            <br><br>
+            <input class="button is-primary is-large"type="submit" value="Write query">
+        </form>
+
+    </section>
 
     
     

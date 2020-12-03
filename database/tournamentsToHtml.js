@@ -25,7 +25,7 @@ function tournamentsToHtml(x, id) {
         `
     }
 
-    tableRows = `<table>
+    tableRows = `<table class='table'>
         <tr style='font-weight:bold; text-align:center;'>
             <td>Date</td>
             <td>Title</td>

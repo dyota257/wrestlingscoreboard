@@ -3,21 +3,18 @@
         <%- title %>
     </title>
 
-    <style>
-        body {
-            color: white;
-            display: block;
-            text-align: left;
-
-        }
-    </style>
-
 </head>
 <body>
     <%- include('header'); %> 
-    <h1><%- title %></h1>
-    <%- message %> 
-    <br><br>
-    <%- error %> 
+    <section class="container">
+        <h1 class="title is-3"><%- title %></h1>
+
+    </section>
+    
+    <section class="container">
+        <%- message %> 
+        <br><br>
+        <%- error %> 
+    </section>
 </body>
 </html>
