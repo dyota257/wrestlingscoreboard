@@ -1,7 +1,12 @@
 # To-do list
 
+## CSS
 
-[ ] scoring buttons are broken
+[ ] 
+
+## misc
+
+[x] scoring buttons are broken
 [x] key map under keys
 [/] password at /import to prevent other people from entering stuff during the match
     hid the other nav bar items in mobile mode

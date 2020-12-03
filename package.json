@@ -12,10 +12,15 @@
     "mysql": "^2.18.1",
     "nodemon": "^2.0.6"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "node-sass": "^5.0.0"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js"
+    "css-build": "node-sass --omit-source-map-url public/css/bulmaStyles.scss public/css/dist/bulmaStyles.css",
+    "css-watch": "npm run css-build -- --watch",
+    
+    "start": "npm run css-watch"
   },
   "author": "",
   "license": "ISC"
