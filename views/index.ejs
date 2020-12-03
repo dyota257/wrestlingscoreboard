@@ -13,41 +13,25 @@
     
     <h1>Tournament Centre</h1>
     
-    <table style="align-items: center;">
-        <tr>
-            <td>
-                <% if (tournamentId != -1) { %>
-                    <form action="/tournaments/openHome" method="get">
-                        <button class="mainPage" type="submit">Go to current tournament</button>
-                    </form>
-                <% } %>
-            </td>
-            <td>
-                <form action="/tournaments/setup" method="get">
-                    <button class="mainPage" type="submit">Set up new tournament</button>
-                </form>
+        <% if (tournamentId != -1) { %>
+            <form action="/tournaments/openHome" method="get">
+                <button class="button is-primary is-large" type="submit">Go to current tournament</button>
+            </form>
+        <% } %>
+        <form action="/tournaments/setup" method="get">
+            <button class="button is-primary" type="submit">Set up new tournament</button>
+        </form>
 
-                <form action="/tournaments/history" method="get">
-                    <button class="mainPage" type="submit">Past tournaments</button>
-                </form>
+        <form action="/tournaments/history" method="get">
+            <button class="button is-primary" type="submit">Past tournaments</button>
+        </form>
 
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <form action="/wrestlers/all" method="get">
-                    <button class="mainPage" type="submit">All Wrestlers</button>
-                </form>
-            </td>
-            <td>
-                <form action="/scoreboard/A" method="get">
-                    <button class="mainPage" type="submit">Scoreboard</button>
-                </form>
-            </td>
-        
-        </tr>
-
-    </table>
+        <form action="/wrestlers/all" method="get">
+            <button class="button is-primary" type="submit">All Wrestlers</button>
+        </form>
+        <form action="/scoreboard/A" method="get">
+            <button class="button is-primary" type="submit">Scoreboard</button>
+        </form>
 
 </body>
 </html>
