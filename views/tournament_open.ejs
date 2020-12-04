@@ -5,42 +5,56 @@
 </head>
 <body>
     <%- include('header'); %> 
-    <h1 class="title is-1"><%- title %></h1>
-    <h3 class="subtitle is-3"><%- location %>,  <%- date %></h3>
     
-    <table>
-        <tr>
-            <td>
-                <form action="/matches/fixtures/A" method="get">
-                    <button id="matA" class="mainPage" type="submit">Matches Mat A</button>
-                </form>
-                <form action="/scoreboard/A" method="get">
-                    <button class="mainPage" type="submit">Scoreboard Mat A</button>
-                </form>
-                <a href="/matches/import/A">Import matches</a>
-                <br> <a href="/images/Fixtures - Mat A.png">QR code</a>
-                <br> <a href="/matches/sampleA">Sample input</a>
-            </td>
-            <td>
-                <form action="/matches/fixtures/B" method="get">
-                    <button id="matB" class="mainPage" type="submit">Matches Mat B</button>
-                </form>
-                <form action="/scoreboard/B" method="get">
-                    <button class="mainPage" type="submit">Scoreboard Mat B</button>
-                </form>
-                <a href="/matches/import/B">Import matches</a>
-                <br> <a href="/images/Fixtures - Mat B.png">QR code</a>
-                <br> <a href="/matches/sampleB">Sample input</a>
-            </td>
-        </tr>
-        <tr>
-            <td colspan="2">
-                <form action="/wrestlers/open" method="get">
-                    <button class="mainPage" type="submit">Registered wrestlers</button>
-                </form>
-            </td>
-        </tr>
-    </table>
+    <section class="section">
+        <div class="container">
+            <h1 class="title is-1"><%- title %></h1>
+            <h3 class="subtitle is-3"><%- location %>,  <%- date %></h3>
+
+        </div>
+    </section>
+
+    <div class="container">
+        <div class="tile is-ancestor">
+            <div class="tile is-vertical is-8">
+                <div class="tile">
+                    <div class="tile is-parent is-vertical">
+                            <div class="tile is-child">
+                                <form class="block" action="/matches/fixtures/A" method="get">
+                                    <button class="button is-primary is-large" id="matA" type="submit">Matches Mat A</button>
+                                </form>
+                                <form class="block" action="/scoreboard/A" method="get">
+                                    <button class="button is-primary block" type="submit">Scoreboard Mat A</button>
+                                </form>
+                                <a class="button is-primary is-light is-small block" href="/matches/import/A">Import matches</a>
+                                <br> <a class="button is-primary is-light is-small block" href="/images/Fixtures - Mat A.png">QR code</a>
+                                <br> <a class="button is-primary is-light is-small block" href="/matches/sampleA">Sample input</a>
+                            </div>                        
+                    </div>
+                    <div class="tile is-parent">
+                        <div class="tile is-child">
+                            <form class="block" action="/matches/fixtures/B" method="get">
+                                <button class="button is-primary is-large block" id="matB" type="submit">Matches Mat B</button>
+                            </form>
+                            <form class="block" action="/scoreboard/B" method="get">
+                                <button class="button is-primary block" type="submit">Scoreboard Mat B</button>
+                            </form>
+                            <a class="button is-primary is-light is-small block" href="/matches/import/B">Import matches</a>
+                            <br> <a class="button is-primary is-light is-small block" href="/images/Fixtures - Mat B.png">QR code</a>
+                            <br> <a class="button is-primary is-light is-small block" href="/matches/sampleB">Sample input</a>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="tile is-parent is-wide notification">
+                    <form class="block" action="/wrestlers/open" method="get">
+                        <button class="button is-primary" type="submit">Registered wrestlers</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+    </div>
 
 </body>
 </html>

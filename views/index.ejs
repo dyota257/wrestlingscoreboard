@@ -18,10 +18,11 @@
         </section>
     
         <section class="section">
-            <div class="container">
+            
+            <div class="container block">
                 <h1 class="title">Get started</h1>
                     
-                <div class="container">
+                <div class="container block">
                     <% if (tournamentId != -1) { %>
                         <form action="/tournaments/openHome" method="get">
                             <button class="button is-primary is-large" type="submit">Go to current tournament</button>
@@ -36,7 +37,7 @@
                     <% } %> 
                 </div>
                 
-                <div class="container">
+                <div class="container block">
                     <form action="/tournaments/setup" method="get">
                         <button class="button is-primary" type="submit">Set up new tournament</button>
                     </form>

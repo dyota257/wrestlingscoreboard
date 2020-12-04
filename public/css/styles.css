@@ -32,6 +32,12 @@ label {
     font-weight: bold;
 }
 
+.navbar {
+    align-self: stretch;
+    background-color:black;
+
+}
+
 p {
     color: white;
 }
