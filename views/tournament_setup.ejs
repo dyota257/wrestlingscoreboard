@@ -3,67 +3,66 @@
         Tournament setup
     </title>
 
-    <style>
-        div {
-            display:flex;
-            align-items:center;
-            align-self: center;
-        }
-    </style>
-
     <script src="../js/tournaments_setup.js" defer></script>
 
 </head>
 <body>
     <%- include('header'); %> 
     
-    <h1>Set up new tournament</h1>
+    <section class="section">
+        <div class="container">
+            <h1 class="title is-3">Set up new tournament</h1>
+        </div>
+    </section>
 
-    <div>
-    <form action="/tournaments/setup" method="post">
-        <table style="display:flex; align-self: center; align-items:center;">
-            <tr>
-                <td>
+    <section class="container">
+        <form action="/tournaments/setup" method="post"></form>
+            <div class="field">
+                <label for="" class="label">
                     <strong>Tournament title</strong>
-                </td>
-                <td>
+                </label>
+                <div class="control">
                     Choose from a previous tournament name:<br>
-                    <select name="title" value="">
-                        <%- optionsTitles %>
-                    </select>
+                    <div class="select">
+                        <select name="title" value="">
+                            <%- optionsTitles %>
+                        </select>
+                    </div>
                     <br><br>
                     <span style="visibility: hidden;" name="otherTitleLabel">Or enter a new one: <br></span>
-                    <input style="visibility: hidden;" name="otherTitle" type="text" placeholder="Enter new tournament name"></input>
-                </td>
-            </tr>
-            <tr>
-                <td>
+                    <input class="select" style="visibility: hidden;" name="otherTitle" type="text" placeholder="Enter new tournament name"></input>
+                </div>
+            </div>
+
+            <div class="field">
+                <label for="" class="label">
                     <strong>Date</strong>
-                </td>
-                <td>
-                    <input type="date" name="date" id="" value=<%- today%> >
-                </td>
-            </tr>
-            <tr>
-                <td>
+                </label>
+                <div class="control">
+                    <input class="select" type="date" name="date" id="" value=<%- today%> >
+                </div>
+            </div>
+
+            <div class="field">
+                <label for="" class="label">
                     <strong>Location</strong>
-                </td>
-                <td>
+                </label>
+                <div class="control">
                     Choose from a previous location:<br>
-                    <select name="location" value="">
-                        <%- optionsLocations %>
-                    </select><br><br>
+                    <div class="select">
+                        <select name="location" value="">
+                            <%- optionsLocations %>
+                        </select>
+                    </div>
+                    <br><br>
                     <span style="visibility: hidden;" name="otherLocationLabel">Or enter a new one: <br></span>
-                    <input style="visibility: hidden;" name="otherLocation" type="text" placeholder="Enter new location"></input>
-                </td>
-            </tr>
-        </table>
+                    <input class="select" style="visibility: hidden;" name="otherLocation" type="text" placeholder="Enter new location"></input>
+                </div>
+            </div>
 
-        <input style="visibility: hidden;" type="submit" value="Create tournament">
-
-    </form>
-    </div>
-
+            <input class="button is-primary" style="visibility: hidden;" type="submit" value="Create tournament">
+        </form>
+    </section>
     
 </body>
 </html>

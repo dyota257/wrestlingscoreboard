@@ -11,43 +11,58 @@
 <body>
     <%- include('header') %>
     
-    <h1>Tournament Centre</h1>
+        <section class="hero">            
+            <div class="container">
+                <h1 class="title is-1">Tournament Centre</h1>
+            </div>
+        </section>
     
-    <table style="align-items: center;">
-        <tr>
-            <td>
-                <% if (tournamentId != -1) { %>
-                    <form action="/tournaments/openHome" method="get">
-                        <button class="mainPage" type="submit">Go to current tournament</button>
+        <section class="section">
+            
+            <div class="container block">
+                <h1 class="title">Get started</h1>
+                    
+                <div class="container block">
+                    <% if (tournamentId != -1) { %>
+                        <form action="/tournaments/openHome" method="get">
+                            <button class="button is-primary is-large" type="submit">Go to current tournament</button>
+                        </form>
+                    <% } else { %>
+                        <div class="box">
+                            No tournament open yet! 
+                            <br>
+                            Use the buttons below to set up a new one, or open a previously created tournament to get started.
+                            <br>
+                        </div>
+                    <% } %> 
+                </div>
+                
+                <div class="container block">
+                    <form action="/tournaments/setup" method="get">
+                        <button class="button is-primary" type="submit">Set up new tournament</button>
                     </form>
-                <% } %>
-            </td>
-            <td>
-                <form action="/tournaments/setup" method="get">
-                    <button class="mainPage" type="submit">Set up new tournament</button>
-                </form>
-
-                <form action="/tournaments/history" method="get">
-                    <button class="mainPage" type="submit">Past tournaments</button>
-                </form>
-
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <form action="/wrestlers/all" method="get">
-                    <button class="mainPage" type="submit">All Wrestlers</button>
-                </form>
-            </td>
-            <td>
-                <form action="/scoreboard/A" method="get">
-                    <button class="mainPage" type="submit">Scoreboard</button>
-                </form>
-            </td>
+            
+                    <form action="/tournaments/history" method="get">
+                        <button class="button is-primary" type="submit">Past tournaments</button>
+                    </form>    
+                
+                </div>
+                
+            </div>
+        </section>
         
-        </tr>
-
-    </table>
+        
+        <section class="container">
+            <div class="container">
+                <h1 class="title">Other tools</h1>
+                <form action="/wrestlers/all" method="get">
+                    <button class="button is-primary" type="submit">All Wrestlers</button>
+                </form>
+                <form action="/scoreboard/A" method="get">
+                    <button class="button is-primary" type="submit">Scoreboard</button>
+                </form>
+            </div>
+        </section>
 
 </body>
 </html>

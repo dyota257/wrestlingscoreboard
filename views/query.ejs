@@ -5,11 +5,20 @@
 </head>
 <body>
     <%- include('header'); %> 
-    <form  action="/query" method="post">
-        <textarea name="query" style="width: 660px; height:320px">SELECT * FROM tournaments </textarea>
-        <br><br>
-        <input type="submit" value="Write query">
-    </form>
+
+    <section class="container">
+
+        <h1 class="title is-3">SQL query</h1>
+
+        <p class="block">Use the text box below to interact directly with the database. Results are displayed in JSON format. </p>
+
+        <form  class="block" action="/query" method="post">
+            <textarea class="textarea" name="query" style="width: 660px; height:320px; font-family:monospace">SELECT * FROM tournaments </textarea>
+            <br><br>
+            <input class="button is-primary is-large"type="submit" value="Write query">
+        </form>
+
+    </section>
 
     
     

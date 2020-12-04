@@ -1,14 +1,35 @@
-<div id="mainHeader">
-	<span id="logo"><img src="http://wrestlingwa.org/wp-content/uploads/wwa_logo.png"></span>
-	
+<div id="mainHeader" class="hero is-primary">
+    <!-- <span id="logo"><img src="images/wwa_logo.png"></span> -->
+    <img width="768" height="108" src="http://wrestlingwa.org/wp-content/uploads/wwa_logo.png">
 </div>
-<div class="nav">
-	<span class="mobile" ><a href="/">Home</a></span>
-	<span class="mobile" ><a href="/tournaments/openHome">Current tournament</a></span>
-	<span class="mobile" data-label="fixtures">Mat <a href="/matches/fixtures/A">A</a>/<a href="/matches/fixtures/B">B</a></span>
-	<span class="mobile" >Scoreboard <a href="/scoreboard/A">A</a>/<a href="/scoreboard/B">B</a></span>
-	<span class="mobile" ><a href="/tournaments/history">Tournaments</a></span>
-	<span class="mobile" ><a href="/wrestlers/all">Wrestlers</a></span>
-	<span class="mobile" ><a href="/query">Query</a></span>
 
-</div>
+<nav class="navbar" role="navigation" aria-label="main navigation">
+    <div  class="navbar-menu">
+        <div class="navbar-start">
+            <a class="navbar-item" href="/">Home</a>
+            <a class="navbar-item" href="/tournaments/openHome">Current tournament</a>
+        
+        <div class="navbar-item has-dropdown is-hoverable">
+            <a class="navbar-link">Tournaments</a>
+            <div class="navbar-dropdown">
+                <a class="navbar-item" href="/tournaments/setup">Set up new tournament</a>
+                <a class="navbar-item" href="/tournaments/history">Past tournaments</a>
+                <hr class="navbar-divider">
+                <a class="navbar-item" href="/scoreboard/A">Scoreboard Mat A</a>
+                <a class="navbar-item" href="/scoreboard/B">Scoreboard Mat B</a>
+            </div>
+        </div>
+        <div class="navbar-item has-dropdown is-hoverable">
+            <a class="navbar-link">Fixtures</a>
+            <div class="navbar-dropdown">
+              <a class="navbar-item" href="/matches/fixtures/A">Mat A</a>
+              <a class="navbar-item" href="/matches/fixtures/B">Mat B</a>
+            </div>
+        </div>
+        <a class="navbar-item" href="/wrestlers/all">Wrestlers</a>
+      </div>
+      <div class="navbar-end">
+            <a class="button is-primary is-light  navbar-item" href="/query">Query</a>
+      </div>
+    </div>
+  </nav>

@@ -6,6 +6,8 @@
 
 ## misc
 
+
+
 [x] scoring buttons are broken
 [x] key map under keys
 [/] password at /import to prevent other people from entering stuff during the match
@@ -63,6 +65,8 @@ This server.js file is getting really big and disorganised. Organise it.
 [x] Refactor resets into a function
 [x] Refactor colour buttons class names
 [x] comment out/delete console.logs on timers
+[ ] Rework how classes are assigned in scoreboard elements
+    [ ] Refactor behaviour
 
 ## Shotclock
 [x] Make shot clock in sync with current time

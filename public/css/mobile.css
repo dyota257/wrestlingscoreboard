@@ -8,7 +8,7 @@
         display:none;
     }
     
-    span.mobile[data-label="fixtures"] {
+    /* span.mobile[data-label="fixtures"] {
         display:contents;
         font-size:1.25em;
     }
@@ -25,14 +25,14 @@
     td.mobile[data-label="category"] {
         padding-right:0px;
     }
-
-    td.mobile {
+ */
+    /* td.mobile {
         border:none;
         padding-bottom:5%;
         text-align:left;
         font-size:1.5em;
         vertical-align: top;
 
-    }
+    } */
 
 }
