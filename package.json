@@ -19,7 +19,6 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "css-build": "node-sass --omit-source-map-url public/css/bulmaStyles.scss public/css/dist/bulmaStyles.css",
     "css-watch": "npm run css-build -- --watch",
-    
     "start": "npm run css-watch"
   },
   "author": "",

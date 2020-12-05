@@ -5,13 +5,20 @@
 </head>
 <body>
     <%- include('header'); %> 
-    <h1>Import Matches for Mat <%- mat %></h1>
-    <form  action="/matches/import/<%- mat %>" method="POST">
-        <textarea name="x" style="width: 660px; height:320px" placeholder="Paste directly from Excel into here"></textarea>
-        <br><br>
-        <input type="submit" value="Import matches">
-    </form>
-    <a href="/matches/sample<%- mat %>">Sample</a>
+    
+    <section class="container">
+        <h1 class="title is-3">Import Matches for Mat <%- mat %></h1>
+        <p class="block">Copy and paste fixtures from Excel sheet directly into the text box below (from the first column to the last).</p>
+        
+        <form class="block" action="/matches/import/<%- mat %>" method="POST">
+            <textarea class="textarea" name="x" placeholder="Paste directly from Excel into here"></textarea>
+            <br><br>
+            <input class="button is-primary is-large"type="submit" value="Import matches">
+        </form>
+        
+        <a href="/matches/sample<%- mat %>">Sample</a>
+
+    </section>
 
 </body>
 </html>
