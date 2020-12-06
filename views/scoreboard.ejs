@@ -1,5 +1,6 @@
 <%- include('boilerplate'); %> 
-    <link rel="stylesheet" href="/css/dist/styles.css">
+
+    <link rel="stylesheet" href="/css/scoreboard.css">
     <!-- To run HTML file through node.js -->
     <script defer src="../js/jquery-3.5.1.slim.min.js"> </script>
     <script defer src="../js/dropdowns.js"></script>
@@ -21,7 +22,6 @@
     <div id="resetGameRow">
         <button class="resetGame" id = "setGame">Set game</button>
         <button class="resetGame" id = "resetGame">Reset all</button>
-        <!-- <button class="resetGame" id = "import">Import</button> -->
         <button class="resetGame" id = "fixtures">Fixtures</button>
         <button class="resetGame" id = "prev"><<</button>
         <button class="resetGame" id = "next">>></button>
@@ -31,62 +31,11 @@
     <div class = "container" id="playerInput" style="display:none">
         <table class="container">
             <tr>
-                <td class="red">
-<!-- Players details red -->
-                    <label>Red first name</label>
-                    <input type = "text" name="playerData" id = "redFirstName" value = "redFirstName"><br><br>
-                    <label>Red last name</label>
-                    <input type = "text" name="playerData" id = "redLastName" value = "redLastName"><br><br>
-                    <label>Red club name</label>
-                    <input type = "text" name="playerData" id = "redClubName" value = "redClubName"><br><br>
-                </td>
-                <td class="blue">
-                    <label>Blue first name</label>
-                    <input type = "text" name="playerData" id = "blueFirstName" value = "blueFirstName"><br><br>
-                    <label>Blue last name</label>
-                    <input type = "text" name="playerData" id = "blueLastName" value = "blueLastName"><br><br>
-                    <label>Blue club name</label>
-                    <input type = "text" name="playerData" id = "blueClubName" value = "blueClubName"><br><br>
-                </td>
+                <% include ('scoreboard/playerinput') %> 
                 <td>
-<!-- Dropdown lists -->
-                    <label>Mat</label>
-                    <select name="mat" value="">
-                        <option value="" selected></option>
-                        <option value="Mat A">Mat A</option>
-                        <option value="Mat B">Mat B</option>
-                    </select><br> <br>    
-                    <label>Age</label><br>
-                    <select name="age" value="">
-                        <option value="" selected></option>
-                        <option value="6-7 yrs">6-7 yrs</option>
-                        <option value="8-9 yrs">8-9 yrs</option>
-                        <option value="10-11 yrs">10-11 yrs</option>
-                        <option value="12-13 yrs">12-13 yrs</option>
-                        <option value="14-15 yrs">14-15 yrs</option>
-                        <option value="16-17 yrs">16-17 yrs</option>
-                        <option value="18-20 yrs">18-20 yrs</option>
-                        <option value="21yrs+">21yrs+</option>
-                    </select><br> <br>
-                    <label name="gender">Gender</label><br>
-                    <select name="gender">
-                        <option value="" selected></option>
-                        <option value="Female">Female</option>
-                        <option value="Male">Male</option>
-                    </select> <br> <br>
-                    <label name="style">Style</label><br>
-                    <select name="style">
-                        <option value=""></option>
-                        <option value="Freestyle">Freestyle</option>
-                        <option value="Greco-Roman">Greco-Roman</option>
-                    </select> <br> <br>
-                    <label name="weight">Weight</label><br>
-                    <select name="weight">
-                        <option value=""></option>
-                    </select> <br> <br>
+                    <% include ('scoreboard/dropdowns') %> 
                 </td>
             </tr>
-<!-- Confirm game button -->
             <tr>
                 <td colspan="5" >
                     <button class="resetGame" id="setConfirmGame">Confirm</button>
@@ -191,37 +140,7 @@
     <div>
 
 <!-- Popup  -->
-    <div class="popup">
-        <div class="popup-content">
-            <img src="images/close.png" alt="" srcset="" class="close">
-            <div class="popup-text">
-
-            </div>
-            <form method="POST" action="/matches/records">
-                <div style="display: none;">
-                    <input type="text" name="matchID">
-                    <input type="text" name="mat">
-                    <input type="text" name="tournament">
-                    <input type="text" name="red">
-                    <input type="text" name="blue">
-                    <input type="text" name="winner">
-                    <input type="text" name="class_points">
-                    <input type="text" name="age">
-                    <input type="text" name="gender">
-                    <input type="text" name="style">
-                    <input type="text" name="weight">
-                    <input type="text" name="time_start">
-                    <input type="text" name="time_end">
-                    <input type="text" name="time_clock">
-                </div>
-                <button type="submit">Save result</button>
-            </form>
-            
-        </div>
-    </div>
-
-
-
+        <% include ('scoreboard/popup') %> 
 
 <!-- Footer -->
     <br>

@@ -2,11 +2,25 @@
 
 ## CSS
 
-[ ] 
+[ ] One QR code (one route for match fixtures)
+    [ ] On-page toggle for Mat A/Mat B
+
+[/] Insert a line in between? For when people pull out of matches
+
+[ ] Exhibitions? Remember to mark them correctly somehow
+    [ ] Or have a category for "exhbitions" and have a choice of a 2-min or a 3-min match
+
+[ ] Tech sup victory DON'T STOP THE CLOCK
+
+[ ] End time is not important information
+
+[ ] Victory - tell the timekeeper if they want to accounce victory or not
+
+[ ] Rearrange player name and club section on scoreboard
+
+[ ] airhorn isn't working - fix this. 
 
 ## misc
-
-
 
 [x] scoring buttons are broken
 [x] key map under keys
