@@ -15,7 +15,7 @@ const phases = [ "1", "rest", "2"];
 const timeRest = 30; // should be 30 seconds
 var phasePos = 0;
 var phasesTime = [0,0,0];
-
+ 
 let nowOffset = 0;
 const shotClockTime = 30;
 let shotClockTimerOn = false;

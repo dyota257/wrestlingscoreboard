@@ -1,0 +1,481 @@
+// For nav bar
+
+
+/* Variables */
+
+$WWA: #ffcc00;
+
+/* Tags */
+
+a {
+    color:$WWA;
+}
+
+body {
+    background-color: black;
+    font-family: Arial, Helvetica, sans-serif;
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    --score-button-font-size: 15pt;
+}
+
+div, h1, p, h3, label {
+    color: white;
+}
+
+h3 {
+    font-style: italic;
+}
+
+label {
+    font-weight: bold;
+}
+
+table {
+    table-layout: fixed;
+    width: 80%;
+}
+
+td {
+    border-color: white;
+    border-collapse: collapse;
+    border: 2px solid white;
+    color: white;
+    padding: 20px;
+    width: 25%;
+}
+
+button, input[type=submit] {
+    color: black;
+    background-color:$WWA;
+    font-size: large;
+    font-weight: bold;
+    padding: 5% 5%;
+}
+
+button {
+    &.timer {
+        color: black;
+        font-size: small;
+        font-weight: normal;
+        padding: 2.5% 5%;
+        &:disabled {
+            color: grey;
+        }
+    }
+    
+    &#download {
+        padding: 5px;
+        border-radius: 5px;
+    }
+}
+
+
+/* Ids */
+
+#footer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#main-display {
+    width: 95%;
+    height: 100vh;
+    background: black;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+    grid-template-rows: 60% 20% 1fr 1fr 1fr;
+    grid-gap: 2px;
+    grid-template-areas:
+      "left-player left-player time time right-player right-player"
+      "left-score left-score left-score right-score right-score right-score"
+      "left-points-control left-points-control left-points-control right-points-control right-points-control right-points-control"
+      "left-penalty-control left-penalty-control left-penalty-control right-penalty-control right-penalty-control right-penalty-control"
+      "left-pin left-pin left-pin right-pin right-pin right-pin";
+    margin-top: 10px;
+    margin-bottom: 100px;
+}
+
+#mainHeader {
+    height: 5%;
+    background-color: $WWA;
+    display: flex;
+    color: black;
+    text-align: center;
+    justify-content: center;
+    font-size: xxx-large;
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+@media(max-width: 1400px){
+    #fedName{
+        display: none;
+    }
+
+    #logo img{
+        max-width:100%;
+    }
+}
+
+#playerInput {
+    display: flex;
+}
+
+#resetGameRow{
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+#startTimer {
+    width: 150px;
+    height: 100px;
+    font-size: xxx-large;
+    color: navy;
+    border-radius: 10px;
+    &:disabled {
+        color: grey;
+        background-color: darkslategray;
+    }
+}
+
+#timer {
+    font-size: 15vw;
+}
+
+/* Classes */
+.blue {
+    background: blue;
+    
+    button {
+        background: darkblue;
+        color:white;
+    }
+
+    &.playerData {
+        text-align: left;
+        grid-area: right-score;
+        border-bottom-right-radius: 30px
+    }
+
+    &.scorebox {
+        grid-area: right-player;
+        border-radius: 0px 30px 0px 0px;
+    }
+
+    &.points-control {
+        grid-area: right-points-control;
+        border-top-right-radius: 30px;
+    }
+
+    &.penalty {
+        grid-area: right-penalty-control;
+    }
+
+    &.pin {
+        grid-area: right-pin;
+        border-bottom-right-radius: 30px
+    }
+
+    &.buttonsRow {
+        border-radius: 0px 30px 0px 0px;
+    }
+
+    &.markerWarning {
+        justify-content: left;
+        padding-left: 20px;
+    }
+
+}
+
+
+.red {
+    background-color: red;
+
+    button {
+        background: darkred;
+        color:white;
+    }
+
+    &.buttonsRow {
+        border-radius: 30px 0px 0px 0px;
+    }
+
+    &.markerWarning {
+        justify-content: right;
+        background: initial;
+        padding-right: 20px;
+    }
+    
+    &.points-control {
+        border-top-left-radius: 30px;
+    }
+    
+    &.playerData {
+        text-align: right;
+        grid-area: left-score;
+        border-bottom-left-radius: 30px
+    }
+    
+    &.scorebox {
+        grid-area: left-player;
+        border-radius: 30px 0px 0px 0px;
+    }
+    
+    &.points-control {
+        grid-area: left-points-control;
+    }
+    
+    &.penalty {
+        grid-area: left-penalty-control;
+    }
+    
+    &.pin {
+        grid-area: left-pin;
+        border-bottom-left-radius: 30px
+    }
+}
+
+.buttonsRow {
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.centerPanel {
+    max-width: 43%;
+    display: inline-block;
+    position: relative;
+    padding: 10px 0;
+    vertical-align: top;
+}
+
+.close {
+    position: absolute;
+    top: -10px;
+    right:-10px;
+    background: #fff;
+    height: 20px;
+    width:20px;
+    border-radius:50%;
+    cursor:pointer;
+}
+
+.container {
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    padding-top: 0%;
+}
+
+.firstName, .clubName {
+    font-size: min(3vw,30pt);
+}
+
+.lastName, #period {
+    font-size: min(3.5vw,36pt);
+}
+
+.mainPage {
+    width:200px;
+    height: 100px;
+}
+
+.markerWarning {
+    color: yellow;
+    display: flex;
+    font-size:  8vh;/* xxx-large; */
+    height: 8vh;/* 1rem; */
+    background: initial;
+    padding: 0px;
+    margin: 0px;
+}
+
+.matchOrder {
+    background-color:$WWA;
+    font-size: xx-large;
+}
+
+.middle {
+    /* width:10%; */
+    grid-area: time;
+    display: flex;
+    flex-direction: column; 
+    justify-content: center;
+    align-items: center;
+}
+
+.navbar {
+    align-self: start;
+    padding-bottom:10px;
+    background-color: black;
+    display:block
+
+    >a {
+        margin: 5px;
+    }
+}
+
+
+.pin {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+    button {
+        font-size: min(2vw,var(--score-button-font-size));
+        border-radius: 10px;
+        font-weight: bold;
+        padding: 10px;
+    }
+}
+
+
+.popup{
+    background-color: rgba(0,0,0,0.6);
+    width:100%;
+    height:150%;
+    position:absolute;
+    display: none;
+    top: 0px;
+    left: 0px;
+    justify-content: center;
+}
+
+.popup-content {
+    color: black;
+    text-align: center;
+    font-size: 4rem;
+    height:250px;
+    width:500px;
+    background: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    position:relative;
+    top: 15%;
+}
+
+.points-control {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    button {
+        font-size: min(2vw,var(--score-button-font-size));
+        border-radius: 10px;
+        font-weight: bold;
+        padding: 10px;
+    }
+}
+
+.playerData {
+    padding: 10px;
+}
+
+.resetGame {
+    color: black;
+    height: 2rem;
+    margin: 0;
+    padding: 0;
+    width: 10rem;
+    border-radius: 5px;
+}
+
+.score {
+    /*font-size: 7.5rem;*/
+    font-size: 35vh;
+    background: initial;
+    padding: 0px;
+    margin: 0px;
+}
+
+.scorebox {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: stretch;
+    padding: 0px;
+    margin: 0px;
+}
+
+.shotclock {
+    font-size: 6vh;
+    background: grey;
+    margin: 20px;
+    color: white;
+    visibility: hidden;
+}
+
+.team {
+    text-align: center;
+    font-size: 2.5em;
+    color: #FFF;
+    vertical-align: top;
+    display: inline-block;
+}
+
+.penalty {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    button {
+        font-size: min(2vw,var(--score-button-font-size));
+        border-radius: 10px;
+        font-weight: bold;
+        padding: 10px;
+    }
+}
+
+
+/*Iphone screen size */
+@media(max-width: 500px){
+    #startTimer {
+        width: 75px;
+        height: 50px;
+        font-size: x-large;
+        color: navy;
+        border-radius: 10px;
+    }
+
+    #main-display {
+        grid-template-rows: 40% 10% 1fr 1fr 1fr;
+    }
+
+    .buttonsRow {
+        display: flex;
+        flex-wrap: wrap;
+        overflow: initial;
+        white-space: initial;
+        justify-content: center;
+    }
+
+    .points-control button {
+        font-size: 15pt;
+    }
+
+    .pin button {
+        font-size: 20pt;
+    }
+
+    .penalty button {
+        font-size: 10pt;
+    }
+
+    .score {
+        /*font-size: 7.5rem;*/
+        font-size: 18vh;
+    }
+
+    .shotclock {
+        font-size: 4vh;
+
+    }
+
+    #timer {
+        font-size: 13vw;
+    }
+}

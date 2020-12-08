@@ -1,0 +1,12 @@
+@charset "utf-8";
+
+
+// Set own colours
+$WWA: #ffcc00;
+
+// Replace Bulma's
+
+$primary: $WWA;
+$link: $WWA;
+
+@import "../node_modules/bulma/bulma.sass";

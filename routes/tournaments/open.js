@@ -24,7 +24,7 @@ function open(req, res, mysql, db) {
             let title = rows[0].title;
             let location = rows[0].location;
             
-            res.render('tournament_open', {
+            res.render('open', {
                 id: id,
                 date: date,
                 title: title,

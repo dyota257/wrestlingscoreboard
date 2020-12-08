@@ -20,7 +20,7 @@ function get(req, res, mysql, db) {
         if (err) throw err;
         let optionsTitle = tournamentsToOptionsTitles(rows); 
         let optionsLocations = tournamentsToOptionsLocations(rows);
-        res.render('tournament_setup', {
+        res.render('setup', {
             optionsTitles: optionsTitle,
             optionsLocations: optionsLocations,
             today: todayString
