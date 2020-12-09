@@ -4,13 +4,15 @@ const importMatches = require(process.cwd()+'/database/importMatches');
 
 async function matches_import(req, res, mysql, db) {
     
-    var values = importMatches(req.body.x);
+    let values = importMatches(req.body.x);
     
+    let whichMat = req.params.mat;
+    console.log(whichMat);
     let conn = mysql.createConnection(db);
     conn.connect();
     console.log("Connected...");
 
-    let clearTable = `DELETE FROM  matches_temp`
+    let clearTable = `DELETE FROM matches_temp WHERE mat = "${whichMat}"`
 
     await conn.query(clearTable);
 
@@ -40,7 +42,7 @@ async function matches_import(req, res, mysql, db) {
 
     res.render('notif', {
         title: 'Success!',
-        message: `Fixtures have been updated. <br> Click <a href="/matches/fixtures/${req.params.mat}">here</a> to view fixtures.`,
+        message: `Fixtures have been updated. <br> Click <a href="/matches/fixtures">here</a> to view fixtures.`,
         error: ''
     })
 

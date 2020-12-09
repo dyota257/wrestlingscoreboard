@@ -15,53 +15,55 @@
         </div>
     </section>
 
-    <section class="container">
-        <form action="/tournaments/setup" method="post"></form>
-            <div class="field">
-                <label for="" class="label">
-                    <strong>Tournament title</strong>
-                </label>
-                <div class="control">
-                    Choose from a previous tournament name:<br>
-                    <div class="select">
-                        <select name="title" value="">
-                            <%- optionsTitles %>
-                        </select>
+    <section class="section">
+        <div class="container">
+            <form action="/tournaments/setup" method="post"></form>
+                <div class="field">
+                    <label for="" class="label">
+                        <strong>Tournament title</strong>
+                    </label>
+                    <div class="control">
+                        Choose from a previous tournament name:<br>
+                        <div class="select">
+                            <select name="title" value="">
+                                <%- optionsTitles %>
+                            </select>
+                        </div>
+                        <br><br>
+                        <span style="display:none;" name="otherTitleLabel">Or enter a new one: <br></span>
+                        <input class="select" style="display:none;" name="otherTitle" type="text" placeholder="Enter new tournament name"></input>
                     </div>
-                    <br><br>
-                    <span style="display:none;" name="otherTitleLabel">Or enter a new one: <br></span>
-                    <input class="select" style="display:none;" name="otherTitle" type="text" placeholder="Enter new tournament name"></input>
                 </div>
-            </div>
-
-            <div class="field">
-                <label for="" class="label">
-                    <strong>Date</strong>
-                </label>
-                <div class="control">
-                    <input class="select" type="date" name="date" id="" value=<%- today%> >
-                </div>
-            </div>
-
-            <div class="field">
-                <label for="" class="label">
-                    <strong>Location</strong>
-                </label>
-                <div class="control">
-                    Choose from a previous location:<br>
-                    <div class="select">
-                        <select name="location" value="">
-                            <%- optionsLocations %>
-                        </select>
+    
+                <div class="field">
+                    <label for="" class="label">
+                        <strong>Date</strong>
+                    </label>
+                    <div class="control">
+                        <input class="select" type="date" name="date" id="" value=<%- today%> >
                     </div>
-                    <br><br>
-                    <span style="display:none;" name="otherLocationLabel">Or enter a new one: <br></span>
-                    <input class="select" style="display:none;" name="otherLocation" type="text" placeholder="Enter new location"></input>
                 </div>
-            </div>
-
-            <input class="button is-primary" style="display:none;" type="submit" value="Create tournament">
-        </form>
+    
+                <div class="field">
+                    <label for="" class="label">
+                        <strong>Location</strong>
+                    </label>
+                    <div class="control">
+                        Choose from a previous location:<br>
+                        <div class="select">
+                            <select name="location" value="">
+                                <%- optionsLocations %>
+                            </select>
+                        </div>
+                        <br><br>
+                        <span style="display:none;" name="otherLocationLabel">Or enter a new one: <br></span>
+                        <input class="select" style="display:none;" name="otherLocation" type="text" placeholder="Enter new location"></input>
+                    </div>
+                </div>
+    
+                <input class="button is-primary" style="display:none;" type="submit" value="Create tournament">
+            </form>
+        </div>
     </section>
     
 </body>
