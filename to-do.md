@@ -2,6 +2,8 @@
 
 ## CSS
 
+[ ] Style addon buttons on fixtures page
+
 [ ] One QR code (one route for match fixtures)
     [ ] On-page toggle for Mat A/Mat B
 

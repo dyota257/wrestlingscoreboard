@@ -4,6 +4,7 @@
     </title>
 
     <% if (title.startsWith('Matches')) { %>
+        <script defer src="/js/jquery-3.5.1.slim.min.js"></script>    
         <script defer src="/js/fixtures.min.js"></script>    
     <% } %>
     
@@ -16,6 +17,16 @@
     <section class="container">
         <h1 class="title is-3"><%- title %></h1>
     </section>
+
+    <% if (title.startsWith('Matches')) { %>
+        <div class="container">
+            <div class="buttons has-addons">
+                <button class="button is-medium" id="Mat A" value="A">Mat A</button>
+                <button class="button is-medium" id="Mat B" value="B">Mat B</button>
+            </div>
+        </div>
+    <% } %>
+
 
     <section class="container">
         <%- table %> 
