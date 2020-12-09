@@ -2,8 +2,8 @@
     <title>
         Tournament setup
     </title>
-
-    <script src="../js/setup.min.js" defer></script>
+    <script defer src="../js/jquery-3.5.1.slim.min.js"> </script>
+    <script defer src="../js/setup.js"></script>
 
 </head>
 <body>
@@ -29,8 +29,8 @@
                         </select>
                     </div>
                     <br><br>
-                    <span style="visibility: hidden;" name="otherTitleLabel">Or enter a new one: <br></span>
-                    <input class="select" style="visibility: hidden;" name="otherTitle" type="text" placeholder="Enter new tournament name"></input>
+                    <span style="display:none;" name="otherTitleLabel">Or enter a new one: <br></span>
+                    <input class="select" style="display:none;" name="otherTitle" type="text" placeholder="Enter new tournament name"></input>
                 </div>
             </div>
 
@@ -55,12 +55,12 @@
                         </select>
                     </div>
                     <br><br>
-                    <span style="visibility: hidden;" name="otherLocationLabel">Or enter a new one: <br></span>
-                    <input class="select" style="visibility: hidden;" name="otherLocation" type="text" placeholder="Enter new location"></input>
+                    <span style="display:none;" name="otherLocationLabel">Or enter a new one: <br></span>
+                    <input class="select" style="display:none;" name="otherLocation" type="text" placeholder="Enter new location"></input>
                 </div>
             </div>
 
-            <input class="button is-primary" style="visibility: hidden;" type="submit" value="Create tournament">
+            <input class="button is-primary" style="display:none;" type="submit" value="Create tournament">
         </form>
     </section>
     
