@@ -69,7 +69,7 @@ const fixtures = require('./routes/matches/fixtures.js');
 const matches_import = require('./routes/matches/matches_import.js');
 const records = require('./routes/matches/records.js');
 
-app.route('/matches/fixtures/:mat')
+app.route('/matches/fixtures')
     .get((req, res) => {fixtures(req,res,mysql,db)});
 
 app.route('/matches/records')

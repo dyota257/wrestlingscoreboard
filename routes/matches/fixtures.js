@@ -6,7 +6,7 @@ async function fixtures(req, res, mysql, db) {
     let conn = mysql.createConnection(db);
     conn.connect();
     let whichMat = req.params.mat;
-    let query = `SELECT * FROM matches_temp WHERE mat = "${whichMat}"`;
+    let query = `SELECT * FROM matches_temp`;
     
     await conn.query(query, (err, rows, fields) => {
         if (err) {
@@ -14,7 +14,7 @@ async function fixtures(req, res, mysql, db) {
         } else {
             let table = matchesToHtml(rows);
             res.render('table', {
-                title: `Matches - Mat ${whichMat}`,
+                title: `Matches`,
                 table: table
             })
             // console.log(rows);
