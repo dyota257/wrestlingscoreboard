@@ -76,7 +76,7 @@ button#download {
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
   grid-template-rows: 60% 20% 1fr 1fr 1fr;
   grid-gap: 2px;
-  grid-template-areas: " left_player left_player time time right_player right_player " " left_score left_score left_score right_score right_score right_score " " left_points_control left_points_control left_points_control right_points_control right_points_control right_points_control " " left_penalty_control left_penalty_control left_penalty_control right_penalty_control right_penalty_control right_penalty_control " " left_pin left_pin left_pin right_pin right_pin right_pin";
+  grid-template-areas: "left_player             left_player           time                  time                   right_player           right_player          " "left_score              left_score            left_score            right_score            right_score            right_score           " "left_points_control     left_points_control   left_points_control   right_points_control   right_points_control   right_points_control  " "left_penalty_control    left_penalty_control  left_penalty_control  right_penalty_control  right_penalty_control  right_penalty_control " "left_pin                left_pin              left_pin              right_pin              right_pin              right_pin             ";
   margin-top: 10px;
   margin-bottom: 100px;
 }
@@ -114,9 +114,9 @@ button#download {
 }
 
 #startTimer {
-  width: 150px;
-  height: 100px;
-  font-size: xxx-large;
+  width: 10vw;
+  height: 10vh;
+  font-size: min(5vh, 5vw);
   color: navy;
   border-radius: 10px;
 }
@@ -126,7 +126,7 @@ button#download {
 }
 
 #timer {
-  font-size: 15vw;
+  font-size: min(20vh, 15vw);
 }
 
 /* Classes */
@@ -235,11 +235,11 @@ button#download {
 }
 
 .firstName, .clubName {
-  font-size: min(3vw, 30pt);
+  font-size: min(3vh, 3vw);
 }
 
 .lastName, #period {
-  font-size: min(3.5vw, 36pt);
+  font-size: min(5vh, 4vw);
 }
 
 .mainPage {
@@ -345,10 +345,10 @@ button#download {
 
 .score {
   /*font-size: 7.5rem;*/
-  font-size: 35vh;
+  font-size: min(37.5vh, 50vw);
   background: initial;
   padding: 0px;
-  margin: 0px;
+  margin: -20vh 0 -20vh;
 }
 
 .scorebox {
@@ -389,49 +389,3 @@ button#download {
 }
 
 /*Iphone screen size */
-@media (max-width: 500px) {
-  #startTimer {
-    width: 75px;
-    height: 50px;
-    font-size: x-large;
-    color: navy;
-    border-radius: 10px;
-  }
-
-  #main-display {
-    grid-template-rows: 40% 10% 1fr 1fr 1fr;
-  }
-
-  .buttonsRow {
-    display: flex;
-    flex-wrap: wrap;
-    overflow: initial;
-    white-space: initial;
-    justify-content: center;
-  }
-
-  .points-control button {
-    font-size: 15pt;
-  }
-
-  .pin button {
-    font-size: 20pt;
-  }
-
-  .penalty button {
-    font-size: 10pt;
-  }
-
-  .score {
-    /*font-size: 7.5rem;*/
-    font-size: 18vh;
-  }
-
-  .shotclock {
-    font-size: 4vh;
-  }
-
-  #timer {
-    font-size: 13vw;
-  }
-}
