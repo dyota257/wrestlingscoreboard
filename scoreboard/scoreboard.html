@@ -3,48 +3,67 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/styles.css">
-    <link rel="stylesheet" href="public/css/styles.css">
-    <!-- To run HTML file locally -->
-    <script defer src="js/jquery-3.5.1.slim.min.js"> </script>
-    <script defer src="js/dropdowns.js"></script>
-    <script defer src="js/import.js"></script>
-    <!-- <script defer src="js/download.js"></script> -->
-    <script defer src="js/victory.js"></script>
-    <script defer src="js/timer.js"></script>
-    <script defer src="js/playerClass.js"></script>
-    <script defer src="js/app.js"></script>
-    <!-- To run HTML file through node.js -->
-    <script defer src="public/js/jquery-3.5.1.slim.min.js"> </script>
-    <script defer src="public/js/dropdowns.js"></script>
-    <script defer src="public/js/import.js"></script>
-    <!-- <script defer src="public/js/download.js"></script> -->
-    <script defer src="public/js/victory.js"></script>
-    <script defer src="public/js/timer.js"></script>
-    <script defer src="public/js/playerClass.js"></script>
-    <script defer src="public/js/app.js"></script>
-    <script src="https://kit.fontawesome.com/0f58b31d22.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="../public/css/manager.css">
+    <link rel="stylesheet" href="../public/css/mobile.css">
     <link rel="shortcut icon" href="http://wrestlingwa.org/wp-content/uploads/2017/05/wwa1-150x150.jpg" type="image/x-icon">
+
+    <link rel="stylesheet" href="../public/css/scoreboard.css">
+    <!-- To run HTML file through node.js -->
+    <script defer src="../js/jquery-3.5.1.slim.min.js"> </script>
+    <!-- <script defer src="../js/scoreboard/dropdowns.js"></script>
+    <script defer src="../js/scoreboard/import.js"></script>
+    <script defer src="../js/scoreboard/victory.js"></script>
+    <script defer src="../js/scoreboard/timer.js"></script>
+    <script defer src="../js/scoreboard/playerClass.js"></script> --> -->
+    <script defer src="../js/scoreboard.min.js"></script>
+
+    <script src="https://kit.fontawesome.com/0f58b31d22.js" crossorigin="anonymous"></script>
+    
+    
     <title>Wrestling WA Online Scoreboard</title>
 </head>
 
 <body>
-    <div id="mainHeader">
-        <span id="logo"><img src="http://wrestlingwa.org/wp-content/uploads/wwa_logo.png"></span>
-        <span id="fedName">Wrestling Western Australia <br> Scoreboard</span>
+    <div id="mainHeader" class="hero is-primary">
+        <!-- <span id="logo"><img src="images/wwa_logo.png"></span> -->
+        <img width="768" height="108" src="http://wrestlingwa.org/wp-content/uploads/wwa_logo.png">
     </div>
-    <div class="nav">
-        <a href="/">Home</a>
-        <a href="/tournaments/history">Tournaments</a>
-        <a href="/wrestlers/all">Wrestlers</a>
-        <a href="/scoreboard">Scoreboard</a>
-        <a href="/query">Query</a>
-    </div>
+    
+    <nav class="navbar" role="navigation" aria-label="main navigation">
+        <div  class="navbar-menu">
+            <div class="navbar-start">
+                <a class="navbar-item" href="/">Home</a>
+                <a class="navbar-item" href="/tournaments/openHome">Current tournament</a>
+            
+            <div class="navbar-item has-dropdown is-hoverable">
+                <a class="navbar-link">Tournaments</a>
+                <div class="navbar-dropdown">
+                    <a class="navbar-item" href="/tournaments/setup">Set up new tournament</a>
+                    <a class="navbar-item" href="/tournaments/history">Past tournaments</a>
+                    <hr class="navbar-divider">
+                    <a class="navbar-item" href="/scoreboard/A">Scoreboard Mat A</a>
+                    <a class="navbar-item" href="/scoreboard/B">Scoreboard Mat B</a>
+                </div>
+            </div>
+            <div class="navbar-item has-dropdown is-hoverable">
+                <a class="navbar-link" href="/matches/fixtures">Fixtures</a>
+                <div class="navbar-dropdown">
+                    <a class="navbar-item" href="/matches/import/A">Import mat A</a>
+                    <a class="navbar-item" href="/matches/import/B">Import mat B</a>
+                </div>
+            </div>
+    
+            <a class="navbar-item" href="/wrestlers/all">Wrestlers</a>
+          </div>
+          <div class="navbar-end">
+                <a class="button is-primary is-light  navbar-item" href="/query">Query</a>
+          </div>
+        </div>
+      </nav>
 
     <div id="resetGameRow">
         <button class="resetGame" id = "setGame">Set game</button>
         <button class="resetGame" id = "resetGame">Reset all</button>
-        <button class="resetGame" id = "import">Import</button>
         <button class="resetGame" id = "fixtures">Fixtures</button>
         <button class="resetGame" id = "prev"><<</button>
         <button class="resetGame" id = "next">>></button>
@@ -55,7 +74,6 @@
         <table class="container">
             <tr>
                 <td class="red">
-<!-- Players details red -->
                     <label>Red first name</label>
                     <input type = "text" name="playerData" id = "redFirstName" value = "redFirstName"><br><br>
                     <label>Red last name</label>
@@ -72,13 +90,12 @@
                     <input type = "text" name="playerData" id = "blueClubName" value = "blueClubName"><br><br>
                 </td>
                 <td>
-<!-- Dropdown lists -->
                     <label>Mat</label>
                     <select name="mat" value="">
                         <option value="" selected></option>
                         <option value="Mat A">Mat A</option>
                         <option value="Mat B">Mat B</option>
-                    </select><br> <br>    
+                    </select><br> <br>
                     <label>Age</label><br>
                     <select name="age" value="">
                         <option value="" selected></option>
@@ -107,9 +124,10 @@
                     <select name="weight">
                         <option value=""></option>
                     </select> <br> <br>
+                
                 </td>
+                
             </tr>
-<!-- Confirm game button -->
             <tr>
                 <td colspan="5" >
                     <button class="resetGame" id="setConfirmGame">Confirm</button>
@@ -118,27 +136,10 @@
             </tr>
         </table>
     </div>
-
-    <div class = "container" id = "importArea" style = "display:none"> 
-        <table>
-            <tr>
-                <td>
-                    <textarea width=500 height=50 style="width: 659px; height: 577px;"></textarea>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <button class="resetGame" id = "importDone">Confirm</button>
-                    <button class="resetGame" id = "importCancel">Cancel</button>
-                </td>
-            </tr>
-        </table>
-    </div>
     <div class = "container" id = "fixturesTable" style="display:none"> 
-        <table name = "list">
-
-        </table>
+        <!-- <%- table %> -->
     </div>
+
 <!-- Main Score Display -->
     <div class="container" id="main-display">
 <!-- Red side -->
@@ -177,20 +178,29 @@
 <!-- Control buttons row 1: scores -->
         <div class="red points-control">
             <div class="red buttonsRow">
-                <button value=4>+5</button>
-                <button value=3>+4</button>
-                <button value=2>+2</button>
-                <button value=1>+1</button>
-                <button value=0>-1</button>
+                <table style="border:none; margin-right:0; margin-left:auto;">
+                    <tr>
+                        <td class="red buttonsRow" style="border:none"><button value=4>+5</button><br>A</td>
+                        <td class="red buttonsRow" style="border:none"><button value=3>+4</button><br>S</td>
+                        <td class="red buttonsRow" style="border:none"><button value=2>+2</button><br>D</td>
+                        <td class="red buttonsRow" style="border:none"><button value=1>+1</button><br>F</td>
+                        <td class="red buttonsRow" style="border:none"><button value=0>-1</button><br>G</td>
+                    </tr>
+                </table>
             </div>
         </div>
         <div class="blue points-control">
             <div class="blue buttonsRow">
-                <button value=0>-1</button>
-                <button value=1>+1</button>
-                <button value=2>+2</button>
-                <button value=3>+4</button>
-                <button value=4>+5</button>
+                <table style="border:none;margin-right:auto; margin-left:0;">
+                    <tr>
+                        <td class="blue buttonsRow" style="border:none"><button value=0>-1</button><br>H</td>
+                        <td class="blue buttonsRow" style="border:none"><button value=1>+1</button><br>J</td>
+                        <td class="blue buttonsRow" style="border:none"><button value=2>+2</button><br>K</td>
+                        <td class="blue buttonsRow" style="border:none"><button value=3>+4</button><br>L</td>
+                        <td class="blue buttonsRow" style="border:none"><button value=4>+5</button><br>;</td>
+                    </tr>
+                </table>
+
             </div>
         </div>
 <!-- Control buttons row 2: warning -->
@@ -222,36 +232,34 @@
     <div>
 
 <!-- Popup  -->
-    <div class="popup">
-        <div class="popup-content">
-            <img src="images/close.png" alt="" srcset="" class="close">
-            <div class="popup-text">
+<div class="popup">
+    <div class="popup-content">
+        <img src="images/close.png" alt="" srcset="" class="close">
+        <div class="popup-text">
 
-            </div>
-            <form method="POST" action="/matches/records">
-                <div style="display: none;">
-                    <input type="text" name="id">
-                    <input type="text" name="tournament">
-                    <input type="text" name="red">
-                    <input type="text" name="blue">
-                    <input type="text" name="winner">
-                    <input type="text" name="class_points">
-                    <input type="text" name="age">
-                    <input type="text" name="gender">
-                    <input type="text" name="style">
-                    <input type="text" name="weight">
-                    <input type="text" name="time_start">
-                    <input type="text" name="time_end">
-                    <input type="text" name="time_clock">
-                </div>
-                <button type="submit">Save result</button>
-            </form>
-            
         </div>
+        <form method="POST" action="/matches/records">
+            <div style="display: none;">
+                <input type="text" name="matchID">
+                <input type="text" name="mat">
+                <input type="text" name="tournament">
+                <input type="text" name="red">
+                <input type="text" name="blue">
+                <input type="text" name="winner">
+                <input type="text" name="class_points">
+                <input type="text" name="age">
+                <input type="text" name="gender">
+                <input type="text" name="style">
+                <input type="text" name="weight">
+                <input type="text" name="time_start">
+                <input type="text" name="time_end">
+                <input type="text" name="time_clock">
+            </div>
+            <button type="submit">Save result</button>
+        </form>
+        
     </div>
-
-
-
+</div>
 
 <!-- Footer -->
     <br>

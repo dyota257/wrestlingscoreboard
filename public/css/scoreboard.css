@@ -76,7 +76,7 @@ button#download {
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
   grid-template-rows: 60% 20% 1fr 1fr 1fr;
   grid-gap: 2px;
-  grid-template-areas: "left-player left-player time time right-player right-player" "left-score left-score left-score right-score right-score right-score" "left-points-control left-points-control left-points-control right-points-control right-points-control right-points-control" "left-penalty-control left-penalty-control left-penalty-control right-penalty-control right-penalty-control right-penalty-control" "left-pin left-pin left-pin right-pin right-pin right-pin";
+  grid-template-areas: " left_player left_player time time right_player right_player " " left_score left_score left_score right_score right_score right_score " " left_points_control left_points_control left_points_control right_points_control right_points_control right_points_control " " left_penalty_control left_penalty_control left_penalty_control right_penalty_control right_penalty_control right_penalty_control " " left_pin left_pin left_pin right_pin right_pin right_pin";
   margin-top: 10px;
   margin-bottom: 100px;
 }
@@ -139,22 +139,22 @@ button#download {
 }
 .blue.playerData {
   text-align: left;
-  grid-area: right-score;
+  grid-area: right_score;
   border-bottom-right-radius: 30px;
 }
 .blue.scorebox {
-  grid-area: right-player;
+  grid-area: right_player;
   border-radius: 0px 30px 0px 0px;
 }
 .blue.points-control {
-  grid-area: right-points-control;
+  grid-area: right_points_control;
   border-top-right-radius: 30px;
 }
 .blue.penalty {
-  grid-area: right-penalty-control;
+  grid-area: right_penalty_control;
 }
 .blue.pin {
-  grid-area: right-pin;
+  grid-area: right_pin;
   border-bottom-right-radius: 30px;
 }
 .blue.buttonsRow {
@@ -185,21 +185,21 @@ button#download {
 }
 .red.playerData {
   text-align: right;
-  grid-area: left-score;
+  grid-area: left_score;
   border-bottom-left-radius: 30px;
 }
 .red.scorebox {
-  grid-area: left-player;
+  grid-area: left_player;
   border-radius: 30px 0px 0px 0px;
 }
 .red.points-control {
-  grid-area: left-points-control;
+  grid-area: left_points_control;
 }
 .red.penalty {
-  grid-area: left-penalty-control;
+  grid-area: left_penalty_control;
 }
 .red.pin {
-  grid-area: left-pin;
+  grid-area: left_pin;
   border-bottom-left-radius: 30px;
 }
 
