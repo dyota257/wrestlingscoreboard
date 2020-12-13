@@ -2,10 +2,10 @@
 
 ## CSS
 
-[ ] Style addon buttons on fixtures page
+[x] Style addon buttons on fixtures page
 
 [ ] One QR code (one route for match fixtures)
-    [ ] On-page toggle for Mat A/Mat B
+    [x] On-page toggle for Mat A/Mat B
 
 [/] Insert a line in between? For when people pull out of matches
 
