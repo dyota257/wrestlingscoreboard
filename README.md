@@ -6,4 +6,4 @@ Built to keep score for both Freestyle and Greco-Roman formats, Seniors and Juni
 Also distributes fixtures live, viewable by internet-enabled  mobile device.
 
 Currently hosted on Heroku at
-https://murmuring-crag-38443.herokuapp.com
+http://wrestlingwa.herokuapp.com/

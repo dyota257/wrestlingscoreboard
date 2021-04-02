@@ -1,13 +1,6 @@
 # To-do list
 
-## CSS
-
-[x] Style addon buttons on fixtures page
-
-[ ] One QR code (one route for match fixtures)
-    [x] On-page toggle for Mat A/Mat B
-
-[/] Insert a line in between? For when people pull out of matches
+## Misc
 
 [ ] Exhibitions? Remember to mark them correctly somehow
     [ ] Or have a category for "exhbitions" and have a choice of a 2-min or a 3-min match
@@ -22,6 +15,21 @@
 
 [ ] airhorn isn't working - fix this. 
 
+[ ] import only the required Bulma modules
+
+
+## CSS
+
+[x] Style addon buttons on fixtures page
+[x] One QR code (one route for match fixtures)
+    [x] On-page toggle for Mat A/Mat B
+[/] Insert a line in between? For when people pull out of matches
+
+### Scoreboard
+[ ] fix nav bar colours
+[ ] nav bar on hover not enough contrast - maybe put black background
+
+
 ## misc
 
 [x] scoring buttons are broken
@@ -32,13 +40,13 @@
     [ ] Need a param on scoreboard for matchID
 [ ] search box to highlight when your matches are
 
-[ ] organise JS files
-    [ ] client-side
-        [ ] scoreboard
-        [ ] others
-    [ ] server-side
+[x] organise JS files
+    [x] client-side
+        [x] scoreboard
+        [x] others
+    [x] server-side
 
-[ ] break up scoreboard into different partials
+[x] break up scoreboard into different partials
 
 ## Tournament manager
 ### Passing data
@@ -55,8 +63,8 @@ This server.js file is getting really big and disorganised. Organise it.
 
 ### Create tournament
 [x] Once finished doing the tournament setup, make a screen for "this tournament" 
-    [ ] Flesh out "this tournament"
-[ ] Clear up main screen
+    [x] Flesh out "this tournament"
+[x] Clear up main screen
 [x] Date format in tournament display
 
 
