@@ -1,5 +1,5 @@
 # Objectives
- - Have functioning writeback record-keeping functionality 
+ - Have functioning writeback record-keeping functionality
  - Have good styling and presentation
  - Make fixes according to feedback
 
@@ -9,14 +9,27 @@
 
 ### Refresh memory
 [ ] Review app performance
-[ ] Check live app on Heroku.com
-[ ] Review Githhub repo
-    [ ] Update Readme if needed
+[x] Check live app on Heroku.com
+[x] Review Githhub repo
+    [x] Update Readme if needed
 [ ] List out all of the things it could do
 [ ] Write out to-do list
 [ ] Write out objectives
+[ ] Straighten out spreadsheet format with Erica
+
+[ ] Do refactoring work on scoreboard
+
+[ ] Check if scores actually update correctly
 
 #### Refresh memory: notes
+- Refactoring player class
+    - There is something to be done in the function updateScore in scoreboard.js
+    - Need to check if scores update correctly
 
+#### Refresh memory: questions
+
+? Where is the point at which writeback needs to happen on scoreboard.js?
+
+? What is the structure of 
 
 ### 

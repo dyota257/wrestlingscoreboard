@@ -17,6 +17,9 @@
 
 [ ] import only the required Bulma modules
 
+[ ] highlight the currently ongoing match
+    [ ] Need a param on scoreboard for matchID
+[ ] search box to highlight when your matches are
 
 ## CSS
 
@@ -36,10 +39,6 @@
 [x] key map under keys
 [/] password at /import to prevent other people from entering stuff during the match
     hid the other nav bar items in mobile mode
-[ ] highlight the currently ongoing match
-    [ ] Need a param on scoreboard for matchID
-[ ] search box to highlight when your matches are
-
 [x] organise JS files
     [x] client-side
         [x] scoreboard
@@ -50,12 +49,7 @@
 
 ## Tournament manager
 ### Passing data
-
 [ ] Store match results in matches_records
-[ ] Store the time the match ended (Chris Samios)
-    match begin
-    clock duration at stop
-
 
 ### ROUTING
 This server.js file is getting really big and disorganised. Organise it.
@@ -89,6 +83,7 @@ This server.js file is getting really big and disorganised. Organise it.
 [x] Refactor resets into a function
 [x] Refactor colour buttons class names
 [x] comment out/delete console.logs on timers
+
 [ ] Rework how classes are assigned in scoreboard elements
     [ ] Refactor behaviour
 

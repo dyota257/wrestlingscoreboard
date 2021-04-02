@@ -43,5 +43,6 @@ let playerRed = new Player(
 );
 
 const players = [playerBlue, playerRed];
+// this is a test
 let side = "red";
 players.find(x => x.side === side).firstName; // "Carol"

@@ -1,0 +1,68 @@
+{
+    # ? This hasn't been used yet
+    "matches_open": [
+        "id",
+        "tournament",
+        "red",
+        "blue",
+        "age",
+        "gender",
+        "style",
+        "weight",
+        "mat"
+    ],
+
+    # see routes/matches/records.js
+    "matches_records": [
+        "id",
+        "tournament",
+        "red",
+        "blue",
+        "winner",
+        "class_points",
+        "age",
+        "gender",
+        "style",
+        "weight",
+        "time_start",
+        "time_end",
+        "time_clock"
+    ],
+
+    # fixtures pull from this. See routes/fixtures.js and routes/matches_import.js
+    "matches_temp": [
+        "category",
+        "round",
+        "mat",
+        "id",
+        "red_name",
+        "red_firstname",
+        "red_lastname",
+        "red_fullname",
+        "red_club",
+        "blue_name",
+        "blue_firstname",
+        "blue_lastname",
+        "blue_fullname",
+        "blue_club"
+    ],
+
+    # save/open tournaments from this. See directory routes/tournaments
+    "tournaments": [
+        "id",
+        "date",
+        "title",
+        "location"
+    ],
+
+    # register wrestlers
+    "wrestlers": [
+        "id",
+        "gender",
+        "dob",
+        "firstname",
+        "lastname",
+        "clubname",
+        "fullname"
+    ]
+}
