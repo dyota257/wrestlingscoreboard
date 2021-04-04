@@ -10,6 +10,11 @@
     [ ] View record (all matches)
     [ ] Total class_points
 
+[ ] matches_temp table structure is wrong
+    - it will be veryy hard to look up records by wrestler
+    - need to rework structure so that EACH ROW is one wrestler, with own class_points
+    - at the end of every match, post two rows: one for blue, one for red
+
 ## Misc
 
 [ ] Exhibitions? Remember to mark them correctly somehow
