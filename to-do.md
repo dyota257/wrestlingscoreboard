@@ -1,5 +1,15 @@
 # To-do list
 
+## database writeback records
+[ ] Check if records.js works
+    [ ] make it route somewhere else after it's done
+    [ ] 
+
+[ ] Make records page
+    [ ] Select wrestler
+    [ ] View record (all matches)
+    [ ] Total class_points
+
 ## Misc
 
 [ ] Exhibitions? Remember to mark them correctly somehow
