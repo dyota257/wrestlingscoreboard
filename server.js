@@ -73,7 +73,7 @@ app.route('/matches/fixtures')
     .get((req, res) => {fixtures(req,res,mysql,db)});
 
 app.route('/matches/records')
-    .post((req,res) => {records(req, res, mysql, db)});
+    .post((req,res) => {console.log('hit the server'); records(req, res, mysql, db)});
 
 app.route('/matches/import/:mat')
     .get((req,res)=>{ res.render('import', {mat: req.params.mat})})

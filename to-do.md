@@ -15,6 +15,9 @@
     - need to rework structure so that EACH ROW is one wrestler, with own class_points
     - at the end of every match, post two rows: one for blue, one for red
 
+[ ] records.js
+    - Logic for this hasn't been written yet. The SQL query is just a placeholder.
+
 ## Misc
 
 [ ] Exhibitions? Remember to mark them correctly somehow

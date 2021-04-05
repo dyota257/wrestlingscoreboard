@@ -4,6 +4,7 @@ async function records(req, res, mysql, db) {
     let conn = mysql.createConnection(db);
     conn.connect();
 
+    // Delete the match from the fixture
     let query = `DELETE FROM matches_temp WHERE (mat = "${req.body.mat}" AND id = ${req.body.matchID})`;
 
     await conn.query(query, (err, rows, fields) => {
@@ -14,6 +15,7 @@ async function records(req, res, mysql, db) {
         }
     });
 
+    // write the record 
     query = `INSERT INTO matches_records VALUES (
         "id"
         "tournament"
@@ -30,6 +32,7 @@ async function records(req, res, mysql, db) {
         "time_clock"
     )`;
 
+    
     // await conn.query(query, (err, rows, fields) => {
     //     if (err) {
     //         res.send("Something is wrong with this record - go back")
