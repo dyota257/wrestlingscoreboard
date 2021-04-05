@@ -14,8 +14,8 @@ function victory(side, method) {
     $(".popup").css("display", "flex");
     $(".popup").css("height", document.body.clientHeight);
     
-    // pause time
-    startTimer(now);
+    // DON'T pause time
+    // startTimer(now);
     
     // decide classification points
     switch (method) {
