@@ -70,7 +70,7 @@ $("select[name=age]").change(()=>{
     ) {
         arWeight = categories[ageDiv];
         optionsWeight(arWeight);
-    } else if (ageDiv != "") {
+    } else if (ageDiv.indexOf('min') === -1) {
         $("[name=gender]").css("visibility", "visible");
     }
 })
@@ -85,6 +85,7 @@ $("select[name=gender]").change(()=>{
 
     arWeight=[];
     genderDiv = $("select[name=gender]").val();
+
     if (
         ageDiv == "12-13 yrs"
         || ageDiv == "14-15 yrs"
@@ -135,9 +136,14 @@ function dropdownsCheckWhich() {
         gameType = "Senior Greco-Roman";
     } else if (ageDiv == "18-20 yrs" || ageDiv == "21yrs+") {
         gameType = "Senior Freestyle";
-    }  else {
+    }  else  if (ageDiv.indexOf('min') === -1) { // not an exhibition
         gameType = "Junior Freestyle";
+    } else if (ageDiv === '2min') {
+        gameType = 'Exhibition: 2 mins'
+    } else {
+        gameType = 'Exhibition: 3 mins'
     }
+
     const styleAndAge = [gameType, ageDiv];
     return styleAndAge
 }

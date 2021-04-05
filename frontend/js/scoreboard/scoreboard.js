@@ -162,16 +162,17 @@ $("button").click( function() {
 
         if ( // check for empty fields
             
-            $("#blueFirstName").val()==""
-            || $("#blueLastName").val()==""
-            || $("#blueClubName").val()==""
-            || $("#redFirstName").val()==""
-            || $("#redLastName").val()==""
-            || $("#redClubName").val()==""
-            || $("select[name=weight]").val()==""
+            (
+                $("#blueFirstName").val()==""
+                || $("#blueLastName").val()==""
+                || $("#blueClubName").val()==""
+                || $("#redFirstName").val()==""
+                || $("#redLastName").val()==""
+                || $("#redClubName").val()==""
+                || $("select[name=weight]").val()==""
+            ) && ageDiv.indexOf('min') === -1
         ) {
             window.alert("Fill in all the names and game type!");
-
         } else {
             // close input area and fixtures
             $("#playerInput").css("display", "none");
@@ -182,9 +183,12 @@ $("button").click( function() {
             setPhase(phasePos);
 
             // game type
-            if (dropdownsCheckWhich()[0]=="Junior Freestyle") {
+            if (
+                dropdownsCheckWhich()[0]=="Junior Freestyle"
+                || dropdownsCheckWhich()[0]=="Exhibition: 2 mins"
+            ) {
                 timerInit = 120;
-            } else { // for Senior Freestyle and Senior Greco-Roman
+            } else { // for Senior Freestyle, Senior Greco-Roman, and Exhibition: 3 mins
                 timerInit = 180;
             }
             

@@ -24,11 +24,11 @@
     [ ] Or have a category for "exhbitions" and have a choice of a 2-min or a 3-min match
 
 [x] Tech sup victory DON'T STOP THE CLOCK
-[ ] Victory - tell the timekeeper if they want to accounce victory or not
+[x] Victory - tell the timekeeper if they want to accounce victory or not
 
 [ ] End time is not important information
 
-[ ] Resize popup
+[x] Resize popup
 
 [ ] Rearrange player name and club section on scoreboard
 
