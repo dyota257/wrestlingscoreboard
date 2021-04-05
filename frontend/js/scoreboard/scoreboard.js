@@ -133,6 +133,17 @@ $("button").click( function() {
         }
     }
 
+    if (this.id === 'announcevictory') {
+        // get the winning score
+        let scoreWinner = Math.max(playerBlue.score, playerRed.score);
+        // get the side of the player with the winning score
+        let side = players.find(x => x.score === scoreWinner).side;
+        // give option to declare victory
+        victory(side, "technical superiority");
+        // hide te button again
+        $('#announcevictory').css('visibility', 'hidden');
+    }
+
 // Set game - cancel set game
     if (this.id==="setGame") {
         $("#playerInput").css("display", "flex")
@@ -311,12 +322,8 @@ function updateScore(side, addScore) {
     };
 
     if ( Math.abs(playerBlue.score-playerRed.score)>=gameTypeWinScore && gameType != "" ) {
-        // get the winning score
-        let scoreWinner = Math.max(playerBlue.score, playerRed.score);
-        // get the side of the player with the winning score
-        let side = players.find(x => x.score === scoreWinner).side;
-        // declare victory
-        victory(side, "technical superiority");
+        $('#announcevictory').css('visibility', 'visible');
+        
     }
 }
 

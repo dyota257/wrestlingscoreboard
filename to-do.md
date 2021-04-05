@@ -23,11 +23,12 @@
 [ ] Exhibitions? Remember to mark them correctly somehow
     [ ] Or have a category for "exhbitions" and have a choice of a 2-min or a 3-min match
 
-[ ] Tech sup victory DON'T STOP THE CLOCK
+[x] Tech sup victory DON'T STOP THE CLOCK
+[ ] Victory - tell the timekeeper if they want to accounce victory or not
 
 [ ] End time is not important information
 
-[ ] Victory - tell the timekeeper if they want to accounce victory or not
+[ ] Resize popup
 
 [ ] Rearrange player name and club section on scoreboard
 
@@ -41,6 +42,7 @@
 
 ## CSS
 
+
 [x] Style addon buttons on fixtures page
 [x] One QR code (one route for match fixtures)
     [x] On-page toggle for Mat A/Mat B
@@ -49,7 +51,7 @@
 ### Scoreboard
 [ ] fix nav bar colours
 [ ] nav bar on hover not enough contrast - maybe put black background
-
+[ ] Shot clock positioning - overlap with score
 
 ## misc
 

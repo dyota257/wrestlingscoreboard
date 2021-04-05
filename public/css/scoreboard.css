@@ -60,6 +60,11 @@ button#download {
   padding: 5px;
   border-radius: 5px;
 }
+button#announcevictory {
+  height: 3vh;
+  padding: 0px;
+  visibility: hidden;
+}
 
 /* Ids */
 #footer {
@@ -308,10 +313,9 @@ button#download {
 .popup-content {
   color: black;
   text-align: center;
-  font-size: 4rem;
-  height: 250px;
-  width: 500px;
-  background: #fff;
+  font-size: 7vh;
+  height: 70vh;
+  width: 50vh;
   padding: 20px;
   border-radius: 5px;
   position: relative;
