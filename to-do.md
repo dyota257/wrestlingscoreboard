@@ -32,7 +32,7 @@
 
 [x] Rearrange player name and club section on scoreboard
 
-[ ] airhorn isn't working - fix this. 
+[x] airhorn isn't working - fix this. 
 
 
 [ ] highlight the currently ongoing match

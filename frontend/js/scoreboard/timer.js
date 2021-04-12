@@ -55,7 +55,7 @@ function timer(time) {
         if( now <= 0 && timerOn === true) {
             
             // play sound
-            new Audio("sounds/airhorn.mp3").play();
+            new Audio("/sounds/airhorn.mp3").play();
             // move to the next phase
             phasePos++;
             if (phasePos<3) {

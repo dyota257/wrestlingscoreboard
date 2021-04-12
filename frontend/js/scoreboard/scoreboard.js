@@ -64,6 +64,10 @@ $(document).keydown( (e) => {
 $("button").click( function() {
     this.blur();
 
+
+    if(this.id === 'airhorn'){
+        new Audio("/sounds/airhorn.mp3").play();
+    }
     // the first class of parentElement.className is the colour blue/red
     var side = this.parentElement.className.split(" ")[0];
     let buttonId = this.id;
