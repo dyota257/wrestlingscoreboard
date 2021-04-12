@@ -51,10 +51,14 @@
 <!-- Main Score Display -->
     <div class="container" id="main-display">
 <!-- Red side -->
-        <div class="red playerData">
-            <span class = "red firstName">redFirstName</span><br>
-            <span class = "red lastName">redLastName</span><br>
-            <span class = "red clubName">redClubName</span>
+        <div class="red playerData" style="display: table; table-layout: fixed;">
+            <div style="display: table-cell; text-align: left;">
+                <span class = "red clubName">redClubName</span>
+            </div>
+            <div style="display: table-cell;">
+                <span class = "red firstName">redFirstName</span><br>
+                <span class = "red lastName">redLastName</span><br>
+            </div>
         </div>
 <!-- Timer central -->
         <div class="middle">
@@ -68,10 +72,14 @@
 
         </div>
 <!-- Blue side -->
-        <div class="blue playerData">
-            <span class = "blue firstName">blueFirstName</span><br>
-            <span class = "blue lastName">blueLastName</span><br>
-            <span class = "blue clubName">blueClubName</span>
+        <div class="blue playerData" style="display: table; table-layout: fixed;">
+            <div style="display: table-cell;">
+                <span class = "blue firstName">blueFirstName</span><br>
+                <span class = "blue lastName">blueLastName</span><br>
+            </div>
+            <div style="display: table-cell; text-align: right;">
+                <span class = "blue clubName">blueClubName</span>
+            </div>
         </div>
 <!-- Player scores -->
         <div class="red scorebox">

@@ -79,7 +79,7 @@ button#announcevictory {
   background: black;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
-  grid-template-rows: 60% 20% 1fr 1fr 1fr;
+  grid-template-rows: 60% 14% 1fr 1fr 1fr;
   grid-gap: 2px;
   grid-template-areas: "left_player             left_player           time                  time                   right_player           right_player          " "left_score              left_score            left_score            right_score            right_score            right_score           " "left_points_control     left_points_control   left_points_control   right_points_control   right_points_control   right_points_control  " "left_penalty_control    left_penalty_control  left_penalty_control  right_penalty_control  right_penalty_control  right_penalty_control " "left_pin                left_pin              left_pin              right_pin              right_pin              right_pin             ";
   margin-top: 10px;

@@ -20,8 +20,8 @@
 
 ## Misc
 
-[ ] Exhibitions? Remember to mark them correctly somehow
-    [ ] Or have a category for "exhbitions" and have a choice of a 2-min or a 3-min match
+[x] Exhibitions? Remember to mark them correctly somehow
+    [x] Or have a category for "exhbitions" and have a choice of a 2-min or a 3-min match
 
 [x] Tech sup victory DON'T STOP THE CLOCK
 [x] Victory - tell the timekeeper if they want to accounce victory or not
@@ -30,19 +30,20 @@
 
 [x] Resize popup
 
-[ ] Rearrange player name and club section on scoreboard
+[x] Rearrange player name and club section on scoreboard
 
 [ ] airhorn isn't working - fix this. 
 
-[ ] import only the required Bulma modules
 
 [ ] highlight the currently ongoing match
     [ ] Need a param on scoreboard for matchID
+
 [ ] search box to highlight when your matches are
 
 ## CSS
 
 
+[ ] import only the required Bulma modules
 [x] Style addon buttons on fixtures page
 [x] One QR code (one route for match fixtures)
     [x] On-page toggle for Mat A/Mat B
