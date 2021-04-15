@@ -1,6 +1,25 @@
 # To-do list
 
+# Last time...
+put console log in matches import to catch error
+
+Need to fetch id using this
+var id = Number(
+    document
+        .querySelectorAll('tr.matchOrder>td[data-label="id"]')[0]
+        .innerText
+        .trim()
+);
+
+Need to fetch this within victory.js. 
+Write this into the input fields, so that the form can be submitted.
+
+Then write SQL queries. 
+
 ## database writeback records
+[ ] DELETE from matches_temp WHERE
+    [ ] Need a way to fetching the match id
+
 [ ] Check if records.js works
     [ ] make it route somewhere else after it's done
     [ ] 
@@ -33,7 +52,6 @@
 [x] Rearrange player name and club section on scoreboard
 
 [x] airhorn isn't working - fix this. 
-
 
 [ ] highlight the currently ongoing match
     [ ] Need a param on scoreboard for matchID

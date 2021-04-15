@@ -61,8 +61,9 @@ function victory(side, method) {
     
     // add the rows of table here. 
 
-    var matchResults = $("table.results>tbody")
-    console.log(matchResults)
+    var matchResults = $("table.results>tbody");
+    console.log(matchResults);
+    
     var newRow = `
         <td>${playerBlue.firstName} ${playerBlue.lastName}</td>
         <td>${playerRed.firstName} ${playerRed.lastName}</td>
@@ -71,7 +72,8 @@ function victory(side, method) {
         <td>${winnerName}</td>
         <td>${method}</td>
         <td>${classification}</td>`;
-    matchResults.html(matchResults.html() + newRow);
+    
+        matchResults.html(matchResults.html() + newRow);
 
 
 };

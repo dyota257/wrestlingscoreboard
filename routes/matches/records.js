@@ -5,15 +5,23 @@ async function records(req, res, mysql, db) {
     conn.connect();
 
     // Delete the match from the fixture
-    let query = `DELETE FROM matches_temp WHERE (mat = "${req.body.mat}" AND id = ${req.body.matchID})`;
-
-    await conn.query(query, (err, rows, fields) => {
-        if (err) {
-            res.send(err)
-        } else {
-            res.redirect(`/scoreboard/${req.body.mat}`);
-        }
-    });
+    
+    if(req.body.matchID.length > 0) {
+        console.log(req.body.matchID);
+        console.log('This match is not on the fixtures')
+        let query = `DELETE FROM matches_temp WHERE (mat = "${req.body.mat}" AND id = ${req.body.matchID})`;
+        
+        console.log(query);
+        
+        await conn.query(query, (err, rows, fields) => {
+            if (err) {
+                res.send(err)
+            } else {
+                res.redirect(`/scoreboard/${req.body.mat}`);
+            }
+        });
+    }
+    
 
     // write the record 
     query = `INSERT INTO matches_records VALUES (
@@ -31,6 +39,8 @@ async function records(req, res, mysql, db) {
         "time_end"
         "time_clock"
     )`;
+
+    console.log(query);
 
     
     // await conn.query(query, (err, rows, fields) => {

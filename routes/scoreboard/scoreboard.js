@@ -20,7 +20,7 @@ async function scoreboard(req,res,mysql,db)  {
             res.render('scoreboard', {
                 table: table
             })
-            console.log(rows);
+            // console.log(rows);
         }
         
     });
