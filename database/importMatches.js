@@ -15,7 +15,7 @@ function importMatches(x) {
     var category = "";
     var round = "";
     var mat = "";
-    var id = "";
+    var id = 0;
 
     var red_name = "";
     var red_club = "";
@@ -31,7 +31,7 @@ function importMatches(x) {
         category = row[0];
         round = row[1];
         mat = row[2];
-        id = row[3];
+        id = Number(row[3]);
 
         // red
         red_name = row[4].split(/\(/)[0].trim();
@@ -88,7 +88,7 @@ function importMatches(x) {
             "${matches[i].category}",
             "${matches[i].round}",
             "${matches[i].mat}",
-            "${matches[i].id}",
+            ${matches[i].id},
             "${matches[i].red_name}",
             "${matches[i].red_firstname}",
             "${matches[i].red_lastname}",
