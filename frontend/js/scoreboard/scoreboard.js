@@ -1,6 +1,5 @@
-window.onbeforeunload = () => {
-    return "Are you sure?"
-}
+// No longer need this alert - will use a permanent database connection instead
+// window.onbeforeunload = () => {return "Are you sure?"}
 
 var gameType = "";
 var gameTypeWinScore = 0;
@@ -221,6 +220,8 @@ $("button").click( function() {
                 }
             };
 
+            players = [playerBlue, playerRed];
+
             $(".blue.firstName").text(playerBlue.firstName);
             $(".blue.lastName").text(playerBlue.lastName);
             $(".blue.clubName").text(playerBlue.clubName);
@@ -329,9 +330,10 @@ function updateScore(side, addScore) {
         criteria();
     };
 
-    if ( Math.abs(playerBlue.score-playerRed.score)>=gameTypeWinScore && gameType != "" ) {
+    if (Math.abs(playerBlue.score-playerRed.score) >= gameTypeWinScore && gameType != "") {
         $('#announcevictory').css('visibility', 'visible');
-        
+    } else {
+        $('#announcevictory').css('visibility', 'hidden');
     }
 }
 

@@ -42,7 +42,7 @@ let playerRed = new Player(
     false
 );
 
-const players = [playerBlue, playerRed];
+let players = [playerBlue, playerRed];
 // this is a test
 let side = "red";
 players.find(x => x.side === side).firstName; // "Carol"

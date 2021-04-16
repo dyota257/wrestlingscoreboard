@@ -92,7 +92,7 @@ button {
     background: black;
     display: grid;
     grid-template-columns:      1fr     1fr    1fr   1fr      1fr     1fr;
-    grid-template-rows:         60%     14%    1fr   1fr      1fr;
+    grid-template-rows:         4fr     1fr    1fr   1fr      1fr;
     grid-gap: 2px;
     grid-template-areas:
       "left_player             left_player           time                  time                   right_player           right_player          "
@@ -282,7 +282,7 @@ button {
 }
 
 .lastName, #period {
-    font-size: min(5vh, 4vw);
+    font-size: min(6vh, 5vw);
 }
 
 .mainPage {

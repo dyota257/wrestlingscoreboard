@@ -16,6 +16,13 @@ Write this into the input fields, so that the form can be submitted.
 
 Then write SQL queries. 
 
+## Erica UI feedback
+[x] window alert when leaving
+[ ] announce victory button obscured
+[x] popup doesn't pull in wrestlers' names
+
+
+
 ## database writeback records
 [ ] DELETE from matches_temp WHERE
     [ ] Need a way to fetching the match id
