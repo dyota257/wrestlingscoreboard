@@ -229,6 +229,15 @@ $("button").click( function() {
             $(".red.lastName").text(playerRed.lastName);
             $(".red.clubName").text(playerRed.clubName);
 
+            // Mark the start time, ready to be POSTed
+            
+            $(".popup input[name=time_start]").val(
+                String(new Date().getHours()).padStart(2, "0")
+                + ':'
+                + String(new Date().getMinutes()).padStart(2, "0")
+            );
+
+
             // reset scores, warnings, shotclocks
             reset(true,true,true);
 

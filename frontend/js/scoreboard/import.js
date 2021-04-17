@@ -34,8 +34,6 @@ $("button#prev").click( function() {
     }
 })
 
-
-
 function updateNames(matchOrder) {
     
     // Fixtures table

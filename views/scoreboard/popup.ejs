@@ -7,13 +7,16 @@
         <form method="POST" action="/matches/records">
             <!-- This form needs to be populated by victory() -->
             <div style="display: none;">
+                <input type="text" name="tournamentId">
                 <input type="text" name="matchID">
                 <input type="text" name="mat">
-                <input type="text" name="tournament">
+                <!-- This is handled server-side -->
+                <!-- <input type="text" name="tournament"> -->
                 <input type="text" name="red">
                 <input type="text" name="blue">
                 <input type="text" name="winner">
-                <input type="text" name="class_points">
+                <input type="text" name="class_points_red">
+                <input type="text" name="class_points_blue">
                 <input type="text" name="age">
                 <input type="text" name="gender">
                 <input type="text" name="style">

@@ -1,7 +1,10 @@
 # To-do list
 
 # Last time...
-put console log in matches import to catch error
+
+Can't auto-write to database. 
+
+How to do two database fetches in a row?
 
 Need to fetch id using this
 var id = Number(
@@ -18,7 +21,7 @@ Then write SQL queries.
 
 ## Erica UI feedback
 [x] window alert when leaving
-[ ] announce victory button obscured
+[x] announce victory button obscured
 [x] popup doesn't pull in wrestlers' names
 
 
@@ -43,6 +46,8 @@ Then write SQL queries.
 
 [ ] records.js
     - Logic for this hasn't been written yet. The SQL query is just a placeholder.
+
+[x] put console log in matches import to catch error
 
 ## Misc
 

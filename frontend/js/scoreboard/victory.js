@@ -40,6 +40,11 @@ function victory(side, method) {
             break;
     }
 
+    // classification points
+    let class_ratio = classification.split(' ')[1].split(':');
+    let class_points_winner = class_ratio[0];
+    let class_points_loser = class_ratio[1];
+
     // declare winner
     var winnerName = "";
     var popupText = "";
@@ -59,6 +64,37 @@ function victory(side, method) {
     $(".popup-text").text(popupText);
     $(".popup-content").css("background", popupBg);
     
+    // Fill in the data to be POSTed to the 
+
+    $(".popup input[name=tournamentId]").val($("#tournamentId").text())
+    $(".popup input[name=matchID]").val()
+    $(".popup input[name=mat]").val($("select[name=mat]").val())
+    $(".popup input[name=red]").val(playerRed.firstName + ' ' + playerRed.lastName)
+    $(".popup input[name=blue]").val(playerBlue.firstName + ' ' + playerBlue.lastName)
+    $(".popup input[name=winner]").val(side)
+    switch(side) {
+        case "red":
+            $(".popup input[name=class_points_red]").val(class_points_winner);
+            $(".popup input[name=class_points_blue]").val(class_points_loser);
+            break;
+        case "blue":
+            $(".popup input[name=class_points_red]").val(class_points_loser);
+            $(".popup input[name=class_points_blue]").val(class_points_winner);
+            break;
+    }
+    $(".popup input[name=age]").val($("select[name=age]").val())
+    $(".popup input[name=gender]").val($("select[name=gender]").val())
+    $(".popup input[name=style]").val($("select[name=style]").val())
+    $(".popup input[name=weight]").val($("select[name=weight]").val())
+    // This input is populate on setConfirmGame
+    // $(".popup input[name=time_start]").val()
+    $(".popup input[name=time_end]").val(
+        String(new Date().getHours()).padStart(2, "0")
+        + ":" 
+        + String(new Date().getMinutes()).padStart(2, "0")
+    )
+    $(".popup input[name=time_clock]").val($("#period").text() + ", " + $("#timer").text())
+    
     // add the rows of table here. 
 
     var matchResults = $("table.results>tbody");
@@ -73,7 +109,7 @@ function victory(side, method) {
         <td>${method}</td>
         <td>${classification}</td>`;
     
-        matchResults.html(matchResults.html() + newRow);
+    matchResults.html(matchResults.html() + newRow);
 
 
 };

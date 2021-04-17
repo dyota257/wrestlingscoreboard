@@ -1,56 +1,83 @@
 module.exports = records;
 
-async function records(req, res, mysql, db) {
+async function records(req, res, mysql, db, tournamentId) {
     let conn = mysql.createConnection(db);
+    
     conn.connect();
-
-    // Delete the match from the fixture
+    // let maxTournamentId = 0;
+    // Pick the last tournamentId
+    // let query = 'SELECT MAX(id) AS id FROM tournaments;'
     
-    if(req.body.matchID.length > 0) {
-        console.log(req.body.matchID);
-        console.log('This match is not on the fixtures')
-        let query = `DELETE FROM matches_temp WHERE (mat = "${req.body.mat}" AND id = ${req.body.matchID})`;
-        
-        console.log(query);
-        
-        await conn.query(query, (err, rows, fields) => {
-            if (err) {
-                res.send(err)
-            } else {
-                res.redirect(`/scoreboard/${req.body.mat}`);
-            }
-        });
-    }
-    
-
-    // write the record 
-    query = `INSERT INTO matches_records VALUES (
-        "id"
-        "tournament"
-        "red"
-        "blue"
-        "winner"
-        "class_points"
-        "age"
-        "gender"
-        "style"
-        "weight"
-        "time_start"
-        "time_end"
-        "time_clock"
-    )`;
+    query = `INSERT INTO matches_records (
+        tournament,
+        red_name,
+        blue_name,
+        winner,
+        class_points_red,
+        class_points_blue,
+        age,
+        gender,
+        style,
+        weight,
+        time_start,
+        time_end,
+        time_clock
+    ) VALUES (
+        ${req.body.tournamentId},
+        "${req.body.red}",
+        "${req.body.blue}",
+        "${req.body.winner}",
+        ${Number(req.body.class_points_red)},
+        ${Number(req.body.class_points_blue)},
+        "${req.body.age}",
+        "${req.body.gender}",
+        "${req.body.style}",
+        "${req.body.weight}",
+        "${req.body.time_start}",
+        "${req.body.time_end}",
+        "${req.body.time_clock}"
+    )`
+    .replace(/\n/g, "")
+    .replace(/  /g, "");
 
     console.log(query);
 
-    
-    // await conn.query(query, (err, rows, fields) => {
-    //     if (err) {
-    //         res.send("Something is wrong with this record - go back")
-    //     } else {
-    //         res.send(query);
-    //     }
-    // });
-    
+
+
+    await conn.query(query, (err, rows, fields) => {
+        if (err) {
+            res.send(err)
+        } else {
+            console.log('Write query: ' + query)
+            res.redirect('/scoreboard/' + req.body.mat)
+        }
+    });
+
     conn.end();
+
+    
+    // Delete the match from the fixture
+    
+    // if(req.body.matchID.length > 0) {
+    //     console.log(req.body.matchID);
+    //     console.log('This match is not on the fixtures')
+    //     let query = `DELETE FROM matches_temp WHERE (mat = "${req.body.mat}" AND id = ${req.body.matchID})`;
+        
+    //     console.log(query);
+        
+    //     await conn.query(query, (err, rows, fields) => {
+    //         if (err) {
+    //             res.send(err)
+    //         }
+    //     });
+    // }
+    
+
+    // write the record 
+    // No need to write id - it will auto-increment
+    
+ 
+    
+    
     // res.send(req.body);
 }
