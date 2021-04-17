@@ -1,4 +1,13 @@
-var categories = 
+// Defaults
+
+// default mat
+const url = window.location.href;
+const mat = url.slice(url.length-1);
+
+$(`select[name=mat]>option[value='${mat}']`).attr('selected', true);
+
+
+const  categories = 
 {
     // Age only block
     "6-7 yrs": [19, 23, 27, 35, 42, 53, 66, 73, '73+'],
@@ -35,10 +44,10 @@ var categories =
 }
 
 // variables setup
-var ageDiv = "";
-var arWeight = [];
-var genderDiv="";
-var styleDiv = "";
+let ageDiv = "";
+let arWeight = [];
+let genderDiv="";
+let styleDiv = "";
 
 // set other dropdowns as hidden, showing only name-age
 $("[name=gender]").css("visibility", "hidden");
