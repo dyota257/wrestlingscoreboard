@@ -4,8 +4,13 @@
     </title>
 
     <% if (title.startsWith('Matches')) { %>
-        <script defer src="/js/jquery-3.5.1.slim.min.js"></script>    
-        <script defer src="/js/fixtures.min.js"></script>    
+        <script defer src="/js/jquery-3.5.1.slim.min.js"></script>
+        <script defer src="/js/fixtures.min.js"></script>
+    <% } %>
+
+    <% if (title.startsWith('Records')) { %>
+        <script defer src="/js/jquery-3.5.1.slim.min.js"></script>
+        <script defer src="/js/records.js"></script>
     <% } %>
     
 
@@ -26,7 +31,12 @@
             </div>
         </div>
     <% } %>
-
+    
+    <% if (title.startsWith('Records')) { %>
+        <div class="container">
+        
+        </div>
+    <% } %>
 
     <section class="container">
         <%- table %> 

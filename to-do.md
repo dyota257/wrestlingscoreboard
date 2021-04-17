@@ -2,6 +2,8 @@
 
 # Last time...
 
+records.js
+
 Can't auto-write to database. 
 
 How to do two database fetches in a row?
@@ -27,11 +29,17 @@ Then write SQL queries.
 
 
 ## database writeback records
+SUCCESS
+
+[ ] Time takem from clock is TIME REMAINING - want to log TIME ELAPSED
+
+
 [ ] DELETE from matches_temp WHERE
     [ ] Need a way to fetching the match id
+    [ ] Two connections in a row isn't working
 
-[ ] Check if records.js works
-    [ ] make it route somewhere else after it's done
+[x] Check if records.js works
+    [x] make it route somewhere else after it's done
     [ ] 
 
 [ ] Make records page
@@ -50,7 +58,7 @@ Then write SQL queries.
 [x] put console log in matches import to catch error
 
 ## Misc
-
+[ ] ctrl enter as press button
 [x] Exhibitions? Remember to mark them correctly somehow
     [x] Or have a category for "exhbitions" and have a choice of a 2-min or a 3-min match
 

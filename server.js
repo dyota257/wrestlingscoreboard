@@ -73,7 +73,7 @@ app.route('/matches/fixtures')
     .get((req, res) => {fixtures(req,res,mysql,db)});
 
 app.route('/matches/records')
-    .post((req,res) => {console.log('hit the server'); records(req, res, mysql, db, app.get('tournamentId'))});
+    .post((req,res) => {records(req, res, mysql, db, app.get('tournamentId'))});
 
 app.route('/matches/import/:mat')
     .get((req,res)=>{ res.render('import', {mat: req.params.mat})})
@@ -85,6 +85,7 @@ app.route('/matches/sampleB').get((req,res)=>{res.sendFile(__dirname+'/database/
 // WRESTLERS
 const all = require('./routes/wrestlers/all.js')
 const wrestlers_import = require('./routes/wrestlers/wrestlers_import.js')
+const wrestlers_records = require('./routes/wrestlers/wrestlers_records.js')
 
 app.route('/wrestlers/all')
     .get((req, res) => {all(req,res,mysql,db)});
@@ -93,6 +94,9 @@ app.route('/wrestlers/import')
     .post(async (req, res) => {
         wrestlers_import(req,res,mysql,db);
     });
+
+app.route('/wrestlers/records')
+    .get((req, res) => {wrestlers_records(req,res,mysql,db)});
 
 
 // SQL INTERFACE
