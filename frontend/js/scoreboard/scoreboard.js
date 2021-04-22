@@ -11,7 +11,13 @@ var now = 0;
 let nowShotClock = 0;
 
 const phases = [ "1", "rest", "2"];
-const timeRest = 30; // should be 30 seconds
+const timeValue = [
+    5, // Rest period 30 s
+    5, // 2 mins (juniors)
+    5 // 3 mins (seniors)
+];
+
+// should be 30 seconds
 var phasePos = 0;
 var phasesTime = [0,0,0];
  
@@ -141,7 +147,13 @@ $("button").click( function() {
         // get the side of the player with the winning score
         let side = players.find(x => x.score === scoreWinner).side;
         // give option to declare victory
-        victory(side, "technical superiority");
+        if(Math.abs(playerRed.score - playerBlue.score)>=10) {
+            victory(side, "technical superiority");
+        } else {
+            victory(side, "points");
+        }
+        
+        
         // hide te button again
         $('#announcevictory').css('visibility', 'hidden');
     }
@@ -189,10 +201,12 @@ $("button").click( function() {
                 dropdownsCheckWhich()[0]=="Junior Freestyle"
                 || dropdownsCheckWhich()[0]=="Exhibition: 2 mins"
             ) {
-                timerInit = 120;
+                timerInit = timeValue[1];
             } else { // for Senior Freestyle, Senior Greco-Roman, and Exhibition: 3 mins
-                timerInit = 180;
+                timerInit = timeValue[2];
             }
+
+            timeRest = timeValue[0];
             
             $("#gameType").text(gameType);
 

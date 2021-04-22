@@ -54,33 +54,37 @@ function timer(time) {
         // timer on end
         if( now <= 0 && timerOn === true) {
             
-            // play sound
-            new Audio("/sounds/airhorn.mp3").play();
+            
             // move to the next phase
             phasePos++;
             if (phasePos<3) {
+                // play sound
+                new Audio("/sounds/airhorn.mp3").play();
                 // if it's still in the game, set the next phase
                 setPhase(phasePos);
                 // pause the clock
                 startTimer(phasesTime[phasePos]);
                 // timer(phasesTime[phasePos]);
             } else {
+                new Audio("/sounds/airhorn.mp3").play();
                 // it must be the end of the game, close things down
+                console.log(`it must be the end of the game, close things down`)
                 $("#startTimer").prop("disabled", true);
-                var winBlue = (scoreBlue - scoreRed)/Math.abs(scoreBlue - scoreRed)
-                switch ( winBlue ){
-                    case 1:
-                        victory("blue", "points");        
-                        break;
-                    case -1:
-                        victory("red", "points");        
-                        break;
-                    default:
-// Draw outcome
-                        victory("draw", "technical superiority");
-                        console.log("Outcome is draw")      
-                        break;
-                }
+                $('#announcevictory').css('visibility', 'visible');
+                // var winBlue = (scoreBlue - scoreRed)/Math.abs(scoreBlue - scoreRed)
+//                 switch ( winBlue ){
+//                     case 1:
+//                         victory("blue", "points");        
+//                         break;
+//                     case -1:
+//                         victory("red", "points");        
+//                         break;
+//                     default:
+// // Draw outcome
+//                         victory("draw", "technical superiority");
+//                         console.log("Outcome is draw")      
+//                         break;
+//                 }
                 clearInterval(interval);
             }
         };
