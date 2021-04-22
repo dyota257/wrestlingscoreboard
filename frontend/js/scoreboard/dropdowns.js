@@ -1,8 +1,8 @@
 // Defaults
 
 // default mat
-const url = window.location.href;
-const mat = url.slice(url.length-1);
+const url = window.location.pathname.split('/');
+const mat = url[url.length-1];
 
 $(`select[name=mat]>option[value='${mat}']`).attr('selected', true);
 
