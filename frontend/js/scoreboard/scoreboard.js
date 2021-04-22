@@ -55,10 +55,9 @@ $(document).keydown( (e) => {
             var addScore = scoresMap[redKeysMap.indexOf(e.keyCode)];
             updateScore("red", addScore);
         }
-        
     }
-
 })
+
 
 $("button").click( function() {
     this.blur();

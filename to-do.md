@@ -2,11 +2,12 @@
 
 # Last time...
 
-records.js
+records.js frontend.... 
 
-Can't auto-write to database. 
+[x] Can't auto-write to database. Fixed.
 
-How to do two database fetches in a row?
+[x] How to do two database fetches in a row?
+    multipleStatements: true
 
 Need to fetch id using this
 var id = Number(
@@ -20,6 +21,19 @@ Need to fetch this within victory.js.
 Write this into the input fields, so that the form can be submitted.
 
 Then write SQL queries. 
+
+## Tournament feedback
+### Jack
+[ ] Clock was counting two different times
+[ ] Announce victory as soon as >9 points (?)
+[ ] can't pause clock after Period 2
+[ ] Doesn't change people automatically on load!
+
+### Own notes
+[ ] Warning squares not showing
+[ ] Criteria not showing if scores were totally even (need to determine who scored last)
+[ ] Announce victory on Exhibition matches showed as soon as scores were posted. 
+
 
 ## Erica UI feedback
 [x] window alert when leaving

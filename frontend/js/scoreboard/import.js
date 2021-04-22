@@ -1,15 +1,7 @@
 var matchOrder = 0;
-var pairing = [];
-var table = [];
-var blueFirstName = "";
-var blueLastName = "";
-var blueClubName = "";
-var redFirstName = "";
-var redLastName = "";
-var redClubName = "";
-var raw = "";
-var rows = [];
-var tablePage = $("table[name=list]");
+// Default names in set game form is the first row of the fixtures table
+// updateNames() defined in import.js
+updateNames(0);
 
 $(`tr[matchOrder='0']`).addClass("matchOrder");
 
