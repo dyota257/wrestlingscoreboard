@@ -27,7 +27,9 @@ Then write SQL queries.
 [ ] Clock was counting two different times
 [ ] Announce victory as soon as >9 points (?)
 [ ] can't pause clock after Period 2
-[ ] Doesn't change people automatically on load!
+[x] Doesn't change people automatically on load!
+[ ] Filter wrestlers' records
+[ ] Mat selector - lock it to the current mat
 
 ### Own notes
 [ ] Warning squares not showing
