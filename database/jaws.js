@@ -4,7 +4,8 @@ const jaws = () => {
         user: 'mdfdk2xmgu4500zk',
         password: 'qhqpr7cnzm27w6kt',
         port: '3306',
-        database: 'tdp5wp392ohvymoc'
+        database: 'tdp5wp392ohvymoc',
+        multipleStatements: true
     })
 };
 
