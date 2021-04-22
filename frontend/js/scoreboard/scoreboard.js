@@ -153,6 +153,8 @@ $("button").click( function() {
             victory(side, "points");
         }
         
+        if(timerOn) {startTime(now)}
+        
         
         // hide te button again
         $('#announcevictory').css('visibility', 'hidden');
@@ -299,6 +301,9 @@ $("button").click( function() {
 
 $(".close").click( function() {
         $(".popup").css("display", "none");
+        $('#announcevictory').css('visibility', 'visible');
+        
+        
     }
 )
 
