@@ -3,10 +3,42 @@ module.exports = wrestlers_records;
 async function wrestlers_records(req, res, mysql, db) {
     let conn = mysql.createConnection(db);
     
+
     conn.connect();
+
+    let query = `SELECT DISTINCT red_name, blue_name FROM matches_records;`
+
+    var distinctNames = '';
+    var dropdown = '';
+    await conn.query(query, (err, rows, fields) => {
+        let names = [];
+
+        for(var i=0; i<rows.length; i++) {
+            names.push(rows[i].red_name);
+        }
+        
+        for(var i=0; i<rows.length; i++) {
+            names.push(rows[i].blue_name);
+        }
+
+        distinctNames = [...new Set(names)].sort();
+        
+        var options = `<option value=''></options>`;
+        
+        for(var i=0; i<distinctNames.length; i++) {
+            options = options + `<option value='${distinctNames[i]}'>${distinctNames[i]}</options>`
+        }
+        console.log();
+        dropdown = `<select id='names'>
+            ${options}
+        </select>`
+
+    })
+
+       
     
-    let query = `SELECT * FROM matches_records`;
-    
+    query = `SELECT * FROM matches_records`;  
+
     await conn.query(query, (err, rows, fields) => {
         if (err) {
             res.send(err)
@@ -57,11 +89,10 @@ async function wrestlers_records(req, res, mysql, db) {
             }
 
             table = '<table class="table" id="records">' + table + '</table>'
-
-            let names = [...new Set(arr)];
             
-            res.render('table', {
+            res.render('records', {
                 title: `Records`,
+                names: dropdown,
                 table: table
             })
 

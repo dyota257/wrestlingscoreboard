@@ -1,4 +1,9 @@
-let tableRows = $('#records tr');
+$('select#names').change(function() {
+    let tableRows = $('tr')
+    let selected = $('select#names').val()
+    console.log(selected)
+    // let
+    // for(var i=0;i<tableRows.length;i++){
 
-// Index starts at 1 to avoid header row
-for(var i = 1; )
+    // }
+})

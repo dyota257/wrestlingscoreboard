@@ -1,0 +1,51 @@
+<%- include('boilerplate'); %> 
+    <title>
+        <%- title %>
+    </title>
+
+        
+        
+        
+
+</head>
+<body>
+    <%- include('header'); %> 
+    
+
+    <section class="container">
+        <h1 class="title is-3"><%- title %></h1>
+    </section>
+
+   
+    <div class="container">
+        <h2>Wrestlers</h2>
+        <%- names %> 
+    </div>
+
+    <section class="container">
+        <%- table %> 
+
+    </section>
+    
+    <script>
+        // Dropdown list filtering
+        document.querySelectorAll('select#names')[0].addEventListener('change', function() {
+            var tableRows = document.querySelectorAll('tr')
+            var selected = document.getElementById('names').value
+            console.log(selected)
+            
+            for(var i=1;i<tableRows.length;i++){
+                document.querySelectorAll('tr')[i].style.display = ''
+            }
+
+            for(var i=1;i<tableRows.length;i++){
+                if (tableRows[i].innerText.indexOf(selected) === -1) {
+                    console.log(tableRows[i].innerText);
+                    document.querySelectorAll('tr')[i].style.display = 'none'
+                }
+            }
+        })
+    
+    </script>
+</body>
+</html>

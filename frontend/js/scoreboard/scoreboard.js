@@ -12,9 +12,9 @@ let nowShotClock = 0;
 
 const phases = [ "1", "rest", "2"];
 const timeValue = [
-    5, // Rest period 30 s
-    5, // 2 mins (juniors)
-    5 // 3 mins (seniors)
+    30, // Rest period 30 s
+    120, // 2 mins (juniors)
+    180 // 3 mins (seniors)
 ];
 
 // should be 30 seconds
