@@ -68,11 +68,13 @@ app.route('/tournaments/openHome')
 const fixtures = require('./routes/matches/fixtures.js');
 const matches_import = require('./routes/matches/matches_import.js');
 const records = require('./routes/matches/records.js');
+const matches_records = require('./routes/matches/matches_records.js')
 
 app.route('/matches/fixtures')
     .get((req, res) => {fixtures(req,res,mysql,db)});
 
 app.route('/matches/records')
+    .get((req,res) => {matches_records(req, res, mysql, db, app.get('tournamentId'))})
     .post((req,res) => {records(req, res, mysql, db, app.get('tournamentId'))});
 
 app.route('/matches/import/:mat')
@@ -85,7 +87,7 @@ app.route('/matches/sampleB').get((req,res)=>{res.sendFile(__dirname+'/database/
 // WRESTLERS
 const all = require('./routes/wrestlers/all.js')
 const wrestlers_import = require('./routes/wrestlers/wrestlers_import.js')
-const wrestlers_records = require('./routes/wrestlers/wrestlers_records.js')
+
 
 app.route('/wrestlers/all')
     .get((req, res) => {all(req,res,mysql,db)});
@@ -95,8 +97,7 @@ app.route('/wrestlers/import')
         wrestlers_import(req,res,mysql,db);
     });
 
-app.route('/wrestlers/records')
-    .get((req, res) => {wrestlers_records(req,res,mysql,db)});
+
 
 
 // SQL INTERFACE

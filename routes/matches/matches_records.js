@@ -1,15 +1,34 @@
-module.exports = wrestlers_records;
+module.exports = matches_records;
 
-async function wrestlers_records(req, res, mysql, db) {
+async function matches_records(req, res, mysql, db) {
     let conn = mysql.createConnection(db);
     
 
     conn.connect();
 
-    let query = `SELECT DISTINCT red_name, blue_name FROM matches_records;`
+    let query = `SELECT DISTINCT id, date, title FROM tournaments;`
+
+    await conn.query(query, (err, rows, fields) => {
+        let tournaments = [];
+
+        let options = `<option value=''></options>`;
+        
+        for(var i=0; i<rows.length; i++) {
+            let tournamentTitle = rows[i].date.getFullYear() + ' ' + rows[i].title;
+            options = options + `<option value='${rows[i].id}'>${tournamentTitle}</options>`
+        }
+        
+        dropdownTournaments = `<select id='tournaments'>
+            ${options}
+        </select>`
+
+    })
+
+    query = `SELECT DISTINCT red_name, blue_name FROM matches_records;`
 
     var distinctNames = '';
-    var dropdown = '';
+    var dropdownNames = '';
+
     await conn.query(query, (err, rows, fields) => {
         let names = [];
 
@@ -23,13 +42,13 @@ async function wrestlers_records(req, res, mysql, db) {
 
         distinctNames = [...new Set(names)].sort();
         
-        var options = `<option value=''></options>`;
+        let options = `<option value=''></options>`;
         
         for(var i=0; i<distinctNames.length; i++) {
             options = options + `<option value='${distinctNames[i]}'>${distinctNames[i]}</options>`
         }
         console.log();
-        dropdown = `<select id='names'>
+        dropdownNames = `<select id='names'>
             ${options}
         </select>`
 
@@ -47,6 +66,7 @@ async function wrestlers_records(req, res, mysql, db) {
             let table = `
                 <tr class='header'>
                     <th>Id</th>
+                    <th style='display:none;'>Tournament</th>
                     <th>Red</th>
                     <th>Blue</th>
                     <th>Age</th>
@@ -73,6 +93,7 @@ async function wrestlers_records(req, res, mysql, db) {
                 table = table + 
                 `<tr>
                     <td>${row.id}</td>
+                    <td style='display:none;' name='tournament'>${row.tournament}</td>
                     <td ${redWinner}>${row.red_name}</td>
                     <td ${blueWinner}>${row.blue_name}</td>
                     <td>${row.age}</td>
@@ -80,8 +101,8 @@ async function wrestlers_records(req, res, mysql, db) {
                     <td>${style}</td>
                     <td>${row.weight}</td>
                     <td>${row.time_clock}</td>
-                    <td>${row.class_points_red}</td>
-                    <td>${row.class_points_blue}</td>
+                    <td style='text-align:center;'>${row.class_points_red}</td>
+                    <td style='text-align:center;'>${row.class_points_blue}</td>
                 </tr>`
                 
                 arr.push(rows[i].red_name);
@@ -92,7 +113,8 @@ async function wrestlers_records(req, res, mysql, db) {
             
             res.render('records', {
                 title: `Records`,
-                names: dropdown,
+                names: dropdownNames,
+                tournaments: dropdownTournaments,
                 table: table
             })
 
