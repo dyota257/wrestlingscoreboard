@@ -14,6 +14,7 @@ async function wrestlers_records(req, res, mysql, db) {
             
             let table = `
                 <tr class='header'>
+                    <th>Id</th>
                     <th>Red</th>
                     <th>Blue</th>
                     <th>Age</th>
@@ -39,6 +40,7 @@ async function wrestlers_records(req, res, mysql, db) {
 
                 table = table + 
                 `<tr>
+                    <td>${row.id}</td>
                     <td ${redWinner}>${row.red_name}</td>
                     <td ${blueWinner}>${row.blue_name}</td>
                     <td>${row.age}</td>

@@ -6,7 +6,14 @@
     <script defer src="/js/jquery-3.5.1.slim.min.js"></script>
 
     <script defer>
-        // add ctrl-enter as press button
+        // Press the "Write query" button when Ctrl+Enter is pressed
+        var keyArr = [];
+        document.addEventListener('keydown', function() {
+            let key = event.key;
+            if(keyArr.indexOf(key) === -1) {keyArr.push(key);}
+            if(keyArr[0] === 'Control'&& keyArr[1] === 'Enter') {document.querySelectorAll('input[value="Write query"]')[0].click()}
+        });
+        document.addEventListener('keyup', function() {keyArr.pop();})
     </script>
 </head>
 
@@ -19,12 +26,12 @@
 
         <h1 class="title is-3">SQL query</h1>
 
-        <p class="block">Use the text box below to interact directly with the database. Results are displayed in JSON format. </p>
+        <p class="block">Use the text box below to interact directly with the database. Results are displayed in JSON format. Multiple queries are supported. Ctrl+Enter to enter query.</p>
 
         <form  class="block" action="/query" method="post">
             <textarea class="textarea" name="query" style="width: 660px; height:320px; font-family:monospace">SELECT * FROM tournaments </textarea>
             <br><br>
-            <input class="button is-primary is-large"type="submit" value="Write query">
+            <input class="button is-primary is-large" type="submit" value="Write query">
         </form>
 
     </section>

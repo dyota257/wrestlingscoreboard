@@ -1,7 +1,7 @@
 # To-do list
 
 # Last time...
-
+ctrl+enter on query
 records.js frontend.... 
 
 [x] Can't auto-write to database. Fixed.
@@ -24,11 +24,10 @@ Then write SQL queries.
 
 ## Tournament feedback
 ### Jack
-[ ] can't pause clock after Period 2
+[x] can't pause clock after Period 2
 [ ] This block is not complete in scoreboard.js
-    if (this.id === 'announcevictory') {
-
-        need to include criteria for draws
+    if (this.id === 'announcevictory') 
+    need to include criteria for draws
 [ ] Clock was counting two different times
 [ ] Announce victory as soon as >9 points (?)
 [ ] Filter wrestlers' records
@@ -54,9 +53,9 @@ SUCCESS
 [ ] Time takem from clock is TIME REMAINING - want to log TIME ELAPSED
 
 
-[ ] DELETE from matches_temp WHERE
-    [ ] Need a way to fetching the match id
-    [ ] Two connections in a row isn't working
+[x] DELETE from matches_temp WHERE
+    [x] Need a way to fetching the match id
+    [x] Two connections in a row isn't working
 
 [x] Check if records.js works
     [x] make it route somewhere else after it's done

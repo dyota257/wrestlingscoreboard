@@ -10,7 +10,7 @@ async function records(req, res, mysql, db, tournamentId) {
     
     query = `
         DELETE FROM matches_temp WHERE (mat = "${req.body.mat}" AND id = ${req.body.matchID});
-        INSERT INTO matches_records (
+        INSERT IGNORE INTO matches_records (
             tournament,
             red_name,
             blue_name,
