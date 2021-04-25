@@ -1,10 +1,8 @@
 # To-do list
 
 # Last time...
-[ ] INSERT INTO records need to include 
-    [ ] score
-    [ ] club
-[ ] Change style input to FS and GR
+changing database records for consistency
+
 
 [ ] get rid of temporary match table underneath
 
@@ -69,6 +67,11 @@ Then write SQL queries.
 
 ## database writeback records
 SUCCESS
+
+[x] INSERT INTO records need to include 
+    [x] score
+    [x] club
+[x] Change style input to FS and GR
 
 [ ] Time takem from clock is TIME REMAINING - want to log TIME ELAPSED
 

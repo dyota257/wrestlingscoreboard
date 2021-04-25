@@ -2,38 +2,47 @@
     <title>
         <%- title %>
     </title>
-
         
-        
-        
-
 </head>
 <body>
     <%- include('header'); %> 
     
-
     <section class="container">
         <h1 class="title is-3"><%- title %></h1>
     </section>
 
-   
     <div class="container">
-        <h2>Wrestlers</h2>
-        <%- names %> 
+        <div class="tile">
+
+            <div class="tile is-3"><div class="field">
+                <label for="" class="label">
+                    Wrestlers
+                </label>
+                <div class="control"><div class="select">
+                    <%- names %> 
+                </div></div>
+            </div></div>
+
+            <div class="tile is-3"><div class="field">
+                <label for="" class="label">
+                    Tournaments
+                </label>
+                <div class="control"><div class="select">
+                    <%- tournaments %> 
+                </div></div>
+            </div></div>
+            
+        </div>
     </div>
     
-    <div class="container">
-        <h2>Tournaments</h2>
-        <%- tournaments %> 
-    </div>
-
     <section class="container">
         <%- table %> 
 
     </section>
-    
+
     <script>
         
+        // Dropdown list filtering
         var filter = {
             name: '',
             tournament: ''
@@ -41,12 +50,12 @@
 
         var tableRows = document.querySelectorAll('tr')
         
-        // Dropdown list filtering
+        //  names
         document.querySelectorAll('select#names')[0].addEventListener('change', function() {
             filter['name'] = document.getElementById('names').value
             filterTable();
         })
-        
+        //  tournaments
         document.querySelectorAll('select#tournaments')[0].addEventListener('change', function() {
             filter['tournament'] = document.getElementById('tournaments').value
             filterTable();
@@ -67,5 +76,7 @@
             }
         };
     </script>
+
+
 </body>
 </html>
