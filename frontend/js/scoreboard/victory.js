@@ -69,8 +69,17 @@ function victory(side, method) {
     $(".popup input[name=tournamentId]").val($("#tournamentId").text())
     $(".popup input[name=matchID]").val()
     $(".popup input[name=mat]").val($("select[name=mat]").val())
+    
     $(".popup input[name=red]").val(playerRed.firstName + ' ' + playerRed.lastName)
     $(".popup input[name=blue]").val(playerBlue.firstName + ' ' + playerBlue.lastName)
+    
+    $(".popup input[name=red_club]").val(playerRed.clubName)
+    $(".popup input[name=blue_club]").val(playerBlue.clubName)
+    
+    $(".popup input[name=red_score]").val(playerRed.score)
+    $(".popup input[name=blue_score]").val(playerBlue.score)
+    
+    
     $(".popup input[name=winner]").val(side)
     switch(side) {
         case "red":
@@ -83,8 +92,12 @@ function victory(side, method) {
             break;
     }
     $(".popup input[name=age]").val($("select[name=age]").val())
-    $(".popup input[name=gender]").val($("select[name=gender]").val())
-    $(".popup input[name=style]").val($("select[name=style]").val())
+    $(".popup input[name=gender]").val($("select[name=gender]").val().slice(0,1))
+    if($("select[name=style]").val ()=== "Greco-Roman") {
+        $(".popup input[name=style]").val("GR");
+    } else {
+        $(".popup input[name=style]").val("FS");
+    }
     $(".popup input[name=weight]").val($("select[name=weight]").val())
     // This input is populate on setConfirmGame
     // $(".popup input[name=time_start]").val()
@@ -97,19 +110,19 @@ function victory(side, method) {
     
     // add the rows of table here. 
 
-    var matchResults = $("table.results>tbody");
-    console.log(matchResults);
+    // var matchResults = $("table.results>tbody");
+    // console.log(matchResults);
     
-    var newRow = `
-        <td>${playerBlue.firstName} ${playerBlue.lastName}</td>
-        <td>${playerRed.firstName} ${playerRed.lastName}</td>
-        <td>${playerBlue.score}</td>
-        <td>${playerRed.score}</td>
-        <td>${winnerName}</td>
-        <td>${method}</td>
-        <td>${classification}</td>`;
+    // var newRow = `
+    //     <td>${playerBlue.firstName} ${playerBlue.lastName}</td>
+    //     <td>${playerRed.firstName} ${playerRed.lastName}</td>
+    //     <td>${playerBlue.score}</td>
+    //     <td>${playerRed.score}</td>
+    //     <td>${winnerName}</td>
+    //     <td>${method}</td>
+    //     <td>${classification}</td>`;
     
-    matchResults.html(matchResults.html() + newRow);
+    // matchResults.html(matchResults.html() + newRow);
 
 
 };

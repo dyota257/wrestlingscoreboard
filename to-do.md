@@ -1,9 +1,23 @@
 # To-do list
 
 # Last time...
-ctrl+enter on query
-records.js frontend.... 
+[ ] INSERT INTO records need to include 
+    [ ] score
+    [ ] club
+[ ] Change style input to FS and GR
 
+[ ] get rid of temporary match table underneath
+
+[ ] What if we need to change the current match, and don't want to delete the next one?
+    [ ] Make an "outside of fixtures" options
+
+[ ] fixtures bugs out if no names are there
+[x] records.js frontend.... 
+
+Just finished filters on records page
+[ ] Write actual records into here
+[ ] People want to see club name on fixtures
+[ ] Names are too small on scoreboard
 [x] Can't auto-write to database. Fixed.
 
 [x] How to do two database fetches in a row?
@@ -39,6 +53,12 @@ Then write SQL queries.
 [ ] Criteria not showing if scores were totally even (need to determine who scored last)
 [ ] Announce victory on Exhibition matches showed as soon as scores were posted. 
 
+### Records data
+[ ] Record points
+[ ] Change all names to uppercase
+[ ] Exhibitions record style also
+[ ] Import all other records!
+ 
 
 ## Erica UI feedback
 [x] window alert when leaving
@@ -127,7 +147,7 @@ SUCCESS
 
 ## Tournament manager
 ### Passing data
-[ ] Store match results in matches_records
+[x] Store match results in matches_records
 
 ### ROUTING
 This server.js file is getting really big and disorganised. Organise it.
@@ -140,8 +160,11 @@ This server.js file is getting really big and disorganised. Organise it.
 [x] Date format in tournament display
 
 
+
 ## misc
 [ ] Put in a forfeit condition
+
+[x] ctrl+enter on query
 
 [ ] The play button gets confused / runs two timers if start button is pressed in rapid succession
 

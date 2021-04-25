@@ -56,7 +56,7 @@ async function matches_records(req, res, mysql, db) {
 
        
     
-    query = `SELECT * FROM matches_records`;  
+    query = `SELECT * FROM matches_records ORDER BY id DESC`;  
 
     await conn.query(query, (err, rows, fields) => {
         if (err) {
@@ -68,7 +68,9 @@ async function matches_records(req, res, mysql, db) {
                     <th>Id</th>
                     <th style='display:none;'>Tournament</th>
                     <th>Red</th>
+                    <th></th>
                     <th>Blue</th>
+                    <th></th>
                     <th>Age</th>
                     <th>Gender</th>
                     <th>Style</th>
@@ -94,8 +96,10 @@ async function matches_records(req, res, mysql, db) {
                 `<tr>
                     <td>${row.id}</td>
                     <td style='display:none;' name='tournament'>${row.tournament}</td>
-                    <td ${redWinner}>${row.red_name}</td>
-                    <td ${blueWinner}>${row.blue_name}</td>
+                    <td ${redWinner}>${row.red_name} (${row.red_club})</td>
+                    <td>${row.red_score === null ? '' : row.red_score}</td>
+                    <td ${blueWinner}>${row.blue_name} (${row.blue_club})</td>
+                    <td>${row.blue_score=== null ? '' : row.blue_score}</td>
                     <td>${row.age}</td>
                     <td>${row.gender}</td>
                     <td>${style}</td>
