@@ -186,7 +186,7 @@ $("button").click( function() {
                 || $("#redLastName").val()==""
                 || $("#redClubName").val()==""
                 || $("select[name=weight]").val()==""
-            ) && ageDiv.indexOf('min') === -1
+            ) && ageDiv.indexOf('SP') === -1
         ) {
             window.alert("Fill in all the names and game type!");
         } else {

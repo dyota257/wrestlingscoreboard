@@ -14,22 +14,28 @@
     <div class="container">
         <div class="tile">
 
-            <div class="tile is-3"><div class="field">
-                <label for="" class="label">
-                    Wrestlers
-                </label>
-                <div class="control"><div class="select">
-                    <%- names %> 
-                </div></div>
-            </div></div>
+            <div class="tile is-3">
+                <div class="field">
+                    <label for="" class="label">
+                        Wrestlers
+                    </label>
+                    <div class="control">
+                        <div class="select">
+                            <%- names %> 
+                        </div>
+                    </div>
+                </div>
+            </div>
 
             <div class="tile is-3"><div class="field">
                 <label for="" class="label">
                     Tournaments
                 </label>
-                <div class="control"><div class="select">
-                    <%- tournaments %> 
-                </div></div>
+                <div class="control">
+                    <div class="select">
+                        <%- tournaments %> 
+                    </div>
+                </div>
             </div></div>
             
         </div>
@@ -51,12 +57,12 @@
         var tableRows = document.querySelectorAll('tr')
         
         //  names
-        document.querySelectorAll('select#names')[0].addEventListener('change', function() {
+        document.querySelectorAll('select#names')[0].addEventListener('click', function() {
             filter['name'] = document.getElementById('names').value
             filterTable();
         })
         //  tournaments
-        document.querySelectorAll('select#tournaments')[0].addEventListener('change', function() {
+        document.querySelectorAll('select#tournaments')[0].addEventListener('click', function() {
             filter['tournament'] = document.getElementById('tournaments').value
             filterTable();
         })

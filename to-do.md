@@ -1,8 +1,9 @@
 # To-do list
 
 # Last time...
-changing database records for consistency
+Check that game type (FS/ GR) and SP Senior / SP Junior are working
 
+changing database records for consistency
 
 [ ] get rid of temporary match table underneath
 
@@ -100,7 +101,8 @@ SUCCESS
 [x] put console log in matches import to catch error
 
 ## Misc
-[ ] ctrl enter as press button
+[ ] <datalist> element has no event listeners, can't use in the same way as <select>
+[x] ctrl enter as press button
 [x] Exhibitions? Remember to mark them correctly somehow
     [x] Or have a category for "exhbitions" and have a choice of a 2-min or a 3-min match
 

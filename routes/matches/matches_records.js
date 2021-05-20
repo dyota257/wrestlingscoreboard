@@ -19,8 +19,8 @@ async function matches_records(req, res, mysql, db) {
         }
         
         dropdownTournaments = `<select id='tournaments'>
-            ${options}
-        </select>`
+                ${options}
+            </select>`
 
     })
 
@@ -49,8 +49,8 @@ async function matches_records(req, res, mysql, db) {
         }
         console.log();
         dropdownNames = `<select id='names'>
-            ${options}
-        </select>`
+                ${options}
+            </select>`
 
     })
 
