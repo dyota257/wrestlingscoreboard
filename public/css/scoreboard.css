@@ -161,10 +161,10 @@ button#announcevictory {
 }
 .blue.penalty {
   grid-area: right_penalty_control;
+  border-bottom-right-radius: 30px;
 }
 .blue.pin {
   grid-area: right_pin;
-  border-bottom-right-radius: 30px;
 }
 .blue.buttonsRow {
   border-radius: 0px 30px 0px 0px;
@@ -189,9 +189,6 @@ button#announcevictory {
   background: initial;
   padding-right: 20px;
 }
-.red.points-control {
-  border-top-left-radius: 30px;
-}
 .red.playerData {
   text-align: right;
   grid-area: left_score;
@@ -202,14 +199,15 @@ button#announcevictory {
   border-radius: 30px 0px 0px 0px;
 }
 .red.points-control {
+  border-top-left-radius: 30px;
   grid-area: left_points_control;
 }
 .red.penalty {
   grid-area: left_penalty_control;
+  border-bottom-left-radius: 30px;
 }
 .red.pin {
   grid-area: left_pin;
-  border-bottom-left-radius: 30px;
 }
 
 .buttonsRow {
@@ -244,11 +242,15 @@ button#announcevictory {
 }
 
 .firstName, .clubName {
+  font-size: min(5vh, 5vw);
+}
+
+#gameType {
   font-size: min(3vh, 3vw);
 }
 
 .lastName, #period {
-  font-size: min(5vh, 4vw);
+  font-size: min(10vh, 6vw);
 }
 
 .mainPage {
@@ -394,6 +396,7 @@ button#announcevictory {
   border-radius: 10px;
   font-weight: bold;
   padding: 10px;
+  margin: auto;
 }
 
 /*Iphone screen size */

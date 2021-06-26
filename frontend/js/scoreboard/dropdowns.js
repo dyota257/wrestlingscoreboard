@@ -30,15 +30,15 @@ const  categories =
     "18-20 yrs":{
         Female: [50, 53, 57, 62, 68, 76, 85, '85+'],
         Male: {
-            Freestyle:  [57, 65, 74, 79, 86, 92, 97, 125, '125+'],
-            "Greco-Roman": [60, 67, 77, 87, 97, 130, '130+']
+            FS:  [57, 65, 74, 79, 86, 92, 97, 125, '125+'],
+            GR: [60, 67, 77, 87, 97, 130, '130+']
         } 	
     },
     "21yrs+":{
         Female: [50, 53, 57, 62, 68, 76, 85, '85+'],
         Male: {
-            Freestyle:  [57, 65, 74, 79, 86, 92, 97, 125, '125+'],
-            "Greco-Roman": [60, 67, 77, 87, 97, 130, '130+']
+            FS:  [57, 65, 74, 79, 86, 92, 97, 125, '125+'],
+            GR: [60, 67, 77, 87, 97, 130, '130+']
         } 	
     }
 }
@@ -143,16 +143,17 @@ function dropdownsCheckWhich() {
     const styleDiv = $("select[name=style]").val();
 
     var gameType = "";
-    if (styleDiv == "Greco-Roman") {
+    if (styleDiv == "GR") {
         gameType = "Senior Greco-Roman";
-    } else if (ageDiv == "18-20 yrs" || ageDiv == "21yrs+") {
+    } else if (ageDiv == "18-20 yrs" || ageDiv == "21yrs+" || ageDiv.indexOf("Senior") > 0) {
         gameType = "Senior Freestyle";
-    } else  if (ageDiv.indexOf('SP') === -1) { // not an exhibition
+    } else { 
         gameType = "Junior Freestyle";
-    } else if (ageDiv === 'SP Junior') {
-        gameType = 'Exhibition: Junior'
-    } else {
-        gameType = 'Exhibition: Senior'
+    }
+
+    if ( ageDiv.indexOf("SP")>0 ) {
+        gameType = "Exhibition: " + gameType
+
     }
 
     const styleAndAge = [gameType, ageDiv];

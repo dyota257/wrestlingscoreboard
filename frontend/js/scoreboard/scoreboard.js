@@ -3,6 +3,7 @@
 
 var gameType = "";
 var gameTypeWinScore = 0;
+var disqualification = '';
 
 var timerOn = false;
 var timerInit = 0;
@@ -68,7 +69,6 @@ $(document).keydown( (e) => {
 $("button").click( function() {
     this.blur();
 
-
     if(this.id === 'airhorn'){
         new Audio("/sounds/airhorn.mp3").play();
     }
@@ -91,12 +91,26 @@ $("button").click( function() {
             switch(this.className){
                 // warning
                 case "warning":
-                    if(players[playerNumber].warnings < 2) {
+                    switch(side) {
+                        case "red":
+                            playerX = playerRed;
+                            payerY = playerBlue;
+                            break;
+                        case "blue":
+                            playerX = playerBlue;
+                            payerY = playerRed;
+                            break;
+                    }
+                    if(playerX.warnings < 2) {
                         $(`.markerWarning.${side}`).text($(`.markerWarning.${side}`).text() + "■");
-                        players[playerNumber].warnings++;
+                        playerX.warnings++;
                     } else {
+                        $(`.markerWarning.${side}`).text($(`.markerWarning.${side}`).text() + "■")
+                        playerX.warnings++;
                         // the other side wins
-                        victory(players[Math.abs(playerNumber-1)].side, "disqualification");
+                        $('#announcevictory').css('visibility', 'visible');
+                        disqualification = side;
+                        // victory(playerY.side, "disqualification");
                     }
                     break;
                 // shotclock
@@ -115,11 +129,14 @@ $("button").click( function() {
                         // console.log(nowOffset);
                     }
                     break;
+                // pin
+                case "pin":
+                    victory(side, "fall");
+                    break;
             }
             break;
 // Pins
         case `${side} pin`:
-            victory(side, "fall");
             break;
         default:
             null;
@@ -134,27 +151,36 @@ $("button").click( function() {
         switch( $("#fixturesTable").css("display") ) {
             case "flex":
                 $("#fixturesTable").css("display", "none");
+                $("#fixtures").text("Fixtures 🔽");
                 break;
             case "none":
                 $("#fixturesTable").css("display", "flex");
+                $("#fixtures").text("Fixtures 🔼");
                 break;
         }
     }
 
     if (this.id === 'announcevictory') {
-        // get the winning score
-        let scoreWinner = Math.max(playerBlue.score, playerRed.score);
-        // get the side of the player with the winning score
-        let side = players.find(x => x.score === scoreWinner).side;
-        // give option to declare victory
-        if(Math.abs(playerRed.score - playerBlue.score)>=10) {
-            victory(side, "technical superiority");
-        } else {
-            victory(side, "points");
+        // Opponent wins by disqualification
+        if (disqualification === 'red') {
+            victory('blue', "disqualification");
         }
-        
+        else if (disqualification === 'blue') {
+            victory('red', "disqualification");
+        } else {
+            // get the winning score
+            let scoreWinner = Math.max(playerBlue.score, playerRed.score);
+            // get the side of the player with the winning score
+            let side = players.find(x => x.score === scoreWinner).side;
+            // give option to declare victory
+            if(Math.abs(playerRed.score - playerBlue.score)>=10) {
+                victory(side, "technical superiority");
+            } else {
+                victory(side, "points");
+            }
+        }
+        // If the timer is on, then stop it
         if(timerOn) {startTime(now)}
-        
         
         // hide te button again
         $('#announcevictory').css('visibility', 'hidden');
@@ -255,6 +281,8 @@ $("button").click( function() {
 
             // reset scores, warnings, shotclocks
             reset(true,true,true);
+            $('#announcevictory').css('visibility', 'hidden');
+            disqualification = false;
 
             if (gameType.indexOf("Greco")>0) {
                 gameTypeWinScore = 8;
@@ -278,7 +306,9 @@ $("button").click( function() {
             $("#playerInput").css("display","none");
             
             // reset scores, warnings, shotclocks, gameType
-            reset(true,true,true, true);
+            reset(true,true,true,true);
+            $('#announcevictory').css('visibility', 'hidden');
+            disqualification = false;
             
             $(".blue.firstName").text("blueFirstName");
             $(".blue.lastName").text("blueLastName");

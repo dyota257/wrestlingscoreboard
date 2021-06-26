@@ -23,6 +23,9 @@ function startTimer(now) {
         $('#importArea').css("display", "none");
         $('#playerInput').css("display", "none");
         $('#fixturesTable').css("display", "none");
+        $('nav').css("display", "none");
+        $('#mainHeader').css("display", "none");
+
 
     } else if (timerOn === true)  { // to pause the time
         $("#startTimer").html("▶");
@@ -30,6 +33,8 @@ function startTimer(now) {
         timer(now);
         $(".middle").css("backgroundColor", "grey");
         $('#resetGameRow').css("display", "flex");
+        $('nav').css("display", "flex");
+        $('#mainHeader').css("display", "flex");
     };
 }
 

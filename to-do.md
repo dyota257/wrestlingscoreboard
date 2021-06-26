@@ -5,18 +5,28 @@ Check that game type (FS/ GR) and SP Senior / SP Junior are working
 
 changing database records for consistency
 
-[ ] get rid of temporary match table underneath
+[x] get rid of temporary match table underneath
+[x] Make controls smaller
+[x] weight selector broken: fixed, style name changed (Fresstyle -> FS, Greco-Roman -> GR)
+[x] Makes last names bigger
+[x] Fixtures up and down
+[x] People want to see club name on fixtures
+[x] Warning squares not showing
+[x] on pause, hide all of the navbar
+[x] put disqualification state as part of reset
+___
 
 [ ] What if we need to change the current match, and don't want to delete the next one?
     [ ] Make an "outside of fixtures" options
 
+
+
 [ ] fixtures bugs out if no names are there
+
 [x] records.js frontend.... 
 
-Just finished filters on records page
-[ ] Write actual records into here
-[ ] People want to see club name on fixtures
-[ ] Names are too small on scoreboard
+
+[x] Names are too small on scoreboard
 [x] Can't auto-write to database. Fixed.
 
 [x] How to do two database fetches in a row?
@@ -48,7 +58,7 @@ Then write SQL queries.
 [x] Mat selector - lock it to the current mat
 
 ### Own notes
-[ ] Warning squares not showing
+
 [ ] Criteria not showing if scores were totally even (need to determine who scored last)
 [ ] Announce victory on Exhibition matches showed as soon as scores were posted. 
 

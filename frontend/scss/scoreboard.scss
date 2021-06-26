@@ -184,11 +184,11 @@ button {
 
     &.penalty {
         grid-area: right_penalty_control;
+        border-bottom-right-radius: 30px
     }
 
     &.pin {
         grid-area: right_pin;
-        border-bottom-right-radius: 30px
     }
 
     &.buttonsRow {
@@ -221,10 +221,6 @@ button {
         padding-right: 20px;
     }
     
-    &.points-control {
-        border-top-left-radius: 30px;
-    }
-    
     &.playerData {
         text-align: right;
         grid-area: left_score;
@@ -237,16 +233,17 @@ button {
     }
     
     &.points-control {
+        border-top-left-radius: 30px;
         grid-area: left_points_control;
     }
     
     &.penalty {
         grid-area: left_penalty_control;
+        border-bottom-left-radius: 30px;
     }
     
     &.pin {
         grid-area: left_pin;
-        border-bottom-left-radius: 30px
     }
 }
 
@@ -282,11 +279,15 @@ button {
 }
 
 .firstName, .clubName {
+    font-size: min(5vh, 5vw);
+}
+
+#gameType {
     font-size: min(3vh, 3vw);
 }
 
 .lastName, #period {
-    font-size: min(5vh, 4vw);
+    font-size: min(10vh, 6vw);
 }
 
 .mainPage {
@@ -437,6 +438,7 @@ button {
         border-radius: 10px;
         font-weight: bold;
         padding: 10px;
+        margin: auto;
     }
 }
 

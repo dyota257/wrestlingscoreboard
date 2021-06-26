@@ -15,7 +15,8 @@ function victory(side, method) {
     $(".popup").css("height", document.body.clientHeight);
     
     // pause time
-    startTimer(now);
+    // No need for this - this is already handled by announce victory
+    // startTimer(now);
     
     // decide classification points
     switch (method) {
@@ -36,6 +37,8 @@ function victory(side, method) {
                 classification = "VPO1 3:1";
             }
             break;
+        case "disqualification":
+                classification = "VCA 5:0"
         default:
             break;
     }
