@@ -1,15 +1,18 @@
 Other reference/
 WWA reference/
 node_modules/
+Excel/
+
 WWA_scoreboard_single.html
 WWA_scoreboard_single.min.html
 Timer_example.html
 js/app.min.js
 css/styles.min.css
-Screenshot.png
-wwa_logo.png
-Excel/
+
 George-Samios-Cup-2019-Pairing.xlsx
 UFW 2020 Pairing.xlsx
 textbox.html
 package-lock.json
+
+Screenshot.png
+wwa_logo.png

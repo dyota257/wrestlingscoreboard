@@ -19,8 +19,6 @@ ___
 [ ] What if we need to change the current match, and don't want to delete the next one?
     [ ] Make an "outside of fixtures" options
 
-
-
 [ ] fixtures bugs out if no names are there
 
 [x] records.js frontend.... 
