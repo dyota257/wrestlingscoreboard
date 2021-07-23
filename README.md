@@ -10,5 +10,5 @@ Currently hosted on Heroku at
 
 ## In action
 
-<img src='https://raw.githubusercontent.com/dyota257/wrestlingscoreboard/master/images/liveshot1.png' width='50em'>
-<img src='https://raw.githubusercontent.com/dyota257/wrestlingscoreboard/master/images/liveshot2.png' width='50em'>
+<img src='https://raw.githubusercontent.com/dyota257/wrestlingscoreboard/master/images/liveshot1.png' width='100%'>
+<img src='https://raw.githubusercontent.com/dyota257/wrestlingscoreboard/master/images/liveshot2.png' width='100%'>
