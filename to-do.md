@@ -1,4 +1,15 @@
 # To-do list
+## From George Samios Cup August 2021
+[ ] Take out rest period 30s.
+    This is not useful. The refs keep their own rest time. If this gets missed, then it can't be skipped. 
+[ ] Take out the connection to the server - no need to save results. 
+    Jack says that there is a problem. When click "Save Result", it brings an error Cannot GET Scoreboard. Something was wrong with the server. 
+[ ] Take out the mandatory weights that have to be filled in before a match can be confirmed.
+    This doesn't matter. It only matters for the master database of records, but that isn't something that we need. 
+[ ] Replace timing code with a premade JS library
+    Timer for period 2 was misbehaving, showing two different timers. 
+[ ] Get another tablet device
+    The view angle is not wide enough
 
 # Last time...
 Check that game type (FS/ GR) and SP Senior / SP Junior are working
@@ -19,73 +30,7 @@ ___
 [ ] What if we need to change the current match, and don't want to delete the next one?
     [ ] Make an "outside of fixtures" options
 
-[ ] fixtures bugs out if no names are there
-
-[x] records.js frontend.... 
-
-
-[x] Names are too small on scoreboard
-[x] Can't auto-write to database. Fixed.
-
-[x] How to do two database fetches in a row?
-    multipleStatements: true
-
-Need to fetch id using this
-var id = Number(
-    document
-        .querySelectorAll('tr.matchOrder>td[data-label="id"]')[0]
-        .innerText
-        .trim()
-);
-
-Need to fetch this within victory.js. 
-Write this into the input fields, so that the form can be submitted.
-
-Then write SQL queries. 
-
-## Tournament feedback
-### Jack
-[x] can't pause clock after Period 2
-[ ] This block is not complete in scoreboard.js
-    if (this.id === 'announcevictory') 
-    need to include criteria for draws
-[ ] Clock was counting two different times
-[ ] Announce victory as soon as >9 points (?)
-[ ] Filter wrestlers' records
-[x] Doesn't change people automatically on load!
-[x] Mat selector - lock it to the current mat
-
-### Own notes
-
-[ ] Criteria not showing if scores were totally even (need to determine who scored last)
-[ ] Announce victory on Exhibition matches showed as soon as scores were posted. 
-
-### Records data
-[ ] Record points
-[ ] Change all names to uppercase
-[ ] Exhibitions record style also
-[ ] Import all other records!
- 
-
-## Erica UI feedback
-[x] window alert when leaving
-[x] announce victory button obscured
-[x] popup doesn't pull in wrestlers' names
-
-
-
-## database writeback records
-SUCCESS
-
-[x] INSERT INTO records need to include 
-    [x] score
-    [x] club
-[x] Change style input to FS and GR
-
-[ ] Time takem from clock is TIME REMAINING - want to log TIME ELAPSED
-
-
-[x] DELETE from matches_temp WHERE
+[ ] fixtures bugs out if no names are tHERE
     [x] Need a way to fetching the match id
     [x] Two connections in a row isn't working
 
