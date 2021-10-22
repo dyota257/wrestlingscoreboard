@@ -248,8 +248,13 @@ button {
 }
 
 .buttonsRow {
+    border:none;
     overflow: hidden;
     white-space: nowrap;
+
+    td {
+        border:none
+    }
 }
 
 .centerPanel {

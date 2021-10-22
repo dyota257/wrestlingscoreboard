@@ -3,13 +3,15 @@
     <link rel="stylesheet" href="/css/scoreboard.css">
     <!-- To run HTML file through node.js -->
     <script defer src="../js/jquery-3.5.1.slim.min.js"> </script>
-    <!-- <script defer src="../js/scoreboard/dropdowns.js"></script>
-    <script defer src="../js/scoreboard/import.js"></script>
-    <script defer src="../js/scoreboard/victory.js"></script>
-    <script defer src="../js/scoreboard/timer.js"></script>
-    <script defer src="../js/scoreboard/playerClass.js"></script> --> -->
+    
+    <!-- <script defer src="../js/scoreboard/dropdowns.js"></script> -->
+    <!-- <script defer src="../js/scoreboard/import.js"></script> -->
+    <!-- <script defer src="../js/scoreboard/playerClass.js"></script> -->
+    <!-- <script defer src="../js/scoreboard/scoreboard.js"></script> -->
+    <!-- <script defer src="../js/scoreboard/timer.js"></script> -->
+    <!-- <script defer src="../js/scoreboard/victory.js"></script> -->
+    
     <script defer src="../js/scoreboard.min.js"></script>
-    <script defer src="../js/testing.js"></script>
 
     <script src="https://kit.fontawesome.com/0f58b31d22.js" crossorigin="anonymous"></script>
     
@@ -25,9 +27,9 @@
 
 
     <div id="resetGameRow">
-        <button class="resetGame" id = "setGame">Set game</button>
+        <button class="resetGame" onclick="setGame()">Set game</button>
         <button class="resetGame" id = "resetGame">Reset all</button>
-        <button class="resetGame" id = "fixtures">Fixtures</button>
+        <button class="resetGame" onclick="fixtures()">Fixtures</button>
         <button class="resetGame" id = "prev"><<</button>
         <button class="resetGame" id = "next">>></button>
     </div>
@@ -45,8 +47,8 @@
             </tr>
             <tr>
                 <td colspan="5" >
-                    <button class="resetGame" id="setConfirmGame">Confirm</button>
-                    <button class="resetGame" id="cancelConfirmGame">Cancel</button>
+                    <button class="resetGame" onclick="setConfirmGame()">Confirm</button>
+                    <button class="resetGame" onclick="cancelConfirmGame()">Cancel</button>
                 </td>
             </tr>
         </table>
@@ -72,8 +74,8 @@
             <br>
             <span id="timer">0:00</span>
             <br>
-            <button class ="timer" id="startTimer" >▶</button>
-            <button id = "announcevictory">Announce victory</button>
+            <button class ="timer" onclick="startTimer()" id="startTimer">▶</button>
+            <button id="announcevictory" onclick="announceVictory()">Announce victory</button>
 
         </div>
 <!-- Blue side -->
@@ -100,36 +102,23 @@
 <!-- Control buttons row 1: scores -->
         <div class="red points-control">
             <div class="red buttonsRow">
-                <table style="border:none; margin-right:0; margin-left:auto;">
+                <table style="margin-right:0; margin-left:auto;">
                     <tr>
-                        <td class="red buttonsRow" style="border:none"><button value=4>+5</button> 
-                            <!-- <br>A</td> -->
-                        <td class="red buttonsRow" style="border:none"><button value=3>+4</button> 
-                            <!-- <br>S</td> -->
-                        <td class="red buttonsRow" style="border:none"><button value=2>+2</button> 
-                            <!-- <br>D</td> -->
-                        <td class="red buttonsRow" style="border:none"><button value=1>+1</button> 
-                            <!-- <br>F</td> -->
-                        <td class="red buttonsRow" style="border:none"><button value=0>-1</button> 
-                            <!-- <br>G</td> -->
+                        <% ["+5","+4","+2","+1","-1"].forEach((e,i)=>{%>
+                            <td onclick="updateScore('red', <%= Number(e) %>)"><button><%= e %></button></td>
+                        <% }) %>
                     </tr>
                 </table>
             </div>
         </div>
         <div class="blue points-control">
             <div class="blue buttonsRow">
-                <table style="border:none;margin-right:auto; margin-left:0;">
+                <table style="margin-right:auto; margin-left:0;">
                     <tr>
-                        <td class="blue buttonsRow" style="border:none"><button value=0>-1</button>
-                            <!-- <br>H</td> -->
-                        <td class="blue buttonsRow" style="border:none"><button value=1>+1</button>
-                            <!-- <br>J</td> -->
-                        <td class="blue buttonsRow" style="border:none"><button value=2>+2</button>
-                            <!-- <br>K</td> -->
-                        <td class="blue buttonsRow" style="border:none"><button value=3>+4</button>
-                            <!-- <br>L</td> -->
-                        <td class="blue buttonsRow" style="border:none"><button value=4>+5</button>
-                            <!-- <br>;</td> -->
+                        <% ["-1","+1","+2","+4","-5"].forEach((e,i)=>{%>
+                            <td onclick="updateScore('blue', <%= Number(e) %>)"><button><%= e %></button></td>
+                        <% }) %>
+                        
                     </tr>
                 </table>
 
@@ -137,28 +126,21 @@
         </div>
 <!-- Control buttons row 2: warning -->
         <div class="red penalty">
-            <button class="pin">📍 Pin!</button>
+            <button onclick="victory('red', 'fall')" class="pin">📍 Pin!</button>
             <button class="warning">⚠️Warning</button>
             <button class="shotclockbtn" id="shotclockbuttonred">⏱️ Shot clock</button>
         </div>
         <div class="blue penalty">
             <button class="shotclockbtn" id="shotclockbuttonblue">⏱️ Shot clock</button>
             <button class="warning">⚠️ Warning</button>
-            <button class="pin">📍 Pin!</button>
+            <button onclick="victory('blue', 'fall')" class="pin">📍 Pin!</button>
         </div>
 <!-- Control buttons row 3: reset -->
         <!-- <div class="red pin"></div>
         <div class="blue pin"></div> -->
     </div>
 
-    <!-- <div id="footer">
-        <table class="results container">
-            <tr style="font-weight:bolder">
-                <td>Red name</td><td>Blue name</td><td>Red score</td><td>Blue score</td><td>Winner</td><td>Method</td><td>Classification</td>
-            </tr>
-        </table>
 
-    <div> -->
 
 <!-- Popup  -->
     <%- include('scoreboard/popup') %>
@@ -171,7 +153,7 @@
     <footer>
         Dyota Tanuwibawa, David Hang 2020
         <section class="testing">
-            <button id="airhorn" style="display: none">🎺</button>
+            <button style="display: block;" onclick="airhorn()">🎺</button>
             <button id="victory" style="display: none">Victory</button>
         </section>
     </footer>

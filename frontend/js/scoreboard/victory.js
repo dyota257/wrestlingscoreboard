@@ -1,23 +1,45 @@
 /*
-Victory methods: 
-technical superiority
-points
-disqualification
-fall
+    Victory methods: 
+    technical superiority
+    points
+    disqualification
+    fall
 */
 
 
 var classification = "";
 
+function announceVictory() {
+    // Opponent wins by disqualification
+    if (disqualification === 'red') {
+        victory('blue', "disqualification");
+    }
+    else if (disqualification === 'blue') {
+        victory('red', "disqualification");
+    } else {
+        // get the winning score
+        let scoreWinner = Math.max(playerBlue.score, playerRed.score);
+        // get the side of the player with the winning score
+        let side = players.find(x => x.score === scoreWinner).side;
+        // give option to declare victory
+        if(Math.abs(playerRed.score - playerBlue.score)>=10) {
+            victory(side, "technical superiority");
+        } else {
+            victory(side, "points");
+        }
+    }
+    // If the timer is on, then stop it
+    if(timerOn) {startTime(now)}
+    
+    // hide te button again
+    $('#announcevictory').css('visibility', 'hidden');
+}
+
 function victory(side, method) {
     
     $(".popup").css("display", "flex");
     $(".popup").css("height", document.body.clientHeight);
-    
-    // pause time
-    // No need for this - this is already handled by announce victory
-    // startTimer(now);
-    
+        
     // decide classification points
     switch (method) {
         case "fall":
@@ -110,23 +132,6 @@ function victory(side, method) {
         + String(new Date().getMinutes()).padStart(2, "0")
     )
     $(".popup input[name=time_clock]").val($("#period").text() + ", " + $("#timer").text())
-    
-    // add the rows of table here. 
-
-    // var matchResults = $("table.results>tbody");
-    // console.log(matchResults);
-    
-    // var newRow = `
-    //     <td>${playerBlue.firstName} ${playerBlue.lastName}</td>
-    //     <td>${playerRed.firstName} ${playerRed.lastName}</td>
-    //     <td>${playerBlue.score}</td>
-    //     <td>${playerRed.score}</td>
-    //     <td>${winnerName}</td>
-    //     <td>${method}</td>
-    //     <td>${classification}</td>`;
-    
-    // matchResults.html(matchResults.html() + newRow);
-
 
 };
 

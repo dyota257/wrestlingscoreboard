@@ -211,8 +211,12 @@ button#announcevictory {
 }
 
 .buttonsRow {
+  border: none;
   overflow: hidden;
   white-space: nowrap;
+}
+.buttonsRow td {
+  border: none;
 }
 
 .centerPanel {

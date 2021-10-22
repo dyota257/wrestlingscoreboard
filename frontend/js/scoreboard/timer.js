@@ -9,7 +9,8 @@ function secondsToClock(seconds){
     return date.toISOString().substr(15, 4);
 }
 
-function startTimer(now) {
+function startTimer() {
+    
     if(timerOn === false) { // to restart the time
         $("#startTimer").html('<i class="fas fa-pause"></i>');
         timerOn = true;
@@ -19,22 +20,19 @@ function startTimer(now) {
             shotClockPaused = false;
         }
         $(".middle").css("backgroundColor", "black");
-        $('#resetGameRow').css("display", "none");
-        $('#importArea').css("display", "none");
-        $('#playerInput').css("display", "none");
-        $('#fixturesTable').css("display", "none");
-        $('nav').css("display", "none");
-        $('#mainHeader').css("display", "none");
-
+        
+        ['#resetGameRow','#importArea','#playerInput','#fixturesTable','nav','#mainHeader',].forEach((e)=>{
+            displayNone(e)
+        })
 
     } else if (timerOn === true)  { // to pause the time
         $("#startTimer").html("▶");
         timerOn = false;
         timer(now);
         $(".middle").css("backgroundColor", "grey");
-        $('#resetGameRow').css("display", "flex");
-        $('nav').css("display", "flex");
-        $('#mainHeader').css("display", "flex");
+        ['#resetGameRow','nav','#mainHeader'].forEach((e)=>{
+            displayFlex(e)
+        })
     };
 }
 
@@ -76,20 +74,6 @@ function timer(time) {
                 console.log(`it must be the end of the game, close things down`)
                 $("#startTimer").prop("disabled", true);
                 $('#announcevictory').css('visibility', 'visible');
-                // var winBlue = (scoreBlue - scoreRed)/Math.abs(scoreBlue - scoreRed)
-//                 switch ( winBlue ){
-//                     case 1:
-//                         victory("blue", "points");        
-//                         break;
-//                     case -1:
-//                         victory("red", "points");        
-//                         break;
-//                     default:
-// // Draw outcome
-//                         victory("draw", "technical superiority");
-//                         console.log("Outcome is draw")      
-//                         break;
-//                 }
                 clearInterval(interval);
             }
         };
