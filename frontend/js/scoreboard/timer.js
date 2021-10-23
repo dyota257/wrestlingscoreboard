@@ -10,7 +10,7 @@ function secondsToClock(seconds){
 }
 
 function startTimer() {
-    window.location('#main-display')
+    window.location = '#main-display'
     if(timerOn === false) { // to restart the time
         $("#startTimer").html('<i class="fas fa-pause"></i>');
         timerOn = true;
