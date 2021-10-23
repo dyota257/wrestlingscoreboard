@@ -10,7 +10,7 @@
 
     <label>Match time</label><br>
     <div style="text-align:left;">
-        <% [2, 3].forEach((e)=>{ %>
+        <% [0.1, 3].forEach((e)=>{ %>
             <input type="radio" name="matchTime" onclick="setMatchTime(<%= e %>)" value="<%= e %>">
             <label style="font-weight:normal;" for="<%= e %>"> <%= e %> minutes</label><br>
         <% }) %>

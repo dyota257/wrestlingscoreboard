@@ -33,6 +33,8 @@ function setConfirmGame() {
             || $("#redFirstName").val()==""
             || $("#redLastName").val()==""
             || $("#redClubName").val()==""
+            || $('input[name=wrestlingStyle]:checked').length === 0
+            || $('input[name=matchTime]:checked').length === 0
             // || $("select[name=weight]").val()==""
         ) // && ageDiv.indexOf('SP') === -1
     ) {

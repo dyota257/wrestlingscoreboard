@@ -14,9 +14,7 @@ $(document).keydown( (e) => {
     }
 })
 
-function setPhase(pos) {
-    $("#period").html("Period " + phases[pos]);
-}
+function setPhase(pos) {$("#period").html("Period " + phases[pos]);}
 
 function secondsToClock(seconds){
     //used to format the clock displays
@@ -31,7 +29,7 @@ function timerFlickerIcon() {
     $("#startTimer").html(icon);
 }
 
-function startTimer() {
+function pressTimer() {
     window.location = '#main-display'
     // temporarily disable timer button to prevent multiple inputs/multiple virtual clocks
     disable('button.timer')
@@ -86,19 +84,22 @@ function timer(time) {
             
             // move to the next phase
             phasePos++;
-            if (phasePos<3) {
+            if (phasePos < 2) {
                 // play sound
                 new Audio("/sounds/airhorn.mp3").play();
                 // if it's still in the game, set the next phase
                 setPhase(phasePos);
                 // pause the clock
-                startTimer(phasesTime[phasePos]);
-                // timer(phasesTime[phasePos]);
+                pressTimer();
+                // set up timer for next round
+                now = timerInit
             } else {
                 new Audio("/sounds/airhorn.mp3").play();
                 // it must be the end of the game, close things down
                 console.log(`it must be the end of the game, close things down`)
                 disable("#startTimer");
+                $("#period").html("End");
+                $("#timer").html(secondsToClock(0));
                 unhide('#announcevictory');
                 clearInterval(interval);
             }
@@ -106,9 +107,9 @@ function timer(time) {
 
         // timer pause
         if( now <= 0 || timerOn === false) {
-            // console.log("Timer stopped at: "+now);
             clearInterval(interval);
-            now = time;
+            // skip over this part if now == timerInit to set up for the next round
+            now !== timerInit ? now = time : false
         };
 
         // console.log("now: "+Math.ceil(now));

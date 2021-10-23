@@ -25,7 +25,7 @@
     <%- tournamentWarning %>
     <div id="tournamentId" style="display:none"><%- tournamentId %></div>
 
-    <h2>Mat <%- mat %></h2>
+    <h2 style="color:white; font-size:xxx-large; font-weight:bold;">Mat <%- mat %></h2>
     <div id="resetGameRow">
         <button class="resetGame" onclick="setGame()"   >Set game</button>
         <button class="resetGame" onclick="resetGame()" >Reset all</button>
@@ -67,7 +67,7 @@
             <br>
             <span id="timer">0:00</span>
             <br>
-            <button class ="timer" onclick="startTimer()" id="startTimer">▶</button>
+            <button class ="timer" onclick="pressTimer()" id="startTimer">▶</button>
             <button id="announcevictory" onclick="announceVictory()">Announce victory</button>
 
         </div>

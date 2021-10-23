@@ -6,7 +6,7 @@ let gameTypeWinScore = 0;
 let disqualification = '';
 
 let timerOn = false;
-let timerInit = 0;
+let timerInit = 0; // 120 | 180
 let timerPause = 0;
 let now = 0;
 let nowShotClock = 0;
