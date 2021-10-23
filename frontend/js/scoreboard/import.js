@@ -22,11 +22,11 @@ function prev() {
 
 function moveMatchOrder() {
     $("tr").removeClass("matchOrder");
-    updateNames(matchOrder);
+    updateNames();
     $(`tr[matchorder='${matchOrder}']`).addClass("matchOrder");
 }
 
-function updateNames(matchOrder) {
+function updateNames() {
     // Fixtures table
     [
         {target: '.firstName.red',  dataLabel: 'red_firstname'},
@@ -60,5 +60,5 @@ function updateNames(matchOrder) {
 }
 
 function getThisRowFixtures(dataLabel) {
-    $(`tr[matchOrder='${matchOrder}']>[data-label='${dataLabel}']`)[0].textContent.trim()
+    return $(`tr[matchOrder='${matchOrder}']>[data-label='${dataLabel}']`)[0].textContent.trim()
 }
