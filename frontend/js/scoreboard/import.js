@@ -5,44 +5,60 @@ updateNames(0);
 
 $(`tr[matchOrder='0']`).addClass("matchOrder");
 
-$("button#next").click( function() {
-    table = $('[matchOrder]')
-
+function next() {
+    let table = $('[matchOrder]')
     if (matchOrder+1 < table.length) {
-        $("tr").removeClass("matchOrder");
         matchOrder++;
-        updateNames(matchOrder);
-        $("tr[matchorder='"+matchOrder+"']").addClass("matchOrder");
-    };
-    
-})
+        moveMatchOrder();
+    };   
+}
 
-$("button#prev").click( function() {
+function prev() {
     if (matchOrder!=0) {
-        $("tr").removeClass("matchOrder");
         matchOrder--;
-        updateNames(matchOrder);
-        $("tr[matchorder='"+matchOrder+"']").addClass("matchOrder");
+        moveMatchOrder();    
     }
-})
+}
+
+function moveMatchOrder() {
+    $("tr").removeClass("matchOrder");
+    updateNames(matchOrder);
+    $(`tr[matchorder='${matchOrder}']`).addClass("matchOrder");
+}
 
 function updateNames(matchOrder) {
-    
     // Fixtures table
-    $(".firstName.red").text(   $(`tr[matchOrder='${matchOrder}']>[data-label='red_firstname']`)[0].textContent.trim());
-    $(".lastName.red").text(    $(`tr[matchOrder='${matchOrder}']>[data-label='red_lastname']`)[0].textContent.trim());
-    $(".clubName.red").text(    $(`tr[matchOrder='${matchOrder}']>[data-label='red_club']`)[0].textContent.trim());
-    $(".firstName.blue").text(  $(`tr[matchOrder='${matchOrder}']>[data-label='blue_firstname']`)[0].textContent.trim());
-    $(".lastName.blue").text(   $(`tr[matchOrder='${matchOrder}']>[data-label='blue_lastname']`)[0].textContent.trim());
-    $(".clubName.blue").text(   $(`tr[matchOrder='${matchOrder}']>[data-label='blue_club']`)[0].textContent.trim());
+    [
+        {target: '.firstName.red',  dataLabel: 'red_firstname'},
+        {target: '.lastName.red',   dataLabel: 'red_lastname'},
+        {target: '.clubName.red',   dataLabel: 'red_club'},
+        {target: '.firstName.blue', dataLabel: 'blue_firstname'},
+        {target: '.lastName.blue',  dataLabel: 'blue_lastname'},
+        {target: '.clubName.blue',  dataLabel: 'blue_club'}
+    ].forEach((e)=>{    
+        $(e.target).text(
+            getThisRowFixtures(e.dataLabel)
+        );
+    })
 
     // Game setup form
-    $("#playerInput").css("display", "flex");
+    displayFlex("#playerInput");
     
-    $("input#redFirstName").val($(`tr[matchOrder='${matchOrder}']>[data-label='red_firstname']`)[0].textContent.trim());
-    $("input#redLastName").val($(`tr[matchOrder='${matchOrder}']>[data-label='red_lastname']`)[0].textContent.trim());
-    $("input#redClubName").val($(`tr[matchOrder='${matchOrder}']>[data-label='red_club']`)[0].textContent.trim());
-    $("input#blueFirstName").val($(`tr[matchOrder='${matchOrder}']>[data-label='blue_firstname']`)[0].textContent.trim());
-    $("input#blueLastName").val($(`tr[matchOrder='${matchOrder}']>[data-label='blue_lastname']`)[0].textContent.trim());
-    $("input#blueClubName").val($(`tr[matchOrder='${matchOrder}']>[data-label='blue_club']`)[0].textContent.trim());
+    [
+        {target: 'input#redFirstName',  dataLabel: 'red_firstname'},
+        {target: 'input#redLastName',   dataLabel: 'red_lastname'},
+        {target: 'input#redClubName',   dataLabel: 'red_club'},
+        {target: 'input#blueFirstName', dataLabel: 'blue_firstname'},
+        {target: 'input#blueLastName',  dataLabel: 'blue_lastname'},
+        {target: 'input#blueClubName',  dataLabel: 'blue_club'}
+    ].forEach((e)=>{
+        // Get this row from the fixtures tables and put it into the input textboxes
+        $(e.target).val(
+            getThisRowFixtures(e.dataLabel)
+        );
+    })
+}
+
+function getThisRowFixtures(dataLabel) {
+    $(`tr[matchOrder='${matchOrder}']>[data-label='${dataLabel}']`)[0].textContent.trim()
 }

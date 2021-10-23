@@ -27,7 +27,6 @@ const shotClockTime = 30;
 let shotClockTimerOn = false;
 let shotClockPaused = false;
 let shotClockPlayer = null;
-const scoresMap = [ -1, 1, 2, 4, 5];
 
 $(".score.blue").text(playerBlue.score);
 $(".score.red").text(playerRed.score);
@@ -48,31 +47,6 @@ $("button").click( function() {
 // Warnings and shotclock row
         case `${side} penalty`:
             switch(this.className){
-                // warning
-                case "warning":
-                    switch(side) {
-                        case "red":
-                            playerX = playerRed;
-                            payerY = playerBlue;
-                            break;
-                        case "blue":
-                            playerX = playerBlue;
-                            payerY = playerRed;
-                            break;
-                    }
-                    if(playerX.warnings < 2) {
-                        $(`.markerWarning.${side}`).append("■");
-                        playerX.warnings++;
-                    } else {
-                        $(`.markerWarning.${side}`).append("■")
-                        playerX.warnings++;
-                        // the other side wins
-                        unhide('#announcevictory');
-                        disqualification = side;
-                        // victory(playerY.side, "disqualification");
-                    }
-                    break;
-                // shotclock
                 case "shotclockbtn":
                     if(shotClockTimerOn) {
                         break; // can't give them a shot clock warning if the shotclock is already on or the time hasn't started yet
@@ -95,35 +69,10 @@ $("button").click( function() {
             null;
             break;
     }; 
-
-// Reset game
-    if (this.id==="resetGame") {
-        var confirm = window.confirm("Are you sure? This will reset all scores and reset the timer.");
-        
-        if (confirm) {
-            displayNone("#playerInput");
-            
-            // reset scores, warnings, shotclocks, gameType
-            reset(true,true,true,true);
-            hide('#announcevictory');
-            disqualification = false;
-            
-            $(".blue.firstName").text("blueFirstName");
-            $(".blue.lastName").text("blueLastName");
-            $(".blue.clubName").text("blueClubName");
-            $(".red.firstName").text("redFirstName");
-            $(".red.lastName").text("redLastName");
-            $(".red.clubName").text("redClubName");
-            
-            $("#timer").html("0:00");
-        }
-    };
-
-
 });
 
 $(".close").click( function() {
-        $(".popup").css("display", "none");
+        displayNone(".popup");
         unhide('#announcevictory');
     }
 )
@@ -133,7 +82,7 @@ function reset(scores, warnings, shotclocks, gameType) {
         playerBlue.score = 0;
         playerRed.score = 0;
         $(".score").text(0);
-        $(".score").css("text-decoration", "none");
+        noDecorate(".score");
     };
 
     if (warnings) {
@@ -154,57 +103,3 @@ function reset(scores, warnings, shotclocks, gameType) {
 
 }
 
-function updateScore(side, addScore) {
-    // get the clone player of the correct side
-    let i; if (side === 'blue') { i = 0} 
-    else if (side === 'red') {i = 1}
-    let player = players[i]
-
-    // add score
-    if (addScore<0 && player.score === 0 ||  gameType === ""){
-        // do nothing
-    } else {
-        player.score += addScore;
-        $(`.score.${side}`).text(player.score);
-        player.scoreHist.push(addScore);
-        if(shotClockTimerOn){
-            shotClockTimerOn = false; 
-        }
-        // return the clone to the real player
-        if (side === 'blue') { playerBlue = player}
-        else if (side === 'red') {playerRed = player}
-        
-        criteria();
-    };
-
-    if (Math.abs(playerBlue.score-playerRed.score) >= gameTypeWinScore && gameType != "") {
-        unhide('#announcevictory');
-    } else {
-        hide('#announcevictory');
-    }
-}
-
-function criteria() {
-    scoreRedMax = Math.max(...playerRed.scoreHist);
-    scoreRedLast = playerRed.scoreHist[playerRed.scoreHist.length-1];
-    scoreBlueMax = Math.max(...playerBlue.scoreHist);
-    scoreBlueLast = playerBlue.scoreHist[playerBlue.scoreHist.length-1];
-    if(playerRed.score == playerBlue.score) {
-        if (scoreRedMax > scoreBlueMax) {
-            underline(".red.score");
-        } else if (scoreRedMax < scoreBlueMax) {
-            underline(".blue.score");
-        } else if (scoreRedMax == scoreBlueMax)  {
-            // pick the more recent one and take 
-            if (scoreRedLast > scoreBlueLast) {
-                underline(".red.score");
-            } else if (scoreRedLast < scoreBlueLast) {
-                underline(".blue.score");
-            }
-            
-            // read page 25 of regulation
-        }
-    } else {
-        $(".score").css("text-decoration", "");
-    }
-}

@@ -14,6 +14,7 @@
 [ ] Get another tablet device
     The view angle is not wide enough
 [x] Sound check button
+[x] remove warnings
 
 # Last time...
 Check that game type (FS/ GR) and SP Senior / SP Junior are working

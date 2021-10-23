@@ -28,10 +28,10 @@
 
     <div id="resetGameRow">
         <button class="resetGame" onclick="setGame()">Set game</button>
-        <button class="resetGame" id = "resetGame">Reset all</button>
+        <button class="resetGame" onclick="resetGame()">Reset all</button>
         <button class="resetGame" onclick="fixtures()">Fixtures</button>
-        <button class="resetGame" id = "prev"><<</button>
-        <button class="resetGame" id = "next">>></button>
+        <button class="resetGame" onclick="prev()"><<</button>
+        <button class="resetGame" onclick="next()">>></button>
     </div>
 
 <!-- Game setup - disappearable rows  -->
@@ -118,7 +118,6 @@
                         <% ["-1","+1","+2","+4","-5"].forEach((e,i)=>{%>
                             <td onclick="updateScore('blue', <%= Number(e) %>)"><button><%= e %></button></td>
                         <% }) %>
-                        
                     </tr>
                 </table>
 
@@ -127,7 +126,7 @@
 <!-- Control buttons row 2: warning -->
         <div class="red penalty">
             <button onclick="victory('red', 'fall')" class="pin">📍 Pin!</button>
-            <button class="warning">⚠️Warning</button>
+            <button onclick="warning('red')">⚠️Warning</button>
             <button class="shotclockbtn" id="shotclockbuttonred">⏱️ Shot clock</button>
         </div>
         <div class="blue penalty">

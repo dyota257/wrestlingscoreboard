@@ -112,7 +112,26 @@ function setConfirmGame() {
         // confirm and set up for records
         let inputMatchID = $('td[data-label="id"]')[matchOrder].textContent.trim();
         $("input[name='matchID']").val(inputMatchID);
+        
         let path = window.location.pathname.split('/');
         $("input[name='mat']").val(path[2]);
+    }
+};
+
+function resetGame() {
+    var confirm = window.confirm("Are you sure? This will reset all scores and reset the timer.");
+    
+    if (confirm) {
+        displayNone("#playerInput");
+        
+        // reset scores, warnings, shotclocks, gameType
+        reset(true,true,true,true);
+        hide('#announcevictory');
+        disqualification = false;
+        [".blue.firstName",".blue.lastName",".blue.clubName",".red.firstName",".red.lastName",".red.clubName"].forEach((e)=>{
+            $(e).text(e);
+        })
+        
+        $("#timer").html("0:00");
     }
 };
