@@ -1,16 +1,20 @@
-<td class="red">
-    <label>Red first name</label>
-    <input type = "text" name="playerData" id = "redFirstName" value = "redFirstName"><br><br>
-    <label>Red last name</label>
-    <input type = "text" name="playerData" id = "redLastName" value = "redLastName"><br><br>
-    <label>Red club name</label>
-    <input type = "text" name="playerData" id = "redClubName" value = "redClubName"><br><br>
-</td>
-<td class="blue">
-    <label>Blue first name</label>
-    <input type = "text" name="playerData" id = "blueFirstName" value = "blueFirstName"><br><br>
-    <label>Blue last name</label>
-    <input type = "text" name="playerData" id = "blueLastName" value = "blueLastName"><br><br>
-    <label>Blue club name</label>
-    <input type = "text" name="playerData" id = "blueClubName" value = "blueClubName"><br><br>
-</td>
+<% ['Red', 'Blue'].forEach((side)=>{ %>
+    <td class="<%= side.toLowerCase() %>">
+        <% ['First', 'Last', 'Club'].forEach((e)=>{ %>
+            <label><%= side %> <%= e.toLowerCase() %> name</label>
+            <input type = "text" name="playerData" id = "<%= side.toLowerCase() %><%= e %>Name" value = "<%= side.toLowerCase() %><%= e %>Name"><br><br>
+        <%     }) %>
+    </td>
+<%     }) %>
+
+<!-- Result: -->
+<!-- 
+    <td class="blue">
+        <label>Blue first name</label>
+        <input type = "text" name="playerData" id = "blueFirstName" value = "blueFirstName"><br><br>
+        <label>Blue last name</label>
+        <input type = "text" name="playerData" id = "blueLastName" value = "blueLastName"><br><br>
+        <label>Blue club name</label>
+        <input type = "text" name="playerData" id = "blueClubName" value = "blueClubName"><br><br>
+    </td>
+-->
