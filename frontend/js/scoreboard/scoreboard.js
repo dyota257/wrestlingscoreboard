@@ -32,7 +32,7 @@ let shotClockPlayer = null;
 
 $(".score.blue").text(playerBlue.score);
 $(".score.red").text(playerRed.score);
-$("#startTimer").prop("disabled", true);
+disable("#startTimer");
 
 $("button").click( function() {
     this.blur();

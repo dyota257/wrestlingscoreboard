@@ -8,7 +8,7 @@ $(document).keydown( (e) => {
         // don't enter a "space" character if it's not in text input mode
         // preventDefault to stop scrolling only works on keydown, not keyup
         e.preventDefault();
-        startTimer();
+        $('button.timer').click()
         console.log("timerInit: " + timerInit);
         console.log(now)
     }
@@ -28,11 +28,17 @@ function secondsToClock(seconds){
 function timerFlickerIcon() {
     let icon = '';
     timerOn ? icon = '▶' : icon = '<i class="fas fa-pause"></i>'
-    $("#startTimer").html(icon);       
+    $("#startTimer").html(icon);
 }
 
 function startTimer() {
     window.location = '#main-display'
+    // temporarily disable timer button to prevent multiple inputs/multiple virtual clocks
+    disable('button.timer')
+    setTimeout(()=>{
+        undisable('button.timer')
+    }, 1000)
+    
 
     console.log('now: ' + now)
     timerFlickerIcon();
@@ -95,8 +101,8 @@ function timer(time) {
                 new Audio("/sounds/airhorn.mp3").play();
                 // it must be the end of the game, close things down
                 console.log(`it must be the end of the game, close things down`)
-                $("#startTimer").prop("disabled", true);
-                $('#announcevictory').css('visibility', 'visible');
+                disable("#startTimer");
+                unhide('#announcevictory');
                 clearInterval(interval);
             }
         };

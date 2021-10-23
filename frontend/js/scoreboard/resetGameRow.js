@@ -55,14 +55,12 @@ function setConfirmGame() {
         //     timerInit = timeValue[2];
         // }
 
-        
-        
         $("#gameType").text(gameType);
 
         // timer setup
         $("#timer").html(Math.floor(timerInit/60).toString() + ":00");
         $("#startTimer").html("▶");
-        $("#startTimer").prop("disabled", false);
+        undisable("#startTimer");
         timerOn = false;
         shotClockTimerOn = false;
         now = timerInit;

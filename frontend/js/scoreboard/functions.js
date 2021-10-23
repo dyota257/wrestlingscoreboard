@@ -17,3 +17,6 @@ function proper(text) {
     let rest = text.slice(1,text.length)
     return first+rest
 }
+
+function disable(target) {$(target).prop("disabled", true)}
+function undisable(target) {$(target).prop("disabled", false)}
