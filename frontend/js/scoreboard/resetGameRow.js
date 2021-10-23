@@ -17,12 +17,15 @@ function fixtures() {
 }
 
 function setConfirmGame() {
-    gameType = "";
-    gameType = `${dropdownsCheckWhich()[0]}, ${dropdownsCheckWhich()[1]}, ${$("select[name=weight]").val()}`;
+    // gameType = `${dropdownsCheckWhich()[0]}, ${dropdownsCheckWhich()[1]}, ${$("select[name=weight]").val()}`;
+    gametype = $('input[name=wrestlingStyle]:checked').val()
+    timerInit = $('input[name=matchTime]:checked').val() * 60;
+    timeRest = timeValue[0];
+
+    
     $(".middle").css("backgroundColor", "black");
 
     if ( // check for empty fields
-        
         (
             $("#blueFirstName").val()==""
             || $("#blueLastName").val()==""
@@ -30,8 +33,8 @@ function setConfirmGame() {
             || $("#redFirstName").val()==""
             || $("#redLastName").val()==""
             || $("#redClubName").val()==""
-            || $("select[name=weight]").val()==""
-        ) && ageDiv.indexOf('SP') === -1
+            // || $("select[name=weight]").val()==""
+        ) // && ageDiv.indexOf('SP') === -1
     ) {
         window.alert("Fill in all the names and game type!");
     } else {
@@ -40,20 +43,19 @@ function setConfirmGame() {
         displayNone("#fixturesTable");
 
         // restart phase at Period 1
-        phasePos = 0;
-        setPhase(phasePos);
+        setPhase(0);
 
         // game type
-        if (
-            dropdownsCheckWhich()[0]=="Junior Freestyle"
-            || dropdownsCheckWhich()[0]=="Exhibition: 2 mins"
-        ) {
-            timerInit = timeValue[1];
-        } else { // for Senior Freestyle, Senior Greco-Roman, and Exhibition: 3 mins
-            timerInit = timeValue[2];
-        }
+        // if (
+        //     dropdownsCheckWhich()[0]=="Junior Freestyle"
+        //     || dropdownsCheckWhich()[0]=="Exhibition: 2 mins"
+        // ) {
+            // timerInit = timeValue[1];
+        // } else { // for Senior Freestyle, Senior Greco-Roman, and Exhibition: 3 mins
+        //     timerInit = timeValue[2];
+        // }
 
-        timeRest = timeValue[0];
+        
         
         $("#gameType").text(gameType);
 
@@ -90,7 +92,6 @@ function setConfirmGame() {
         $(".red.clubName").text(playerRed.clubName);
 
         // Mark the start time, ready to be POSTed
-        
         $(".popup input[name=time_start]").val(
             String(new Date().getHours()).padStart(2, "0")
             + ':'

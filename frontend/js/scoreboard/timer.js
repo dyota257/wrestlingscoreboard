@@ -1,3 +1,19 @@
+$(document).keydown( (e) => {
+    // spacebar
+    if (
+        e.keyCode == 32 
+        && $("#startTimer").prop("disabled") == false 
+        && $('#playerInput').css('display') === 'none'
+    ) {
+        // don't enter a "space" character if it's not in text input mode
+        // preventDefault to stop scrolling only works on keydown, not keyup
+        e.preventDefault();
+        startTimer();
+        console.log("timerInit: " + timerInit);
+        console.log(now)
+    }
+})
+
 function setPhase(pos) {
     $("#period").html("Period " + phases[pos]);
 }
@@ -9,10 +25,19 @@ function secondsToClock(seconds){
     return date.toISOString().substr(15, 4);
 }
 
+function timerFlickerIcon() {
+    let icon = '';
+    timerOn ? icon = '▶' : icon = '<i class="fas fa-pause"></i>'
+    $("#startTimer").html(icon);       
+}
+
 function startTimer() {
     window.location = '#main-display'
+
+    console.log('now: ' + now)
+    timerFlickerIcon();
+
     if(timerOn === false) { // to restart the time
-        $("#startTimer").html('<i class="fas fa-pause"></i>');
         timerOn = true;
         timer(now); // 2 minutes is 120 seconds = 120 000 milliseconds
         if(shotClockTimerOn === true){ //continue shotclock if it was on during the pause
@@ -26,7 +51,6 @@ function startTimer() {
         })
 
     } else if (timerOn === true)  { // to pause the time
-        $("#startTimer").html("▶");
         timerOn = false;
         timer(now);
         $(".middle").css("backgroundColor", "grey");
@@ -42,7 +66,7 @@ function timer(time) {
     
     // console.log(`start: ${start}`);
     
-    var interval = setInterval( function() {
+    let interval = setInterval( function() {
         
         // timer on start
         if (timerOn === true) {
@@ -56,7 +80,6 @@ function timer(time) {
 
         // timer on end
         if( now <= 0 && timerOn === true) {
-            
             
             // move to the next phase
             phasePos++;

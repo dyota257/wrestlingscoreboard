@@ -1,17 +1,19 @@
 // No longer need this alert - will use a permanent database connection instead
 // window.onbeforeunload = () => {return "Are you sure?"}
 
-var gameType = "";
-var gameTypeWinScore = 0;
-var disqualification = '';
+let gameType = ""; // 'Senior Greco-Roman' | 'Senior Freestyle' | 'Junior Freestyle' | 'Exhibition'
+let gameTypeWinScore = 0;
+let disqualification = '';
 
-var timerOn = false;
-var timerInit = 0;
-var timerPause = 0;
-var now = 0;
+let timerOn = false;
+let timerInit = 0;
+let timerPause = 0;
+let now = 0;
 let nowShotClock = 0;
+let matchTime = 0;
 
-const phases = [ "1", "rest", "2"];
+// only two phases - no need to codify rest period
+const phases = [ "1", "2"];
 const timeValue = [
     30, // Rest period 30 s
     120, // 2 mins (juniors)
@@ -19,8 +21,8 @@ const timeValue = [
 ];
 
 // should be 30 seconds
-var phasePos = 0;
-var phasesTime = [0,0,0];
+let phasePos = 0;
+let phasesTime = [0,0,0];
  
 let nowOffset = 0;
 const shotClockTime = 30;
@@ -100,6 +102,14 @@ function reset(scores, warnings, shotclocks, gameType) {
         $("#gameType").text(gameType);
         gameTypeWinScore = 0;
     }
+};
 
+function setGameType(text) {
+    gameType = text;
+    console.log('gameType: ' + gameType);
 }
 
+function setMatchTime(number) {
+    matchTime = number * 60;
+    console.log('matchTime: ' + matchTime);
+}

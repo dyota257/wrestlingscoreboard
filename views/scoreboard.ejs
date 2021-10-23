@@ -46,10 +46,7 @@
                     <%- include ('scoreboard/dropdowns') %> 
             </tr>
             <tr>
-                <td colspan="5" >
-                    <button class="resetGame" onclick="setConfirmGame()">Confirm</button>
-                    <button class="resetGame" onclick="cancelConfirmGame()">Cancel</button>
-                </td>
+
             </tr>
         </table>
     </div>
@@ -115,7 +112,7 @@
             <div class="blue buttonsRow">
                 <table style="margin-right:auto; margin-left:0;">
                     <tr>
-                        <% ["-1","+1","+2","+4","-5"].forEach((e,i)=>{%>
+                        <% ["-1","+1","+2","+4","+5"].forEach((e,i)=>{%>
                             <td onclick="updateScore('blue', <%= Number(e) %>)"><button><%= e %></button></td>
                         <% }) %>
                     </tr>

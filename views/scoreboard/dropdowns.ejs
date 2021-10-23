@@ -1,5 +1,25 @@
 <td>
-    <!-- Mat -->
+    <label>Style</label><br>
+    <% ['Freestyle', 'Greco-Roman'].forEach((e)=>{ %>
+        <input type="radio" name="wrestlingStyle" onclick="setGameType('<%= e %>')" value="<%= e %>">
+        <label for="<%= e %>"> <%= e %> </label><br>
+    <% }) %>
+
+    <br>
+
+    <label>Match time</label><br>
+    <% [2, 3].forEach((e)=>{ %>
+        <input type="radio" name="matchTime" onclick="setMatchTime(<%= e %>)" value="<%= e %>">
+        <label for="<%= e %>"> <%= e %> minutes</label><br>
+    <% }) %>
+    <br>
+    <button class="resetGame" onclick="setConfirmGame(matchTime)">✅ Confirm</button>
+    <br>
+    <button class="resetGame" onclick="cancelConfirmGame()" style="max-width:5rem;">Cancel</button>
+    
+</td>
+
+<!--     
     <label>Mat</label>
     <select name="mat" value="" disabled>
         <option value="" selected></option>
@@ -8,7 +28,6 @@
     </select>
     <br> <br>
     
-    <!-- Age -->
     <label>Age</label><br>
     <select name="age" value="">
         <option value="" selected></option>
@@ -25,7 +44,6 @@
     </select>
     <br> <br>
     
-    <!-- Gender -->
     <label name="gender">Gender</label><br>
     <select name="gender">
         <option value="" selected></option>
@@ -34,7 +52,6 @@
     </select> 
     <br> <br>
     
-    <!-- Style -->
     <label name="style">Style</label><br>
     <select name="style">
         <option value=""></option>
@@ -43,11 +60,9 @@
     </select> 
     <br> <br>
     
-    <!-- Weight -->
     <label name="weight">Weight</label><br>
     <select name="weight">
         <option value=""></option>
     </select> 
     <br> <br>
-
-</td>
+    -->
