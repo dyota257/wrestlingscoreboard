@@ -28,9 +28,10 @@ async function scoreboard(req,res,mysql,db, tournamentId)  {
         } else {
             let table = matchesToHtml(rows);
             res.render('scoreboard', {
-                table: table,
+                mat              : whichMat,
+                table            : table,
                 tournamentWarning: warning,
-                tournamentId: tournamentId
+                tournamentId     : tournamentId
             })
             // console.log(rows);
         }

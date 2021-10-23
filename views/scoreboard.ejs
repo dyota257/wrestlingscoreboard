@@ -25,7 +25,7 @@
     <%- tournamentWarning %>
     <div id="tournamentId" style="display:none"><%- tournamentId %></div>
 
-
+    <h2>Mat <%- mat %></h2>
     <div id="resetGameRow">
         <button class="resetGame" onclick="setGame()"   >Set game</button>
         <button class="resetGame" onclick="resetGame()" >Reset all</button>
@@ -42,15 +42,11 @@
     <div class = "container" id="playerInput" style="display:none">
         <table class="container">
             <tr>
-                    <%- include ('scoreboard/playerinput') %> 
-                    <%- include ('scoreboard/dropdowns') %> 
-            </tr>
-            <tr>
-
+                <%- include ('scoreboard/playerinput') %> 
+                <%- include ('scoreboard/dropdowns') %> 
             </tr>
         </table>
     </div>
-
 
 <!-- Main Score Display -->
     <div class="container" id="main-display">

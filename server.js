@@ -27,6 +27,8 @@ app.route('/')
 const scoreboard= require('./routes/scoreboard/scoreboard.js');
 app.route('/scoreboard/:mat')
     .get((req, res) => {scoreboard(req, res, mysql, db, app.get('tournamentId'));});
+app.route('/scoreboard/')
+    .get((req, res) => {res.redirect('/scoreboard/A')});
 
 // TOURNAMENTS
 // use app variable app.use('tournamentId'), retrieve with app.get('tournamentId')

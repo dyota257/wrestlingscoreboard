@@ -35,10 +35,7 @@ function startTimer() {
     window.location = '#main-display'
     // temporarily disable timer button to prevent multiple inputs/multiple virtual clocks
     disable('button.timer')
-    setTimeout(()=>{
-        undisable('button.timer')
-    }, 1000)
-    
+    setTimeout(()=>{undisable('button.timer')}, 1000)
 
     console.log('now: ' + now)
     timerFlickerIcon();
