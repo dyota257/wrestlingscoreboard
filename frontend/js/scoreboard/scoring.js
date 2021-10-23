@@ -29,8 +29,9 @@ function updateScore(side, addScore) {
     let player = players[i]
 
     // add score
-    if (addScore<0 && player.score === 0 ||  gameType === ""){
+    if (addScore < 0 && player.score === 0 ||  gameType === ""){
         // do nothing
+        console.warn('updateScore() is in the do nothing condition')
     } else {
         player.score += addScore;
         $(`.score.${side}`).text(player.score);

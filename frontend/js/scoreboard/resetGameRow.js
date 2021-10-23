@@ -18,7 +18,7 @@ function fixtures() {
 
 function setConfirmGame() {
     // gameType = `${dropdownsCheckWhich()[0]}, ${dropdownsCheckWhich()[1]}, ${$("select[name=weight]").val()}`;
-    gametype = $('input[name=wrestlingStyle]:checked').val()
+    gameType = $('input[name=wrestlingStyle]:checked').val()
     timerInit = $('input[name=matchTime]:checked').val() * 60;
     timeRest = timeValue[0];
 
@@ -104,9 +104,9 @@ function setConfirmGame() {
         hide('#announcevictory');
         disqualification = false;
 
-        if (gameType.indexOf("Greco")>0) {
+        if (gameType.indexOf("Greco") !== -1) {
             gameTypeWinScore = 8;
-        } else if (gameType.indexOf("Freestyle")>0) {
+        } else if (gameType.indexOf("Freestyle") !== -1) {
             gameTypeWinScore = 10;
         }
         

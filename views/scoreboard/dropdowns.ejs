@@ -1,17 +1,20 @@
 <td>
     <label>Style</label><br>
-    <% ['Freestyle', 'Greco-Roman'].forEach((e)=>{ %>
-        <input type="radio" name="wrestlingStyle" onclick="setGameType('<%= e %>')" value="<%= e %>">
-        <label for="<%= e %>"> <%= e %> </label><br>
-    <% }) %>
-
+    <div style="text-align:left;">
+        <% ['Freestyle', 'Greco-Roman'].forEach((e)=>{ %>
+            <input type="radio" name="wrestlingStyle" onclick="setGameType('<%= e %>')" value="<%= e %>">
+            <label style="font-weight:normal;" for="<%= e %>"> <%= e %> </label><br>
+        <% }) %>
+    </div>
     <br>
 
     <label>Match time</label><br>
-    <% [2, 3].forEach((e)=>{ %>
-        <input type="radio" name="matchTime" onclick="setMatchTime(<%= e %>)" value="<%= e %>">
-        <label for="<%= e %>"> <%= e %> minutes</label><br>
-    <% }) %>
+    <div style="text-align:left;">
+        <% [2, 3].forEach((e)=>{ %>
+            <input type="radio" name="matchTime" onclick="setMatchTime(<%= e %>)" value="<%= e %>">
+            <label style="font-weight:normal;" for="<%= e %>"> <%= e %> minutes</label><br>
+        <% }) %>
+    </div>
     <br>
     <button class="resetGame" onclick="setConfirmGame(matchTime)">✅ Confirm</button>
     <br>
