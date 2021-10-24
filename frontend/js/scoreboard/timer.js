@@ -14,7 +14,10 @@ $(document).keydown( (e) => {
     }
 })
 
-function setPhase(pos) {$("#period").html("Period " + phases[pos]);}
+function setPhase(pos) {
+    $("#period").html("Period " + phases[pos]);
+    $("#timer").html(secondsToClock(timerInit));
+}
 
 function secondsToClock(seconds){
     //used to format the clock displays
@@ -29,35 +32,45 @@ function timerFlickerIcon() {
     $("#startTimer").html(icon);
 }
 
-function pressTimer() {
-    window.location = '#main-display'
-    // temporarily disable timer button to prevent multiple inputs/multiple virtual clocks
+function timerFlickerDisable() {
+    // Multiple inputs to the timer, within the interval period, will cause multiple intervals to run at the same time
+    // Disable the control for 1000 ms (the interval period) to prevent this
     disable('button.timer')
     setTimeout(()=>{undisable('button.timer')}, 1000)
+}
 
-    console.log('now: ' + now)
-    timerFlickerIcon();
+function pressTimer() {
+    
+    // graphics
+        window.location = '#main-display'
+        timerFlickerDisable()
+        timerFlickerIcon();
 
+    // logic
     if(timerOn === false) { // to restart the time
-        timerOn = true;
-        timer(now); // 2 minutes is 120 seconds = 120 000 milliseconds
-        if(shotClockTimerOn === true){ //continue shotclock if it was on during the pause
-            shotClockTimer(nowShotClock);
-            shotClockPaused = false;
-        }
-        $(".middle").css("backgroundColor", "black");
+        // logic
+            timerOn = true;
+            timer(now); // 2 minutes is 120 seconds = 120 000 milliseconds
+            if(shotClockTimerOn === true){ //continue shotclock if it was on during the pause
+                shotClockTimer(nowShotClock);
+                shotClockPaused = false;
+            }
         
-        ['#resetGameRow','#importArea','#playerInput','#fixturesTable','nav','#mainHeader',].forEach((e)=>{
-            displayNone(e)
-        })
+        // graphics
+            $(".middle").css("backgroundColor", "black");
+            ['#resetGameRow','#importArea','#playerInput','#fixturesTable','nav','#mainHeader', 'footer'].forEach((e)=>{
+                displayNone(e)
+            })
 
     } else if (timerOn === true)  { // to pause the time
-        timerOn = false;
-        timer(now);
-        $(".middle").css("backgroundColor", "grey");
-        ['#resetGameRow','nav','#mainHeader'].forEach((e)=>{
-            displayFlex(e)
-        })
+        // logic
+            timerOn = false; // the interval function runs wver second - it will pick this up and stop the countdown 
+
+        // graphics
+            $(".middle").css("backgroundColor", "grey");
+            ['#resetGameRow','nav','#mainHeader'].forEach((e)=>{
+                displayFlex(e)
+            })
     };
 }
 
@@ -65,10 +78,10 @@ function timer(time) {
     
     let start = new Date().getTime();
     
-    // console.log(`start: ${start}`);
-    
-    let interval = setInterval( function() {
+    let interval = setInterval(() => {
         
+        log(`Inside interval, now = ${now}`)
+
         // timer on start
         if (timerOn === true) {
             now = Math.ceil(
@@ -81,38 +94,37 @@ function timer(time) {
 
         // timer on end
         if( now <= 0 && timerOn === true) {
-            
             // move to the next phase
             phasePos++;
             if (phasePos < 2) {
-                // play sound
-                new Audio("/sounds/airhorn.mp3").play();
-                // if it's still in the game, set the next phase
-                setPhase(phasePos);
-                // pause the clock
-                pressTimer();
-                // set up timer for next round
-                now = timerInit
+                // logic
+                new Audio("/sounds/airhorn.mp3").play(); // play sound
+                pressTimer();       // pause the clock
+                now = timerInit     // set up timer for next round
+
+                // graphics
+                setPhase(phasePos); // if it's still in the game, set the next phase    
+                
             } else {
-                new Audio("/sounds/airhorn.mp3").play();
                 // it must be the end of the game, close things down
                 console.log(`it must be the end of the game, close things down`)
+                
+                // logic
+                clearInterval(interval);
+                new Audio("/sounds/airhorn.mp3").play();
+                
+                // graphics
                 disable("#startTimer");
                 $("#period").html("End");
                 $("#timer").html(secondsToClock(0));
                 unhide('#announcevictory');
-                clearInterval(interval);
             }
         };
 
         // timer pause
         if( now <= 0 || timerOn === false) {
             clearInterval(interval);
-            // skip over this part if now == timerInit to set up for the next round
-            now !== timerInit ? now = time : false
         };
-
-        // console.log("now: "+Math.ceil(now));
 
     },1000);
     
@@ -137,7 +149,7 @@ function shotClockTimer(time) {
         // score occured during shotclock
         if(!shotClockTimerOn && nowShotClock > 0){
             // clearInterval(interval);
-            $(".shotclock").css("visibility","hidden"); //hide shot clock on timer end
+            hide(".shotclock") //hide shot clock on timer end
             shotClockTimerOn = false;
             shotClockPlayer = null;
         }
@@ -145,7 +157,7 @@ function shotClockTimer(time) {
         // timer on end
         if( nowShotClock <= 0 && shotClockTimerOn) {
             // clearInterval(interval);
-            $(".shotclock").css("visibility","hidden"); //hide shot clock on timer end
+            hide(".shotclock") //hide shot clock on timer end
             switch(shotClockPlayer){
                 case 'blue':
                     redScoreUpdate(1); //other player gets the point

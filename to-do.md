@@ -1,4 +1,10 @@
 # To-do list
+## From officiating training
+[ ] shot clock wasn't working
+[ ] Set up tournament is weird, objects not appearing in time after selecting options
+[x] After restarting clock from pause, it goes back to 3 mins
+[ ] How to make the whole scoreboard SCALE to the viewport?
+
 ## From George Samios Cup August 2021
 
 

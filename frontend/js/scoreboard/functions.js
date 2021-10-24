@@ -19,4 +19,7 @@ function proper(text) {
 }
 
 function disable(target) {$(target).prop("disabled", true)}
+
 function undisable(target) {$(target).prop("disabled", false)}
+
+function log(message) {console.log(message);}

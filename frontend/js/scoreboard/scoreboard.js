@@ -39,13 +39,8 @@ $("button").click( function() {
 
     // the first class of parentElement.className is the colour blue/red
     var side = this.parentElement.className.split(" ")[0];
-    let buttonId = this.id;
-    console.log("buttonId: " + buttonId);
-    console.log("side: " + side);
-    console.log("parentElement.className: " + this.parentElement.className);
 
     switch(this.parentElement.className){
-        
 // Warnings and shotclock row
         case `${side} penalty`:
             switch(this.className){
