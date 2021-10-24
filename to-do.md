@@ -6,16 +6,16 @@
 
 ## From George Samios Cup August 2021
 
-
-[ ] Take out rest period 30s.
+[x] Take out rest period 30s.
     This is not useful. The refs keep their own rest time. If this gets missed, then it can't be skipped. 
 [ ] Take out the connection to the server - no need to save results. 
     Jack says that there is a problem. When click "Save Result", it brings an error Cannot GET Scoreboard. Something was wrong with the server. 
-[ ] Take out the mandatory weights that have to be filled in before a match can be confirmed.
+[x] Take out the mandatory weights that have to be filled in before a match can be confirmed.
     This doesn't matter. It only matters for the master database of records, but that isn't something that we need. 
     Conditions are set in setConfirmGame()
-[ ] Replace timing code with a premade JS library
+[/] Replace timing code with a premade JS library
     Timer for period 2 was misbehaving, showing two different timers. 
+    FIXED IT MYSELF
 [ ] Get another tablet device
     The view angle is not wide enough
 [x] Sound check button
@@ -46,7 +46,6 @@ ___
 
 [x] Check if records.js works
     [x] make it route somewhere else after it's done
-    [ ] 
 
 [ ] Make records page
     [ ] Select wrestler

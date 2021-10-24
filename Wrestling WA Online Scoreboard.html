@@ -23,6 +23,7 @@
     <script defer src="./frontend/js/scoreboard/testing.js" ></script>
     <script defer src="./frontend/js/scoreboard/timer.js" ></script>
     <script defer src="./frontend/js/scoreboard/victory.js" ></script>
+    <script defer src="./frontend/js/scoreboard/shotclock.js" ></script>
     
     <title>Wrestling WA Online Scoreboard</title>
 </head>
@@ -388,10 +389,10 @@
         <div class="red penalty">
             <button onclick="victory('red', 'fall')" class="pin">📍 Pin!</button>
             <button onclick="warning('red')">⚠️Warning</button>
-            <button class="shotclockbtn" id="shotclockbuttonred">⏱️ Shot clock</button>
+            <button onclick="shotclock('red')">⏱️ Shot clock</button>
         </div>
         <div class="blue penalty">
-            <button class="shotclockbtn" id="shotclockbuttonblue">⏱️ Shot clock</button>
+            <button onclick="shotclock('blue')"">⏱️ Shot clock</button>
             <button class="warning">⚠️ Warning</button>
             <button onclick="victory('blue', 'fall')" class="pin">📍 Pin!</button>
         </div>

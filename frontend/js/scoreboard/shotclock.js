@@ -1,9 +1,25 @@
+function shotclock(side) {
+    log('shotclock!')
+    if(shotClockTimerOn) {
+        false; // can't give them a shot clock warning if the shotclock is already on or the time hasn't started yet
+    } else if(now < shotClockTime) {
+        false; // can't give them a shot clock if less than shotclock time
+    } else if (!timerOn) {
+        unhide(`.${side}.shotclock`);
+    } else if(!shotClockTimerOn) {
+        unhide(`.${side}.shotclock`);
+        shotClockPlayer = players.find(x => x.side === side).side;
+        shotClockTimerOn = true;
+        nowOffset = now - 30;
+        // console.log(nowOffset);
+    }
+};
+
 function shotClockTimer() {
 
     /* 
         This function does not have its own interval, but instead piggybacks on the **existing clock interval**.
         This way, the clock intervals are directly in sync. 
-
     */
 
     // timer on start

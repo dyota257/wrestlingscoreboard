@@ -34,38 +34,9 @@ $(".score.blue").text(playerBlue.score);
 $(".score.red").text(playerRed.score);
 disable("#startTimer");
 
-$("button").click( function() {
+$("button").click(() => {
+    // prevent focus after clicking on the button
     this.blur();
-
-    // the first class of parentElement.className is the colour blue/red
-    var side = this.parentElement.className.split(" ")[0];
-
-    switch(this.parentElement.className){
-// Warnings and shotclock row
-        case `${side} penalty`:
-            switch(this.className){
-                case "shotclockbtn":
-                    if(shotClockTimerOn) {
-                        break; // can't give them a shot clock warning if the shotclock is already on or the time hasn't started yet
-                    } else if(now < shotClockTime) {
-                        break; // can't give them a shot clock if less than shotclock time
-                    } else if (!timerOn) {
-                        unhide(`.${side}.shotclock`);
-                    } else if(!shotClockTimerOn) {
-                        unhide(`.${side}.shotclock`);
-                        shotClockPlayer = players.find(x => x.side === side).side;
-                        shotClockTimerOn = true;
-                        nowOffset = now - 30;
-                        // console.log(nowOffset);
-                    }
-                    break;
-            }
-            break;
-// Pins
-        default:
-            null;
-            break;
-    }; 
 });
 
 $(".close").click( function() {
