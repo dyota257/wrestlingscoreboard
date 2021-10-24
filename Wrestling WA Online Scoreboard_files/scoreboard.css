@@ -1,0 +1,406 @@
+/* Variables */
+/* Tags */
+a {
+  color: #ffcc00;
+}
+
+body {
+  background-color: black;
+  font-family: Arial, Helvetica, sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  --score-button-font-size: 15pt;
+}
+
+div, h1, p, h3, label {
+  color: white;
+}
+
+h3 {
+  font-style: italic;
+}
+
+label {
+  font-weight: bold;
+}
+
+table {
+  table-layout: fixed;
+  width: 80%;
+}
+
+table[name=list] td {
+  color: black;
+}
+
+td {
+  border-color: white;
+  border-collapse: collapse;
+  border: 2px solid white;
+  color: white;
+  padding: 20px;
+  width: 25%;
+}
+
+button, input[type=submit] {
+  color: black;
+  background-color: #ffcc00;
+  font-size: large;
+  font-weight: bold;
+  padding: 5% 5%;
+}
+
+button.timer {
+  color: black;
+  font-size: small;
+  font-weight: normal;
+  padding: 2.5% 5%;
+}
+button.timer:disabled {
+  color: grey;
+}
+button#download {
+  padding: 5px;
+  border-radius: 5px;
+}
+button#announcevictory {
+  height: 3vh;
+  padding: 0px;
+  visibility: hidden;
+}
+
+/* Ids */
+#footer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#main-display {
+  width: 95%;
+  height: 100vh;
+  background: black;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+  grid-template-rows: 6fr 1fr 1fr 1fr 1fr;
+  grid-gap: 2px;
+  grid-template-areas: "left_player             left_player           time                  time                   right_player           right_player          " "left_score              left_score            left_score            right_score            right_score            right_score           " "left_points_control     left_points_control   left_points_control   right_points_control   right_points_control   right_points_control  " "left_penalty_control    left_penalty_control  left_penalty_control  right_penalty_control  right_penalty_control  right_penalty_control " "left_pin                left_pin              left_pin              right_pin              right_pin              right_pin             ";
+  margin-top: 10px;
+  margin-bottom: 100px;
+}
+
+#mainHeader {
+  height: 5%;
+  background-color: #ffcc00;
+  display: flex;
+  color: black;
+  text-align: center;
+  justify-content: center;
+  font-size: xxx-large;
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+@media (max-width: 1400px) {
+  #fedName {
+    display: none;
+  }
+
+  #logo img {
+    max-width: 100%;
+  }
+}
+#playerInput {
+  display: flex;
+}
+
+#resetGameRow {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+#startTimer {
+  width: 10vw;
+  height: 10vh;
+  font-size: min(5vh, 5vw);
+  color: navy;
+  border-radius: 10px;
+}
+#startTimer:disabled {
+  color: grey;
+  background-color: darkslategray;
+}
+
+#timer {
+  font-size: min(20vh, 15vw);
+}
+
+/* Classes */
+.blue {
+  background: blue;
+}
+.blue button {
+  background: darkblue;
+  color: white;
+}
+.blue.playerData {
+  text-align: left;
+  grid-area: right_score;
+  border-bottom-right-radius: 30px;
+}
+.blue.scorebox {
+  grid-area: right_player;
+  border-radius: 0px 30px 0px 0px;
+}
+.blue.points-control {
+  grid-area: right_points_control;
+  border-top-right-radius: 30px;
+}
+.blue.penalty {
+  grid-area: right_penalty_control;
+  border-bottom-right-radius: 30px;
+}
+.blue.pin {
+  grid-area: right_pin;
+}
+.blue.buttonsRow {
+  border-radius: 0px 30px 0px 0px;
+}
+.blue.markerWarning {
+  justify-content: left;
+  padding-left: 20px;
+}
+
+.red {
+  background-color: red;
+}
+.red button {
+  background: darkred;
+  color: white;
+}
+.red.buttonsRow {
+  border-radius: 30px 0px 0px 0px;
+}
+.red.markerWarning {
+  justify-content: right;
+  background: initial;
+  padding-right: 20px;
+}
+.red.playerData {
+  text-align: right;
+  grid-area: left_score;
+  border-bottom-left-radius: 30px;
+}
+.red.scorebox {
+  grid-area: left_player;
+  border-radius: 30px 0px 0px 0px;
+}
+.red.points-control {
+  border-top-left-radius: 30px;
+  grid-area: left_points_control;
+}
+.red.penalty {
+  grid-area: left_penalty_control;
+  border-bottom-left-radius: 30px;
+}
+.red.pin {
+  grid-area: left_pin;
+}
+
+.buttonsRow {
+  border: none;
+  overflow: hidden;
+  white-space: nowrap;
+}
+.buttonsRow td {
+  border: none;
+}
+
+.centerPanel {
+  max-width: 43%;
+  display: inline-block;
+  position: relative;
+  padding: 10px 0;
+  vertical-align: top;
+}
+
+.close {
+  position: absolute;
+  top: -10px;
+  right: -10px;
+  background: #fff;
+  height: 20px;
+  width: 20px;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.container {
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  padding-top: 0%;
+}
+
+.firstName, .clubName {
+  font-size: min(5vh, 5vw);
+}
+
+#gameType {
+  font-size: min(3vh, 3vw);
+}
+
+.lastName, #period {
+  font-size: min(10vh, 6vw);
+}
+
+.mainPage {
+  width: 200px;
+  height: 100px;
+}
+
+.markerWarning {
+  color: yellow;
+  display: flex;
+  font-size: 8vh;
+  /* xxx-large; */
+  height: 8vh;
+  /* 1rem; */
+  background: initial;
+  padding: 0px;
+  margin: 0px;
+}
+
+.matchOrder {
+  background-color: #ffcc00;
+  font-size: xx-large;
+}
+
+.middle {
+  /* width:10%; */
+  grid-area: time;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.navbar {
+  align-self: start;
+  padding-bottom: 10px;
+  background-color: black;
+}
+.navbar display:block > a {
+  margin: 5px;
+}
+
+.pin {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.pin button {
+  font-size: min(2vw, var(--score-button-font-size));
+  border-radius: 10px;
+  font-weight: bold;
+  padding: 10px;
+}
+
+.popup {
+  background-color: rgba(0, 0, 0, 0.6);
+  width: 100%;
+  height: 150%;
+  position: absolute;
+  display: none;
+  top: 0px;
+  left: 0px;
+  justify-content: center;
+}
+
+.popup-content {
+  color: black;
+  text-align: center;
+  font-size: 7vh;
+  height: 70vh;
+  width: 50vh;
+  padding: 20px;
+  border-radius: 5px;
+  position: relative;
+  top: 15%;
+}
+
+.points-control {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.points-control button {
+  font-size: min(2vw, var(--score-button-font-size));
+  border-radius: 10px;
+  font-weight: bold;
+  padding: 10px;
+}
+
+.playerData {
+  padding: 10px;
+}
+
+.resetGame {
+  color: black;
+  height: 2rem;
+  margin: 0;
+  padding: 0;
+  width: 10rem;
+  border-radius: 5px;
+}
+
+.score {
+  /*font-size: 7.5rem;*/
+  font-size: min(37.5vh, 50vw);
+  background: initial;
+  padding: 0px;
+  margin: -20vh 0 -20vh;
+}
+
+.scorebox {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: stretch;
+  padding: 0px;
+  margin: 0px;
+}
+
+.shotclock {
+  font-size: 6vh;
+  background: grey;
+  margin: 20px;
+  color: white;
+  visibility: hidden;
+}
+
+.team {
+  text-align: center;
+  font-size: 2.5em;
+  color: #FFF;
+  vertical-align: top;
+  display: inline-block;
+}
+
+.penalty {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.penalty button {
+  font-size: min(2vw, var(--score-button-font-size));
+  border-radius: 10px;
+  font-weight: bold;
+  padding: 10px;
+  margin: auto;
+}
+
+/*Iphone screen size */
