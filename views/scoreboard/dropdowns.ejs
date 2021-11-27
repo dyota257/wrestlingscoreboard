@@ -2,17 +2,17 @@
     <label>Style</label><br>
     <div style="text-align:left;">
         <% ['Freestyle', 'Greco-Roman'].forEach((e)=>{ %>
-            <input type="radio" name="wrestlingStyle" onclick="setGameType('<%= e %>')" value="<%= e %>">
-            <label style="font-weight:normal;" for="<%= e %>"> <%= e %> </label><br>
+            <input type="radio" name="wrestlingStyle" onclick="setGameType('<%= e %>')" value="<%= e %>" id="wrestlingStyle<%= e %>"> 
+            <label style="font-weight:normal;" for="wrestlingStyle<%= e %>"> <%= e %> </label><br>
         <% }) %>
     </div>
     <br>
 
     <label>Match time</label><br>
     <div style="text-align:left;">
-        <% [0.1, 3].forEach((e)=>{ %>
-            <input type="radio" name="matchTime" onclick="setMatchTime(<%= e %>)" value="<%= e %>">
-            <label style="font-weight:normal;" for="<%= e %>"> <%= e %> minutes</label><br>
+        <% [2, 3].forEach((e)=>{ %>
+            <input type="radio" name="matchTime" onclick="setMatchTime(<%= e %>)" value="<%= e %>" id="matchTime<%= e %>">
+            <label style="font-weight:normal;" for="matchTime<%= e %>"> <%= e %> minutes</label><br>
         <% }) %>
     </div>
     <br>

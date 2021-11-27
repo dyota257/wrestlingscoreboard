@@ -98,9 +98,6 @@ app.route('/wrestlers/import')
         wrestlers_import(req,res,mysql,db);
     });
 
-
-
-
 // SQL INTERFACE
 app.route('/query')
     .get((req,res) =>{
