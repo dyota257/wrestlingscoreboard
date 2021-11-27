@@ -10,43 +10,7 @@ async function records(req, res, mysql, db, tournamentId) {
     
     query = `
         DELETE FROM matches_temp WHERE (mat = "${req.body.mat}" AND id = ${req.body.matchID});
-        INSERT IGNORE INTO matches_records (
-            tournament,
-            red_name,
-            blue_name,
-            red_club,
-            blue_club,
-            red_score,
-            blue_score,
-            winner,
-            class_points_red,
-            class_points_blue,
-            age,
-            gender,
-            style,
-            weight,
-            time_start,
-            time_end,
-            time_clock
-        ) VALUES (
-            ${req.body.tournamentId},
-            "${req.body.red}",
-            "${req.body.blue}",
-            "${req.body.red_club}",
-            "${req.body.blue_club}",
-            ${req.body.red_score},
-            ${req.body.blue_score},
-            "${req.body.winner}",
-            ${Number(req.body.class_points_red)},
-            ${Number(req.body.class_points_blue)},
-            "${req.body.age}",
-            "${req.body.gender}",
-            "${req.body.style}",
-            "${req.body.weight}",
-            "${req.body.time_start}",
-            "${req.body.time_end}",
-            "${req.body.time_clock}"
-        )`
+    `
     .replace(/\n/g, "")
     .replace(/  /g, "");
 

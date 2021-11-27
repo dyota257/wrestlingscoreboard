@@ -39,11 +39,10 @@ $("button").click(() => {
     this.blur();
 });
 
-$(".close").click( function() {
-        displayNone(".popup");
-        unhide('#announcevictory');
-    }
-)
+function closePopup() {
+    displayNone(".popup");
+    unhide('#announcevictory');
+}
 
 function reset(scores, warnings, shotclocks, gameType) {
     if (scores) {

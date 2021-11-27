@@ -29,7 +29,7 @@ function announceVictory() {
         }
     }
     // If the timer is on, then stop it
-    if(timerOn) {startTime(now)}
+    if(timerOn) {pressTimer(now)}
     
     // hide te button again
     $('#announcevictory').css('visibility', 'hidden');
@@ -89,49 +89,6 @@ function victory(side, method) {
     $(".popup-text").text(popupText);
     $(".popup-content").css("background", popupBg);
     
-    // Fill in the data to be POSTed to the 
-
-    $(".popup input[name=tournamentId]").val($("#tournamentId").text())
-    $(".popup input[name=matchID]").val()
-    $(".popup input[name=mat]").val($("select[name=mat]").val())
-    
-    $(".popup input[name=red]").val(playerRed.firstName + ' ' + playerRed.lastName)
-    $(".popup input[name=blue]").val(playerBlue.firstName + ' ' + playerBlue.lastName)
-    
-    $(".popup input[name=red_club]").val(playerRed.clubName)
-    $(".popup input[name=blue_club]").val(playerBlue.clubName)
-    
-    $(".popup input[name=red_score]").val(playerRed.score)
-    $(".popup input[name=blue_score]").val(playerBlue.score)
-    
-    
-    $(".popup input[name=winner]").val(side)
-    switch(side) {
-        case "red":
-            $(".popup input[name=class_points_red]").val(class_points_winner);
-            $(".popup input[name=class_points_blue]").val(class_points_loser);
-            break;
-        case "blue":
-            $(".popup input[name=class_points_red]").val(class_points_loser);
-            $(".popup input[name=class_points_blue]").val(class_points_winner);
-            break;
-    }
-    $(".popup input[name=age]").val($("select[name=age]").val())
-    $(".popup input[name=gender]").val($("select[name=gender]").val().slice(0,1))
-    if($("select[name=style]").val ()=== "Greco-Roman") {
-        $(".popup input[name=style]").val("GR");
-    } else {
-        $(".popup input[name=style]").val("FS");
-    }
-    $(".popup input[name=weight]").val($("select[name=weight]").val())
-    // This input is populate on setConfirmGame
-    // $(".popup input[name=time_start]").val()
-    $(".popup input[name=time_end]").val(
-        String(new Date().getHours()).padStart(2, "0")
-        + ":" 
-        + String(new Date().getMinutes()).padStart(2, "0")
-    )
-    $(".popup input[name=time_clock]").val($("#period").text() + ", " + $("#timer").text())
 
 };
 

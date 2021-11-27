@@ -12,6 +12,8 @@ async function scoreboard(req,res,mysql,db, tournamentId)  {
     
     let warning = '';
 
+    console.log({warning});
+    
     if(tournamentId === -1) {
         warning = `
             <script>
@@ -20,19 +22,26 @@ async function scoreboard(req,res,mysql,db, tournamentId)  {
         `
     }
 
+    console.log({warning});
+
     await conn.query(query, (err, rows, fields) => {
         if (err) {
             res.render('scoreboard', {
-                table: `Can't find the table for mat ${whichMat}`
+                mat              : whichMat,
+                table: `Can't find the table for mat ${whichMat}`,
+                tournamentWarning: warning,
+                tournamentId     : tournamentId
             })
         } else {
             let table = matchesToHtml(rows);
-            res.render('scoreboard', {
+            let params = {
                 mat              : whichMat,
                 table            : table,
                 tournamentWarning: warning,
                 tournamentId     : tournamentId
-            })
+            };
+            console.log({params});
+            res.render('scoreboard', params)
             // console.log(rows);
         }
         

@@ -1,17 +1,18 @@
 <div class="popup">
     <div class="popup-content">
-        <img src="/images/close.png" alt="" srcset="" class="close">
+        <img src="/images/close.png" alt="" srcset="" class="close" onclick="closePopup()">
         <div class="popup-text">
         </div>
         <form method="POST" action="/matches/records">
             <!-- This form needs to be populated by victory() -->
-            <div style="display: none;">
-                <% ['tournamentId','matchID','mat','red','blue','red_club','blue_club','red_score','blue_score','winner','class_points_red','class_points_blue','age','gender','style','weight','time_start','time_end','time_clock'].forEach((e)=>{ %>
+            <!-- <div style="display: none;">
+                <% 
+                    ['tournamentId','matchID','mat','red','blue','red_club','blue_club','red_score','blue_score','winner','class_points_red','class_points_blue','age','gender','style','weight','time_start','time_end','time_clock'].forEach((e)=>{ 
+                %>
                     <input type="text" name="<%= e %>">
                 <% }) %>
-            </div>
+            </div> -->
             <button type="submit">Save result</button>
         </form>
-        
     </div>
 </div>

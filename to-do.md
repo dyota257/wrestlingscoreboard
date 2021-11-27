@@ -1,4 +1,13 @@
 # To-do list
+## from night before nevember tournament
+[ ] when the local DB is used (Maria) for testing, tournamentWarning is not defined. Why?? Everything is OK again when connected to Jaws. 
+[ ] make the local Maria db mirror the production one and prefill it with data
+Root problem: 
+    [x] Because there are no longer dropdown selectors, the post-match logic (after pressing the "announc victory" "Save results' button) will not work
+        [x] To fix this, need to make sure that the page is getting refreshed every time, but not have to send things to the server.
+            To keep things moving along, delete the most recent match just like normal
+                [x] To test this, need to connect to the local database so can try out 
+
 ## From officiating training
 [ ] Set up tournament is weird, objects not appearing in time after selecting options
 [x] After restarting clock from pause, it goes back to 3 mins
@@ -8,8 +17,10 @@
 
 [x] Take out rest period 30s.
     This is not useful. The refs keep their own rest time. If this gets missed, then it can't be skipped. 
-[ ] Take out the connection to the server - no need to save results. 
+[X] Take out the connection to the server - no need to save results. 
     Jack says that there is a problem. When click "Save Result", it brings an error Cannot GET Scoreboard. Something was wrong with the server. 
+    This error could only have happened if the browser was requesting /scoreboard, without a parameter (e.g. it wasn't scoreboard/A)
+    This was solved by redirecting /scoreboard to /scoreboard/A
 [x] Take out the mandatory weights that have to be filled in before a match can be confirmed.
     This doesn't matter. It only matters for the master database of records, but that isn't something that we need. 
     Conditions are set in setConfirmGame()
