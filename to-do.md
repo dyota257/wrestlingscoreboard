@@ -1,4 +1,13 @@
 # To-do list
+## From November tournament
+[ ] it would be easier to click on the row of the table and immediately set the matchID to that row
+[ ] Underline is wrong
+[ ] Period 1 sometimes jumps to End
+    * this happens when page isn't refreshed e.g. to avoid refreshing
+* Arash says to be faster with the scores. How to allow this?
+[ ] Put in a custom time if something bad happened with the clock
+[ ] Hide scoreboard in game setup to not confuse people as to what to look at
+
 ## from night before nevember tournament
 [ ] when the local DB is used (Maria) for testing, tournamentWarning is not defined. Why?? Everything is OK again when connected to Jaws. 
 [ ] make the local Maria db mirror the production one and prefill it with data

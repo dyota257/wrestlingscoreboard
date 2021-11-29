@@ -8,6 +8,7 @@
     "bulma": "^0.9.3",
     "ejs": "^3.1.6",
     "express": "^4.17.1",
+    "jest": "^27.3.1",
     "mariadb": "^2.5.4",
     "meow": "^10.1.1",
     "mysql": "^2.18.1",
@@ -18,7 +19,7 @@
     "node-sass": "^6.0.1"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "jest",
     "css-build": "node-sass --omit-source-map-url public/css/bulmaStyles.scss public/css/dist/bulmaStyles.css",
     "css-watch": "npm run css-build -- --watch",
     "start": "npm run css-watch"
