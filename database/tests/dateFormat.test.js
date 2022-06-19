@@ -1,4 +1,4 @@
-const dateFormat = require('../../database/dateFormat.js');
+const dateFormat = require('../dateFormat.js');
 
 describe('dateFormat() function', () => {
     it('changes a Date object into a correctly formatted string', () => {

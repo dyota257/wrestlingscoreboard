@@ -8,7 +8,6 @@
     "bulma": "^0.9.3",
     "ejs": "^3.1.6",
     "express": "^4.17.1",
-    "jest": "^27.3.1",
     "mariadb": "^2.5.4",
     "meow": "^10.1.1",
     "mysql": "^2.18.1",
@@ -16,7 +15,8 @@
     "trim-newlines": "^4.0.2"
   },
   "devDependencies": {
-    "node-sass": "^6.0.1"
+    "node-sass": "^6.0.1",
+    "jest": "^27.3.1"
   },
   "scripts": {
     "test": "jest",
@@ -25,5 +25,8 @@
     "start": "npm run css-watch"
   },
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "jest": {
+    "testMatch": ["**/**/**/*.test.js"]
+  }
 }

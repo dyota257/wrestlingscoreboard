@@ -7,6 +7,7 @@
 * Arash says to be faster with the scores. How to allow this?
 [ ] Put in a custom time if something bad happened with the clock
 [ ] Hide scoreboard in game setup to not confuse people as to what to look at
+[ ] if there is match that is like 26a, HANDLE IT. Turn it into a 0.1
 
 ## from night before nevember tournament
 [ ] when the local DB is used (Maria) for testing, tournamentWarning is not defined. Why?? Everything is OK again when connected to Jaws. 

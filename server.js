@@ -98,6 +98,11 @@ app.route('/wrestlers/import')
         wrestlers_import(req, res, mysql, db);
     });
 
+app.route('/smoothcomp')
+    .get((req, res) => {
+        res.redirect('https://smoothcomp.com/en/event/7478/schedule')
+    })
+
 // SQL INTERFACE
 app.route('/query')
     .get((req, res) => {

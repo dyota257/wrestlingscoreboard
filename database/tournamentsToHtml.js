@@ -1,16 +1,27 @@
-module.exports =tournamentsToHtml;
-
 const dateFormat = require('../database/dateFormat.js');
 
-function tournamentsToHtml(x, id) {
-    
-    var tableRows='';
+/* 
+    tournamentsToHtml: string
+    x: {
+        id: number,
+        date: string,
+        title: string,
+        location: string
+    },
+    id: number
 
-    for(i=0; i<x.length;i++) {
+    id is the table row that will be highlighted
+*/
 
-        tableRows = tableRows+
-        `
-        <tr ${ x[i].id == id ? 'class="matchOrder"' : ''}>
+module.exports = function tournamentsToHtml(x, id) {
+
+    var tableRows = '';
+
+    for (i = 0; i < x.length; i++) {
+
+        tableRows = tableRows +
+            `
+        <tr ${x[i].id == id ? 'class="matchOrder"' : ''}>
             <td>
                 ${dateFormat(x[i].date)}
             </td>
@@ -22,7 +33,7 @@ function tournamentsToHtml(x, id) {
             </td>
         </tr>
         
-        `
+        `;
     }
 
     tableRows = `<table class='table'>
@@ -31,9 +42,10 @@ function tournamentsToHtml(x, id) {
             <td>Title</td>
             <td>Location</td>
         </tr>
-        ${tableRows}</table>`
+        ${tableRows}</table>`;
 
-        console.log('tournamentToHtml: ' + id)
-    return tableRows
-}
+    console.log('tournamentToHtml: ' + id);
+    console.log(tableRows);
+    return tableRows;
+};
 
