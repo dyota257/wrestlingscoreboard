@@ -1,7 +1,7 @@
 {
   "name": "wrestling-maria",
   "version": "1.0.0",
-  "description": "",
+  "description": "Web-based scoreboard and tournament manager application for my local wrestling association.",
   "main": "server.js",
   "dependencies": {
     "body-parser": "^1.19.0",
@@ -27,6 +27,8 @@
   "author": "",
   "license": "ISC",
   "jest": {
-    "testMatch": ["**/**/**/*.test.js"]
+    "testMatch": [
+      "**/**/**/*.test.js"
+    ]
   }
 }

@@ -1,0 +1,37 @@
+<%- include('boilerplate'); %> 
+    <title>
+        <%- title %>
+    </title>
+
+    <style>
+        flex {
+            display: flex;
+        }
+
+        flex-item {
+            flex: 1
+        }
+    </style>
+
+</head>
+<body>
+    <%- include('header'); %> 
+
+    <section class="container">
+        <h1 class="title is-3"><%- title %></h1>
+    </section>
+    
+    <div class="container flex">
+        <!-- Youth  -->
+        
+        <iframe src="https://smoothcomp.com/en/event/7478/schedule/mat/43862" frameborder="0" width="40%" height="750"></iframe>
+        <iframe src="https://smoothcomp.com/en/event/7478/schedule/mat/43863" frameborder="0" width="40%" height="750"></iframe>
+
+        <!-- Seniors  -->
+
+        <iframe src="https://smoothcomp.com/en/event/7478/schedule/mat/44782" frameborder="0" width="40%" height="750"></iframe>
+        <iframe src="https://smoothcomp.com/en/event/7478/schedule/mat/44783" frameborder="0" width="40%" height="750"></iframe>
+    </div>
+
+</body>
+</html>

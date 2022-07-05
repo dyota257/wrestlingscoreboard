@@ -100,7 +100,16 @@ app.route('/wrestlers/import')
 
 app.route('/smoothcomp')
     .get((req, res) => {
-        res.redirect('https://smoothcomp.com/en/event/7478/schedule')
+        res.render('smoothcomp', {
+            title: 'SmoothComp links'
+        })
+    })
+
+app.route('/smoothcomp/announcer')
+    .get((req,res) => {
+        res.render('smoothcomp_announcer', {
+            title: 'Tournament announcer view'
+        })
     })
 
 // SQL INTERFACE
