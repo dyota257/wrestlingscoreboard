@@ -1,3 +1,11 @@
+# SmoothComp era:
+The site is on Render.com (https://wrestlingwa.onrender.com/)
+Every tournament: 
+- update smoothcomp.ejs and smoothcomp_announcer.ejs with the newest smoothcomp mat URLs
+- push to GitHub
+- pushing to GitHub will automatically push to Render.com
+
+
 # To-do list
 ## From November tournament
 [ ] it would be easier to click on the row of the table and immediately set the matchID to that row
